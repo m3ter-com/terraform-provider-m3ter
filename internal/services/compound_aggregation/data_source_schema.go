@@ -22,12 +22,12 @@ var _ datasource.DataSourceWithConfigValidators = (*CompoundAggregationDataSourc
 func DataSourceSchema(ctx context.Context) schema.Schema {
 	return schema.Schema{
 		Attributes: map[string]schema.Attribute{
-			"org_id": schema.StringAttribute{
-				Optional: true,
-			},
 			"id": schema.StringAttribute{
 				Computed: true,
 				Optional: true,
+			},
+			"org_id": schema.StringAttribute{
+				Required: true,
 			},
 			"calculation": schema.StringAttribute{
 				Description: "This field is a string that represents the formula for the calculation. This formula determines how the CompoundAggregation is calculated from the underlying usage data.",
@@ -107,9 +107,6 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 			"find_one_by": schema.SingleNestedAttribute{
 				Optional: true,
 				Attributes: map[string]schema.Attribute{
-					"org_id": schema.StringAttribute{
-						Required: true,
-					},
 					"codes": schema.ListAttribute{
 						Description: "An optional parameter to retrieve specific CompoundAggregations based on their short codes.",
 						Optional:    true,
@@ -137,8 +134,6 @@ func (d *CompoundAggregationDataSource) Schema(ctx context.Context, req datasour
 
 func (d *CompoundAggregationDataSource) ConfigValidators(_ context.Context) []datasource.ConfigValidator {
 	return []datasource.ConfigValidator{
-		datasourcevalidator.RequiredTogether(path.MatchRoot("id"), path.MatchRoot("orgId")),
-		datasourcevalidator.ExactlyOneOf(path.MatchRoot("find_one_by"), path.MatchRoot("id")),
-		datasourcevalidator.ExactlyOneOf(path.MatchRoot("find_one_by"), path.MatchRoot("orgId")),
+		datasourcevalidator.ExactlyOneOf(path.MatchRoot("id"), path.MatchRoot("find_one_by")),
 	}
 }

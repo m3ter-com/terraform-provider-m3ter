@@ -18,8 +18,8 @@ type CompoundAggregationDataListDataSourceEnvelope struct {
 }
 
 type CompoundAggregationDataSourceModel struct {
-	OrgID                    types.String                                    `tfsdk:"org_id" path:"orgId,optional"`
 	ID                       types.String                                    `tfsdk:"id" path:"id,computed_optional"`
+	OrgID                    types.String                                    `tfsdk:"org_id" path:"orgId,required"`
 	Calculation              types.String                                    `tfsdk:"calculation" json:"calculation,computed"`
 	Code                     types.String                                    `tfsdk:"code" json:"code,computed"`
 	CreatedBy                types.String                                    `tfsdk:"created_by" json:"createdBy,computed"`
@@ -62,7 +62,6 @@ func (m *CompoundAggregationDataSourceModel) toListParams(_ context.Context) (pa
 }
 
 type CompoundAggregationFindOneByDataSourceModel struct {
-	OrgID     types.String            `tfsdk:"org_id" path:"orgId,required"`
 	Codes     *[]types.String         `tfsdk:"codes" query:"codes,optional"`
 	IDs       *[]types.String         `tfsdk:"ids" query:"ids,optional"`
 	ProductID *[]jsontypes.Normalized `tfsdk:"product_id" query:"productId,optional"`

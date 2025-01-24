@@ -22,12 +22,12 @@ var _ datasource.DataSourceWithConfigValidators = (*AggregationDataSource)(nil)
 func DataSourceSchema(ctx context.Context) schema.Schema {
 	return schema.Schema{
 		Attributes: map[string]schema.Attribute{
-			"org_id": schema.StringAttribute{
-				Optional: true,
-			},
 			"id": schema.StringAttribute{
 				Computed: true,
 				Optional: true,
+			},
+			"org_id": schema.StringAttribute{
+				Required: true,
 			},
 			"aggregation": schema.StringAttribute{
 				Description: "Specifies the computation method applied to usage data collected in `targetField`. Aggregation unit value depends on the **Category** configured for the selected targetField.\n\nEnum: \n\n* **SUM**. Adds the values. Can be applied to a **Measure**, **Income**, or **Cost** `targetField`.\n\n* **MIN**. Uses the minimum value. Can be applied to a **Measure**, **Income**, or **Cost** `targetField`.\n\n* **MAX**. Uses the maximum value. Can be applied to a **Measure**, **Income**, or **Cost** `targetField`.\n\n* **COUNT**. Counts the number of values. Can be applied to a **Who**, **What**, **Where**, **Measure**, **Income**, **Cost** or **Other** `targetField`.\n\n* **LATEST**. Uses the most recent value. Can be applied to a **Measure**, **Income**, or **Cost** `targetField`.\n\n* **MEAN**. Uses the arithmetic mean of the values. Can be applied to a **Measure**, **Income**, or **Cost** `targetField`.\n\n* **UNIQUE**. Uses unique values and returns a count of the number of unique values. Can be applied to a **Metadata** `targetField`.",
@@ -128,9 +128,6 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 			"find_one_by": schema.SingleNestedAttribute{
 				Optional: true,
 				Attributes: map[string]schema.Attribute{
-					"org_id": schema.StringAttribute{
-						Required: true,
-					},
 					"codes": schema.ListAttribute{
 						Description: "List of Aggregation codes to retrieve. These are unique short codes to identify each Aggregation.",
 						Optional:    true,
@@ -158,8 +155,6 @@ func (d *AggregationDataSource) Schema(ctx context.Context, req datasource.Schem
 
 func (d *AggregationDataSource) ConfigValidators(_ context.Context) []datasource.ConfigValidator {
 	return []datasource.ConfigValidator{
-		datasourcevalidator.RequiredTogether(path.MatchRoot("id"), path.MatchRoot("orgId")),
-		datasourcevalidator.ExactlyOneOf(path.MatchRoot("find_one_by"), path.MatchRoot("id")),
-		datasourcevalidator.ExactlyOneOf(path.MatchRoot("find_one_by"), path.MatchRoot("orgId")),
+		datasourcevalidator.ExactlyOneOf(path.MatchRoot("id"), path.MatchRoot("find_one_by")),
 	}
 }
