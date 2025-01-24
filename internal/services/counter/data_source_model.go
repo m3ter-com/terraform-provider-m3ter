@@ -17,8 +17,8 @@ type CounterDataListDataSourceEnvelope struct {
 }
 
 type CounterDataSourceModel struct {
-	OrgID          types.String                     `tfsdk:"org_id" path:"orgId,optional"`
 	ID             types.String                     `tfsdk:"id" path:"id,computed_optional"`
+	OrgID          types.String                     `tfsdk:"org_id" path:"orgId,required"`
 	Code           types.String                     `tfsdk:"code" json:"code,computed"`
 	CreatedBy      types.String                     `tfsdk:"created_by" json:"createdBy,computed"`
 	DtCreated      timetypes.RFC3339                `tfsdk:"dt_created" json:"dtCreated,computed" format:"date-time"`
@@ -55,7 +55,6 @@ func (m *CounterDataSourceModel) toListParams(_ context.Context) (params m3ter.C
 }
 
 type CounterFindOneByDataSourceModel struct {
-	OrgID     types.String    `tfsdk:"org_id" path:"orgId,required"`
 	Codes     *[]types.String `tfsdk:"codes" query:"codes,optional"`
 	IDs       *[]types.String `tfsdk:"ids" query:"ids,optional"`
 	ProductID *[]types.String `tfsdk:"product_id" query:"productId,optional"`

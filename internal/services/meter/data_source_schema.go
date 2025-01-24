@@ -22,12 +22,12 @@ var _ datasource.DataSourceWithConfigValidators = (*MeterDataSource)(nil)
 func DataSourceSchema(ctx context.Context) schema.Schema {
 	return schema.Schema{
 		Attributes: map[string]schema.Attribute{
-			"org_id": schema.StringAttribute{
-				Optional: true,
-			},
 			"id": schema.StringAttribute{
 				Computed: true,
 				Optional: true,
+			},
+			"org_id": schema.StringAttribute{
+				Required: true,
 			},
 			"code": schema.StringAttribute{
 				Description: "Code of the Meter - unique short code used to identify the Meter.",
@@ -150,9 +150,6 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 			"find_one_by": schema.SingleNestedAttribute{
 				Optional: true,
 				Attributes: map[string]schema.Attribute{
-					"org_id": schema.StringAttribute{
-						Required: true,
-					},
 					"codes": schema.ListAttribute{
 						Description: "List of Meter codes to retrieve. These are the unique short codes that identify each Meter.   ",
 						Optional:    true,
@@ -180,8 +177,6 @@ func (d *MeterDataSource) Schema(ctx context.Context, req datasource.SchemaReque
 
 func (d *MeterDataSource) ConfigValidators(_ context.Context) []datasource.ConfigValidator {
 	return []datasource.ConfigValidator{
-		datasourcevalidator.RequiredTogether(path.MatchRoot("id"), path.MatchRoot("orgId")),
-		datasourcevalidator.ExactlyOneOf(path.MatchRoot("find_one_by"), path.MatchRoot("id")),
-		datasourcevalidator.ExactlyOneOf(path.MatchRoot("find_one_by"), path.MatchRoot("orgId")),
+		datasourcevalidator.ExactlyOneOf(path.MatchRoot("id"), path.MatchRoot("find_one_by")),
 	}
 }

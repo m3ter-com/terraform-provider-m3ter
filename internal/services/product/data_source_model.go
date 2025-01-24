@@ -18,8 +18,8 @@ type ProductDataListDataSourceEnvelope struct {
 }
 
 type ProductDataSourceModel struct {
-	OrgID          types.String                          `tfsdk:"org_id" path:"orgId,optional"`
 	ID             types.String                          `tfsdk:"id" path:"id,computed_optional"`
+	OrgID          types.String                          `tfsdk:"org_id" path:"orgId,required"`
 	Code           types.String                          `tfsdk:"code" json:"code,computed"`
 	CreatedBy      types.String                          `tfsdk:"created_by" json:"createdBy,computed"`
 	DtCreated      timetypes.RFC3339                     `tfsdk:"dt_created" json:"dtCreated,computed" format:"date-time"`
@@ -45,6 +45,5 @@ func (m *ProductDataSourceModel) toListParams(_ context.Context) (params m3ter.P
 }
 
 type ProductFindOneByDataSourceModel struct {
-	OrgID types.String    `tfsdk:"org_id" path:"orgId,required"`
-	IDs   *[]types.String `tfsdk:"ids" query:"ids,optional"`
+	IDs *[]types.String `tfsdk:"ids" query:"ids,optional"`
 }
