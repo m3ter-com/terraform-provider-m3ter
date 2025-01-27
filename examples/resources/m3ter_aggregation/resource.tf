@@ -3,7 +3,7 @@ resource "m3ter_aggregation" "example_aggregation" {
   aggregation = "SUM"
   meter_id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
   name = "x"
-  quantity_per_unit = 0
+  quantity_per_unit = 1
   rounding = "UP"
   target_field = "x"
   unit = "x"

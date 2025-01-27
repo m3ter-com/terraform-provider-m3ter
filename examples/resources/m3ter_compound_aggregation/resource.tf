@@ -2,7 +2,7 @@ resource "m3ter_compound_aggregation" "example_compound_aggregation" {
   org_id = "orgId"
   calculation = "x"
   name = "x"
-  quantity_per_unit = 0
+  quantity_per_unit = 1
   rounding = "UP"
   unit = "x"
   code = "{1{}}_"
