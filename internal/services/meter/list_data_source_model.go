@@ -27,15 +27,15 @@ type MetersDataSourceModel struct {
 }
 
 func (m *MetersDataSourceModel) toListParams(_ context.Context) (params m3ter.MeterListParams, diags diag.Diagnostics) {
-	mCodes := []string{}
+	mCodes := []MeterListParamsCode{}
 	for _, item := range *m.Codes {
 		mCodes = append(mCodes, item.ValueString())
 	}
-	mIDs := []string{}
+	mIDs := []MeterListParamsID{}
 	for _, item := range *m.IDs {
 		mIDs = append(mIDs, item.ValueString())
 	}
-	mProductID := []interface{}{}
+	mProductID := []MeterListParamsProductID{}
 	for _, item := range *m.ProductID {
 		mProductID = append(mProductID, item.ValueString())
 	}
