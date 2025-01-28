@@ -25,7 +25,7 @@ type ProductsDataSourceModel struct {
 }
 
 func (m *ProductsDataSourceModel) toListParams(_ context.Context) (params m3ter.ProductListParams, diags diag.Diagnostics) {
-	mIDs := []string{}
+	mIDs := []ProductListParamsID{}
 	for _, item := range *m.IDs {
 		mIDs = append(mIDs, item.ValueString())
 	}

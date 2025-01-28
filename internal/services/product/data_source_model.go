@@ -32,7 +32,7 @@ type ProductDataSourceModel struct {
 }
 
 func (m *ProductDataSourceModel) toListParams(_ context.Context) (params m3ter.ProductListParams, diags diag.Diagnostics) {
-	mFindOneByIDs := []string{}
+	mFindOneByIDs := []ProductListParamsID{}
 	for _, item := range *m.FindOneBy.IDs {
 		mFindOneByIDs = append(mFindOneByIDs, item.ValueString())
 	}
