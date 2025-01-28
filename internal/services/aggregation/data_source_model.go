@@ -41,15 +41,15 @@ type AggregationDataSourceModel struct {
 }
 
 func (m *AggregationDataSourceModel) toListParams(_ context.Context) (params m3ter.AggregationListParams, diags diag.Diagnostics) {
-	mFindOneByCodes := []string{}
+	mFindOneByCodes := []AggregationListParamsCode{}
 	for _, item := range *m.FindOneBy.Codes {
 		mFindOneByCodes = append(mFindOneByCodes, item.ValueString())
 	}
-	mFindOneByIDs := []string{}
+	mFindOneByIDs := []AggregationListParamsID{}
 	for _, item := range *m.FindOneBy.IDs {
 		mFindOneByIDs = append(mFindOneByIDs, item.ValueString())
 	}
-	mFindOneByProductID := []interface{}{}
+	mFindOneByProductID := []AggregationListParamsProductID{}
 	for _, item := range *m.FindOneBy.ProductID {
 		mFindOneByProductID = append(mFindOneByProductID, item.ValueString())
 	}

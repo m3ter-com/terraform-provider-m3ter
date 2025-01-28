@@ -27,15 +27,15 @@ type AggregationsDataSourceModel struct {
 }
 
 func (m *AggregationsDataSourceModel) toListParams(_ context.Context) (params m3ter.AggregationListParams, diags diag.Diagnostics) {
-	mCodes := []string{}
+	mCodes := []AggregationListParamsCode{}
 	for _, item := range *m.Codes {
 		mCodes = append(mCodes, item.ValueString())
 	}
-	mIDs := []string{}
+	mIDs := []AggregationListParamsID{}
 	for _, item := range *m.IDs {
 		mIDs = append(mIDs, item.ValueString())
 	}
-	mProductID := []interface{}{}
+	mProductID := []AggregationListParamsProductID{}
 	for _, item := range *m.ProductID {
 		mProductID = append(mProductID, item.ValueString())
 	}
