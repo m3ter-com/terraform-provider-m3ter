@@ -1,17 +1,23 @@
 # M3ter Terraform Provider
 
-The M3ter Terraform provider
-
 The [M3ter Terraform provider](https://registry.terraform.io/providers/m3ter-com/m3ter/latest/docs) provides convenient access to
 [the M3ter REST API](https://www.m3ter.com) from Terraform.
 
 It is generated with [Stainless](https://www.stainlessapi.com/).
 
-## Installation
+## Requirements
+
+This provider requires Terraform CLI 1.0 or later. You can [install it for your system](https://developer.hashicorp.com/terraform/install)
+on Hashicorp's website.
+
+## Usage
+
+Add the following to your `main.tf` file:
 
 <!-- x-release-please-start-version -->
 
-```
+```hcl
+# Declare the provider and version
 terraform {
   required_providers {
     m3ter = {
@@ -20,16 +26,37 @@ terraform {
     }
   }
 }
+
+# Initialize the provider
+provider "m3ter" {
+  api_key = "My API Key" # or set M3TER_API_KEY env variable
+  api_secret = "My API Secret" # or set M3TER_API_SECRET env variable
+  token = "My Token" # or set M3TER_API_TOKEN env variable
+}
+
+# Configure a resource
+resource "m3ter_product" "example_product" {
+  org_id = "ORG_ID"
+}
 ```
 
 <!-- x-release-please-end -->
 
-And initialize your project by running `terraform init`.
+Initialize your project by running `terraform init` in the directory.
 
-## Requirements
+Additional examples can be found in the [./examples](./examples) folder within this repository, and you can
+refer to the full documentation on [the Terraform Registry](https://registry.terraform.io/providers/m3ter-com/m3ter/latest/docs).
 
-This library requires Terraform CLI 1.0 or later. You can [install it for your system](https://developer.hashicorp.com/terraform/install)
-on Hashicorp's website.
+### Provider Options
+
+When you initialize the provider, the following options are supported. It is recommended to use environment variables for sensitive values like access tokens.
+If an environment variable is provided, then the option does not need to be set in the terraform source.
+
+| Property   | Environment variable | Required | Default value |
+| ---------- | -------------------- | -------- | ------------- |
+| api_secret | `M3TER_API_SECRET`   | true     | —             |
+| api_key    | `M3TER_API_KEY`      | true     | —             |
+| token      | `M3TER_API_TOKEN`    | false    | —             |
 
 ## Semantic versioning
 
@@ -41,3 +68,7 @@ This package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) con
 We take backwards-compatibility seriously and work hard to ensure you can rely on a smooth upgrade experience.
 
 We are keen for your feedback; please open an [issue](https://www.github.com/m3ter-com/terraform-provider-m3ter/issues) with questions, bugs, or suggestions.
+
+## Contributing
+
+See [the contributing documentation](./CONTRIBUTING.md).
