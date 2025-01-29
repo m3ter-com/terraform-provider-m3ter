@@ -26,15 +26,15 @@ type CountersDataSourceModel struct {
 }
 
 func (m *CountersDataSourceModel) toListParams(_ context.Context) (params m3ter.CounterListParams, diags diag.Diagnostics) {
-	mCodes := []CounterListParamsCode{}
+	mCodes := []string{}
 	for _, item := range *m.Codes {
 		mCodes = append(mCodes, item.ValueString())
 	}
-	mIDs := []CounterListParamsID{}
+	mIDs := []string{}
 	for _, item := range *m.IDs {
 		mIDs = append(mIDs, item.ValueString())
 	}
-	mProductID := []CounterListParamsProductID{}
+	mProductID := []string{}
 	for _, item := range *m.ProductID {
 		mProductID = append(mProductID, item.ValueString())
 	}
