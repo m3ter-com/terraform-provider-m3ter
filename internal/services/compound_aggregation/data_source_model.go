@@ -39,15 +39,15 @@ type CompoundAggregationDataSourceModel struct {
 }
 
 func (m *CompoundAggregationDataSourceModel) toListParams(_ context.Context) (params m3ter.CompoundAggregationListParams, diags diag.Diagnostics) {
-	mFindOneByCodes := []CompoundAggregationListParamsCode{}
+	mFindOneByCodes := []string{}
 	for _, item := range *m.FindOneBy.Codes {
 		mFindOneByCodes = append(mFindOneByCodes, item.ValueString())
 	}
-	mFindOneByIDs := []CompoundAggregationListParamsID{}
+	mFindOneByIDs := []string{}
 	for _, item := range *m.FindOneBy.IDs {
 		mFindOneByIDs = append(mFindOneByIDs, item.ValueString())
 	}
-	mFindOneByProductID := []CompoundAggregationListParamsProductID{}
+	mFindOneByProductID := []interface{}{}
 	for _, item := range *m.FindOneBy.ProductID {
 		mFindOneByProductID = append(mFindOneByProductID, item.ValueString())
 	}
