@@ -21,7 +21,7 @@ type CompoundAggregationsDataSourceModel struct {
 	OrgID     types.String                                                           `tfsdk:"org_id" path:"orgId,required"`
 	Codes     *[]types.String                                                        `tfsdk:"codes" query:"codes,optional"`
 	IDs       *[]types.String                                                        `tfsdk:"ids" query:"ids,optional"`
-	ProductID *[]jsontypes.Normalized                                                `tfsdk:"product_id" query:"productId,optional"`
+	ProductID *[]types.String                                                        `tfsdk:"product_id" query:"productId,optional"`
 	MaxItems  types.Int64                                                            `tfsdk:"max_items"`
 	Items     customfield.NestedObjectList[CompoundAggregationsItemsDataSourceModel] `tfsdk:"items"`
 }
@@ -35,7 +35,7 @@ func (m *CompoundAggregationsDataSourceModel) toListParams(_ context.Context) (p
 	for _, item := range *m.IDs {
 		mIDs = append(mIDs, item.ValueString())
 	}
-	mProductID := []interface{}{}
+	mProductID := []string{}
 	for _, item := range *m.ProductID {
 		mProductID = append(mProductID, item.ValueString())
 	}
@@ -51,7 +51,6 @@ func (m *CompoundAggregationsDataSourceModel) toListParams(_ context.Context) (p
 
 type CompoundAggregationsItemsDataSourceModel struct {
 	ID                       types.String                                    `tfsdk:"id" json:"id,computed"`
-	Version                  types.Int64                                     `tfsdk:"version" json:"version,computed"`
 	Calculation              types.String                                    `tfsdk:"calculation" json:"calculation,computed"`
 	Code                     types.String                                    `tfsdk:"code" json:"code,computed"`
 	CreatedBy                types.String                                    `tfsdk:"created_by" json:"createdBy,computed"`
@@ -66,4 +65,5 @@ type CompoundAggregationsItemsDataSourceModel struct {
 	Rounding                 types.String                                    `tfsdk:"rounding" json:"rounding,computed"`
 	Segments                 customfield.List[customfield.Map[types.String]] `tfsdk:"segments" json:"segments,computed"`
 	Unit                     types.String                                    `tfsdk:"unit" json:"unit,computed"`
+	Version                  types.Int64                                     `tfsdk:"version" json:"version,computed"`
 }

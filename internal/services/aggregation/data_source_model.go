@@ -49,7 +49,7 @@ func (m *AggregationDataSourceModel) toListParams(_ context.Context) (params m3t
 	for _, item := range *m.FindOneBy.IDs {
 		mFindOneByIDs = append(mFindOneByIDs, item.ValueString())
 	}
-	mFindOneByProductID := []interface{}{}
+	mFindOneByProductID := []string{}
 	for _, item := range *m.FindOneBy.ProductID {
 		mFindOneByProductID = append(mFindOneByProductID, item.ValueString())
 	}
@@ -64,7 +64,7 @@ func (m *AggregationDataSourceModel) toListParams(_ context.Context) (params m3t
 }
 
 type AggregationFindOneByDataSourceModel struct {
-	Codes     *[]types.String         `tfsdk:"codes" query:"codes,optional"`
-	IDs       *[]types.String         `tfsdk:"ids" query:"ids,optional"`
-	ProductID *[]jsontypes.Normalized `tfsdk:"product_id" query:"productId,optional"`
+	Codes     *[]types.String `tfsdk:"codes" query:"codes,optional"`
+	IDs       *[]types.String `tfsdk:"ids" query:"ids,optional"`
+	ProductID *[]types.String `tfsdk:"product_id" query:"productId,optional"`
 }
