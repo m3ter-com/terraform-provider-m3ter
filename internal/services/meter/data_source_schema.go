@@ -7,13 +7,10 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
-	"github.com/hashicorp/terraform-plugin-framework-validators/datasourcevalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
-	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
-	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/m3ter-com/terraform-provider-m3ter/internal/customfield"
 )
 
@@ -22,12 +19,11 @@ var _ datasource.DataSourceWithConfigValidators = (*MeterDataSource)(nil)
 func DataSourceSchema(ctx context.Context) schema.Schema {
 	return schema.Schema{
 		Attributes: map[string]schema.Attribute{
-			"id": schema.StringAttribute{
-				Computed: true,
-				Optional: true,
-			},
 			"org_id": schema.StringAttribute{
 				Required: true,
+			},
+			"id": schema.StringAttribute{
+				Computed: true,
 			},
 			"code": schema.StringAttribute{
 				Description: "Code of the Meter - unique short code used to identify the Meter.",
@@ -151,26 +147,6 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 					},
 				},
 			},
-			"find_one_by": schema.SingleNestedAttribute{
-				Optional: true,
-				Attributes: map[string]schema.Attribute{
-					"codes": schema.ListAttribute{
-						Description: "list of codes to retrieve",
-						Optional:    true,
-						ElementType: types.StringType,
-					},
-					"ids": schema.ListAttribute{
-						Description: "list of ids to retrieve",
-						Optional:    true,
-						ElementType: types.StringType,
-					},
-					"product_id": schema.ListAttribute{
-						Description: "The UUIDs of the products to retrieve meters for",
-						Optional:    true,
-						ElementType: types.StringType,
-					},
-				},
-			},
 		},
 	}
 }
@@ -180,7 +156,5 @@ func (d *MeterDataSource) Schema(ctx context.Context, req datasource.SchemaReque
 }
 
 func (d *MeterDataSource) ConfigValidators(_ context.Context) []datasource.ConfigValidator {
-	return []datasource.ConfigValidator{
-		datasourcevalidator.ExactlyOneOf(path.MatchRoot("id"), path.MatchRoot("find_one_by")),
-	}
+	return []datasource.ConfigValidator{}
 }

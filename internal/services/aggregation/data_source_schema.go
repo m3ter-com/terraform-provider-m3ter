@@ -7,11 +7,9 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
-	"github.com/hashicorp/terraform-plugin-framework-validators/datasourcevalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
-	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/m3ter-com/terraform-provider-m3ter/internal/customfield"
@@ -22,12 +20,11 @@ var _ datasource.DataSourceWithConfigValidators = (*AggregationDataSource)(nil)
 func DataSourceSchema(ctx context.Context) schema.Schema {
 	return schema.Schema{
 		Attributes: map[string]schema.Attribute{
-			"id": schema.StringAttribute{
-				Computed: true,
-				Optional: true,
-			},
 			"org_id": schema.StringAttribute{
 				Required: true,
+			},
+			"id": schema.StringAttribute{
+				Computed: true,
 			},
 			"aggregation": schema.StringAttribute{
 				Description: "Specifies the computation method applied to usage data collected in `targetField`. Aggregation unit value depends on the **Category** configured for the selected targetField.\n\nEnum: \n\n* **SUM**. Adds the values. Can be applied to a **Measure**, **Income**, or **Cost** `targetField`.\n\n* **MIN**. Uses the minimum value. Can be applied to a **Measure**, **Income**, or **Cost** `targetField`.\n\n* **MAX**. Uses the maximum value. Can be applied to a **Measure**, **Income**, or **Cost** `targetField`.\n\n* **COUNT**. Counts the number of values. Can be applied to a **Measure**, **Income**, or **Cost** `targetField`.\n\n* **LATEST**. Uses the most recent value. Can be applied to a **Measure**, **Income**, or **Cost** `targetField`. Note: Based on the timestamp (`ts`) value of usage data measurement submissions. If using this method, please ensure *distinct* `ts` values are used for usage data measurment submissions.\n\n* **MEAN**. Uses the arithmetic mean of the values. Can be applied to a **Measure**, **Income**, or **Cost** `targetField`.\n\n* **UNIQUE**. Uses unique values and returns a count of the number of unique values. Can be applied to a **Metadata** `targetField`.",
@@ -125,26 +122,6 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 					ElemType: types.StringType,
 				},
 			},
-			"find_one_by": schema.SingleNestedAttribute{
-				Optional: true,
-				Attributes: map[string]schema.Attribute{
-					"codes": schema.ListAttribute{
-						Description: "List of Aggregation codes to retrieve. These are unique short codes to identify each Aggregation.",
-						Optional:    true,
-						ElementType: types.StringType,
-					},
-					"ids": schema.ListAttribute{
-						Description: "List of Aggregation IDs to retrieve.",
-						Optional:    true,
-						ElementType: types.StringType,
-					},
-					"product_id": schema.ListAttribute{
-						Description: "The UUIDs of the Products to retrieve Aggregations for.",
-						Optional:    true,
-						ElementType: types.StringType,
-					},
-				},
-			},
 		},
 	}
 }
@@ -154,7 +131,5 @@ func (d *AggregationDataSource) Schema(ctx context.Context, req datasource.Schem
 }
 
 func (d *AggregationDataSource) ConfigValidators(_ context.Context) []datasource.ConfigValidator {
-	return []datasource.ConfigValidator{
-		datasourcevalidator.ExactlyOneOf(path.MatchRoot("id"), path.MatchRoot("find_one_by")),
-	}
+	return []datasource.ConfigValidator{}
 }
