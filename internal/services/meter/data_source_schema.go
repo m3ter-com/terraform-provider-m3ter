@@ -155,19 +155,19 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Optional: true,
 				Attributes: map[string]schema.Attribute{
 					"codes": schema.ListAttribute{
-						Description: "List of Meter codes to retrieve. These are the unique short codes that identify each Meter.   ",
+						Description: "list of codes to retrieve",
 						Optional:    true,
 						ElementType: types.StringType,
 					},
 					"ids": schema.ListAttribute{
-						Description: "List of Meter IDs to retrieve. ",
+						Description: "list of ids to retrieve",
 						Optional:    true,
 						ElementType: types.StringType,
 					},
 					"product_id": schema.ListAttribute{
-						Description: "The UUIDs of the Products to retrieve Meters for.",
+						Description: "The UUIDs of the products to retrieve meters for",
 						Optional:    true,
-						ElementType: jsontypes.NormalizedType{},
+						ElementType: types.StringType,
 					},
 				},
 			},

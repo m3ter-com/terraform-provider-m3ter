@@ -21,7 +21,7 @@ type MetersDataSourceModel struct {
 	OrgID     types.String                                             `tfsdk:"org_id" path:"orgId,required"`
 	Codes     *[]types.String                                          `tfsdk:"codes" query:"codes,optional"`
 	IDs       *[]types.String                                          `tfsdk:"ids" query:"ids,optional"`
-	ProductID *[]jsontypes.Normalized                                  `tfsdk:"product_id" query:"productId,optional"`
+	ProductID *[]types.String                                          `tfsdk:"product_id" query:"productId,optional"`
 	MaxItems  types.Int64                                              `tfsdk:"max_items"`
 	Items     customfield.NestedObjectList[MetersItemsDataSourceModel] `tfsdk:"items"`
 }
@@ -35,7 +35,7 @@ func (m *MetersDataSourceModel) toListParams(_ context.Context) (params m3ter.Me
 	for _, item := range *m.IDs {
 		mIDs = append(mIDs, item.ValueString())
 	}
-	mProductID := []interface{}{}
+	mProductID := []string{}
 	for _, item := range *m.ProductID {
 		mProductID = append(mProductID, item.ValueString())
 	}
@@ -51,7 +51,6 @@ func (m *MetersDataSourceModel) toListParams(_ context.Context) (params m3ter.Me
 
 type MetersItemsDataSourceModel struct {
 	ID             types.String                                                     `tfsdk:"id" json:"id,computed"`
-	Version        types.Int64                                                      `tfsdk:"version" json:"version,computed"`
 	Code           types.String                                                     `tfsdk:"code" json:"code,computed"`
 	CreatedBy      types.String                                                     `tfsdk:"created_by" json:"createdBy,computed"`
 	CustomFields   customfield.Map[jsontypes.Normalized]                            `tfsdk:"custom_fields" json:"customFields,computed"`
@@ -63,6 +62,7 @@ type MetersItemsDataSourceModel struct {
 	LastModifiedBy types.String                                                     `tfsdk:"last_modified_by" json:"lastModifiedBy,computed"`
 	Name           types.String                                                     `tfsdk:"name" json:"name,computed"`
 	ProductID      types.String                                                     `tfsdk:"product_id" json:"productId,computed"`
+	Version        types.Int64                                                      `tfsdk:"version" json:"version,computed"`
 }
 
 type MetersDataFieldsDataSourceModel struct {

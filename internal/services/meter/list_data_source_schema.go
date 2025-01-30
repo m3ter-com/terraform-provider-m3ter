@@ -25,19 +25,19 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 				Required: true,
 			},
 			"codes": schema.ListAttribute{
-				Description: "List of Meter codes to retrieve. These are the unique short codes that identify each Meter.   ",
+				Description: "list of codes to retrieve",
 				Optional:    true,
 				ElementType: types.StringType,
 			},
 			"ids": schema.ListAttribute{
-				Description: "List of Meter IDs to retrieve. ",
+				Description: "list of ids to retrieve",
 				Optional:    true,
 				ElementType: types.StringType,
 			},
 			"product_id": schema.ListAttribute{
-				Description: "The UUIDs of the Products to retrieve Meters for.",
+				Description: "The UUIDs of the products to retrieve meters for",
 				Optional:    true,
-				ElementType: jsontypes.NormalizedType{},
+				ElementType: types.StringType,
 			},
 			"max_items": schema.Int64Attribute{
 				Description: "Max items to fetch, default: 1000",
@@ -54,10 +54,6 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 					Attributes: map[string]schema.Attribute{
 						"id": schema.StringAttribute{
 							Description: "The UUID of the entity. ",
-							Computed:    true,
-						},
-						"version": schema.Int64Attribute{
-							Description: "The version number:\n- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.\n- **Update:** On successful Update, the version is incremented by 1 in the response.",
 							Computed:    true,
 						},
 						"code": schema.StringAttribute{
@@ -176,6 +172,10 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 						},
 						"product_id": schema.StringAttribute{
 							Description: "UUID of the Product the Meter belongs to. *(Optional)* - if blank, the Meter is global.",
+							Computed:    true,
+						},
+						"version": schema.Int64Attribute{
+							Description: "The version number:\n- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.\n- **Update:** On successful Update, the version is incremented by 1 in the response.",
 							Computed:    true,
 						},
 					},
