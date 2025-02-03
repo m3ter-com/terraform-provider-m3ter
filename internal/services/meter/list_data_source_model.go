@@ -51,6 +51,7 @@ func (m *MetersDataSourceModel) toListParams(_ context.Context) (params m3ter.Me
 
 type MetersItemsDataSourceModel struct {
 	ID             types.String                                                     `tfsdk:"id" json:"id,computed"`
+	Version        types.Int64                                                      `tfsdk:"version" json:"version,computed"`
 	Code           types.String                                                     `tfsdk:"code" json:"code,computed"`
 	CreatedBy      types.String                                                     `tfsdk:"created_by" json:"createdBy,computed"`
 	CustomFields   customfield.Map[jsontypes.Normalized]                            `tfsdk:"custom_fields" json:"customFields,computed"`
@@ -62,7 +63,6 @@ type MetersItemsDataSourceModel struct {
 	LastModifiedBy types.String                                                     `tfsdk:"last_modified_by" json:"lastModifiedBy,computed"`
 	Name           types.String                                                     `tfsdk:"name" json:"name,computed"`
 	ProductID      types.String                                                     `tfsdk:"product_id" json:"productId,computed"`
-	Version        types.Int64                                                      `tfsdk:"version" json:"version,computed"`
 }
 
 type MetersDataFieldsDataSourceModel struct {
