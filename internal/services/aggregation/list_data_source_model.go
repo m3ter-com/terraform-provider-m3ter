@@ -51,6 +51,7 @@ func (m *AggregationsDataSourceModel) toListParams(_ context.Context) (params m3
 
 type AggregationsItemsDataSourceModel struct {
 	ID              types.String                                    `tfsdk:"id" json:"id,computed"`
+	Version         types.Int64                                     `tfsdk:"version" json:"version,computed"`
 	Aggregation     types.String                                    `tfsdk:"aggregation" json:"aggregation,computed"`
 	Code            types.String                                    `tfsdk:"code" json:"code,computed"`
 	CreatedBy       types.String                                    `tfsdk:"created_by" json:"createdBy,computed"`
@@ -67,5 +68,4 @@ type AggregationsItemsDataSourceModel struct {
 	Segments        customfield.List[customfield.Map[types.String]] `tfsdk:"segments" json:"segments,computed"`
 	TargetField     types.String                                    `tfsdk:"target_field" json:"targetField,computed"`
 	Unit            types.String                                    `tfsdk:"unit" json:"unit,computed"`
-	Version         types.Int64                                     `tfsdk:"version" json:"version,computed"`
 }

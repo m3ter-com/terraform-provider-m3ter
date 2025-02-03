@@ -7,7 +7,7 @@ resource "m3ter_aggregation" "example_aggregation" {
   rounding = "UP"
   target_field = "x"
   unit = "x"
-  code = "{1{}}_"
+  code = "example_code"
   custom_fields = {
     foo = "bar"
   }

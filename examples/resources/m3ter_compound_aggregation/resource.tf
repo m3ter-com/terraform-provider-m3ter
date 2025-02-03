@@ -5,7 +5,7 @@ resource "m3ter_compound_aggregation" "example_compound_aggregation" {
   quantity_per_unit = 1
   rounding = "UP"
   unit = "x"
-  code = "{1{}}_"
+  code = "example_code"
   custom_fields = {
     foo = "bar"
   }
