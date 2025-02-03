@@ -56,6 +56,10 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Description: "The UUID of the entity. ",
 							Computed:    true,
 						},
+						"version": schema.Int64Attribute{
+							Description: "The version number:\n- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.\n- **Update:** On successful Update, the version is incremented by 1 in the response.",
+							Computed:    true,
+						},
 						"code": schema.StringAttribute{
 							Description: "Code of the Meter - unique short code used to identify the Meter.",
 							Computed:    true,
@@ -172,10 +176,6 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 						},
 						"product_id": schema.StringAttribute{
 							Description: "UUID of the Product the Meter belongs to. *(Optional)* - if blank, the Meter is global.",
-							Computed:    true,
-						},
-						"version": schema.Int64Attribute{
-							Description: "The version number:\n- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.\n- **Update:** On successful Update, the version is incremented by 1 in the response.",
 							Computed:    true,
 						},
 					},
