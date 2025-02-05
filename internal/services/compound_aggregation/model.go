@@ -3,7 +3,6 @@
 package compound_aggregation
 
 import (
-	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/m3ter-com/terraform-provider-m3ter/internal/apijson"
@@ -22,7 +21,7 @@ type CompoundAggregationModel struct {
 	EvaluateNullAggregations types.Bool                                      `tfsdk:"evaluate_null_aggregations" json:"evaluateNullAggregations,optional"`
 	ProductID                types.String                                    `tfsdk:"product_id" json:"productId,optional"`
 	Version                  types.Int64                                     `tfsdk:"version" json:"version,optional"`
-	CustomFields             *map[string]jsontypes.Normalized                `tfsdk:"custom_fields" json:"customFields,optional"`
+	CustomFields             *map[string]types.Dynamic                       `tfsdk:"custom_fields" json:"customFields,optional"`
 	Aggregation              types.String                                    `tfsdk:"aggregation" json:"aggregation,computed"`
 	CreatedBy                types.String                                    `tfsdk:"created_by" json:"createdBy,computed"`
 	DefaultValue             types.Float64                                   `tfsdk:"default_value" json:"defaultValue,computed"`
