@@ -155,9 +155,17 @@ func (p *M3terProvider) Configure(ctx context.Context, req provider.ConfigureReq
 		return
 	}
 
-	client := m3ter.NewClient(
+	client, err := m3ter.NewClientWithServiceUserAuth(
+		ctx,
 		opts...,
 	)
+
+	if err != nil {
+		resp.Diagnostics.AddError(
+			"Error creating m3ter client",
+			err.Error(),
+		)
+	}
 
 	resp.DataSourceData = client
 	resp.ResourceData = client
