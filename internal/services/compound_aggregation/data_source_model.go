@@ -3,7 +3,6 @@
 package compound_aggregation
 
 import (
-	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/m3ter-com/terraform-provider-m3ter/internal/customfield"
@@ -25,6 +24,6 @@ type CompoundAggregationDataSourceModel struct {
 	Rounding                 types.String                                    `tfsdk:"rounding" json:"rounding,computed"`
 	Unit                     types.String                                    `tfsdk:"unit" json:"unit,computed"`
 	Version                  types.Int64                                     `tfsdk:"version" json:"version,computed"`
-	CustomFields             customfield.Map[jsontypes.Normalized]           `tfsdk:"custom_fields" json:"customFields,computed"`
+	CustomFields             customfield.Map[types.Dynamic]                  `tfsdk:"custom_fields" json:"customFields,computed"`
 	Segments                 customfield.List[customfield.Map[types.String]] `tfsdk:"segments" json:"segments,computed"`
 }

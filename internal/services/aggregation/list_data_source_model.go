@@ -5,7 +5,6 @@ package aggregation
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -55,7 +54,7 @@ type AggregationsItemsDataSourceModel struct {
 	Aggregation     types.String                                    `tfsdk:"aggregation" json:"aggregation,computed"`
 	Code            types.String                                    `tfsdk:"code" json:"code,computed"`
 	CreatedBy       types.String                                    `tfsdk:"created_by" json:"createdBy,computed"`
-	CustomFields    customfield.Map[jsontypes.Normalized]           `tfsdk:"custom_fields" json:"customFields,computed"`
+	CustomFields    customfield.Map[types.Dynamic]                  `tfsdk:"custom_fields" json:"customFields,computed"`
 	DefaultValue    types.Float64                                   `tfsdk:"default_value" json:"defaultValue,computed"`
 	DtCreated       timetypes.RFC3339                               `tfsdk:"dt_created" json:"dtCreated,computed" format:"date-time"`
 	DtLastModified  timetypes.RFC3339                               `tfsdk:"dt_last_modified" json:"dtLastModified,computed" format:"date-time"`

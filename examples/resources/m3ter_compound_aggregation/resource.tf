@@ -7,7 +7,7 @@ resource "m3ter_compound_aggregation" "example_compound_aggregation" {
   unit = "x"
   code = "example_code"
   custom_fields = {
-    foo = "bar"
+    foo = "string"
   }
   evaluate_null_aggregations = true
   product_id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"

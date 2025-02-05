@@ -5,7 +5,6 @@ package aggregation
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/float64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
@@ -98,7 +97,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 			},
 			"custom_fields": schema.MapAttribute{
 				Optional:    true,
-				ElementType: jsontypes.NormalizedType{},
+				ElementType: types.DynamicType,
 			},
 			"segmented_fields": schema.ListAttribute{
 				Description: "*(Optional)*. Used when creating a segmented Aggregation, which segments the usage data collected by a single Meter. Works together with `segments`.\n\nEnter the `Codes` of the fields in the target Meter to use for segmentation purposes.\n\nString `dataFields` on the target Meter can be segmented. Any string `derivedFields` on the target Meter, such as one that concatenates two string `dataFields`, can also be segmented.",
