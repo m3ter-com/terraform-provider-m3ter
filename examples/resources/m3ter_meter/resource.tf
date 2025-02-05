@@ -16,7 +16,7 @@ resource "m3ter_meter" "example_meter" {
   }]
   name = "x"
   custom_fields = {
-    foo = "bar"
+    foo = "string"
   }
   group_id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
   product_id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"

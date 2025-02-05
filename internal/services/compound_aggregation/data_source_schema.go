@@ -5,7 +5,6 @@ package compound_aggregation
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
@@ -90,8 +89,8 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 			},
 			"custom_fields": schema.MapAttribute{
 				Computed:    true,
-				CustomType:  customfield.NewMapType[jsontypes.Normalized](ctx),
-				ElementType: jsontypes.NormalizedType{},
+				CustomType:  customfield.NewMapType[types.Dynamic](ctx),
+				ElementType: types.DynamicType,
 			},
 			"segments": schema.ListAttribute{
 				Description: "*(Optional)*. Used when creating a segmented Aggregation, which segments the usage data collected by a single Meter. Works together with `segmentedFields`.\n\nContains the values that are to be used as the segments, read from the fields in the meter pointed at by `segmentedFields`.  ",

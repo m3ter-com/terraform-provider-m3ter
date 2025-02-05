@@ -3,7 +3,6 @@
 package meter
 
 import (
-	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/m3ter-com/terraform-provider-m3ter/internal/customfield"
@@ -21,7 +20,7 @@ type MeterDataSourceModel struct {
 	Name           types.String                                                    `tfsdk:"name" json:"name,computed"`
 	ProductID      types.String                                                    `tfsdk:"product_id" json:"productId,computed"`
 	Version        types.Int64                                                     `tfsdk:"version" json:"version,computed"`
-	CustomFields   customfield.Map[jsontypes.Normalized]                           `tfsdk:"custom_fields" json:"customFields,computed"`
+	CustomFields   customfield.Map[types.Dynamic]                                  `tfsdk:"custom_fields" json:"customFields,computed"`
 	DataFields     customfield.NestedObjectList[MeterDataFieldsDataSourceModel]    `tfsdk:"data_fields" json:"dataFields,computed"`
 	DerivedFields  customfield.NestedObjectList[MeterDerivedFieldsDataSourceModel] `tfsdk:"derived_fields" json:"derivedFields,computed"`
 }

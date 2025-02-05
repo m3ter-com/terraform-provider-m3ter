@@ -5,7 +5,6 @@ package compound_aggregation
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
@@ -74,8 +73,8 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 						},
 						"custom_fields": schema.MapAttribute{
 							Computed:    true,
-							CustomType:  customfield.NewMapType[jsontypes.Normalized](ctx),
-							ElementType: jsontypes.NormalizedType{},
+							CustomType:  customfield.NewMapType[types.Dynamic](ctx),
+							ElementType: types.DynamicType,
 						},
 						"dt_created": schema.StringAttribute{
 							Description: "The date and time *(in ISO-8601 format)* when the CompoundAggregation was created.",

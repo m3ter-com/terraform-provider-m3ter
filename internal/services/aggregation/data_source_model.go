@@ -3,7 +3,6 @@
 package aggregation
 
 import (
-	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/m3ter-com/terraform-provider-m3ter/internal/customfield"
@@ -26,7 +25,7 @@ type AggregationDataSourceModel struct {
 	TargetField     types.String                                    `tfsdk:"target_field" json:"targetField,computed"`
 	Unit            types.String                                    `tfsdk:"unit" json:"unit,computed"`
 	Version         types.Int64                                     `tfsdk:"version" json:"version,computed"`
-	CustomFields    customfield.Map[jsontypes.Normalized]           `tfsdk:"custom_fields" json:"customFields,computed"`
+	CustomFields    customfield.Map[types.Dynamic]                  `tfsdk:"custom_fields" json:"customFields,computed"`
 	SegmentedFields customfield.List[types.String]                  `tfsdk:"segmented_fields" json:"segmentedFields,computed"`
 	Segments        customfield.List[customfield.Map[types.String]] `tfsdk:"segments" json:"segments,computed"`
 }

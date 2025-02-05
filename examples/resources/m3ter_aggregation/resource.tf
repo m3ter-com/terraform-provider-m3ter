@@ -9,7 +9,7 @@ resource "m3ter_aggregation" "example_aggregation" {
   unit = "x"
   code = "example_code"
   custom_fields = {
-    foo = "bar"
+    foo = "string"
   }
   default_value = 0
   segmented_fields = ["string"]
