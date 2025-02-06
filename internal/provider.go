@@ -13,11 +13,30 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/m3ter-com/m3ter-sdk-go"
 	"github.com/m3ter-com/m3ter-sdk-go/option"
+	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/account"
+	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/account_plan"
 	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/aggregation"
+	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/balance"
+	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/balance_transaction"
+	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/bill_config"
+	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/commitment"
 	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/compound_aggregation"
+	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/contract"
 	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/counter"
+	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/counter_adjustment"
+	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/counter_pricing"
+	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/credit_reason"
+	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/currency"
+	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/debit_reason"
 	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/meter"
+	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/organization_config"
+	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/plan"
+	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/plan_group"
+	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/plan_group_link"
+	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/plan_template"
+	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/pricing"
 	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/product"
+	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/transaction_type"
 )
 
 var _ provider.ProviderWithConfigValidators = (*M3terProvider)(nil)
@@ -111,26 +130,80 @@ func (p *M3terProvider) ConfigValidators(_ context.Context) []provider.ConfigVal
 
 func (p *M3terProvider) Resources(ctx context.Context) []func() resource.Resource {
 	return []func() resource.Resource{
+		account.NewResource,
+		account_plan.NewResource,
 		aggregation.NewResource,
+		balance.NewResource,
+		balance_transaction.NewResource,
+		bill_config.NewResource,
+		commitment.NewResource,
 		compound_aggregation.NewResource,
+		contract.NewResource,
 		counter.NewResource,
+		counter_adjustment.NewResource,
+		counter_pricing.NewResource,
+		credit_reason.NewResource,
+		currency.NewResource,
+		debit_reason.NewResource,
 		meter.NewResource,
+		organization_config.NewResource,
+		plan.NewResource,
+		plan_group.NewResource,
+		plan_group_link.NewResource,
+		plan_template.NewResource,
+		pricing.NewResource,
 		product.NewResource,
+		transaction_type.NewResource,
 	}
 }
 
 func (p *M3terProvider) DataSources(ctx context.Context) []func() datasource.DataSource {
 	return []func() datasource.DataSource{
+		account.NewAccountDataSource,
+		account.NewAccountsDataSource,
+		account_plan.NewAccountPlanDataSource,
+		account_plan.NewAccountPlansDataSource,
 		aggregation.NewAggregationDataSource,
 		aggregation.NewAggregationsDataSource,
+		balance.NewBalanceDataSource,
+		balance.NewBalancesDataSource,
+		balance_transaction.NewBalanceTransactionsDataSource,
+		bill_config.NewBillConfigDataSource,
+		commitment.NewCommitmentDataSource,
+		commitment.NewCommitmentsDataSource,
 		compound_aggregation.NewCompoundAggregationDataSource,
 		compound_aggregation.NewCompoundAggregationsDataSource,
+		contract.NewContractDataSource,
+		contract.NewContractsDataSource,
 		counter.NewCounterDataSource,
 		counter.NewCountersDataSource,
+		counter_adjustment.NewCounterAdjustmentDataSource,
+		counter_adjustment.NewCounterAdjustmentsDataSource,
+		counter_pricing.NewCounterPricingDataSource,
+		counter_pricing.NewCounterPricingsDataSource,
+		credit_reason.NewCreditReasonDataSource,
+		credit_reason.NewCreditReasonsDataSource,
+		currency.NewCurrencyDataSource,
+		currency.NewCurrenciesDataSource,
+		debit_reason.NewDebitReasonDataSource,
+		debit_reason.NewDebitReasonsDataSource,
 		meter.NewMeterDataSource,
 		meter.NewMetersDataSource,
+		organization_config.NewOrganizationConfigDataSource,
+		plan.NewPlanDataSource,
+		plan.NewPlansDataSource,
+		plan_group.NewPlanGroupDataSource,
+		plan_group.NewPlanGroupsDataSource,
+		plan_group_link.NewPlanGroupLinkDataSource,
+		plan_group_link.NewPlanGroupLinksDataSource,
+		plan_template.NewPlanTemplateDataSource,
+		plan_template.NewPlanTemplatesDataSource,
+		pricing.NewPricingDataSource,
+		pricing.NewPricingsDataSource,
 		product.NewProductDataSource,
 		product.NewProductsDataSource,
+		transaction_type.NewTransactionTypeDataSource,
+		transaction_type.NewTransactionTypesDataSource,
 	}
 }
 
