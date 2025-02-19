@@ -9,8 +9,8 @@ import (
 )
 
 type AggregationDataSourceModel struct {
+	ID                  types.String                                    `tfsdk:"id" path:"id,required"`
 	OrgID               types.String                                    `tfsdk:"org_id" path:"orgId,required"`
-	ID                  types.String                                    `tfsdk:"id" path:"id,computed"`
 	AccountingProductID types.String                                    `tfsdk:"accounting_product_id" json:"accountingProductId,computed"`
 	Aggregation         types.String                                    `tfsdk:"aggregation" json:"aggregation,computed"`
 	Code                types.String                                    `tfsdk:"code" json:"code,computed"`

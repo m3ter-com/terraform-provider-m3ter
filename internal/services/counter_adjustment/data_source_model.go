@@ -8,8 +8,8 @@ import (
 )
 
 type CounterAdjustmentDataSourceModel struct {
+	ID                  types.String      `tfsdk:"id" path:"id,required"`
 	OrgID               types.String      `tfsdk:"org_id" path:"orgId,required"`
-	ID                  types.String      `tfsdk:"id" path:"id,computed"`
 	AccountID           types.String      `tfsdk:"account_id" json:"accountId,computed"`
 	CounterID           types.String      `tfsdk:"counter_id" json:"counterId,computed"`
 	CreatedBy           types.String      `tfsdk:"created_by" json:"createdBy,computed"`

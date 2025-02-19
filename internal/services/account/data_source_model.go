@@ -10,8 +10,8 @@ import (
 )
 
 type AccountDataSourceModel struct {
+	ID                        types.String                                            `tfsdk:"id" path:"id,required"`
 	OrgID                     types.String                                            `tfsdk:"org_id" path:"orgId,required"`
-	ID                        types.String                                            `tfsdk:"id" path:"id,computed"`
 	AutoGenerateStatementMode types.String                                            `tfsdk:"auto_generate_statement_mode" json:"autoGenerateStatementMode,computed"`
 	BillEpoch                 timetypes.RFC3339                                       `tfsdk:"bill_epoch" json:"billEpoch,computed" format:"date"`
 	Code                      types.String                                            `tfsdk:"code" json:"code,computed"`

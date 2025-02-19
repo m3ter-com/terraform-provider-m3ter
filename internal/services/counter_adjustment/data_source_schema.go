@@ -15,11 +15,11 @@ var _ datasource.DataSourceWithConfigValidators = (*CounterAdjustmentDataSource)
 func DataSourceSchema(ctx context.Context) schema.Schema {
 	return schema.Schema{
 		Attributes: map[string]schema.Attribute{
-			"org_id": schema.StringAttribute{
+			"id": schema.StringAttribute{
 				Required: true,
 			},
-			"id": schema.StringAttribute{
-				Computed: true,
+			"org_id": schema.StringAttribute{
+				Required: true,
 			},
 			"account_id": schema.StringAttribute{
 				Description: "The Account ID the CounterAdjustment was created for.",

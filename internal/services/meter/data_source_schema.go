@@ -19,11 +19,11 @@ var _ datasource.DataSourceWithConfigValidators = (*MeterDataSource)(nil)
 func DataSourceSchema(ctx context.Context) schema.Schema {
 	return schema.Schema{
 		Attributes: map[string]schema.Attribute{
-			"org_id": schema.StringAttribute{
+			"id": schema.StringAttribute{
 				Required: true,
 			},
-			"id": schema.StringAttribute{
-				Computed: true,
+			"org_id": schema.StringAttribute{
+				Required: true,
 			},
 			"code": schema.StringAttribute{
 				Description: "Code of the Meter - unique short code used to identify the Meter.",

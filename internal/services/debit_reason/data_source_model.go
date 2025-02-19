@@ -8,8 +8,8 @@ import (
 )
 
 type DebitReasonDataSourceModel struct {
+	ID             types.String      `tfsdk:"id" path:"id,required"`
 	OrgID          types.String      `tfsdk:"org_id" path:"orgId,required"`
-	ID             types.String      `tfsdk:"id" path:"id,computed"`
 	Archived       types.Bool        `tfsdk:"archived" json:"archived,computed"`
 	Code           types.String      `tfsdk:"code" json:"code,computed"`
 	CreatedBy      types.String      `tfsdk:"created_by" json:"createdBy,computed"`

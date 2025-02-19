@@ -19,11 +19,11 @@ var _ datasource.DataSourceWithConfigValidators = (*PlanTemplateDataSource)(nil)
 func DataSourceSchema(ctx context.Context) schema.Schema {
 	return schema.Schema{
 		Attributes: map[string]schema.Attribute{
-			"org_id": schema.StringAttribute{
+			"id": schema.StringAttribute{
 				Required: true,
 			},
-			"id": schema.StringAttribute{
-				Computed: true,
+			"org_id": schema.StringAttribute{
+				Required: true,
 			},
 			"bill_frequency": schema.StringAttribute{
 				Description: "Determines the frequency at which bills are generated.\n\n* **Daily**. Starting at midnight each day, covering the twenty-four hour period following.\n\n* **Weekly**. Starting at midnight on a Monday, covering the seven-day period following.\n\n* **Monthly**. Starting at midnight on the first day of each month, covering the entire calendar month following.\n\n* **Annually**. Starting at midnight on first day of each year covering the entire calendar year following.",

@@ -15,11 +15,11 @@ var _ datasource.DataSourceWithConfigValidators = (*CounterDataSource)(nil)
 func DataSourceSchema(ctx context.Context) schema.Schema {
 	return schema.Schema{
 		Attributes: map[string]schema.Attribute{
-			"org_id": schema.StringAttribute{
+			"id": schema.StringAttribute{
 				Required: true,
 			},
-			"id": schema.StringAttribute{
-				Computed: true,
+			"org_id": schema.StringAttribute{
+				Required: true,
 			},
 			"code": schema.StringAttribute{
 				Description: "Code of the Counter. A unique short code to identify the Counter.",
