@@ -150,6 +150,9 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Description: "The currency used for the Commitment. For example, 'USD'.",
 							Computed:    true,
 						},
+						"drawdowns_accounting_product_id": schema.StringAttribute{
+							Computed: true,
+						},
 						"dt_created": schema.StringAttribute{
 							Description: "The date and time *(in ISO-8601 format)* when the Commitment was created.",
 							Computed:    true,
@@ -191,6 +194,9 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 									},
 								},
 							},
+						},
+						"fees_accounting_product_id": schema.StringAttribute{
+							Computed: true,
 						},
 						"last_modified_by": schema.StringAttribute{
 							Description: "The unique identifier (UUID) of the user who last modified this Commitment.",

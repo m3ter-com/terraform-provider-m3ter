@@ -57,6 +57,10 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 					float64validator.AtLeast(0),
 				},
 			},
+			"minimum_spend_accounting_product_id": schema.StringAttribute{
+				Description: "Optional Product ID this plan's minimum spend should be attributed to for accounting purposes",
+				Optional:    true,
+			},
 			"minimum_spend_bill_in_advance": schema.BoolAttribute{
 				Description: "When TRUE, minimum spend is billed at the start of each billing period.\n\nWhen FALSE, minimum spend is billed at the end of each billing period.\n\n*(Optional)*. Overrides the setting at PlanTemplate level for minimum spend billing in arrears/in advance.",
 				Optional:    true,
@@ -78,6 +82,10 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				Validators: []validator.Float64{
 					float64validator.AtLeast(0),
 				},
+			},
+			"standing_charge_accounting_product_id": schema.StringAttribute{
+				Description: "Optional Product ID this plan's standing charge should be attributed to for accounting purposes",
+				Optional:    true,
 			},
 			"standing_charge_bill_in_advance": schema.BoolAttribute{
 				Description: "When TRUE, standing charge is billed at the start of each billing period.\n\nWhen FALSE, standing charge is billed at the end of each billing period.\n\n*(Optional)*. Overrides the setting at PlanTemplate level for standing charge billing in arrears/in advance.",

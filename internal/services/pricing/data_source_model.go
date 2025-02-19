@@ -11,6 +11,7 @@ import (
 type PricingDataSourceModel struct {
 	OrgID                     types.String                                                            `tfsdk:"org_id" path:"orgId,required"`
 	ID                        types.String                                                            `tfsdk:"id" path:"id,computed"`
+	AccountingProductID       types.String                                                            `tfsdk:"accounting_product_id" json:"accountingProductId,computed"`
 	AggregationID             types.String                                                            `tfsdk:"aggregation_id" json:"aggregationId,computed"`
 	AggregationType           types.String                                                            `tfsdk:"aggregation_type" json:"aggregationType,computed"`
 	Code                      types.String                                                            `tfsdk:"code" json:"code,computed"`

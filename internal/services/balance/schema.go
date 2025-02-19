@@ -57,8 +57,16 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				Description: "Unique short code for the Balance.",
 				Optional:    true,
 			},
+			"consumptions_accounting_product_id": schema.StringAttribute{
+				Description: "Optional Product ID this Balance Consumptions should be attributed to for accounting purposes",
+				Optional:    true,
+			},
 			"description": schema.StringAttribute{
 				Description: "A description of the Balance.",
+				Optional:    true,
+			},
+			"fees_accounting_product_id": schema.StringAttribute{
+				Description: "Optional Product ID this Balance Fees should be attributed to for accounting purposes",
 				Optional:    true,
 			},
 			"name": schema.StringAttribute{

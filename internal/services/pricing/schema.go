@@ -66,6 +66,10 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 					},
 				},
 			},
+			"accounting_product_id": schema.StringAttribute{
+				Description: "Optional Product ID this Pricing should be attributed to for accounting purposes",
+				Optional:    true,
+			},
 			"aggregation_id": schema.StringAttribute{
 				Description: "UUID of the Aggregation used to create the Pricing. Use this when creating a Pricing for a segmented aggregation.",
 				Optional:    true,

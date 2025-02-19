@@ -5,6 +5,7 @@ resource "m3ter_compound_aggregation" "example_compound_aggregation" {
   quantity_per_unit = 1
   rounding = "UP"
   unit = "x"
+  accounting_product_id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
   code = "example_code"
   custom_fields = {
     foo = "string"

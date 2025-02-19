@@ -80,9 +80,16 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				Description: "User defined label for units shown for Bill line items, indicating to your customers what they are being charged for.",
 				Required:    true,
 			},
+			"accounting_product_id": schema.StringAttribute{
+				Description: "Optional Product ID this Aggregation should be attributed to for accounting purposes",
+				Optional:    true,
+			},
 			"code": schema.StringAttribute{
 				Description: "Code of the new Aggregation. A unique short code to identify the Aggregation.",
 				Optional:    true,
+			},
+			"custom_sql": schema.StringAttribute{
+				Optional: true,
 			},
 			"default_value": schema.Float64Attribute{
 				Description: "Aggregation value used when no usage data is available to be aggregated. *(Optional)*.\n\n**Note:** Set to 0, if you expect to reference the Aggregation in a Compound Aggregation. This ensures that any null values are passed in correctly to the Compound Aggregation calculation with a value = 0.",

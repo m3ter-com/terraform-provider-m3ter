@@ -59,6 +59,9 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Description: "The version number:\n- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.\n- **Update:** On successful Update, the version is incremented by 1 in the response.",
 							Computed:    true,
 						},
+						"accounting_product_id": schema.StringAttribute{
+							Computed: true,
+						},
 						"calculation": schema.StringAttribute{
 							Description: "This field is a string that represents the formula for the calculation. This formula determines how the CompoundAggregation is calculated from the underlying usage data.",
 							Computed:    true,
