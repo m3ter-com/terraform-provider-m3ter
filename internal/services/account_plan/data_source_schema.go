@@ -19,11 +19,11 @@ var _ datasource.DataSourceWithConfigValidators = (*AccountPlanDataSource)(nil)
 func DataSourceSchema(ctx context.Context) schema.Schema {
 	return schema.Schema{
 		Attributes: map[string]schema.Attribute{
-			"org_id": schema.StringAttribute{
+			"id": schema.StringAttribute{
 				Required: true,
 			},
-			"id": schema.StringAttribute{
-				Computed: true,
+			"org_id": schema.StringAttribute{
+				Required: true,
 			},
 			"account_id": schema.StringAttribute{
 				Description: "The unique identifier (UUID) for the Account to which the AccountPlan or AccounPlanGroup is attached.",

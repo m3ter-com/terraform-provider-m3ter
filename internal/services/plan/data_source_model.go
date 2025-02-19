@@ -9,8 +9,8 @@ import (
 )
 
 type PlanDataSourceModel struct {
+	ID                                types.String                   `tfsdk:"id" path:"id,required"`
 	OrgID                             types.String                   `tfsdk:"org_id" path:"orgId,required"`
-	ID                                types.String                   `tfsdk:"id" path:"id,computed"`
 	AccountID                         types.String                   `tfsdk:"account_id" json:"accountId,computed"`
 	Bespoke                           types.Bool                     `tfsdk:"bespoke" json:"bespoke,computed"`
 	Code                              types.String                   `tfsdk:"code" json:"code,computed"`

@@ -9,8 +9,8 @@ import (
 )
 
 type ProductDataSourceModel struct {
+	ID             types.String                   `tfsdk:"id" path:"id,required"`
 	OrgID          types.String                   `tfsdk:"org_id" path:"orgId,required"`
-	ID             types.String                   `tfsdk:"id" path:"id,computed"`
 	Code           types.String                   `tfsdk:"code" json:"code,computed"`
 	CreatedBy      types.String                   `tfsdk:"created_by" json:"createdBy,computed"`
 	DtCreated      timetypes.RFC3339              `tfsdk:"dt_created" json:"dtCreated,computed" format:"date-time"`

@@ -9,8 +9,8 @@ import (
 )
 
 type AccountPlanDataSourceModel struct {
+	ID               types.String                   `tfsdk:"id" path:"id,required"`
 	OrgID            types.String                   `tfsdk:"org_id" path:"orgId,required"`
-	ID               types.String                   `tfsdk:"id" path:"id,computed"`
 	AccountID        types.String                   `tfsdk:"account_id" json:"accountId,computed"`
 	BillEpoch        timetypes.RFC3339              `tfsdk:"bill_epoch" json:"billEpoch,computed" format:"date"`
 	ChildBillingMode types.String                   `tfsdk:"child_billing_mode" json:"childBillingMode,computed"`
