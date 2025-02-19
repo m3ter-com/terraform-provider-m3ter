@@ -52,6 +52,7 @@ func (m *CounterPricingsDataSourceModel) toListParams(_ context.Context) (params
 type CounterPricingsItemsDataSourceModel struct {
 	ID                        types.String                                                             `tfsdk:"id" json:"id,computed"`
 	Version                   types.Int64                                                              `tfsdk:"version" json:"version,computed"`
+	AccountingProductID       types.String                                                             `tfsdk:"accounting_product_id" json:"accountingProductId,computed"`
 	Code                      types.String                                                             `tfsdk:"code" json:"code,computed"`
 	CounterID                 types.String                                                             `tfsdk:"counter_id" json:"counterId,computed"`
 	CreatedBy                 types.String                                                             `tfsdk:"created_by" json:"createdBy,computed"`

@@ -17,6 +17,7 @@ type CompoundAggregationModel struct {
 	QuantityPerUnit          types.Float64                                   `tfsdk:"quantity_per_unit" json:"quantityPerUnit,required"`
 	Rounding                 types.String                                    `tfsdk:"rounding" json:"rounding,required"`
 	Unit                     types.String                                    `tfsdk:"unit" json:"unit,required"`
+	AccountingProductID      types.String                                    `tfsdk:"accounting_product_id" json:"accountingProductId,optional"`
 	Code                     types.String                                    `tfsdk:"code" json:"code,optional"`
 	EvaluateNullAggregations types.Bool                                      `tfsdk:"evaluate_null_aggregations" json:"evaluateNullAggregations,optional"`
 	ProductID                types.String                                    `tfsdk:"product_id" json:"productId,optional"`
@@ -24,6 +25,7 @@ type CompoundAggregationModel struct {
 	CustomFields             *map[string]types.Dynamic                       `tfsdk:"custom_fields" json:"customFields,optional"`
 	Aggregation              types.String                                    `tfsdk:"aggregation" json:"aggregation,computed"`
 	CreatedBy                types.String                                    `tfsdk:"created_by" json:"createdBy,computed"`
+	CustomSql                types.String                                    `tfsdk:"custom_sql" json:"customSql,computed"`
 	DefaultValue             types.Float64                                   `tfsdk:"default_value" json:"defaultValue,computed"`
 	DtCreated                timetypes.RFC3339                               `tfsdk:"dt_created" json:"dtCreated,computed" format:"date-time"`
 	DtLastModified           timetypes.RFC3339                               `tfsdk:"dt_last_modified" json:"dtLastModified,computed" format:"date-time"`

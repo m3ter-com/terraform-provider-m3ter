@@ -24,6 +24,9 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 			"id": schema.StringAttribute{
 				Computed: true,
 			},
+			"accounting_product_id": schema.StringAttribute{
+				Computed: true,
+			},
 			"code": schema.StringAttribute{
 				Description: "Unique short code for the Pricing.",
 				Computed:    true,

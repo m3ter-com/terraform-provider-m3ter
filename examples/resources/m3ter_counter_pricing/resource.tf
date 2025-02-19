@@ -9,6 +9,7 @@ resource "m3ter_counter_pricing" "example_counter_pricing" {
     credit_type_id = "creditTypeId"
   }]
   start_date = "2019-12-27T18:11:19.117Z"
+  accounting_product_id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
   code = "JS!?Q0]r] ]$]"
   cumulative = true
   description = "description"

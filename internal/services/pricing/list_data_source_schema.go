@@ -62,6 +62,9 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Description: "The version number:\n- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.\n- **Update:** On successful Update, the version is incremented by 1 in the response.",
 							Computed:    true,
 						},
+						"accounting_product_id": schema.StringAttribute{
+							Computed: true,
+						},
 						"aggregation_id": schema.StringAttribute{
 							Description: "UUID of the Aggregation used to create the Pricing. Use this when creating a Pricing for a segmented aggregation.",
 							Computed:    true,
