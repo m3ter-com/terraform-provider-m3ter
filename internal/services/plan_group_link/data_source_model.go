@@ -8,8 +8,8 @@ import (
 )
 
 type PlanGroupLinkDataSourceModel struct {
+	ID             types.String      `tfsdk:"id" path:"id,required"`
 	OrgID          types.String      `tfsdk:"org_id" path:"orgId,required"`
-	ID             types.String      `tfsdk:"id" path:"id,computed"`
 	CreatedBy      types.String      `tfsdk:"created_by" json:"createdBy,computed"`
 	DtCreated      timetypes.RFC3339 `tfsdk:"dt_created" json:"dtCreated,computed" format:"date-time"`
 	DtLastModified timetypes.RFC3339 `tfsdk:"dt_last_modified" json:"dtLastModified,computed" format:"date-time"`

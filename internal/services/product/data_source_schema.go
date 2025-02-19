@@ -17,11 +17,11 @@ var _ datasource.DataSourceWithConfigValidators = (*ProductDataSource)(nil)
 func DataSourceSchema(ctx context.Context) schema.Schema {
 	return schema.Schema{
 		Attributes: map[string]schema.Attribute{
-			"org_id": schema.StringAttribute{
+			"id": schema.StringAttribute{
 				Required: true,
 			},
-			"id": schema.StringAttribute{
-				Computed: true,
+			"org_id": schema.StringAttribute{
+				Required: true,
 			},
 			"code": schema.StringAttribute{
 				Description: "A unique short code to identify the Product. It should not contain control chracters or spaces. ",

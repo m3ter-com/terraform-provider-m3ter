@@ -9,8 +9,8 @@ import (
 )
 
 type CommitmentDataSourceModel struct {
+	ID                           types.String                                                    `tfsdk:"id" path:"id,required"`
 	OrgID                        types.String                                                    `tfsdk:"org_id" path:"orgId,required"`
-	ID                           types.String                                                    `tfsdk:"id" path:"id,computed"`
 	AccountID                    types.String                                                    `tfsdk:"account_id" json:"accountId,computed"`
 	AccountingProductID          types.String                                                    `tfsdk:"accounting_product_id" json:"accountingProductId,computed"`
 	Amount                       types.Float64                                                   `tfsdk:"amount" json:"amount,computed"`

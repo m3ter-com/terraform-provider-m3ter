@@ -9,8 +9,8 @@ import (
 )
 
 type BalanceDataSourceModel struct {
+	ID                              types.String                   `tfsdk:"id" path:"id,required"`
 	OrgID                           types.String                   `tfsdk:"org_id" path:"orgId,required"`
-	ID                              types.String                   `tfsdk:"id" path:"id,computed"`
 	AccountID                       types.String                   `tfsdk:"account_id" json:"accountId,computed"`
 	Amount                          types.Float64                  `tfsdk:"amount" json:"amount,computed"`
 	BalanceDrawDownDescription      types.String                   `tfsdk:"balance_draw_down_description" json:"balanceDrawDownDescription,computed"`

@@ -17,11 +17,11 @@ var _ datasource.DataSourceWithConfigValidators = (*PlanGroupDataSource)(nil)
 func DataSourceSchema(ctx context.Context) schema.Schema {
 	return schema.Schema{
 		Attributes: map[string]schema.Attribute{
-			"org_id": schema.StringAttribute{
+			"id": schema.StringAttribute{
 				Required: true,
 			},
-			"id": schema.StringAttribute{
-				Computed: true,
+			"org_id": schema.StringAttribute{
+				Required: true,
 			},
 			"account_id": schema.StringAttribute{
 				Description: "Optional. This PlanGroup was created as bespoke for the associated Account with this Account ID.",
