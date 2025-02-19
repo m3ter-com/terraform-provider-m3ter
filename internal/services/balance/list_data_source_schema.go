@@ -73,6 +73,9 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Description: "A unique short code assigned to the Balance.",
 							Computed:    true,
 						},
+						"consumptions_accounting_product_id": schema.StringAttribute{
+							Computed: true,
+						},
 						"created_by": schema.StringAttribute{
 							Description: "The unique identifier (UUID) for the user who created the Balance.",
 							Computed:    true,
@@ -99,6 +102,9 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Description: "The date *(in ISO 8601 format)* after which the Balance will no longer be active.",
 							Computed:    true,
 							CustomType:  timetypes.RFC3339Type{},
+						},
+						"fees_accounting_product_id": schema.StringAttribute{
+							Computed: true,
 						},
 						"last_modified_by": schema.StringAttribute{
 							Description: "The unique identifier (UUID) for the user who last modified the Balance.",

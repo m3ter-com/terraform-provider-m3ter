@@ -126,6 +126,14 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				Description: "The unique identifier (UUID) for a Contract you've created for the Account - used to add the Commitment to this Contract.\n\n**Note:** If you associate the Commitment with a Contract you must ensure the Account Plan attached to the Account has the same Contract associated with it. If the Account Plan Contract and Commitment Contract do not match, then at billing the Commitment amount will not be drawn-down against.",
 				Optional:    true,
 			},
+			"drawdowns_accounting_product_id": schema.StringAttribute{
+				Description: "Optional Product ID this Commitment consumptions should be attributed to for accounting purposes",
+				Optional:    true,
+			},
+			"fees_accounting_product_id": schema.StringAttribute{
+				Description: "Optional Product ID this Commitment fees should be attributed to for accounting purposes",
+				Optional:    true,
+			},
 			"overage_description": schema.StringAttribute{
 				Description: "A textual description of the overage charges.",
 				Optional:    true,

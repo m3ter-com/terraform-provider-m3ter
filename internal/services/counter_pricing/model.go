@@ -14,6 +14,7 @@ type CounterPricingModel struct {
 	CounterID                 types.String                        `tfsdk:"counter_id" json:"counterId,required"`
 	StartDate                 timetypes.RFC3339                   `tfsdk:"start_date" json:"startDate,required" format:"date-time"`
 	PricingBands              *[]*CounterPricingPricingBandsModel `tfsdk:"pricing_bands" json:"pricingBands,required"`
+	AccountingProductID       types.String                        `tfsdk:"accounting_product_id" json:"accountingProductId,optional"`
 	Code                      types.String                        `tfsdk:"code" json:"code,optional"`
 	Cumulative                types.Bool                          `tfsdk:"cumulative" json:"cumulative,optional"`
 	Description               types.String                        `tfsdk:"description" json:"description,optional"`

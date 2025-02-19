@@ -67,6 +67,10 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 					},
 				},
 			},
+			"accounting_product_id": schema.StringAttribute{
+				Description: "Optional Product ID this Pricing should be attributed to for accounting purposes",
+				Optional:    true,
+			},
 			"code": schema.StringAttribute{
 				Description: "Unique short code for the Pricing.",
 				Optional:    true,

@@ -14,6 +14,7 @@ type PricingModel struct {
 	OrgID                     types.String                                                  `tfsdk:"org_id" path:"orgId,required"`
 	StartDate                 timetypes.RFC3339                                             `tfsdk:"start_date" json:"startDate,required" format:"date-time"`
 	PricingBands              *[]*PricingPricingBandsModel                                  `tfsdk:"pricing_bands" json:"pricingBands,required"`
+	AccountingProductID       types.String                                                  `tfsdk:"accounting_product_id" json:"accountingProductId,optional"`
 	AggregationID             types.String                                                  `tfsdk:"aggregation_id" json:"aggregationId,optional"`
 	Code                      types.String                                                  `tfsdk:"code" json:"code,optional"`
 	CompoundAggregationID     types.String                                                  `tfsdk:"compound_aggregation_id" json:"compoundAggregationId,optional"`

@@ -25,6 +25,9 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 			"id": schema.StringAttribute{
 				Computed: true,
 			},
+			"accounting_product_id": schema.StringAttribute{
+				Computed: true,
+			},
 			"calculation": schema.StringAttribute{
 				Description: "This field is a string that represents the formula for the calculation. This formula determines how the CompoundAggregation is calculated from the underlying usage data.",
 				Computed:    true,

@@ -127,7 +127,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				PlanModifiers: []planmodifier.Int64{int64planmodifier.RequiresReplace()},
 			},
 			"credit_application_order": schema.ListAttribute{
-				Description: "Define the order in which any Prepayment or Balance amounts on Accounts are to be drawn-down against for billing. Four options:\n- `\"PREPAYMENT\",\"BALANCE\"`. Draw-down against Prepayment credit before Balance credit.\n- `\"BALANCE\",\"PREPAYMENT\"`. Draw-down against Balance credit before Prepayment credit.\n- `\"PREPAYMENT\"`. Only draw-down against Prepayment credit.\n- `\"BALANCE\"`. Only draw-down against Balance credit.\n\n**NOTE:** You can override this Organization-level setting for credit application order at the level of an individual Account.",
+				Description: "Define the order in which any Prepayment or Balance amounts on Accounts are to be drawn-down against for billing. Four options:\n- `\"PREPAYMENT\",\"BALANCE\"`. Draw-down against Prepayment credit before Balance credit.\n- `\"BALANCE\",\"PREPAYMENT\"`. Draw-down against Balance credit before Prepayment credit.\n- `\"PREPAYMENT\"`. Only draw-down against Prepayment credit.\n- `\"BALANCE\"`. Only draw-down against Balance credit.\n\n**NOTES:**\n* You can override this Organization-level setting for `creditApplicationOrder` at the level of an individual Account.\n* If the Account belongs to a Parent/Child Account hierarchy, then the `creditApplicationOrder` settings are not available, and the draw-down order defaults always to Prepayment then Balance order.",
 				Optional:    true,
 				Validators: []validator.List{
 					listvalidator.ValueStringsAre(

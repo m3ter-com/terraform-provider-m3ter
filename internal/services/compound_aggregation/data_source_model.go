@@ -11,6 +11,7 @@ import (
 type CompoundAggregationDataSourceModel struct {
 	OrgID                    types.String                                    `tfsdk:"org_id" path:"orgId,required"`
 	ID                       types.String                                    `tfsdk:"id" path:"id,computed"`
+	AccountingProductID      types.String                                    `tfsdk:"accounting_product_id" json:"accountingProductId,computed"`
 	Calculation              types.String                                    `tfsdk:"calculation" json:"calculation,computed"`
 	Code                     types.String                                    `tfsdk:"code" json:"code,computed"`
 	CreatedBy                types.String                                    `tfsdk:"created_by" json:"createdBy,computed"`

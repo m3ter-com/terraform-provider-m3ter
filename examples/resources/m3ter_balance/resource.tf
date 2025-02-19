@@ -6,7 +6,9 @@ resource "m3ter_balance" "example_balance" {
   start_date = "2019-12-27T18:11:19.117Z"
   balance_draw_down_description = "balanceDrawDownDescription"
   code = "JS!?Q0]r] ]$]"
+  consumptions_accounting_product_id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
   description = "description"
+  fees_accounting_product_id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
   line_item_types = ["STANDING_CHARGE"]
   name = "name"
   overage_description = "overageDescription"

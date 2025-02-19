@@ -57,6 +57,10 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Description: "The product minimum spend amount per billing cycle for end customer Accounts on a priced Plan.\n\n*(Optional)*. Overrides PlanTemplate value.",
 				Computed:    true,
 			},
+			"minimum_spend_accounting_product_id": schema.StringAttribute{
+				Description: "Optional Product ID this plan's minimum spend should be attributed to for accounting purposes",
+				Computed:    true,
+			},
 			"minimum_spend_bill_in_advance": schema.BoolAttribute{
 				Description: "When TRUE, minimum spend is billed at the start of each billing period.\n\nWhen FALSE, minimum spend is billed at the end of each billing period.\n\n*(Optional)*. Overrides the setting at PlanTemplate level for minimum spend billing in arrears/in advance.",
 				Computed:    true,
@@ -83,6 +87,10 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 			},
 			"standing_charge": schema.Float64Attribute{
 				Description: "The standing charge applied to bills for end customers. This is prorated.\n\n*(Optional)*. Overrides PlanTemplate value.",
+				Computed:    true,
+			},
+			"standing_charge_accounting_product_id": schema.StringAttribute{
+				Description: "Optional Product ID this plan's standing charge should be attributed to for accounting purposes",
 				Computed:    true,
 			},
 			"standing_charge_bill_in_advance": schema.BoolAttribute{
