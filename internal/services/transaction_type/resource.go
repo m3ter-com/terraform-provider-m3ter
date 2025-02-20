@@ -71,8 +71,9 @@ func (r *TransactionTypeResource) Create(ctx context.Context, req resource.Creat
 	res := new(http.Response)
 	_, err = r.client.TransactionTypes.New(
 		ctx,
-		data.OrgID.ValueString(),
-		m3ter.TransactionTypeNewParams{},
+		m3ter.TransactionTypeNewParams{
+			OrgID: m3ter.F(data.OrgID.ValueString()),
+		},
 		option.WithRequestBody("application/json", dataBytes),
 		option.WithResponseBodyInto(&res),
 		option.WithMiddleware(logging.Middleware(ctx)),
@@ -116,9 +117,10 @@ func (r *TransactionTypeResource) Update(ctx context.Context, req resource.Updat
 	res := new(http.Response)
 	_, err = r.client.TransactionTypes.Update(
 		ctx,
-		data.OrgID.ValueString(),
 		data.ID.ValueString(),
-		m3ter.TransactionTypeUpdateParams{},
+		m3ter.TransactionTypeUpdateParams{
+			OrgID: m3ter.F(data.OrgID.ValueString()),
+		},
 		option.WithRequestBody("application/json", dataBytes),
 		option.WithResponseBodyInto(&res),
 		option.WithMiddleware(logging.Middleware(ctx)),
@@ -149,8 +151,10 @@ func (r *TransactionTypeResource) Read(ctx context.Context, req resource.ReadReq
 	res := new(http.Response)
 	_, err := r.client.TransactionTypes.Get(
 		ctx,
-		data.OrgID.ValueString(),
 		data.ID.ValueString(),
+		m3ter.TransactionTypeGetParams{
+			OrgID: m3ter.F(data.OrgID.ValueString()),
+		},
 		option.WithResponseBodyInto(&res),
 		option.WithMiddleware(logging.Middleware(ctx)),
 	)
@@ -184,8 +188,10 @@ func (r *TransactionTypeResource) Delete(ctx context.Context, req resource.Delet
 
 	_, err := r.client.TransactionTypes.Delete(
 		ctx,
-		data.OrgID.ValueString(),
 		data.ID.ValueString(),
+		m3ter.TransactionTypeDeleteParams{
+			OrgID: m3ter.F(data.OrgID.ValueString()),
+		},
 		option.WithMiddleware(logging.Middleware(ctx)),
 	)
 	if err != nil {
@@ -218,8 +224,10 @@ func (r *TransactionTypeResource) ImportState(ctx context.Context, req resource.
 	res := new(http.Response)
 	_, err := r.client.TransactionTypes.Get(
 		ctx,
-		path_org_id,
 		path_id,
+		m3ter.TransactionTypeGetParams{
+			OrgID: m3ter.F(path_org_id),
+		},
 		option.WithResponseBodyInto(&res),
 		option.WithMiddleware(logging.Middleware(ctx)),
 	)

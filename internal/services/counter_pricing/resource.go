@@ -71,8 +71,9 @@ func (r *CounterPricingResource) Create(ctx context.Context, req resource.Create
 	res := new(http.Response)
 	_, err = r.client.CounterPricings.New(
 		ctx,
-		data.OrgID.ValueString(),
-		m3ter.CounterPricingNewParams{},
+		m3ter.CounterPricingNewParams{
+			OrgID: m3ter.F(data.OrgID.ValueString()),
+		},
 		option.WithRequestBody("application/json", dataBytes),
 		option.WithResponseBodyInto(&res),
 		option.WithMiddleware(logging.Middleware(ctx)),
@@ -116,9 +117,10 @@ func (r *CounterPricingResource) Update(ctx context.Context, req resource.Update
 	res := new(http.Response)
 	_, err = r.client.CounterPricings.Update(
 		ctx,
-		data.OrgID.ValueString(),
 		data.ID.ValueString(),
-		m3ter.CounterPricingUpdateParams{},
+		m3ter.CounterPricingUpdateParams{
+			OrgID: m3ter.F(data.OrgID.ValueString()),
+		},
 		option.WithRequestBody("application/json", dataBytes),
 		option.WithResponseBodyInto(&res),
 		option.WithMiddleware(logging.Middleware(ctx)),
@@ -149,8 +151,10 @@ func (r *CounterPricingResource) Read(ctx context.Context, req resource.ReadRequ
 	res := new(http.Response)
 	_, err := r.client.CounterPricings.Get(
 		ctx,
-		data.OrgID.ValueString(),
 		data.ID.ValueString(),
+		m3ter.CounterPricingGetParams{
+			OrgID: m3ter.F(data.OrgID.ValueString()),
+		},
 		option.WithResponseBodyInto(&res),
 		option.WithMiddleware(logging.Middleware(ctx)),
 	)
@@ -184,8 +188,10 @@ func (r *CounterPricingResource) Delete(ctx context.Context, req resource.Delete
 
 	_, err := r.client.CounterPricings.Delete(
 		ctx,
-		data.OrgID.ValueString(),
 		data.ID.ValueString(),
+		m3ter.CounterPricingDeleteParams{
+			OrgID: m3ter.F(data.OrgID.ValueString()),
+		},
 		option.WithMiddleware(logging.Middleware(ctx)),
 	)
 	if err != nil {
@@ -218,8 +224,10 @@ func (r *CounterPricingResource) ImportState(ctx context.Context, req resource.I
 	res := new(http.Response)
 	_, err := r.client.CounterPricings.Get(
 		ctx,
-		path_org_id,
 		path_id,
+		m3ter.CounterPricingGetParams{
+			OrgID: m3ter.F(path_org_id),
+		},
 		option.WithResponseBodyInto(&res),
 		option.WithMiddleware(logging.Middleware(ctx)),
 	)

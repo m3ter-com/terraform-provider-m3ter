@@ -35,6 +35,7 @@ func (m *PlanGroupsDataSourceModel) toListParams(_ context.Context) (params m3te
 	}
 
 	params = m3ter.PlanGroupListParams{
+		OrgID:     m3ter.F(m.OrgID.ValueString()),
 		AccountID: m3ter.F(mAccountID),
 		IDs:       m3ter.F(mIDs),
 	}

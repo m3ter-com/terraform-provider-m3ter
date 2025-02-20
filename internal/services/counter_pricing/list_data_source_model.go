@@ -33,7 +33,8 @@ func (m *CounterPricingsDataSourceModel) toListParams(_ context.Context) (params
 	}
 
 	params = m3ter.CounterPricingListParams{
-		IDs: m3ter.F(mIDs),
+		OrgID: m3ter.F(m.OrgID.ValueString()),
+		IDs:   m3ter.F(mIDs),
 	}
 
 	if !m.Date.IsNull() {

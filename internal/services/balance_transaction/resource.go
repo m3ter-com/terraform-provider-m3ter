@@ -68,9 +68,10 @@ func (r *BalanceTransactionResource) Create(ctx context.Context, req resource.Cr
 	res := new(http.Response)
 	_, err = r.client.Balances.Transactions.New(
 		ctx,
-		data.OrgID.ValueString(),
 		data.BalanceID.ValueString(),
-		m3ter.BalanceTransactionNewParams{},
+		m3ter.BalanceTransactionNewParams{
+			OrgID: m3ter.F(data.OrgID.ValueString()),
+		},
 		option.WithRequestBody("application/json", dataBytes),
 		option.WithResponseBodyInto(&res),
 		option.WithMiddleware(logging.Middleware(ctx)),
@@ -114,9 +115,10 @@ func (r *BalanceTransactionResource) Update(ctx context.Context, req resource.Up
 	res := new(http.Response)
 	_, err = r.client.Balances.Transactions.New(
 		ctx,
-		data.OrgID.ValueString(),
 		data.ID.ValueString(),
-		m3ter.BalanceTransactionNewParams{},
+		m3ter.BalanceTransactionNewParams{
+			OrgID: m3ter.F(data.OrgID.ValueString()),
+		},
 		option.WithRequestBody("application/json", dataBytes),
 		option.WithResponseBodyInto(&res),
 		option.WithMiddleware(logging.Middleware(ctx)),

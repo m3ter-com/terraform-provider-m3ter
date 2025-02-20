@@ -3,8 +3,12 @@
 package account_plan
 
 import (
+	"context"
+
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
+	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/types"
+	"github.com/m3ter-com/m3ter-sdk-go"
 	"github.com/m3ter-com/terraform-provider-m3ter/internal/customfield"
 )
 
@@ -27,4 +31,12 @@ type AccountPlanDataSourceModel struct {
 	StartDate        timetypes.RFC3339              `tfsdk:"start_date" json:"startDate,computed" format:"date-time"`
 	Version          types.Int64                    `tfsdk:"version" json:"version,computed"`
 	CustomFields     customfield.Map[types.Dynamic] `tfsdk:"custom_fields" json:"customFields,computed"`
+}
+
+func (m *AccountPlanDataSourceModel) toReadParams(_ context.Context) (params m3ter.AccountPlanGetParams, diags diag.Diagnostics) {
+	params = m3ter.AccountPlanGetParams{
+		OrgID: m3ter.F(m.OrgID.ValueString()),
+	}
+
+	return
 }

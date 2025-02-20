@@ -71,8 +71,9 @@ func (r *PlanTemplateResource) Create(ctx context.Context, req resource.CreateRe
 	res := new(http.Response)
 	_, err = r.client.PlanTemplates.New(
 		ctx,
-		data.OrgID.ValueString(),
-		m3ter.PlanTemplateNewParams{},
+		m3ter.PlanTemplateNewParams{
+			OrgID: m3ter.F(data.OrgID.ValueString()),
+		},
 		option.WithRequestBody("application/json", dataBytes),
 		option.WithResponseBodyInto(&res),
 		option.WithMiddleware(logging.Middleware(ctx)),
@@ -116,9 +117,10 @@ func (r *PlanTemplateResource) Update(ctx context.Context, req resource.UpdateRe
 	res := new(http.Response)
 	_, err = r.client.PlanTemplates.Update(
 		ctx,
-		data.OrgID.ValueString(),
 		data.ID.ValueString(),
-		m3ter.PlanTemplateUpdateParams{},
+		m3ter.PlanTemplateUpdateParams{
+			OrgID: m3ter.F(data.OrgID.ValueString()),
+		},
 		option.WithRequestBody("application/json", dataBytes),
 		option.WithResponseBodyInto(&res),
 		option.WithMiddleware(logging.Middleware(ctx)),
@@ -149,8 +151,10 @@ func (r *PlanTemplateResource) Read(ctx context.Context, req resource.ReadReques
 	res := new(http.Response)
 	_, err := r.client.PlanTemplates.Get(
 		ctx,
-		data.OrgID.ValueString(),
 		data.ID.ValueString(),
+		m3ter.PlanTemplateGetParams{
+			OrgID: m3ter.F(data.OrgID.ValueString()),
+		},
 		option.WithResponseBodyInto(&res),
 		option.WithMiddleware(logging.Middleware(ctx)),
 	)
@@ -184,8 +188,10 @@ func (r *PlanTemplateResource) Delete(ctx context.Context, req resource.DeleteRe
 
 	_, err := r.client.PlanTemplates.Delete(
 		ctx,
-		data.OrgID.ValueString(),
 		data.ID.ValueString(),
+		m3ter.PlanTemplateDeleteParams{
+			OrgID: m3ter.F(data.OrgID.ValueString()),
+		},
 		option.WithMiddleware(logging.Middleware(ctx)),
 	)
 	if err != nil {
@@ -218,8 +224,10 @@ func (r *PlanTemplateResource) ImportState(ctx context.Context, req resource.Imp
 	res := new(http.Response)
 	_, err := r.client.PlanTemplates.Get(
 		ctx,
-		path_org_id,
 		path_id,
+		m3ter.PlanTemplateGetParams{
+			OrgID: m3ter.F(path_org_id),
+		},
 		option.WithResponseBodyInto(&res),
 		option.WithMiddleware(logging.Middleware(ctx)),
 	)

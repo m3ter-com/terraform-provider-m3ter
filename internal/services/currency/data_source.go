@@ -57,11 +57,17 @@ func (d *CurrencyDataSource) Read(ctx context.Context, req datasource.ReadReques
 		return
 	}
 
+	params, diags := data.toReadParams(ctx)
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
 	res := new(http.Response)
 	_, err := d.client.Currencies.Get(
 		ctx,
-		data.OrgID.ValueString(),
 		data.ID.ValueString(),
+		params,
 		option.WithResponseBodyInto(&res),
 		option.WithMiddleware(logging.Middleware(ctx)),
 	)

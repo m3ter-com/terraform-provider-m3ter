@@ -3,8 +3,12 @@
 package pricing
 
 import (
+	"context"
+
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
+	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/types"
+	"github.com/m3ter-com/m3ter-sdk-go"
 	"github.com/m3ter-com/terraform-provider-m3ter/internal/customfield"
 )
 
@@ -36,6 +40,14 @@ type PricingDataSourceModel struct {
 	Segment                   customfield.Map[types.String]                                           `tfsdk:"segment" json:"segment,computed"`
 	OveragePricingBands       customfield.NestedObjectList[PricingOveragePricingBandsDataSourceModel] `tfsdk:"overage_pricing_bands" json:"overagePricingBands,computed"`
 	PricingBands              customfield.NestedObjectList[PricingPricingBandsDataSourceModel]        `tfsdk:"pricing_bands" json:"pricingBands,computed"`
+}
+
+func (m *PricingDataSourceModel) toReadParams(_ context.Context) (params m3ter.PricingGetParams, diags diag.Diagnostics) {
+	params = m3ter.PricingGetParams{
+		OrgID: m3ter.F(m.OrgID.ValueString()),
+	}
+
+	return
 }
 
 type PricingOveragePricingBandsDataSourceModel struct {

@@ -3,8 +3,12 @@
 package meter
 
 import (
+	"context"
+
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
+	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/types"
+	"github.com/m3ter-com/m3ter-sdk-go"
 	"github.com/m3ter-com/terraform-provider-m3ter/internal/customfield"
 )
 
@@ -23,6 +27,14 @@ type MeterDataSourceModel struct {
 	CustomFields   customfield.Map[types.Dynamic]                                  `tfsdk:"custom_fields" json:"customFields,computed"`
 	DataFields     customfield.NestedObjectList[MeterDataFieldsDataSourceModel]    `tfsdk:"data_fields" json:"dataFields,computed"`
 	DerivedFields  customfield.NestedObjectList[MeterDerivedFieldsDataSourceModel] `tfsdk:"derived_fields" json:"derivedFields,computed"`
+}
+
+func (m *MeterDataSourceModel) toReadParams(_ context.Context) (params m3ter.MeterGetParams, diags diag.Diagnostics) {
+	params = m3ter.MeterGetParams{
+		OrgID: m3ter.F(m.OrgID.ValueString()),
+	}
+
+	return
 }
 
 type MeterDataFieldsDataSourceModel struct {

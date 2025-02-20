@@ -71,8 +71,9 @@ func (r *CounterAdjustmentResource) Create(ctx context.Context, req resource.Cre
 	res := new(http.Response)
 	_, err = r.client.CounterAdjustments.New(
 		ctx,
-		data.OrgID.ValueString(),
-		m3ter.CounterAdjustmentNewParams{},
+		m3ter.CounterAdjustmentNewParams{
+			OrgID: m3ter.F(data.OrgID.ValueString()),
+		},
 		option.WithRequestBody("application/json", dataBytes),
 		option.WithResponseBodyInto(&res),
 		option.WithMiddleware(logging.Middleware(ctx)),
@@ -116,9 +117,10 @@ func (r *CounterAdjustmentResource) Update(ctx context.Context, req resource.Upd
 	res := new(http.Response)
 	_, err = r.client.CounterAdjustments.Update(
 		ctx,
-		data.OrgID.ValueString(),
 		data.ID.ValueString(),
-		m3ter.CounterAdjustmentUpdateParams{},
+		m3ter.CounterAdjustmentUpdateParams{
+			OrgID: m3ter.F(data.OrgID.ValueString()),
+		},
 		option.WithRequestBody("application/json", dataBytes),
 		option.WithResponseBodyInto(&res),
 		option.WithMiddleware(logging.Middleware(ctx)),
@@ -149,8 +151,10 @@ func (r *CounterAdjustmentResource) Read(ctx context.Context, req resource.ReadR
 	res := new(http.Response)
 	_, err := r.client.CounterAdjustments.Get(
 		ctx,
-		data.OrgID.ValueString(),
 		data.ID.ValueString(),
+		m3ter.CounterAdjustmentGetParams{
+			OrgID: m3ter.F(data.OrgID.ValueString()),
+		},
 		option.WithResponseBodyInto(&res),
 		option.WithMiddleware(logging.Middleware(ctx)),
 	)
@@ -184,8 +188,10 @@ func (r *CounterAdjustmentResource) Delete(ctx context.Context, req resource.Del
 
 	_, err := r.client.CounterAdjustments.Delete(
 		ctx,
-		data.OrgID.ValueString(),
 		data.ID.ValueString(),
+		m3ter.CounterAdjustmentDeleteParams{
+			OrgID: m3ter.F(data.OrgID.ValueString()),
+		},
 		option.WithMiddleware(logging.Middleware(ctx)),
 	)
 	if err != nil {
@@ -218,8 +224,10 @@ func (r *CounterAdjustmentResource) ImportState(ctx context.Context, req resourc
 	res := new(http.Response)
 	_, err := r.client.CounterAdjustments.Get(
 		ctx,
-		path_org_id,
 		path_id,
+		m3ter.CounterAdjustmentGetParams{
+			OrgID: m3ter.F(path_org_id),
+		},
 		option.WithResponseBodyInto(&res),
 		option.WithMiddleware(logging.Middleware(ctx)),
 	)

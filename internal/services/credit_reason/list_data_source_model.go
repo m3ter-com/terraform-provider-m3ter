@@ -36,6 +36,7 @@ func (m *CreditReasonsDataSourceModel) toListParams(_ context.Context) (params m
 	}
 
 	params = m3ter.CreditReasonListParams{
+		OrgID: m3ter.F(m.OrgID.ValueString()),
 		Codes: m3ter.F(mCodes),
 		IDs:   m3ter.F(mIDs),
 	}
