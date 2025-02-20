@@ -71,8 +71,9 @@ func (r *AccountPlanResource) Create(ctx context.Context, req resource.CreateReq
 	res := new(http.Response)
 	_, err = r.client.AccountPlans.New(
 		ctx,
-		data.OrgID.ValueString(),
-		m3ter.AccountPlanNewParams{},
+		m3ter.AccountPlanNewParams{
+			OrgID: m3ter.F(data.OrgID.ValueString()),
+		},
 		option.WithRequestBody("application/json", dataBytes),
 		option.WithResponseBodyInto(&res),
 		option.WithMiddleware(logging.Middleware(ctx)),
@@ -116,9 +117,10 @@ func (r *AccountPlanResource) Update(ctx context.Context, req resource.UpdateReq
 	res := new(http.Response)
 	_, err = r.client.AccountPlans.Update(
 		ctx,
-		data.OrgID.ValueString(),
 		data.ID.ValueString(),
-		m3ter.AccountPlanUpdateParams{},
+		m3ter.AccountPlanUpdateParams{
+			OrgID: m3ter.F(data.OrgID.ValueString()),
+		},
 		option.WithRequestBody("application/json", dataBytes),
 		option.WithResponseBodyInto(&res),
 		option.WithMiddleware(logging.Middleware(ctx)),
@@ -149,8 +151,10 @@ func (r *AccountPlanResource) Read(ctx context.Context, req resource.ReadRequest
 	res := new(http.Response)
 	_, err := r.client.AccountPlans.Get(
 		ctx,
-		data.OrgID.ValueString(),
 		data.ID.ValueString(),
+		m3ter.AccountPlanGetParams{
+			OrgID: m3ter.F(data.OrgID.ValueString()),
+		},
 		option.WithResponseBodyInto(&res),
 		option.WithMiddleware(logging.Middleware(ctx)),
 	)
@@ -184,8 +188,10 @@ func (r *AccountPlanResource) Delete(ctx context.Context, req resource.DeleteReq
 
 	_, err := r.client.AccountPlans.Delete(
 		ctx,
-		data.OrgID.ValueString(),
 		data.ID.ValueString(),
+		m3ter.AccountPlanDeleteParams{
+			OrgID: m3ter.F(data.OrgID.ValueString()),
+		},
 		option.WithMiddleware(logging.Middleware(ctx)),
 	)
 	if err != nil {
@@ -218,8 +224,10 @@ func (r *AccountPlanResource) ImportState(ctx context.Context, req resource.Impo
 	res := new(http.Response)
 	_, err := r.client.AccountPlans.Get(
 		ctx,
-		path_org_id,
 		path_id,
+		m3ter.AccountPlanGetParams{
+			OrgID: m3ter.F(path_org_id),
+		},
 		option.WithResponseBodyInto(&res),
 		option.WithMiddleware(logging.Middleware(ctx)),
 	)

@@ -40,6 +40,7 @@ func (m *MetersDataSourceModel) toListParams(_ context.Context) (params m3ter.Me
 	}
 
 	params = m3ter.MeterListParams{
+		OrgID:     m3ter.F(m.OrgID.ValueString()),
 		Codes:     m3ter.F(mCodes),
 		IDs:       m3ter.F(mIDs),
 		ProductID: m3ter.F(mProductID),

@@ -69,7 +69,6 @@ func (d *BalanceTransactionsDataSource) Read(ctx context.Context, req datasource
 	}
 	page, err := d.client.Balances.Transactions.List(
 		ctx,
-		data.OrgID.ValueString(),
 		data.BalanceID.ValueString(),
 		params,
 	)

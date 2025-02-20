@@ -3,8 +3,12 @@
 package counter_adjustment
 
 import (
+	"context"
+
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
+	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/types"
+	"github.com/m3ter-com/m3ter-sdk-go"
 )
 
 type CounterAdjustmentDataSourceModel struct {
@@ -20,4 +24,12 @@ type CounterAdjustmentDataSourceModel struct {
 	PurchaseOrderNumber types.String      `tfsdk:"purchase_order_number" json:"purchaseOrderNumber,computed"`
 	Value               types.Int64       `tfsdk:"value" json:"value,computed"`
 	Version             types.Int64       `tfsdk:"version" json:"version,computed"`
+}
+
+func (m *CounterAdjustmentDataSourceModel) toReadParams(_ context.Context) (params m3ter.CounterAdjustmentGetParams, diags diag.Diagnostics) {
+	params = m3ter.CounterAdjustmentGetParams{
+		OrgID: m3ter.F(m.OrgID.ValueString()),
+	}
+
+	return
 }

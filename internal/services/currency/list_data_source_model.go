@@ -36,6 +36,7 @@ func (m *CurrenciesDataSourceModel) toListParams(_ context.Context) (params m3te
 	}
 
 	params = m3ter.CurrencyListParams{
+		OrgID: m3ter.F(m.OrgID.ValueString()),
 		Codes: m3ter.F(mCodes),
 		IDs:   m3ter.F(mIDs),
 	}

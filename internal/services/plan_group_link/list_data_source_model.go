@@ -32,7 +32,8 @@ func (m *PlanGroupLinksDataSourceModel) toListParams(_ context.Context) (params 
 	}
 
 	params = m3ter.PlanGroupLinkListParams{
-		IDs: m3ter.F(mIDs),
+		OrgID: m3ter.F(m.OrgID.ValueString()),
+		IDs:   m3ter.F(mIDs),
 	}
 
 	if !m.Plan.IsNull() {

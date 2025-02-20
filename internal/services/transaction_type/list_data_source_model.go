@@ -36,6 +36,7 @@ func (m *TransactionTypesDataSourceModel) toListParams(_ context.Context) (param
 	}
 
 	params = m3ter.TransactionTypeListParams{
+		OrgID: m3ter.F(m.OrgID.ValueString()),
 		Codes: m3ter.F(mCodes),
 		IDs:   m3ter.F(mIDs),
 	}

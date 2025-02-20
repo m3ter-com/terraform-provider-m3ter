@@ -67,11 +67,7 @@ func (d *PlanGroupLinksDataSource) Read(ctx context.Context, req datasource.Read
 	if maxItems <= 0 {
 		maxItems = 1000
 	}
-	page, err := d.client.PlanGroupLinks.List(
-		ctx,
-		data.OrgID.ValueString(),
-		params,
-	)
+	page, err := d.client.PlanGroupLinks.List(ctx, params)
 	if err != nil {
 		resp.Diagnostics.AddError("failed to make http request", err.Error())
 		return

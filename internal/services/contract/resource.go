@@ -71,8 +71,9 @@ func (r *ContractResource) Create(ctx context.Context, req resource.CreateReques
 	res := new(http.Response)
 	_, err = r.client.Contracts.New(
 		ctx,
-		data.OrgID.ValueString(),
-		m3ter.ContractNewParams{},
+		m3ter.ContractNewParams{
+			OrgID: m3ter.F(data.OrgID.ValueString()),
+		},
 		option.WithRequestBody("application/json", dataBytes),
 		option.WithResponseBodyInto(&res),
 		option.WithMiddleware(logging.Middleware(ctx)),
@@ -116,9 +117,10 @@ func (r *ContractResource) Update(ctx context.Context, req resource.UpdateReques
 	res := new(http.Response)
 	_, err = r.client.Contracts.Update(
 		ctx,
-		data.OrgID.ValueString(),
 		data.ID.ValueString(),
-		m3ter.ContractUpdateParams{},
+		m3ter.ContractUpdateParams{
+			OrgID: m3ter.F(data.OrgID.ValueString()),
+		},
 		option.WithRequestBody("application/json", dataBytes),
 		option.WithResponseBodyInto(&res),
 		option.WithMiddleware(logging.Middleware(ctx)),
@@ -149,8 +151,10 @@ func (r *ContractResource) Read(ctx context.Context, req resource.ReadRequest, r
 	res := new(http.Response)
 	_, err := r.client.Contracts.Get(
 		ctx,
-		data.OrgID.ValueString(),
 		data.ID.ValueString(),
+		m3ter.ContractGetParams{
+			OrgID: m3ter.F(data.OrgID.ValueString()),
+		},
 		option.WithResponseBodyInto(&res),
 		option.WithMiddleware(logging.Middleware(ctx)),
 	)
@@ -184,8 +188,10 @@ func (r *ContractResource) Delete(ctx context.Context, req resource.DeleteReques
 
 	_, err := r.client.Contracts.Delete(
 		ctx,
-		data.OrgID.ValueString(),
 		data.ID.ValueString(),
+		m3ter.ContractDeleteParams{
+			OrgID: m3ter.F(data.OrgID.ValueString()),
+		},
 		option.WithMiddleware(logging.Middleware(ctx)),
 	)
 	if err != nil {
@@ -218,8 +224,10 @@ func (r *ContractResource) ImportState(ctx context.Context, req resource.ImportS
 	res := new(http.Response)
 	_, err := r.client.Contracts.Get(
 		ctx,
-		path_org_id,
 		path_id,
+		m3ter.ContractGetParams{
+			OrgID: m3ter.F(path_org_id),
+		},
 		option.WithResponseBodyInto(&res),
 		option.WithMiddleware(logging.Middleware(ctx)),
 	)

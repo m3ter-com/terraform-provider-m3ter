@@ -71,8 +71,9 @@ func (r *PlanResource) Create(ctx context.Context, req resource.CreateRequest, r
 	res := new(http.Response)
 	_, err = r.client.Plans.New(
 		ctx,
-		data.OrgID.ValueString(),
-		m3ter.PlanNewParams{},
+		m3ter.PlanNewParams{
+			OrgID: m3ter.F(data.OrgID.ValueString()),
+		},
 		option.WithRequestBody("application/json", dataBytes),
 		option.WithResponseBodyInto(&res),
 		option.WithMiddleware(logging.Middleware(ctx)),
@@ -116,9 +117,10 @@ func (r *PlanResource) Update(ctx context.Context, req resource.UpdateRequest, r
 	res := new(http.Response)
 	_, err = r.client.Plans.Update(
 		ctx,
-		data.OrgID.ValueString(),
 		data.ID.ValueString(),
-		m3ter.PlanUpdateParams{},
+		m3ter.PlanUpdateParams{
+			OrgID: m3ter.F(data.OrgID.ValueString()),
+		},
 		option.WithRequestBody("application/json", dataBytes),
 		option.WithResponseBodyInto(&res),
 		option.WithMiddleware(logging.Middleware(ctx)),
@@ -149,8 +151,10 @@ func (r *PlanResource) Read(ctx context.Context, req resource.ReadRequest, resp 
 	res := new(http.Response)
 	_, err := r.client.Plans.Get(
 		ctx,
-		data.OrgID.ValueString(),
 		data.ID.ValueString(),
+		m3ter.PlanGetParams{
+			OrgID: m3ter.F(data.OrgID.ValueString()),
+		},
 		option.WithResponseBodyInto(&res),
 		option.WithMiddleware(logging.Middleware(ctx)),
 	)
@@ -184,8 +188,10 @@ func (r *PlanResource) Delete(ctx context.Context, req resource.DeleteRequest, r
 
 	_, err := r.client.Plans.Delete(
 		ctx,
-		data.OrgID.ValueString(),
 		data.ID.ValueString(),
+		m3ter.PlanDeleteParams{
+			OrgID: m3ter.F(data.OrgID.ValueString()),
+		},
 		option.WithMiddleware(logging.Middleware(ctx)),
 	)
 	if err != nil {
@@ -218,8 +224,10 @@ func (r *PlanResource) ImportState(ctx context.Context, req resource.ImportState
 	res := new(http.Response)
 	_, err := r.client.Plans.Get(
 		ctx,
-		path_org_id,
 		path_id,
+		m3ter.PlanGetParams{
+			OrgID: m3ter.F(path_org_id),
+		},
 		option.WithResponseBodyInto(&res),
 		option.WithMiddleware(logging.Middleware(ctx)),
 	)

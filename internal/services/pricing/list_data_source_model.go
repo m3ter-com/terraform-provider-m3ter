@@ -33,7 +33,8 @@ func (m *PricingsDataSourceModel) toListParams(_ context.Context) (params m3ter.
 	}
 
 	params = m3ter.PricingListParams{
-		IDs: m3ter.F(mIDs),
+		OrgID: m3ter.F(m.OrgID.ValueString()),
+		IDs:   m3ter.F(mIDs),
 	}
 
 	if !m.Date.IsNull() {

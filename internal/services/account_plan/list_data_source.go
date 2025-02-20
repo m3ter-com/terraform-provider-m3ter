@@ -67,11 +67,7 @@ func (d *AccountPlansDataSource) Read(ctx context.Context, req datasource.ReadRe
 	if maxItems <= 0 {
 		maxItems = 1000
 	}
-	page, err := d.client.AccountPlans.List(
-		ctx,
-		data.OrgID.ValueString(),
-		params,
-	)
+	page, err := d.client.AccountPlans.List(ctx, params)
 	if err != nil {
 		resp.Diagnostics.AddError("failed to make http request", err.Error())
 		return

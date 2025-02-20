@@ -31,7 +31,8 @@ func (m *PlanTemplatesDataSourceModel) toListParams(_ context.Context) (params m
 	}
 
 	params = m3ter.PlanTemplateListParams{
-		IDs: m3ter.F(mIDs),
+		OrgID: m3ter.F(m.OrgID.ValueString()),
+		IDs:   m3ter.F(mIDs),
 	}
 
 	if !m.ProductID.IsNull() {

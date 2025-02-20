@@ -3,8 +3,12 @@
 package transaction_type
 
 import (
+	"context"
+
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
+	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/types"
+	"github.com/m3ter-com/m3ter-sdk-go"
 )
 
 type TransactionTypeDataSourceModel struct {
@@ -18,4 +22,12 @@ type TransactionTypeDataSourceModel struct {
 	LastModifiedBy types.String      `tfsdk:"last_modified_by" json:"lastModifiedBy,computed"`
 	Name           types.String      `tfsdk:"name" json:"name,computed"`
 	Version        types.Int64       `tfsdk:"version" json:"version,computed"`
+}
+
+func (m *TransactionTypeDataSourceModel) toReadParams(_ context.Context) (params m3ter.TransactionTypeGetParams, diags diag.Diagnostics) {
+	params = m3ter.TransactionTypeGetParams{
+		OrgID: m3ter.F(m.OrgID.ValueString()),
+	}
+
+	return
 }

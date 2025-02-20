@@ -71,8 +71,9 @@ func (r *CreditReasonResource) Create(ctx context.Context, req resource.CreateRe
 	res := new(http.Response)
 	_, err = r.client.CreditReasons.New(
 		ctx,
-		data.OrgID.ValueString(),
-		m3ter.CreditReasonNewParams{},
+		m3ter.CreditReasonNewParams{
+			OrgID: m3ter.F(data.OrgID.ValueString()),
+		},
 		option.WithRequestBody("application/json", dataBytes),
 		option.WithResponseBodyInto(&res),
 		option.WithMiddleware(logging.Middleware(ctx)),
@@ -116,9 +117,10 @@ func (r *CreditReasonResource) Update(ctx context.Context, req resource.UpdateRe
 	res := new(http.Response)
 	_, err = r.client.CreditReasons.Update(
 		ctx,
-		data.OrgID.ValueString(),
 		data.ID.ValueString(),
-		m3ter.CreditReasonUpdateParams{},
+		m3ter.CreditReasonUpdateParams{
+			OrgID: m3ter.F(data.OrgID.ValueString()),
+		},
 		option.WithRequestBody("application/json", dataBytes),
 		option.WithResponseBodyInto(&res),
 		option.WithMiddleware(logging.Middleware(ctx)),
@@ -149,8 +151,10 @@ func (r *CreditReasonResource) Read(ctx context.Context, req resource.ReadReques
 	res := new(http.Response)
 	_, err := r.client.CreditReasons.Get(
 		ctx,
-		data.OrgID.ValueString(),
 		data.ID.ValueString(),
+		m3ter.CreditReasonGetParams{
+			OrgID: m3ter.F(data.OrgID.ValueString()),
+		},
 		option.WithResponseBodyInto(&res),
 		option.WithMiddleware(logging.Middleware(ctx)),
 	)
@@ -184,8 +188,10 @@ func (r *CreditReasonResource) Delete(ctx context.Context, req resource.DeleteRe
 
 	_, err := r.client.CreditReasons.Delete(
 		ctx,
-		data.OrgID.ValueString(),
 		data.ID.ValueString(),
+		m3ter.CreditReasonDeleteParams{
+			OrgID: m3ter.F(data.OrgID.ValueString()),
+		},
 		option.WithMiddleware(logging.Middleware(ctx)),
 	)
 	if err != nil {
@@ -218,8 +224,10 @@ func (r *CreditReasonResource) ImportState(ctx context.Context, req resource.Imp
 	res := new(http.Response)
 	_, err := r.client.CreditReasons.Get(
 		ctx,
-		path_org_id,
 		path_id,
+		m3ter.CreditReasonGetParams{
+			OrgID: m3ter.F(path_org_id),
+		},
 		option.WithResponseBodyInto(&res),
 		option.WithMiddleware(logging.Middleware(ctx)),
 	)

@@ -71,8 +71,9 @@ func (r *PlanGroupLinkResource) Create(ctx context.Context, req resource.CreateR
 	res := new(http.Response)
 	_, err = r.client.PlanGroupLinks.New(
 		ctx,
-		data.OrgID.ValueString(),
-		m3ter.PlanGroupLinkNewParams{},
+		m3ter.PlanGroupLinkNewParams{
+			OrgID: m3ter.F(data.OrgID.ValueString()),
+		},
 		option.WithRequestBody("application/json", dataBytes),
 		option.WithResponseBodyInto(&res),
 		option.WithMiddleware(logging.Middleware(ctx)),
@@ -116,9 +117,10 @@ func (r *PlanGroupLinkResource) Update(ctx context.Context, req resource.UpdateR
 	res := new(http.Response)
 	_, err = r.client.PlanGroupLinks.Update(
 		ctx,
-		data.OrgID.ValueString(),
 		data.ID.ValueString(),
-		m3ter.PlanGroupLinkUpdateParams{},
+		m3ter.PlanGroupLinkUpdateParams{
+			OrgID: m3ter.F(data.OrgID.ValueString()),
+		},
 		option.WithRequestBody("application/json", dataBytes),
 		option.WithResponseBodyInto(&res),
 		option.WithMiddleware(logging.Middleware(ctx)),
@@ -149,8 +151,10 @@ func (r *PlanGroupLinkResource) Read(ctx context.Context, req resource.ReadReque
 	res := new(http.Response)
 	_, err := r.client.PlanGroupLinks.Get(
 		ctx,
-		data.OrgID.ValueString(),
 		data.ID.ValueString(),
+		m3ter.PlanGroupLinkGetParams{
+			OrgID: m3ter.F(data.OrgID.ValueString()),
+		},
 		option.WithResponseBodyInto(&res),
 		option.WithMiddleware(logging.Middleware(ctx)),
 	)
@@ -184,8 +188,10 @@ func (r *PlanGroupLinkResource) Delete(ctx context.Context, req resource.DeleteR
 
 	_, err := r.client.PlanGroupLinks.Delete(
 		ctx,
-		data.OrgID.ValueString(),
 		data.ID.ValueString(),
+		m3ter.PlanGroupLinkDeleteParams{
+			OrgID: m3ter.F(data.OrgID.ValueString()),
+		},
 		option.WithMiddleware(logging.Middleware(ctx)),
 	)
 	if err != nil {
@@ -218,8 +224,10 @@ func (r *PlanGroupLinkResource) ImportState(ctx context.Context, req resource.Im
 	res := new(http.Response)
 	_, err := r.client.PlanGroupLinks.Get(
 		ctx,
-		path_org_id,
 		path_id,
+		m3ter.PlanGroupLinkGetParams{
+			OrgID: m3ter.F(path_org_id),
+		},
 		option.WithResponseBodyInto(&res),
 		option.WithMiddleware(logging.Middleware(ctx)),
 	)

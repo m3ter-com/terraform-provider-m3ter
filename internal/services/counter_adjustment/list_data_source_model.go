@@ -30,7 +30,9 @@ type CounterAdjustmentsDataSourceModel struct {
 }
 
 func (m *CounterAdjustmentsDataSourceModel) toListParams(_ context.Context) (params m3ter.CounterAdjustmentListParams, diags diag.Diagnostics) {
-	params = m3ter.CounterAdjustmentListParams{}
+	params = m3ter.CounterAdjustmentListParams{
+		OrgID: m3ter.F(m.OrgID.ValueString()),
+	}
 
 	if !m.AccountID.IsNull() {
 		params.AccountID = m3ter.F(m.AccountID.ValueString())

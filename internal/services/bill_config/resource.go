@@ -71,8 +71,9 @@ func (r *BillConfigResource) Create(ctx context.Context, req resource.CreateRequ
 	res := new(http.Response)
 	_, err = r.client.BillConfig.Update(
 		ctx,
-		data.OrgID.ValueString(),
-		m3ter.BillConfigUpdateParams{},
+		m3ter.BillConfigUpdateParams{
+			OrgID: m3ter.F(data.OrgID.ValueString()),
+		},
 		option.WithRequestBody("application/json", dataBytes),
 		option.WithResponseBodyInto(&res),
 		option.WithMiddleware(logging.Middleware(ctx)),
@@ -116,8 +117,9 @@ func (r *BillConfigResource) Update(ctx context.Context, req resource.UpdateRequ
 	res := new(http.Response)
 	_, err = r.client.BillConfig.Update(
 		ctx,
-		data.ID.ValueString(),
-		m3ter.BillConfigUpdateParams{},
+		m3ter.BillConfigUpdateParams{
+			OrgID: m3ter.F(data.ID.ValueString()),
+		},
 		option.WithRequestBody("application/json", dataBytes),
 		option.WithResponseBodyInto(&res),
 		option.WithMiddleware(logging.Middleware(ctx)),
@@ -148,7 +150,9 @@ func (r *BillConfigResource) Read(ctx context.Context, req resource.ReadRequest,
 	res := new(http.Response)
 	_, err := r.client.BillConfig.Get(
 		ctx,
-		data.ID.ValueString(),
+		m3ter.BillConfigGetParams{
+			OrgID: m3ter.F(data.ID.ValueString()),
+		},
 		option.WithResponseBodyInto(&res),
 		option.WithMiddleware(logging.Middleware(ctx)),
 	)
@@ -194,7 +198,9 @@ func (r *BillConfigResource) ImportState(ctx context.Context, req resource.Impor
 	res := new(http.Response)
 	_, err := r.client.BillConfig.Get(
 		ctx,
-		path,
+		m3ter.BillConfigGetParams{
+			OrgID: m3ter.F(path),
+		},
 		option.WithResponseBodyInto(&res),
 		option.WithMiddleware(logging.Middleware(ctx)),
 	)

@@ -71,8 +71,9 @@ func (r *OrganizationConfigResource) Create(ctx context.Context, req resource.Cr
 	res := new(http.Response)
 	_, err = r.client.OrganizationConfig.Update(
 		ctx,
-		data.OrgID.ValueString(),
-		m3ter.OrganizationConfigUpdateParams{},
+		m3ter.OrganizationConfigUpdateParams{
+			OrgID: m3ter.F(data.OrgID.ValueString()),
+		},
 		option.WithRequestBody("application/json", dataBytes),
 		option.WithResponseBodyInto(&res),
 		option.WithMiddleware(logging.Middleware(ctx)),
@@ -116,8 +117,9 @@ func (r *OrganizationConfigResource) Update(ctx context.Context, req resource.Up
 	res := new(http.Response)
 	_, err = r.client.OrganizationConfig.Update(
 		ctx,
-		data.ID.ValueString(),
-		m3ter.OrganizationConfigUpdateParams{},
+		m3ter.OrganizationConfigUpdateParams{
+			OrgID: m3ter.F(data.ID.ValueString()),
+		},
 		option.WithRequestBody("application/json", dataBytes),
 		option.WithResponseBodyInto(&res),
 		option.WithMiddleware(logging.Middleware(ctx)),
@@ -148,7 +150,9 @@ func (r *OrganizationConfigResource) Read(ctx context.Context, req resource.Read
 	res := new(http.Response)
 	_, err := r.client.OrganizationConfig.Get(
 		ctx,
-		data.ID.ValueString(),
+		m3ter.OrganizationConfigGetParams{
+			OrgID: m3ter.F(data.ID.ValueString()),
+		},
 		option.WithResponseBodyInto(&res),
 		option.WithMiddleware(logging.Middleware(ctx)),
 	)
@@ -194,7 +198,9 @@ func (r *OrganizationConfigResource) ImportState(ctx context.Context, req resour
 	res := new(http.Response)
 	_, err := r.client.OrganizationConfig.Get(
 		ctx,
-		path,
+		m3ter.OrganizationConfigGetParams{
+			OrgID: m3ter.F(path),
+		},
 		option.WithResponseBodyInto(&res),
 		option.WithMiddleware(logging.Middleware(ctx)),
 	)

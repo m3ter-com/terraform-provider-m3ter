@@ -71,8 +71,9 @@ func (r *CompoundAggregationResource) Create(ctx context.Context, req resource.C
 	res := new(http.Response)
 	_, err = r.client.CompoundAggregations.New(
 		ctx,
-		data.OrgID.ValueString(),
-		m3ter.CompoundAggregationNewParams{},
+		m3ter.CompoundAggregationNewParams{
+			OrgID: m3ter.F(data.OrgID.ValueString()),
+		},
 		option.WithRequestBody("application/json", dataBytes),
 		option.WithResponseBodyInto(&res),
 		option.WithMiddleware(logging.Middleware(ctx)),
@@ -116,9 +117,10 @@ func (r *CompoundAggregationResource) Update(ctx context.Context, req resource.U
 	res := new(http.Response)
 	_, err = r.client.CompoundAggregations.Update(
 		ctx,
-		data.OrgID.ValueString(),
 		data.ID.ValueString(),
-		m3ter.CompoundAggregationUpdateParams{},
+		m3ter.CompoundAggregationUpdateParams{
+			OrgID: m3ter.F(data.OrgID.ValueString()),
+		},
 		option.WithRequestBody("application/json", dataBytes),
 		option.WithResponseBodyInto(&res),
 		option.WithMiddleware(logging.Middleware(ctx)),
@@ -149,8 +151,10 @@ func (r *CompoundAggregationResource) Read(ctx context.Context, req resource.Rea
 	res := new(http.Response)
 	_, err := r.client.CompoundAggregations.Get(
 		ctx,
-		data.OrgID.ValueString(),
 		data.ID.ValueString(),
+		m3ter.CompoundAggregationGetParams{
+			OrgID: m3ter.F(data.OrgID.ValueString()),
+		},
 		option.WithResponseBodyInto(&res),
 		option.WithMiddleware(logging.Middleware(ctx)),
 	)
@@ -184,8 +188,10 @@ func (r *CompoundAggregationResource) Delete(ctx context.Context, req resource.D
 
 	_, err := r.client.CompoundAggregations.Delete(
 		ctx,
-		data.OrgID.ValueString(),
 		data.ID.ValueString(),
+		m3ter.CompoundAggregationDeleteParams{
+			OrgID: m3ter.F(data.OrgID.ValueString()),
+		},
 		option.WithMiddleware(logging.Middleware(ctx)),
 	)
 	if err != nil {
@@ -218,8 +224,10 @@ func (r *CompoundAggregationResource) ImportState(ctx context.Context, req resou
 	res := new(http.Response)
 	_, err := r.client.CompoundAggregations.Get(
 		ctx,
-		path_org_id,
 		path_id,
+		m3ter.CompoundAggregationGetParams{
+			OrgID: m3ter.F(path_org_id),
+		},
 		option.WithResponseBodyInto(&res),
 		option.WithMiddleware(logging.Middleware(ctx)),
 	)
