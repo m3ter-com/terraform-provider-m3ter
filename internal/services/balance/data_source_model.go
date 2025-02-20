@@ -3,8 +3,12 @@
 package balance
 
 import (
+	"context"
+
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
+	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/types"
+	"github.com/m3ter-com/m3ter-sdk-go"
 	"github.com/m3ter-com/terraform-provider-m3ter/internal/customfield"
 )
 
@@ -33,4 +37,12 @@ type BalanceDataSourceModel struct {
 	Version                         types.Int64                    `tfsdk:"version" json:"version,computed"`
 	LineItemTypes                   customfield.List[types.String] `tfsdk:"line_item_types" json:"lineItemTypes,computed"`
 	ProductIDs                      customfield.List[types.String] `tfsdk:"product_ids" json:"productIds,computed"`
+}
+
+func (m *BalanceDataSourceModel) toReadParams(_ context.Context) (params m3ter.BalanceGetParams, diags diag.Diagnostics) {
+	params = m3ter.BalanceGetParams{
+		OrgID: m3ter.F(m.OrgID.ValueString()),
+	}
+
+	return
 }

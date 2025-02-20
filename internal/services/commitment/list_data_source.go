@@ -67,11 +67,7 @@ func (d *CommitmentsDataSource) Read(ctx context.Context, req datasource.ReadReq
 	if maxItems <= 0 {
 		maxItems = 1000
 	}
-	page, err := d.client.Commitments.List(
-		ctx,
-		data.OrgID.ValueString(),
-		params,
-	)
+	page, err := d.client.Commitments.List(ctx, params)
 	if err != nil {
 		resp.Diagnostics.AddError("failed to make http request", err.Error())
 		return

@@ -40,6 +40,7 @@ func (m *CountersDataSourceModel) toListParams(_ context.Context) (params m3ter.
 	}
 
 	params = m3ter.CounterListParams{
+		OrgID:     m3ter.F(m.OrgID.ValueString()),
 		Codes:     m3ter.F(mCodes),
 		IDs:       m3ter.F(mIDs),
 		ProductID: m3ter.F(mProductID),

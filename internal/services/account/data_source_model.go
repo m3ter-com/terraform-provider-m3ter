@@ -3,9 +3,13 @@
 package account
 
 import (
+	"context"
+
 	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
+	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/types"
+	"github.com/m3ter-com/m3ter-sdk-go"
 	"github.com/m3ter-com/terraform-provider-m3ter/internal/customfield"
 )
 
@@ -31,6 +35,14 @@ type AccountDataSourceModel struct {
 	CreditApplicationOrder    customfield.List[types.String]                          `tfsdk:"credit_application_order" json:"creditApplicationOrder,computed"`
 	CustomFields              customfield.Map[types.Dynamic]                          `tfsdk:"custom_fields" json:"customFields,computed"`
 	Address                   customfield.NestedObject[AccountAddressDataSourceModel] `tfsdk:"address" json:"address,computed"`
+}
+
+func (m *AccountDataSourceModel) toReadParams(_ context.Context) (params m3ter.AccountGetParams, diags diag.Diagnostics) {
+	params = m3ter.AccountGetParams{
+		OrgID: m3ter.F(m.OrgID.ValueString()),
+	}
+
+	return
 }
 
 type AccountAddressDataSourceModel struct {

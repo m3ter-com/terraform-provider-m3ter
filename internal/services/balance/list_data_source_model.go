@@ -26,7 +26,9 @@ type BalancesDataSourceModel struct {
 }
 
 func (m *BalancesDataSourceModel) toListParams(_ context.Context) (params m3ter.BalanceListParams, diags diag.Diagnostics) {
-	params = m3ter.BalanceListParams{}
+	params = m3ter.BalanceListParams{
+		OrgID: m3ter.F(m.OrgID.ValueString()),
+	}
 
 	if !m.AccountID.IsNull() {
 		params.AccountID = m3ter.F(m.AccountID.ValueString())

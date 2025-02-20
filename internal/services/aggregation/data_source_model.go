@@ -3,8 +3,12 @@
 package aggregation
 
 import (
+	"context"
+
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
+	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/types"
+	"github.com/m3ter-com/m3ter-sdk-go"
 	"github.com/m3ter-com/terraform-provider-m3ter/internal/customfield"
 )
 
@@ -30,4 +34,12 @@ type AggregationDataSourceModel struct {
 	CustomFields        customfield.Map[types.Dynamic]                  `tfsdk:"custom_fields" json:"customFields,computed"`
 	SegmentedFields     customfield.List[types.String]                  `tfsdk:"segmented_fields" json:"segmentedFields,computed"`
 	Segments            customfield.List[customfield.Map[types.String]] `tfsdk:"segments" json:"segments,computed"`
+}
+
+func (m *AggregationDataSourceModel) toReadParams(_ context.Context) (params m3ter.AggregationGetParams, diags diag.Diagnostics) {
+	params = m3ter.AggregationGetParams{
+		OrgID: m3ter.F(m.OrgID.ValueString()),
+	}
+
+	return
 }

@@ -71,8 +71,9 @@ func (r *PricingResource) Create(ctx context.Context, req resource.CreateRequest
 	res := new(http.Response)
 	_, err = r.client.Pricings.New(
 		ctx,
-		data.OrgID.ValueString(),
-		m3ter.PricingNewParams{},
+		m3ter.PricingNewParams{
+			OrgID: m3ter.F(data.OrgID.ValueString()),
+		},
 		option.WithRequestBody("application/json", dataBytes),
 		option.WithResponseBodyInto(&res),
 		option.WithMiddleware(logging.Middleware(ctx)),
@@ -116,9 +117,10 @@ func (r *PricingResource) Update(ctx context.Context, req resource.UpdateRequest
 	res := new(http.Response)
 	_, err = r.client.Pricings.Update(
 		ctx,
-		data.OrgID.ValueString(),
 		data.ID.ValueString(),
-		m3ter.PricingUpdateParams{},
+		m3ter.PricingUpdateParams{
+			OrgID: m3ter.F(data.OrgID.ValueString()),
+		},
 		option.WithRequestBody("application/json", dataBytes),
 		option.WithResponseBodyInto(&res),
 		option.WithMiddleware(logging.Middleware(ctx)),
@@ -149,8 +151,10 @@ func (r *PricingResource) Read(ctx context.Context, req resource.ReadRequest, re
 	res := new(http.Response)
 	_, err := r.client.Pricings.Get(
 		ctx,
-		data.OrgID.ValueString(),
 		data.ID.ValueString(),
+		m3ter.PricingGetParams{
+			OrgID: m3ter.F(data.OrgID.ValueString()),
+		},
 		option.WithResponseBodyInto(&res),
 		option.WithMiddleware(logging.Middleware(ctx)),
 	)
@@ -184,8 +188,10 @@ func (r *PricingResource) Delete(ctx context.Context, req resource.DeleteRequest
 
 	_, err := r.client.Pricings.Delete(
 		ctx,
-		data.OrgID.ValueString(),
 		data.ID.ValueString(),
+		m3ter.PricingDeleteParams{
+			OrgID: m3ter.F(data.OrgID.ValueString()),
+		},
 		option.WithMiddleware(logging.Middleware(ctx)),
 	)
 	if err != nil {
@@ -218,8 +224,10 @@ func (r *PricingResource) ImportState(ctx context.Context, req resource.ImportSt
 	res := new(http.Response)
 	_, err := r.client.Pricings.Get(
 		ctx,
-		path_org_id,
 		path_id,
+		m3ter.PricingGetParams{
+			OrgID: m3ter.F(path_org_id),
+		},
 		option.WithResponseBodyInto(&res),
 		option.WithMiddleware(logging.Middleware(ctx)),
 	)

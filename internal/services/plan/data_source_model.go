@@ -3,8 +3,12 @@
 package plan
 
 import (
+	"context"
+
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
+	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/types"
+	"github.com/m3ter-com/m3ter-sdk-go"
 	"github.com/m3ter-com/terraform-provider-m3ter/internal/customfield"
 )
 
@@ -32,4 +36,12 @@ type PlanDataSourceModel struct {
 	StandingChargeDescription         types.String                   `tfsdk:"standing_charge_description" json:"standingChargeDescription,computed"`
 	Version                           types.Int64                    `tfsdk:"version" json:"version,computed"`
 	CustomFields                      customfield.Map[types.Dynamic] `tfsdk:"custom_fields" json:"customFields,computed"`
+}
+
+func (m *PlanDataSourceModel) toReadParams(_ context.Context) (params m3ter.PlanGetParams, diags diag.Diagnostics) {
+	params = m3ter.PlanGetParams{
+		OrgID: m3ter.F(m.OrgID.ValueString()),
+	}
+
+	return
 }

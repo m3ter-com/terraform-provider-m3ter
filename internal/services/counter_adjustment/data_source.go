@@ -57,11 +57,17 @@ func (d *CounterAdjustmentDataSource) Read(ctx context.Context, req datasource.R
 		return
 	}
 
+	params, diags := data.toReadParams(ctx)
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
 	res := new(http.Response)
 	_, err := d.client.CounterAdjustments.Get(
 		ctx,
-		data.OrgID.ValueString(),
 		data.ID.ValueString(),
+		params,
 		option.WithResponseBodyInto(&res),
 		option.WithMiddleware(logging.Middleware(ctx)),
 	)

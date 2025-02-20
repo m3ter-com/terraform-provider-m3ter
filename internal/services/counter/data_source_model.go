@@ -3,8 +3,12 @@
 package counter
 
 import (
+	"context"
+
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
+	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/types"
+	"github.com/m3ter-com/m3ter-sdk-go"
 )
 
 type CounterDataSourceModel struct {
@@ -19,4 +23,12 @@ type CounterDataSourceModel struct {
 	ProductID      types.String      `tfsdk:"product_id" json:"productId,computed"`
 	Unit           types.String      `tfsdk:"unit" json:"unit,computed"`
 	Version        types.Int64       `tfsdk:"version" json:"version,computed"`
+}
+
+func (m *CounterDataSourceModel) toReadParams(_ context.Context) (params m3ter.CounterGetParams, diags diag.Diagnostics) {
+	params = m3ter.CounterGetParams{
+		OrgID: m3ter.F(m.OrgID.ValueString()),
+	}
+
+	return
 }

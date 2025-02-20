@@ -30,7 +30,8 @@ func (m *ProductsDataSourceModel) toListParams(_ context.Context) (params m3ter.
 	}
 
 	params = m3ter.ProductListParams{
-		IDs: m3ter.F(mIDs),
+		OrgID: m3ter.F(m.OrgID.ValueString()),
+		IDs:   m3ter.F(mIDs),
 	}
 
 	return

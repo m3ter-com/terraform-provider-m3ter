@@ -71,8 +71,9 @@ func (r *CommitmentResource) Create(ctx context.Context, req resource.CreateRequ
 	res := new(http.Response)
 	_, err = r.client.Commitments.New(
 		ctx,
-		data.OrgID.ValueString(),
-		m3ter.CommitmentNewParams{},
+		m3ter.CommitmentNewParams{
+			OrgID: m3ter.F(data.OrgID.ValueString()),
+		},
 		option.WithRequestBody("application/json", dataBytes),
 		option.WithResponseBodyInto(&res),
 		option.WithMiddleware(logging.Middleware(ctx)),
@@ -116,9 +117,10 @@ func (r *CommitmentResource) Update(ctx context.Context, req resource.UpdateRequ
 	res := new(http.Response)
 	_, err = r.client.Commitments.Update(
 		ctx,
-		data.OrgID.ValueString(),
 		data.ID.ValueString(),
-		m3ter.CommitmentUpdateParams{},
+		m3ter.CommitmentUpdateParams{
+			OrgID: m3ter.F(data.OrgID.ValueString()),
+		},
 		option.WithRequestBody("application/json", dataBytes),
 		option.WithResponseBodyInto(&res),
 		option.WithMiddleware(logging.Middleware(ctx)),
@@ -149,8 +151,10 @@ func (r *CommitmentResource) Read(ctx context.Context, req resource.ReadRequest,
 	res := new(http.Response)
 	_, err := r.client.Commitments.Get(
 		ctx,
-		data.OrgID.ValueString(),
 		data.ID.ValueString(),
+		m3ter.CommitmentGetParams{
+			OrgID: m3ter.F(data.OrgID.ValueString()),
+		},
 		option.WithResponseBodyInto(&res),
 		option.WithMiddleware(logging.Middleware(ctx)),
 	)
@@ -184,8 +188,10 @@ func (r *CommitmentResource) Delete(ctx context.Context, req resource.DeleteRequ
 
 	_, err := r.client.Commitments.Delete(
 		ctx,
-		data.OrgID.ValueString(),
 		data.ID.ValueString(),
+		m3ter.CommitmentDeleteParams{
+			OrgID: m3ter.F(data.OrgID.ValueString()),
+		},
 		option.WithMiddleware(logging.Middleware(ctx)),
 	)
 	if err != nil {
@@ -218,8 +224,10 @@ func (r *CommitmentResource) ImportState(ctx context.Context, req resource.Impor
 	res := new(http.Response)
 	_, err := r.client.Commitments.Get(
 		ctx,
-		path_org_id,
 		path_id,
+		m3ter.CommitmentGetParams{
+			OrgID: m3ter.F(path_org_id),
+		},
 		option.WithResponseBodyInto(&res),
 		option.WithMiddleware(logging.Middleware(ctx)),
 	)

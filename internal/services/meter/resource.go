@@ -71,8 +71,9 @@ func (r *MeterResource) Create(ctx context.Context, req resource.CreateRequest, 
 	res := new(http.Response)
 	_, err = r.client.Meters.New(
 		ctx,
-		data.OrgID.ValueString(),
-		m3ter.MeterNewParams{},
+		m3ter.MeterNewParams{
+			OrgID: m3ter.F(data.OrgID.ValueString()),
+		},
 		option.WithRequestBody("application/json", dataBytes),
 		option.WithResponseBodyInto(&res),
 		option.WithMiddleware(logging.Middleware(ctx)),
@@ -116,9 +117,10 @@ func (r *MeterResource) Update(ctx context.Context, req resource.UpdateRequest, 
 	res := new(http.Response)
 	_, err = r.client.Meters.Update(
 		ctx,
-		data.OrgID.ValueString(),
 		data.ID.ValueString(),
-		m3ter.MeterUpdateParams{},
+		m3ter.MeterUpdateParams{
+			OrgID: m3ter.F(data.OrgID.ValueString()),
+		},
 		option.WithRequestBody("application/json", dataBytes),
 		option.WithResponseBodyInto(&res),
 		option.WithMiddleware(logging.Middleware(ctx)),
@@ -149,8 +151,10 @@ func (r *MeterResource) Read(ctx context.Context, req resource.ReadRequest, resp
 	res := new(http.Response)
 	_, err := r.client.Meters.Get(
 		ctx,
-		data.OrgID.ValueString(),
 		data.ID.ValueString(),
+		m3ter.MeterGetParams{
+			OrgID: m3ter.F(data.OrgID.ValueString()),
+		},
 		option.WithResponseBodyInto(&res),
 		option.WithMiddleware(logging.Middleware(ctx)),
 	)
@@ -184,8 +188,10 @@ func (r *MeterResource) Delete(ctx context.Context, req resource.DeleteRequest, 
 
 	_, err := r.client.Meters.Delete(
 		ctx,
-		data.OrgID.ValueString(),
 		data.ID.ValueString(),
+		m3ter.MeterDeleteParams{
+			OrgID: m3ter.F(data.OrgID.ValueString()),
+		},
 		option.WithMiddleware(logging.Middleware(ctx)),
 	)
 	if err != nil {
@@ -218,8 +224,10 @@ func (r *MeterResource) ImportState(ctx context.Context, req resource.ImportStat
 	res := new(http.Response)
 	_, err := r.client.Meters.Get(
 		ctx,
-		path_org_id,
 		path_id,
+		m3ter.MeterGetParams{
+			OrgID: m3ter.F(path_org_id),
+		},
 		option.WithResponseBodyInto(&res),
 		option.WithMiddleware(logging.Middleware(ctx)),
 	)

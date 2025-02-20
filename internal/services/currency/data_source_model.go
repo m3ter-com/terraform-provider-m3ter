@@ -3,8 +3,12 @@
 package currency
 
 import (
+	"context"
+
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
+	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/types"
+	"github.com/m3ter-com/m3ter-sdk-go"
 )
 
 type CurrencyDataSourceModel struct {
@@ -20,4 +24,12 @@ type CurrencyDataSourceModel struct {
 	Name             types.String      `tfsdk:"name" json:"name,computed"`
 	RoundingMode     types.String      `tfsdk:"rounding_mode" json:"roundingMode,computed"`
 	Version          types.Int64       `tfsdk:"version" json:"version,computed"`
+}
+
+func (m *CurrencyDataSourceModel) toReadParams(_ context.Context) (params m3ter.CurrencyGetParams, diags diag.Diagnostics) {
+	params = m3ter.CurrencyGetParams{
+		OrgID: m3ter.F(m.OrgID.ValueString()),
+	}
+
+	return
 }

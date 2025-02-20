@@ -3,8 +3,12 @@
 package organization_config
 
 import (
+	"context"
+
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
+	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/types"
+	"github.com/m3ter-com/m3ter-sdk-go"
 	"github.com/m3ter-com/terraform-provider-m3ter/internal/customfield"
 )
 
@@ -38,6 +42,14 @@ type OrganizationConfigDataSourceModel struct {
 	YearEpoch                       timetypes.RFC3339                                                                  `tfsdk:"year_epoch" json:"yearEpoch,computed" format:"date"`
 	CreditApplicationOrder          customfield.List[types.String]                                                     `tfsdk:"credit_application_order" json:"creditApplicationOrder,computed"`
 	CurrencyConversions             customfield.NestedObjectList[OrganizationConfigCurrencyConversionsDataSourceModel] `tfsdk:"currency_conversions" json:"currencyConversions,computed"`
+}
+
+func (m *OrganizationConfigDataSourceModel) toReadParams(_ context.Context) (params m3ter.OrganizationConfigGetParams, diags diag.Diagnostics) {
+	params = m3ter.OrganizationConfigGetParams{
+		OrgID: m3ter.F(m.OrgID.ValueString()),
+	}
+
+	return
 }
 
 type OrganizationConfigCurrencyConversionsDataSourceModel struct {

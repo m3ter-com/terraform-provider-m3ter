@@ -36,7 +36,8 @@ func (m *CommitmentsDataSourceModel) toListParams(_ context.Context) (params m3t
 	}
 
 	params = m3ter.CommitmentListParams{
-		IDs: m3ter.F(mIDs),
+		OrgID: m3ter.F(m.OrgID.ValueString()),
+		IDs:   m3ter.F(mIDs),
 	}
 
 	if !m.AccountID.IsNull() {

@@ -3,8 +3,12 @@
 package credit_reason
 
 import (
+	"context"
+
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
+	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/types"
+	"github.com/m3ter-com/m3ter-sdk-go"
 )
 
 type CreditReasonDataSourceModel struct {
@@ -18,4 +22,12 @@ type CreditReasonDataSourceModel struct {
 	LastModifiedBy types.String      `tfsdk:"last_modified_by" json:"lastModifiedBy,computed"`
 	Name           types.String      `tfsdk:"name" json:"name,computed"`
 	Version        types.Int64       `tfsdk:"version" json:"version,computed"`
+}
+
+func (m *CreditReasonDataSourceModel) toReadParams(_ context.Context) (params m3ter.CreditReasonGetParams, diags diag.Diagnostics) {
+	params = m3ter.CreditReasonGetParams{
+		OrgID: m3ter.F(m.OrgID.ValueString()),
+	}
+
+	return
 }

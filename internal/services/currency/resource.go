@@ -71,8 +71,9 @@ func (r *CurrencyResource) Create(ctx context.Context, req resource.CreateReques
 	res := new(http.Response)
 	_, err = r.client.Currencies.New(
 		ctx,
-		data.OrgID.ValueString(),
-		m3ter.CurrencyNewParams{},
+		m3ter.CurrencyNewParams{
+			OrgID: m3ter.F(data.OrgID.ValueString()),
+		},
 		option.WithRequestBody("application/json", dataBytes),
 		option.WithResponseBodyInto(&res),
 		option.WithMiddleware(logging.Middleware(ctx)),
@@ -116,9 +117,10 @@ func (r *CurrencyResource) Update(ctx context.Context, req resource.UpdateReques
 	res := new(http.Response)
 	_, err = r.client.Currencies.Update(
 		ctx,
-		data.OrgID.ValueString(),
 		data.ID.ValueString(),
-		m3ter.CurrencyUpdateParams{},
+		m3ter.CurrencyUpdateParams{
+			OrgID: m3ter.F(data.OrgID.ValueString()),
+		},
 		option.WithRequestBody("application/json", dataBytes),
 		option.WithResponseBodyInto(&res),
 		option.WithMiddleware(logging.Middleware(ctx)),
@@ -149,8 +151,10 @@ func (r *CurrencyResource) Read(ctx context.Context, req resource.ReadRequest, r
 	res := new(http.Response)
 	_, err := r.client.Currencies.Get(
 		ctx,
-		data.OrgID.ValueString(),
 		data.ID.ValueString(),
+		m3ter.CurrencyGetParams{
+			OrgID: m3ter.F(data.OrgID.ValueString()),
+		},
 		option.WithResponseBodyInto(&res),
 		option.WithMiddleware(logging.Middleware(ctx)),
 	)
@@ -184,8 +188,10 @@ func (r *CurrencyResource) Delete(ctx context.Context, req resource.DeleteReques
 
 	_, err := r.client.Currencies.Delete(
 		ctx,
-		data.OrgID.ValueString(),
 		data.ID.ValueString(),
+		m3ter.CurrencyDeleteParams{
+			OrgID: m3ter.F(data.OrgID.ValueString()),
+		},
 		option.WithMiddleware(logging.Middleware(ctx)),
 	)
 	if err != nil {
@@ -218,8 +224,10 @@ func (r *CurrencyResource) ImportState(ctx context.Context, req resource.ImportS
 	res := new(http.Response)
 	_, err := r.client.Currencies.Get(
 		ctx,
-		path_org_id,
 		path_id,
+		m3ter.CurrencyGetParams{
+			OrgID: m3ter.F(path_org_id),
+		},
 		option.WithResponseBodyInto(&res),
 		option.WithMiddleware(logging.Middleware(ctx)),
 	)

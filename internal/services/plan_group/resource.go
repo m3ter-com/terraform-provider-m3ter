@@ -71,8 +71,9 @@ func (r *PlanGroupResource) Create(ctx context.Context, req resource.CreateReque
 	res := new(http.Response)
 	_, err = r.client.PlanGroups.New(
 		ctx,
-		data.OrgID.ValueString(),
-		m3ter.PlanGroupNewParams{},
+		m3ter.PlanGroupNewParams{
+			OrgID: m3ter.F(data.OrgID.ValueString()),
+		},
 		option.WithRequestBody("application/json", dataBytes),
 		option.WithResponseBodyInto(&res),
 		option.WithMiddleware(logging.Middleware(ctx)),
@@ -116,9 +117,10 @@ func (r *PlanGroupResource) Update(ctx context.Context, req resource.UpdateReque
 	res := new(http.Response)
 	_, err = r.client.PlanGroups.Update(
 		ctx,
-		data.OrgID.ValueString(),
 		data.ID.ValueString(),
-		m3ter.PlanGroupUpdateParams{},
+		m3ter.PlanGroupUpdateParams{
+			OrgID: m3ter.F(data.OrgID.ValueString()),
+		},
 		option.WithRequestBody("application/json", dataBytes),
 		option.WithResponseBodyInto(&res),
 		option.WithMiddleware(logging.Middleware(ctx)),
@@ -149,8 +151,10 @@ func (r *PlanGroupResource) Read(ctx context.Context, req resource.ReadRequest, 
 	res := new(http.Response)
 	_, err := r.client.PlanGroups.Get(
 		ctx,
-		data.OrgID.ValueString(),
 		data.ID.ValueString(),
+		m3ter.PlanGroupGetParams{
+			OrgID: m3ter.F(data.OrgID.ValueString()),
+		},
 		option.WithResponseBodyInto(&res),
 		option.WithMiddleware(logging.Middleware(ctx)),
 	)
@@ -184,8 +188,10 @@ func (r *PlanGroupResource) Delete(ctx context.Context, req resource.DeleteReque
 
 	_, err := r.client.PlanGroups.Delete(
 		ctx,
-		data.OrgID.ValueString(),
 		data.ID.ValueString(),
+		m3ter.PlanGroupDeleteParams{
+			OrgID: m3ter.F(data.OrgID.ValueString()),
+		},
 		option.WithMiddleware(logging.Middleware(ctx)),
 	)
 	if err != nil {
@@ -218,8 +224,10 @@ func (r *PlanGroupResource) ImportState(ctx context.Context, req resource.Import
 	res := new(http.Response)
 	_, err := r.client.PlanGroups.Get(
 		ctx,
-		path_org_id,
 		path_id,
+		m3ter.PlanGroupGetParams{
+			OrgID: m3ter.F(path_org_id),
+		},
 		option.WithResponseBodyInto(&res),
 		option.WithMiddleware(logging.Middleware(ctx)),
 	)
