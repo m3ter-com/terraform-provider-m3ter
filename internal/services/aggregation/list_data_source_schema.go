@@ -74,6 +74,7 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 									"LATEST",
 									"MEAN",
 									"UNIQUE",
+									"CUSTOM_SQL",
 								),
 							},
 						},
