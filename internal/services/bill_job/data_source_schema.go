@@ -36,7 +36,7 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Computed:    true,
 			},
 			"billing_frequency": schema.StringAttribute{
-				Description: "Defines how often Bills are generated.\n\n* **Daily**. Starting at midnight each day, covering a twenty-four hour period following.\n\n* **Weekly**. Starting at midnight on a Monday morning covering the seven-day period following.\n\n* **Monthly**. Starting at midnight on the morning of the first day of each month covering the entire calendar month following.\n\n* **Annually**. Starting at midnight on the morning of the first day of each year covering the entire calendar year following.\n\n* **Ad_Hoc**. Use this setting when a custom billing schedule is used for billing an Account, such as for billing of Prepayment/Commitment fees using a custom billing schedule.\navailable values: \"DAILY\", \"WEEKLY\", \"MONTHLY\", \"ANNUALLY\", \"AD_HOC\"",
+				Description: "Defines how often Bills are generated.\n\n* **Daily**. Starting at midnight each day, covering a twenty-four hour period following.\n\n* **Weekly**. Starting at midnight on a Monday morning covering the seven-day period following.\n\n* **Monthly**. Starting at midnight on the morning of the first day of each month covering the entire calendar month following.\n\n* **Annually**. Starting at midnight on the morning of the first day of each year covering the entire calendar year following.\n\n* **Ad_Hoc**. Use this setting when a custom billing schedule is used for billing an Account, such as for billing of Prepayment/Commitment fees using a custom billing schedule.\nAvailable values: \"DAILY\", \"WEEKLY\", \"MONTHLY\", \"ANNUALLY\", \"AD_HOC\".",
 				Computed:    true,
 				Validators: []validator.String{
 					stringvalidator.OneOfCaseInsensitive(
@@ -96,7 +96,7 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Computed:    true,
 			},
 			"status": schema.StringAttribute{
-				Description: "The current status of the BillJob, indicating its progress or completion state.\navailable values: \"PENDING\", \"INITIALIZING\", \"RUNNING\", \"COMPLETE\", \"CANCELLED\"",
+				Description: "The current status of the BillJob, indicating its progress or completion state.\nAvailable values: \"PENDING\", \"INITIALIZING\", \"RUNNING\", \"COMPLETE\", \"CANCELLED\".",
 				Computed:    true,
 				Validators: []validator.String{
 					stringvalidator.OneOfCaseInsensitive(
@@ -121,7 +121,7 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Computed:    true,
 			},
 			"type": schema.StringAttribute{
-				Description: "Specifies the type of BillJob. \n\n* **CREATE** Returned for a *Create BillJob* call.\n* **RECALCULATE** Returned for a successful *Create Recalculation BillJob* call.\navailable values: \"CREATE\", \"RECALCULATE\"",
+				Description: "Specifies the type of BillJob. \n\n* **CREATE** Returned for a *Create BillJob* call.\n* **RECALCULATE** Returned for a successful *Create Recalculation BillJob* call.\nAvailable values: \"CREATE\", \"RECALCULATE\".",
 				Computed:    true,
 				Validators: []validator.String{
 					stringvalidator.OneOfCaseInsensitive("CREATE", "RECALCULATE"),

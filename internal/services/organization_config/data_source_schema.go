@@ -29,7 +29,7 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Computed:    true,
 			},
 			"auto_approve_bills_grace_period_unit": schema.StringAttribute{
-				Description: "available values: \"MINUTES\", \"HOURS\", \"DAYS\"",
+				Description: "Available values: \"MINUTES\", \"HOURS\", \"DAYS\".",
 				Computed:    true,
 				Validators: []validator.String{
 					stringvalidator.OneOfCaseInsensitive(
@@ -40,7 +40,7 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				},
 			},
 			"auto_generate_statement_mode": schema.StringAttribute{
-				Description: "Specifies whether to auto-generate statements once Bills are *approved* or *locked*. It will not auto-generate if a bill is in *pending* state.\n\nThe default value is **None**.\n\n- **None**. Statements will not be auto-generated.\n- **JSON**. Statements are auto-generated in JSON format.\n- **JSON and CSV**. Statements are auto-generated in both JSON and CSV formats.\navailable values: \"NONE\", \"JSON\", \"JSON_AND_CSV\"",
+				Description: "Specifies whether to auto-generate statements once Bills are *approved* or *locked*. It will not auto-generate if a bill is in *pending* state.\n\nThe default value is **None**.\n\n- **None**. Statements will not be auto-generated.\n- **JSON**. Statements are auto-generated in JSON format.\n- **JSON and CSV**. Statements are auto-generated in both JSON and CSV formats.\nAvailable values: \"NONE\", \"JSON\", \"JSON_AND_CSV\".",
 				Computed:    true,
 				Validators: []validator.String{
 					stringvalidator.OneOfCaseInsensitive(
@@ -94,7 +94,7 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				CustomType:  timetypes.RFC3339Type{},
 			},
 			"external_invoice_date": schema.StringAttribute{
-				Description: "available values: \"LAST_DAY_OF_ARREARS\", \"FIRST_DAY_OF_NEXT_PERIOD\"",
+				Description: "Available values: \"LAST_DAY_OF_ARREARS\", \"FIRST_DAY_OF_NEXT_PERIOD\".",
 				Computed:    true,
 				Validators: []validator.String{
 					stringvalidator.OneOfCaseInsensitive("LAST_DAY_OF_ARREARS", "FIRST_DAY_OF_NEXT_PERIOD"),

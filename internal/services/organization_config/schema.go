@@ -60,7 +60,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				PlanModifiers: []planmodifier.String{stringplanmodifier.RequiresReplace()},
 			},
 			"auto_generate_statement_mode": schema.StringAttribute{
-				Description: "Specify whether to auto-generate statements once Bills are *approved* or *locked*. It will not auto-generate if a bill is in *pending* state.\n\nThe default value is **None**.\n\n- **None**. Statements will not be auto-generated.\n- **JSON**. Statements are auto-generated in JSON format.\n- **JSON and CSV**. Statements are auto-generated in both JSON and CSV formats.\navailable values: \"NONE\", \"JSON\", \"JSON_AND_CSV\"",
+				Description: "Specify whether to auto-generate statements once Bills are *approved* or *locked*. It will not auto-generate if a bill is in *pending* state.\n\nThe default value is **None**.\n\n- **None**. Statements will not be auto-generated.\n- **JSON**. Statements are auto-generated in JSON format.\n- **JSON and CSV**. Statements are auto-generated in both JSON and CSV formats.\nAvailable values: \"NONE\", \"JSON\", \"JSON_AND_CSV\".",
 				Optional:    true,
 				Validators: []validator.String{
 					stringvalidator.OneOfCaseInsensitive(

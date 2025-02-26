@@ -85,7 +85,7 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Computed:    true,
 						},
 						"entity_type": schema.StringAttribute{
-							Description: "The type of entity associated with the Transaction - identifies who or what was responsible for the Transaction being added to the Balance - such as a **User**, a **Service User**, or a **Bill**.\navailable values: \"BILL\", \"COMMITMENT\", \"USER\", \"SERVICE_USER\"",
+							Description: "The type of entity associated with the Transaction - identifies who or what was responsible for the Transaction being added to the Balance - such as a **User**, a **Service User**, or a **Bill**.\nAvailable values: \"BILL\", \"COMMITMENT\", \"USER\", \"SERVICE_USER\".",
 							Computed:    true,
 							Validators: []validator.String{
 								stringvalidator.OneOfCaseInsensitive(

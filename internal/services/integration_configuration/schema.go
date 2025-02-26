@@ -61,7 +61,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				Required:    true,
 				Attributes: map[string]schema.Attribute{
 					"type": schema.StringAttribute{
-						Description: "Specifies the type of authorization required for the integration.\navailable values: \"HTTP_BASIC\", \"OAUTH_CLIENT_CREDENTIALS\", \"M3TER_SIGNED_REQUEST\", \"AWS_INTEGRATION\", \"PADDLE_AUTH\", \"NETSUITE_AUTH\", \"CHARGEBEE_AUTH\", \"M3TER_SERVICE_USER\", \"STRIPE_SIGNED_REQUEST\"",
+						Description: "Specifies the type of authorization required for the integration.\nAvailable values: \"HTTP_BASIC\", \"OAUTH_CLIENT_CREDENTIALS\", \"M3TER_SIGNED_REQUEST\", \"AWS_INTEGRATION\", \"PADDLE_AUTH\", \"NETSUITE_AUTH\", \"CHARGEBEE_AUTH\", \"M3TER_SERVICE_USER\", \"STRIPE_SIGNED_REQUEST\".",
 						Required:    true,
 						Validators: []validator.String{
 							stringvalidator.OneOfCaseInsensitive(
@@ -78,7 +78,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 						},
 					},
 					"destination": schema.StringAttribute{
-						Description: "available values: \"WEBHOOK\", \"NETSUITE\", \"STRIPE\", \"STRIPE_TEST\", \"AWS\", \"PADDLE\", \"PADDLE_SANDBOX\", \"SALESFORCE\", \"XERO\", \"CHARGEBEE\", \"QUICKBOOKS\", \"QUICKBOOKS_SANDBOX\", \"M3TER\"",
+						Description: "Available values: \"WEBHOOK\", \"NETSUITE\", \"STRIPE\", \"STRIPE_TEST\", \"AWS\", \"PADDLE\", \"PADDLE_SANDBOX\", \"SALESFORCE\", \"XERO\", \"CHARGEBEE\", \"QUICKBOOKS\", \"QUICKBOOKS_SANDBOX\", \"M3TER\".",
 						Optional:    true,
 						Validators: []validator.String{
 							stringvalidator.OneOfCaseInsensitive(
@@ -161,7 +161,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				Computed:    true,
 			},
 			"status": schema.StringAttribute{
-				Description: "available values: \"WAITING\", \"STARTED\", \"COMPLETE\", \"ERROR\", \"AWAITING_RETRY\", \"AUTH_FAILED\", \"ACCOUNTING_PERIOD_CLOSED\", \"INVOICE_ALREADY_PAID\", \"DISABLED\"",
+				Description: "Available values: \"WAITING\", \"STARTED\", \"COMPLETE\", \"ERROR\", \"AWAITING_RETRY\", \"AUTH_FAILED\", \"ACCOUNTING_PERIOD_CLOSED\", \"INVOICE_ALREADY_PAID\", \"DISABLED\".",
 				Computed:    true,
 				Validators: []validator.String{
 					stringvalidator.OneOfCaseInsensitive(
@@ -178,7 +178,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				},
 			},
 			"trigger_type": schema.StringAttribute{
-				Description: "Specifies the type of trigger for the integration.\navailable values: \"EVENT\", \"SCHEDULE\"",
+				Description: "Specifies the type of trigger for the integration.\nAvailable values: \"EVENT\", \"SCHEDULE\".",
 				Computed:    true,
 				Validators: []validator.String{
 					stringvalidator.OneOfCaseInsensitive("EVENT", "SCHEDULE"),
