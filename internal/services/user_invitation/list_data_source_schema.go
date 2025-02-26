@@ -36,7 +36,7 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
 						"id": schema.StringAttribute{
-							Description: "The UUID of the invitation. ",
+							Description: "The UUID of the invitation.",
 							Computed:    true,
 						},
 						"accepted": schema.BoolAttribute{
@@ -44,7 +44,7 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Computed:    true,
 						},
 						"dt_end_access": schema.StringAttribute{
-							Description: "The date that access will end for the user *(in ISO-8601 format)*. If this is blank, there is no end date  meaning that the user has permanent access. ",
+							Description: "The date that access will end for the user *(in ISO-8601 format)*. If this is blank, there is no end date  meaning that the user has permanent access.",
 							Computed:    true,
 							CustomType:  timetypes.RFC3339Type{},
 						},
@@ -54,7 +54,7 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							CustomType:  timetypes.RFC3339Type{},
 						},
 						"email": schema.StringAttribute{
-							Description: "The email address of the invitee. The invitation will be sent to this email address. ",
+							Description: "The email address of the invitee. The invitation will be sent to this email address.",
 							Computed:    true,
 						},
 						"first_name": schema.StringAttribute{
@@ -62,7 +62,7 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Computed:    true,
 						},
 						"inviting_principal_id": schema.StringAttribute{
-							Description: "The UUID of the user who sent the invite. ",
+							Description: "The UUID of the user who sent the invite.",
 							Computed:    true,
 						},
 						"last_name": schema.StringAttribute{
@@ -70,13 +70,13 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Computed:    true,
 						},
 						"permission_policy_ids": schema.ListAttribute{
-							Description: "The IDs of the permission policies the invited user has been assigned. This controls the access rights and privileges that this user will have when working in the m3ter Organization. ",
+							Description: "The IDs of the permission policies the invited user has been assigned. This controls the access rights and privileges that this user will have when working in the m3ter Organization.",
 							Computed:    true,
 							CustomType:  customfield.NewListType[types.String](ctx),
 							ElementType: types.StringType,
 						},
 						"version": schema.Int64Attribute{
-							Description: "The version number. Default value when newly created is one. ",
+							Description: "The version number. Default value when newly created is one.",
 							Computed:    true,
 						},
 						"created_by": schema.StringAttribute{

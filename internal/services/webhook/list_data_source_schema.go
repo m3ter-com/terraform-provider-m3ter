@@ -41,7 +41,7 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
 						"id": schema.StringAttribute{
-							Description: "The UUID of the entity. ",
+							Description: "The UUID of the entity.",
 							Computed:    true,
 						},
 						"version": schema.Int64Attribute{
@@ -59,7 +59,7 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Computed:    true,
 						},
 						"credentials": schema.StringAttribute{
-							Description: "This schema defines the credentials required for m3ter request signing. ",
+							Description: "This schema defines the credentials required for m3ter request signing.",
 							Computed:    true,
 							CustomType:  jsontypes.NormalizedType{},
 						},
@@ -84,7 +84,7 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Computed: true,
 						},
 						"url": schema.StringAttribute{
-							Description: "The URL to which webhook requests are sent. ",
+							Description: "The URL to which webhook requests are sent.",
 							Computed:    true,
 						},
 					},

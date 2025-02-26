@@ -22,7 +22,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 	return schema.Schema{
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
-				Description:   "The UUID of the invitation. ",
+				Description:   "The UUID of the invitation.",
 				Computed:      true,
 				PlanModifiers: []planmodifier.String{stringplanmodifier.UseStateForUnknown(), stringplanmodifier.RequiresReplace()},
 			},
@@ -47,7 +47,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				PlanModifiers: []planmodifier.String{stringplanmodifier.RequiresReplace()},
 			},
 			"dt_end_access": schema.StringAttribute{
-				Description:   "The date when access will end for the user *(in ISO-8601 format)*. Leave blank for no end date, which gives the user permanent access. ",
+				Description:   "The date when access will end for the user *(in ISO-8601 format)*. Leave blank for no end date, which gives the user permanent access.",
 				Optional:      true,
 				CustomType:    timetypes.RFC3339Type{},
 				PlanModifiers: []planmodifier.String{stringplanmodifier.RequiresReplace()},
@@ -67,7 +67,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				PlanModifiers: []planmodifier.Int64{int64planmodifier.RequiresReplace()},
 			},
 			"permission_policy_ids": schema.ListAttribute{
-				Description:   "The IDs of the permission policies the invited user has been assigned. This controls the access rights and privileges that this user will have when working in the m3ter Organization. ",
+				Description:   "The IDs of the permission policies the invited user has been assigned. This controls the access rights and privileges that this user will have when working in the m3ter Organization.",
 				Optional:      true,
 				ElementType:   types.StringType,
 				PlanModifiers: []planmodifier.List{listplanmodifier.RequiresReplace()},
@@ -91,7 +91,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				CustomType:  timetypes.RFC3339Type{},
 			},
 			"inviting_principal_id": schema.StringAttribute{
-				Description: "The UUID of the user who sent the invite. ",
+				Description: "The UUID of the user who sent the invite.",
 				Computed:    true,
 			},
 			"last_modified_by": schema.StringAttribute{

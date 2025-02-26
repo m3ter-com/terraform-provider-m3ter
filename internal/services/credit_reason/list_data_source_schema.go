@@ -23,7 +23,7 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 				Required: true,
 			},
 			"archived": schema.BoolAttribute{
-				Description: "TRUE / FALSE archived flag to filter the list. CreditReasons can be archived once they are obsolete.\n\n* TRUE includes archived CreditReasons.\n* FALSE excludes CreditReasons that are archived. ",
+				Description: "TRUE / FALSE archived flag to filter the list. CreditReasons can be archived once they are obsolete.\n\n* TRUE includes archived CreditReasons.\n* FALSE excludes CreditReasons that are archived.",
 				Optional:    true,
 			},
 			"codes": schema.ListAttribute{
@@ -50,7 +50,7 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
 						"id": schema.StringAttribute{
-							Description: "The UUID of the entity. ",
+							Description: "The UUID of the entity.",
 							Computed:    true,
 						},
 						"version": schema.Int64Attribute{

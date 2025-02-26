@@ -23,7 +23,7 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 				Required: true,
 			},
 			"ids": schema.ListAttribute{
-				Description: "List of specific Product UUIDs to retrieve. ",
+				Description: "List of specific Product UUIDs to retrieve.",
 				Optional:    true,
 				ElementType: types.StringType,
 			},
@@ -41,7 +41,7 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
 						"id": schema.StringAttribute{
-							Description: "The UUID of the entity. ",
+							Description: "The UUID of the entity.",
 							Computed:    true,
 						},
 						"version": schema.Int64Attribute{
@@ -49,7 +49,7 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Computed:    true,
 						},
 						"code": schema.StringAttribute{
-							Description: "A unique short code to identify the Product. It should not contain control chracters or spaces. ",
+							Description: "A unique short code to identify the Product. It should not contain control chracters or spaces.",
 							Computed:    true,
 						},
 						"created_by": schema.StringAttribute{

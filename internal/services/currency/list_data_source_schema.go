@@ -51,7 +51,7 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
 						"id": schema.StringAttribute{
-							Description: "The UUID of the entity. ",
+							Description: "The UUID of the entity.",
 							Computed:    true,
 						},
 						"version": schema.Int64Attribute{
@@ -85,7 +85,7 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Computed:    true,
 						},
 						"max_decimal_places": schema.Int64Attribute{
-							Description: "This indicates the maximum number of decimal places to use for this Currency. ",
+							Description: "This indicates the maximum number of decimal places to use for this Currency.",
 							Computed:    true,
 						},
 						"name": schema.StringAttribute{
@@ -93,7 +93,8 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Computed:    true,
 						},
 						"rounding_mode": schema.StringAttribute{
-							Computed: true,
+							Description: "available values: \"UP\", \"DOWN\", \"CEILING\", \"FLOOR\", \"HALF_UP\", \"HALF_DOWN\", \"HALF_EVEN\", \"UNNECESSARY\"",
+							Computed:    true,
 							Validators: []validator.String{
 								stringvalidator.OneOfCaseInsensitive(
 									"UP",

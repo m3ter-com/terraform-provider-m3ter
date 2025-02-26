@@ -50,7 +50,7 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Computed:    true,
 			},
 			"max_decimal_places": schema.Int64Attribute{
-				Description: "This indicates the maximum number of decimal places to use for this Currency. ",
+				Description: "This indicates the maximum number of decimal places to use for this Currency.",
 				Computed:    true,
 			},
 			"name": schema.StringAttribute{
@@ -58,7 +58,8 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Computed:    true,
 			},
 			"rounding_mode": schema.StringAttribute{
-				Computed: true,
+				Description: "available values: \"UP\", \"DOWN\", \"CEILING\", \"FLOOR\", \"HALF_UP\", \"HALF_DOWN\", \"HALF_EVEN\", \"UNNECESSARY\"",
+				Computed:    true,
 				Validators: []validator.String{
 					stringvalidator.OneOfCaseInsensitive(
 						"UP",

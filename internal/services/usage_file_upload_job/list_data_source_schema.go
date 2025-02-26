@@ -59,7 +59,7 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Computed:    true,
 						},
 						"file_name": schema.StringAttribute{
-							Description: "The name of the measurements file for the upload job. ",
+							Description: "The name of the measurements file for the upload job.",
 							Computed:    true,
 						},
 						"processed_rows": schema.Int64Attribute{
@@ -67,7 +67,7 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Computed:    true,
 						},
 						"status": schema.StringAttribute{
-							Description: "The status of the file upload job. ",
+							Description: "The status of the file upload job.\navailable values: \"notUploaded\", \"running\", \"failed\", \"succeeded\"",
 							Computed:    true,
 							Validators: []validator.String{
 								stringvalidator.OneOfCaseInsensitive(
@@ -79,7 +79,7 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							},
 						},
 						"total_rows": schema.Int64Attribute{
-							Description: "The total number of rows in the file. ",
+							Description: "The total number of rows in the file.",
 							Computed:    true,
 						},
 						"upload_date": schema.StringAttribute{
@@ -87,7 +87,7 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Computed:    true,
 						},
 						"version": schema.Int64Attribute{
-							Description: "The version number. Default value when newly created is one. ",
+							Description: "The version number. Default value when newly created is one.",
 							Computed:    true,
 						},
 					},

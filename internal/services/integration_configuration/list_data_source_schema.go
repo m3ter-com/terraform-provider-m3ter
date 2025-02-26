@@ -37,7 +37,7 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
 						"id": schema.StringAttribute{
-							Description: "The UUID of the entity. ",
+							Description: "The UUID of the entity.",
 							Computed:    true,
 						},
 						"destination": schema.StringAttribute{
@@ -101,7 +101,7 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Computed:    true,
 						},
 						"trigger_type": schema.StringAttribute{
-							Description: "Specifies the type of trigger for the integration. ",
+							Description: "Specifies the type of trigger for the integration.\navailable values: \"EVENT\", \"SCHEDULE\"",
 							Computed:    true,
 							Validators: []validator.String{
 								stringvalidator.OneOfCaseInsensitive("EVENT", "SCHEDULE"),

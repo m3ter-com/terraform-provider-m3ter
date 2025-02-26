@@ -22,7 +22,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 	return schema.Schema{
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
-				Description:   "The UUID of the entity. ",
+				Description:   "The UUID of the entity.",
 				Computed:      true,
 				PlanModifiers: []planmodifier.String{stringplanmodifier.UseStateForUnknown(), stringplanmodifier.RequiresReplace()},
 			},
@@ -46,7 +46,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				PlanModifiers: []planmodifier.String{stringplanmodifier.RequiresReplace()},
 			},
 			"currency_paid": schema.StringAttribute{
-				Description:   "The currency code of the payment if it differs from the Balance currency. For example: USD, GBP or EUR. ",
+				Description:   "The currency code of the payment if it differs from the Balance currency. For example: USD, GBP or EUR.",
 				Optional:      true,
 				PlanModifiers: []planmodifier.String{stringplanmodifier.RequiresReplace()},
 			},
@@ -67,7 +67,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				PlanModifiers: []planmodifier.String{stringplanmodifier.RequiresReplace()},
 			},
 			"transaction_type_id": schema.StringAttribute{
-				Description:   "The unique identifier (UUID) of the transaction type. This is obtained from the list of created Transaction Types within the Organization Configuration. ",
+				Description:   "The unique identifier (UUID) of the transaction type. This is obtained from the list of created Transaction Types within the Organization Configuration.",
 				Optional:      true,
 				PlanModifiers: []planmodifier.String{stringplanmodifier.RequiresReplace()},
 			},
@@ -95,7 +95,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				Computed:    true,
 			},
 			"entity_type": schema.StringAttribute{
-				Description: "The type of entity associated with the Transaction - identifies who or what was responsible for the Transaction being added to the Balance - such as a **User**, a **Service User**, or a **Bill**.",
+				Description: "The type of entity associated with the Transaction - identifies who or what was responsible for the Transaction being added to the Balance - such as a **User**, a **Service User**, or a **Bill**.\navailable values: \"BILL\", \"COMMITMENT\", \"USER\", \"SERVICE_USER\"",
 				Computed:    true,
 				Validators: []validator.String{
 					stringvalidator.OneOfCaseInsensitive(

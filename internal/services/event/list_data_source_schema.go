@@ -35,7 +35,7 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 				Optional:    true,
 			},
 			"include_actioned": schema.BoolAttribute{
-				Description: "A Boolean flag indicating whether to return Events that have been actioned.\n\n* **TRUE** - include actioned Events.\n* **FALSE** - exclude actioned Events. ",
+				Description: "A Boolean flag indicating whether to return Events that have been actioned.\n\n* **TRUE** - include actioned Events.\n* **FALSE** - exclude actioned Events.",
 				Optional:    true,
 			},
 			"notification_code": schema.StringAttribute{
@@ -86,7 +86,7 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							CustomType:  timetypes.RFC3339Type{},
 						},
 						"m3ter_event": schema.StringAttribute{
-							Description: "The Data Transfer Object (DTO) containing the details of the Event. ",
+							Description: "The Data Transfer Object (DTO) containing the details of the Event.",
 							Computed:    true,
 							CustomType:  jsontypes.NormalizedType{},
 						},
