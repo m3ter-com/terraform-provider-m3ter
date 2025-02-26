@@ -37,7 +37,7 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 				Optional:    true,
 			},
 			"ids": schema.ListAttribute{
-				Description: "List of Pricing IDs to retrieve. ",
+				Description: "List of Pricing IDs to retrieve.",
 				Optional:    true,
 				ElementType: types.StringType,
 			},
@@ -55,7 +55,7 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
 						"id": schema.StringAttribute{
-							Description: "The UUID of the entity. ",
+							Description: "The UUID of the entity.",
 							Computed:    true,
 						},
 						"version": schema.Int64Attribute{
@@ -70,7 +70,8 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Computed:    true,
 						},
 						"aggregation_type": schema.StringAttribute{
-							Computed: true,
+							Description: "available values: \"SIMPLE\", \"COMPOUND\"",
+							Computed:    true,
 							Validators: []validator.String{
 								stringvalidator.OneOfCaseInsensitive("SIMPLE", "COMPOUND"),
 							},
@@ -127,7 +128,7 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Computed:    true,
 						},
 						"overage_pricing_bands": schema.ListNestedAttribute{
-							Description: "The Prepayment/Balance overage pricing in pricing bands for the case of a **Tiered** pricing structure. ",
+							Description: "The Prepayment/Balance overage pricing in pricing bands for the case of a **Tiered** pricing structure.",
 							Computed:    true,
 							CustomType:  customfield.NewNestedObjectListType[PricingsOveragePricingBandsDataSourceModel](ctx),
 							NestedObject: schema.NestedAttributeObject{
@@ -152,7 +153,7 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 										Computed:    true,
 									},
 									"credit_type_id": schema.StringAttribute{
-										Description: "**OBSOLETE - this is deprecated and no longer used.** ",
+										Description: "**OBSOLETE - this is deprecated and no longer used.**",
 										Computed:    true,
 									},
 								},
@@ -191,7 +192,7 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 										Computed:    true,
 									},
 									"credit_type_id": schema.StringAttribute{
-										Description: "**OBSOLETE - this is deprecated and no longer used.** ",
+										Description: "**OBSOLETE - this is deprecated and no longer used.**",
 										Computed:    true,
 									},
 								},
@@ -216,7 +217,7 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Computed:    true,
 						},
 						"type": schema.StringAttribute{
-							Description: "* **DEBIT**. Default setting. The amount calculated using the Pricing is added to the bill as a debit.\n\n* **PRODUCT_CREDIT**. The amount calculated using the Pricing is added to the bill as a credit *(negative amount)*. To prevent negative billing, the bill will be capped at the total of other line items for the *same* Product.\n\n* **GLOBAL_CREDIT**. The amount calculated using the Pricing is added to the bill as a credit *(negative amount)*. To prevent negative billing, the bill will be capped at the total of other line items for the entire bill, which might include other Products the Account consumes.",
+							Description: "* **DEBIT**. Default setting. The amount calculated using the Pricing is added to the bill as a debit.\n\n* **PRODUCT_CREDIT**. The amount calculated using the Pricing is added to the bill as a credit *(negative amount)*. To prevent negative billing, the bill will be capped at the total of other line items for the *same* Product.\n\n* **GLOBAL_CREDIT**. The amount calculated using the Pricing is added to the bill as a credit *(negative amount)*. To prevent negative billing, the bill will be capped at the total of other line items for the entire bill, which might include other Products the Account consumes.\navailable values: \"DEBIT\", \"PRODUCT_CREDIT\", \"GLOBAL_CREDIT\"",
 							Computed:    true,
 							Validators: []validator.String{
 								stringvalidator.OneOfCaseInsensitive(

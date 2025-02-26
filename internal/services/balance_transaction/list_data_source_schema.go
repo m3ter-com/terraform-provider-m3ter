@@ -42,7 +42,7 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
 						"id": schema.StringAttribute{
-							Description: "The UUID of the entity. ",
+							Description: "The UUID of the entity.",
 							Computed:    true,
 						},
 						"version": schema.Int64Attribute{
@@ -85,7 +85,7 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Computed:    true,
 						},
 						"entity_type": schema.StringAttribute{
-							Description: "The type of entity associated with the Transaction - identifies who or what was responsible for the Transaction being added to the Balance - such as a **User**, a **Service User**, or a **Bill**.",
+							Description: "The type of entity associated with the Transaction - identifies who or what was responsible for the Transaction being added to the Balance - such as a **User**, a **Service User**, or a **Bill**.\navailable values: \"BILL\", \"COMMITMENT\", \"USER\", \"SERVICE_USER\"",
 							Computed:    true,
 							Validators: []validator.String{
 								stringvalidator.OneOfCaseInsensitive(
@@ -110,7 +110,7 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							CustomType:  timetypes.RFC3339Type{},
 						},
 						"transaction_type_id": schema.StringAttribute{
-							Description: "The unique identifier (UUID) for the Transaction type. This is obtained from the list of created Transaction Types within the Organization Configuration. ",
+							Description: "The unique identifier (UUID) for the Transaction type. This is obtained from the list of created Transaction Types within the Organization Configuration.",
 							Computed:    true,
 						},
 					},

@@ -53,7 +53,7 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Computed: true,
 			},
 			"url": schema.StringAttribute{
-				Description: "The URL to which webhook requests are sent. ",
+				Description: "The URL to which webhook requests are sent.",
 				Computed:    true,
 			},
 			"version": schema.Int64Attribute{
@@ -61,7 +61,7 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Computed:    true,
 			},
 			"credentials": schema.StringAttribute{
-				Description: "This schema defines the credentials required for m3ter request signing. ",
+				Description: "This schema defines the credentials required for m3ter request signing.",
 				Computed:    true,
 				CustomType:  jsontypes.NormalizedType{},
 			},

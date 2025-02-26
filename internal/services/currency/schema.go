@@ -21,7 +21,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 	return schema.Schema{
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
-				Description:   "The UUID of the entity. ",
+				Description:   "The UUID of the entity.",
 				Computed:      true,
 				PlanModifiers: []planmodifier.String{stringplanmodifier.UseStateForUnknown()},
 			},
@@ -49,7 +49,8 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				},
 			},
 			"rounding_mode": schema.StringAttribute{
-				Optional: true,
+				Description: "available values: \"UP\", \"DOWN\", \"CEILING\", \"FLOOR\", \"HALF_UP\", \"HALF_DOWN\", \"HALF_EVEN\", \"UNNECESSARY\"",
+				Optional:    true,
 				Validators: []validator.String{
 					stringvalidator.OneOfCaseInsensitive(
 						"UP",

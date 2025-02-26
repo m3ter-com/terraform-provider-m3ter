@@ -18,7 +18,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 	return schema.Schema{
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
-				Description:   "The UUID of the entity. ",
+				Description:   "The UUID of the entity.",
 				Computed:      true,
 				PlanModifiers: []planmodifier.String{stringplanmodifier.UseStateForUnknown()},
 			},
@@ -43,7 +43,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				Required:    true,
 			},
 			"version": schema.Int64Attribute{
-				Description: "The version number of the scheduled event configuration:\n* **Create entity**: Not valid for initial insertion - do not use for Create. On initial Create, version is set at 1 and listed in the response.\n* **Update Entity**: On Update, version is required and must match the existing version because a check is performed to ensure sequential versioning is preserved. Version is incremented by 1 and listed in the response.\n\n",
+				Description: "The version number of the scheduled event configuration:\n* **Create entity**: Not valid for initial insertion - do not use for Create. On initial Create, version is set at 1 and listed in the response.\n* **Update Entity**: On Update, version is required and must match the existing version because a check is performed to ensure sequential versioning is preserved. Version is incremented by 1 and listed in the response.",
 				Optional:    true,
 			},
 			"created_by": schema.StringAttribute{

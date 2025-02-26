@@ -23,7 +23,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 	return schema.Schema{
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
-				Description:   "The UUID of the entity. ",
+				Description:   "The UUID of the entity.",
 				Computed:      true,
 				PlanModifiers: []planmodifier.String{stringplanmodifier.UseStateForUnknown()},
 			},
@@ -60,7 +60,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 							Optional:    true,
 						},
 						"credit_type_id": schema.StringAttribute{
-							Description: "**OBSOLETE - this is deprecated and no longer used.** ",
+							Description: "**OBSOLETE - this is deprecated and no longer used.**",
 							Optional:    true,
 						},
 					},
@@ -123,7 +123,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				Optional:    true,
 			},
 			"type": schema.StringAttribute{
-				Description: "* **DEBIT**. Default setting. The amount calculated using the Pricing is added to the bill as a debit.\n\n* **PRODUCT_CREDIT**. The amount calculated using the Pricing is added to the bill as a credit *(negative amount)*. To prevent negative billing, the bill will be capped at the total of other line items for the same Product.\n\n* **GLOBAL_CREDIT**. The amount calculated using the Pricing is added to the bill as a credit *(negative amount)*. To prevent negative billing, the bill will be capped at the total of other line items for the entire bill, which might include other Products the Account consumes.",
+				Description: "* **DEBIT**. Default setting. The amount calculated using the Pricing is added to the bill as a debit.\n\n* **PRODUCT_CREDIT**. The amount calculated using the Pricing is added to the bill as a credit *(negative amount)*. To prevent negative billing, the bill will be capped at the total of other line items for the same Product.\n\n* **GLOBAL_CREDIT**. The amount calculated using the Pricing is added to the bill as a credit *(negative amount)*. To prevent negative billing, the bill will be capped at the total of other line items for the entire bill, which might include other Products the Account consumes.\navailable values: \"DEBIT\", \"PRODUCT_CREDIT\", \"GLOBAL_CREDIT\"",
 				Optional:    true,
 				Validators: []validator.String{
 					stringvalidator.OneOfCaseInsensitive(
@@ -143,7 +143,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				ElementType: types.StringType,
 			},
 			"overage_pricing_bands": schema.ListNestedAttribute{
-				Description: "Specify Prepayment/Balance overage pricing in pricing bands for the case of a **Tiered** pricing structure. ",
+				Description: "Specify Prepayment/Balance overage pricing in pricing bands for the case of a **Tiered** pricing structure.",
 				Computed:    true,
 				Optional:    true,
 				CustomType:  customfield.NewNestedObjectListType[PricingOveragePricingBandsModel](ctx),
@@ -169,14 +169,15 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 							Optional:    true,
 						},
 						"credit_type_id": schema.StringAttribute{
-							Description: "**OBSOLETE - this is deprecated and no longer used.** ",
+							Description: "**OBSOLETE - this is deprecated and no longer used.**",
 							Optional:    true,
 						},
 					},
 				},
 			},
 			"aggregation_type": schema.StringAttribute{
-				Computed: true,
+				Description: "available values: \"SIMPLE\", \"COMPOUND\"",
+				Computed:    true,
 				Validators: []validator.String{
 					stringvalidator.OneOfCaseInsensitive("SIMPLE", "COMPOUND"),
 				},

@@ -25,7 +25,7 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Required: true,
 			},
 			"amount": schema.Float64Attribute{
-				Description: "The amount for the line item. ",
+				Description: "The amount for the line item.",
 				Computed:    true,
 			},
 			"created_by": schema.StringAttribute{
@@ -55,15 +55,15 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Computed:    true,
 			},
 			"product_id": schema.StringAttribute{
-				Description: "The UUID of the Product. ",
+				Description: "The UUID of the Product.",
 				Computed:    true,
 			},
 			"referenced_bill_id": schema.StringAttribute{
-				Description: "The UUID of the bill for the line item. ",
+				Description: "The UUID of the bill for the line item.",
 				Computed:    true,
 			},
 			"referenced_line_item_id": schema.StringAttribute{
-				Description: "The UUID of the line item. ",
+				Description: "The UUID of the line item.",
 				Computed:    true,
 			},
 			"service_period_end_date": schema.StringAttribute{

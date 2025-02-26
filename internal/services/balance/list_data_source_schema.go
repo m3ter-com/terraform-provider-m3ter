@@ -50,7 +50,7 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
 						"id": schema.StringAttribute{
-							Description: "The UUID of the entity. ",
+							Description: "The UUID of the entity.",
 							Computed:    true,
 						},
 						"version": schema.Int64Attribute{
@@ -111,7 +111,7 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Computed:    true,
 						},
 						"line_item_types": schema.ListAttribute{
-							Description: "A list of line item charge types that can draw-down against the Balance amount at billing. ",
+							Description: "A list of line item charge types that can draw-down against the Balance amount at billing.",
 							Computed:    true,
 							Validators: []validator.List{
 								listvalidator.ValueStringsAre(
@@ -146,7 +146,7 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							ElementType: types.StringType,
 						},
 						"rollover_amount": schema.Float64Attribute{
-							Description: "The maximum amount that can be carried over past the Balance end date and draw-down against for billing if there is an unused Balance amount remaining when the Balance end date is reached.\n",
+							Description: "The maximum amount that can be carried over past the Balance end date and draw-down against for billing if there is an unused Balance amount remaining when the Balance end date is reached.",
 							Computed:    true,
 						},
 						"rollover_end_date": schema.StringAttribute{

@@ -26,7 +26,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 	return schema.Schema{
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
-				Description:   "The UUID of the entity. ",
+				Description:   "The UUID of the entity.",
 				Computed:      true,
 				PlanModifiers: []planmodifier.String{stringplanmodifier.UseStateForUnknown(), stringplanmodifier.RequiresReplace()},
 			},
@@ -46,7 +46,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				PlanModifiers: []planmodifier.Int64{int64planmodifier.RequiresReplace()},
 			},
 			"billing_frequency": schema.StringAttribute{
-				Description: "How often Bills are generated.\n\n* **Daily**. Starting at midnight each day, covering a twenty-four hour period following.\n\n* **Weekly**. Starting at midnight on a Monday morning covering the seven-day period following.\n\n* **Monthly**. Starting at midnight on the morning of the first day of each month covering the entire calendar month following.\n\n* **Annually**. Starting at midnight on the morning of the first day of each year covering the entire calendar year following.\n\n* **Ad_Hoc**. Use this setting when a custom billing schedule is used for billing an Account, such as for billing of Prepayment/Commitment fees using a custom billing schedule.\n",
+				Description: "How often Bills are generated.\n\n* **Daily**. Starting at midnight each day, covering a twenty-four hour period following.\n\n* **Weekly**. Starting at midnight on a Monday morning covering the seven-day period following.\n\n* **Monthly**. Starting at midnight on the morning of the first day of each month covering the entire calendar month following.\n\n* **Annually**. Starting at midnight on the morning of the first day of each year covering the entire calendar year following.\n\n* **Ad_Hoc**. Use this setting when a custom billing schedule is used for billing an Account, such as for billing of Prepayment/Commitment fees using a custom billing schedule.\navailable values: \"DAILY\", \"WEEKLY\", \"MONTHLY\", \"ANNUALLY\", \"AD_HOC\"",
 				Optional:    true,
 				Validators: []validator.String{
 					stringvalidator.OneOfCaseInsensitive(
@@ -173,7 +173,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				Computed:    true,
 			},
 			"status": schema.StringAttribute{
-				Description: "The current status of the BillJob, indicating its progress or completion state.",
+				Description: "The current status of the BillJob, indicating its progress or completion state.\navailable values: \"PENDING\", \"INITIALIZING\", \"RUNNING\", \"COMPLETE\", \"CANCELLED\"",
 				Computed:    true,
 				Validators: []validator.String{
 					stringvalidator.OneOfCaseInsensitive(
@@ -190,7 +190,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				Computed:    true,
 			},
 			"type": schema.StringAttribute{
-				Description: "Specifies the type of BillJob. \n\n* **CREATE** Returned for a *Create BillJob* call.\n* **RECALCULATE** Returned for a successful *Create Recalculation BillJob* call.",
+				Description: "Specifies the type of BillJob. \n\n* **CREATE** Returned for a *Create BillJob* call.\n* **RECALCULATE** Returned for a successful *Create Recalculation BillJob* call.\navailable values: \"CREATE\", \"RECALCULATE\"",
 				Computed:    true,
 				Validators: []validator.String{
 					stringvalidator.OneOfCaseInsensitive("CREATE", "RECALCULATE"),

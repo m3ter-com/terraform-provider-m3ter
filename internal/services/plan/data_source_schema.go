@@ -78,11 +78,11 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Computed:    true,
 			},
 			"plan_template_id": schema.StringAttribute{
-				Description: "UUID of the PlanTemplate the Plan belongs to. ",
+				Description: "UUID of the PlanTemplate the Plan belongs to.",
 				Computed:    true,
 			},
 			"product_id": schema.StringAttribute{
-				Description: "UUID of the Product the Plan belongs to. ",
+				Description: "UUID of the Product the Plan belongs to.",
 				Computed:    true,
 			},
 			"standing_charge": schema.Float64Attribute{

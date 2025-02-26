@@ -36,7 +36,7 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 				Optional:    true,
 			},
 			"status": schema.StringAttribute{
-				Description: "List Job entities for the status",
+				Description: "List Job entities for the status\navailable values: \"PENDING\", \"RUNNING\", \"SUCCEEDED\", \"FAILED\"",
 				Optional:    true,
 				Validators: []validator.String{
 					stringvalidator.OneOfCaseInsensitive(
@@ -83,7 +83,8 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Computed:    true,
 						},
 						"source_type": schema.StringAttribute{
-							Computed: true,
+							Description: "available values: \"USAGE\", \"OPERATIONAL\"",
+							Computed:    true,
 							Validators: []validator.String{
 								stringvalidator.OneOfCaseInsensitive("USAGE", "OPERATIONAL"),
 							},
@@ -94,7 +95,8 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							CustomType:  timetypes.RFC3339Type{},
 						},
 						"status": schema.StringAttribute{
-							Computed: true,
+							Description: "available values: \"PENDING\", \"RUNNING\", \"SUCCEEDED\", \"FAILED\"",
+							Computed:    true,
 							Validators: []validator.String{
 								stringvalidator.OneOfCaseInsensitive(
 									"PENDING",

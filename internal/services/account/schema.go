@@ -25,7 +25,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 	return schema.Schema{
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
-				Description:   "The UUID of the entity. ",
+				Description:   "The UUID of the entity.",
 				Computed:      true,
 				PlanModifiers: []planmodifier.String{stringplanmodifier.UseStateForUnknown()},
 			},
@@ -46,7 +46,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				Required:    true,
 			},
 			"auto_generate_statement_mode": schema.StringAttribute{
-				Description: "Specify whether to auto-generate statements once Bills are approved or locked.\n\n- **None**. Statements will not be auto-generated.\n- **JSON**. Statements are auto-generated in JSON format.\n- **JSON and CSV**. Statements are auto-generated in both JSON and CSV formats. ",
+				Description: "Specify whether to auto-generate statements once Bills are approved or locked.\n\n- **None**. Statements will not be auto-generated.\n- **JSON**. Statements are auto-generated in JSON format.\n- **JSON and CSV**. Statements are auto-generated in both JSON and CSV formats.\navailable values: \"NONE\", \"JSON\", \"JSON_AND_CSV\"",
 				Optional:    true,
 				Validators: []validator.String{
 					stringvalidator.OneOfCaseInsensitive(
@@ -81,7 +81,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				Optional:    true,
 			},
 			"statement_definition_id": schema.StringAttribute{
-				Description: "The UUID of the statement definition used when Bill statements are generated for the Account. If no statement definition is specified for the Account, the statement definition specified at Organizational level is used.\n\nBill statements can be used as informative backing sheets to invoices. Based on the usage breakdown defined in the statement definition, generated statements give a breakdown of usage charges on Account Bills, which helps customers better understand usage charges incurred over the billing period.\n\nSee [Working with Bill Statements](https://www.m3ter.com/docs/guides/running-viewing-and-managing-bills/working-with-bill-statements) in the m3ter documentation for more details.\n",
+				Description: "The UUID of the statement definition used when Bill statements are generated for the Account. If no statement definition is specified for the Account, the statement definition specified at Organizational level is used.\n\nBill statements can be used as informative backing sheets to invoices. Based on the usage breakdown defined in the statement definition, generated statements give a breakdown of usage charges on Account Bills, which helps customers better understand usage charges incurred over the billing period.\n\nSee [Working with Bill Statements](https://www.m3ter.com/docs/guides/running-viewing-and-managing-bills/working-with-bill-statements) in the m3ter documentation for more details.",
 				Optional:    true,
 			},
 			"version": schema.Int64Attribute{

@@ -26,7 +26,7 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Required: true,
 			},
 			"bill_frequency": schema.StringAttribute{
-				Description: "Determines the frequency at which bills are generated.\n\n* **Daily**. Starting at midnight each day, covering the twenty-four hour period following.\n\n* **Weekly**. Starting at midnight on a Monday, covering the seven-day period following.\n\n* **Monthly**. Starting at midnight on the first day of each month, covering the entire calendar month following.\n\n* **Annually**. Starting at midnight on first day of each year covering the entire calendar year following.",
+				Description: "Determines the frequency at which bills are generated.\n\n* **Daily**. Starting at midnight each day, covering the twenty-four hour period following.\n\n* **Weekly**. Starting at midnight on a Monday, covering the seven-day period following.\n\n* **Monthly**. Starting at midnight on the first day of each month, covering the entire calendar month following.\n\n* **Annually**. Starting at midnight on first day of each year covering the entire calendar year following.\navailable values: \"DAILY\", \"WEEKLY\", \"MONTHLY\", \"ANNUALLY\", \"AD_HOC\", \"MIXED\"",
 				Computed:    true,
 				Validators: []validator.String{
 					stringvalidator.OneOfCaseInsensitive(

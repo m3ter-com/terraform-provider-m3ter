@@ -49,7 +49,7 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
 						"id": schema.StringAttribute{
-							Description: "The UUID of the entity. ",
+							Description: "The UUID of the entity.",
 							Computed:    true,
 						},
 						"external_id": schema.StringAttribute{
@@ -57,15 +57,15 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Computed:    true,
 						},
 						"external_system": schema.StringAttribute{
-							Description: "The name of the external system where the entity you are mapping resides. ",
+							Description: "The name of the external system where the entity you are mapping resides.",
 							Computed:    true,
 						},
 						"external_table": schema.StringAttribute{
-							Description: "The name of the table in the external system where the entity resides. ",
+							Description: "The name of the table in the external system where the entity resides.",
 							Computed:    true,
 						},
 						"m3ter_entity": schema.StringAttribute{
-							Description: "The name of the m3ter entity that is part of the External Mapping. For example, this could be \"Account\". ",
+							Description: "The name of the m3ter entity that is part of the External Mapping. For example, this could be \"Account\".",
 							Computed:    true,
 						},
 						"m3ter_id": schema.StringAttribute{

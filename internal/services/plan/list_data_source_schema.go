@@ -32,7 +32,7 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 				ElementType: types.StringType,
 			},
 			"ids": schema.ListAttribute{
-				Description: "List of Plan IDs to retrieve. ",
+				Description: "List of Plan IDs to retrieve.",
 				Optional:    true,
 				ElementType: types.StringType,
 			},
@@ -50,7 +50,7 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
 						"id": schema.StringAttribute{
-							Description: "The UUID of the entity. ",
+							Description: "The UUID of the entity.",
 							Computed:    true,
 						},
 						"version": schema.Int64Attribute{
@@ -118,11 +118,11 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Computed:    true,
 						},
 						"plan_template_id": schema.StringAttribute{
-							Description: "UUID of the PlanTemplate the Plan belongs to. ",
+							Description: "UUID of the PlanTemplate the Plan belongs to.",
 							Computed:    true,
 						},
 						"product_id": schema.StringAttribute{
-							Description: "UUID of the Product the Plan belongs to. ",
+							Description: "UUID of the Product the Plan belongs to.",
 							Computed:    true,
 						},
 						"standing_charge": schema.Float64Attribute{

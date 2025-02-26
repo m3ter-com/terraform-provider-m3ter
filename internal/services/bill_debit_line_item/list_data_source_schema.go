@@ -38,11 +38,11 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
 						"id": schema.StringAttribute{
-							Description: "The UUID of the entity. ",
+							Description: "The UUID of the entity.",
 							Computed:    true,
 						},
 						"amount": schema.Float64Attribute{
-							Description: "The amount for the line item. ",
+							Description: "The amount for the line item.",
 							Computed:    true,
 						},
 						"description": schema.StringAttribute{
@@ -50,15 +50,15 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Computed:    true,
 						},
 						"product_id": schema.StringAttribute{
-							Description: "The UUID of the Product. ",
+							Description: "The UUID of the Product.",
 							Computed:    true,
 						},
 						"referenced_bill_id": schema.StringAttribute{
-							Description: "The UUID of the bill for the line item. ",
+							Description: "The UUID of the bill for the line item.",
 							Computed:    true,
 						},
 						"referenced_line_item_id": schema.StringAttribute{
-							Description: "The UUID of the line item. ",
+							Description: "The UUID of the line item.",
 							Computed:    true,
 						},
 						"service_period_end_date": schema.StringAttribute{

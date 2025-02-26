@@ -34,7 +34,8 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Computed:    true,
 			},
 			"aggregation_type": schema.StringAttribute{
-				Computed: true,
+				Description: "available values: \"SIMPLE\", \"COMPOUND\"",
+				Computed:    true,
 				Validators: []validator.String{
 					stringvalidator.OneOfCaseInsensitive("SIMPLE", "COMPOUND"),
 				},
@@ -111,7 +112,7 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Computed:    true,
 			},
 			"type": schema.StringAttribute{
-				Description: "* **DEBIT**. Default setting. The amount calculated using the Pricing is added to the bill as a debit.\n\n* **PRODUCT_CREDIT**. The amount calculated using the Pricing is added to the bill as a credit *(negative amount)*. To prevent negative billing, the bill will be capped at the total of other line items for the *same* Product.\n\n* **GLOBAL_CREDIT**. The amount calculated using the Pricing is added to the bill as a credit *(negative amount)*. To prevent negative billing, the bill will be capped at the total of other line items for the entire bill, which might include other Products the Account consumes.",
+				Description: "* **DEBIT**. Default setting. The amount calculated using the Pricing is added to the bill as a debit.\n\n* **PRODUCT_CREDIT**. The amount calculated using the Pricing is added to the bill as a credit *(negative amount)*. To prevent negative billing, the bill will be capped at the total of other line items for the *same* Product.\n\n* **GLOBAL_CREDIT**. The amount calculated using the Pricing is added to the bill as a credit *(negative amount)*. To prevent negative billing, the bill will be capped at the total of other line items for the entire bill, which might include other Products the Account consumes.\navailable values: \"DEBIT\", \"PRODUCT_CREDIT\", \"GLOBAL_CREDIT\"",
 				Computed:    true,
 				Validators: []validator.String{
 					stringvalidator.OneOfCaseInsensitive(
@@ -132,7 +133,7 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				ElementType: types.StringType,
 			},
 			"overage_pricing_bands": schema.ListNestedAttribute{
-				Description: "The Prepayment/Balance overage pricing in pricing bands for the case of a **Tiered** pricing structure. ",
+				Description: "The Prepayment/Balance overage pricing in pricing bands for the case of a **Tiered** pricing structure.",
 				Computed:    true,
 				CustomType:  customfield.NewNestedObjectListType[PricingOveragePricingBandsDataSourceModel](ctx),
 				NestedObject: schema.NestedAttributeObject{
@@ -157,7 +158,7 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 							Computed:    true,
 						},
 						"credit_type_id": schema.StringAttribute{
-							Description: "**OBSOLETE - this is deprecated and no longer used.** ",
+							Description: "**OBSOLETE - this is deprecated and no longer used.**",
 							Computed:    true,
 						},
 					},
@@ -188,7 +189,7 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 							Computed:    true,
 						},
 						"credit_type_id": schema.StringAttribute{
-							Description: "**OBSOLETE - this is deprecated and no longer used.** ",
+							Description: "**OBSOLETE - this is deprecated and no longer used.**",
 							Computed:    true,
 						},
 					},

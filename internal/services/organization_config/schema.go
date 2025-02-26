@@ -30,7 +30,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 	return schema.Schema{
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
-				Description:   "The UUID of the entity. ",
+				Description:   "The UUID of the entity.",
 				Computed:      true,
 				PlanModifiers: []planmodifier.String{stringplanmodifier.UseStateForUnknown(), stringplanmodifier.RequiresReplace()},
 			},
@@ -39,7 +39,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				PlanModifiers: []planmodifier.String{stringplanmodifier.RequiresReplace()},
 			},
 			"days_before_bill_due": schema.Int64Attribute{
-				Description: "Enter the number of days after the Bill generation date that you want to show on Bills as the due date.\n\n**Note:** If you define `daysBeforeBillDue` at individual Account level, this will take precedence over any `daysBeforeBillDue` setting defined at Organization level.\n\n",
+				Description: "Enter the number of days after the Bill generation date that you want to show on Bills as the due date.\n\n**Note:** If you define `daysBeforeBillDue` at individual Account level, this will take precedence over any `daysBeforeBillDue` setting defined at Organization level.",
 				Required:    true,
 				Validators: []validator.Int64{
 					int64validator.AtLeast(0),
@@ -60,7 +60,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				PlanModifiers: []planmodifier.String{stringplanmodifier.RequiresReplace()},
 			},
 			"auto_generate_statement_mode": schema.StringAttribute{
-				Description: "Specify whether to auto-generate statements once Bills are *approved* or *locked*. It will not auto-generate if a bill is in *pending* state.\n\nThe default value is **None**.\n\n- **None**. Statements will not be auto-generated.\n- **JSON**. Statements are auto-generated in JSON format.\n- **JSON and CSV**. Statements are auto-generated in both JSON and CSV formats. ",
+				Description: "Specify whether to auto-generate statements once Bills are *approved* or *locked*. It will not auto-generate if a bill is in *pending* state.\n\nThe default value is **None**.\n\n- **None**. Statements will not be auto-generated.\n- **JSON**. Statements are auto-generated in JSON format.\n- **JSON and CSV**. Statements are auto-generated in both JSON and CSV formats.\navailable values: \"NONE\", \"JSON\", \"JSON_AND_CSV\"",
 				Optional:    true,
 				Validators: []validator.String{
 					stringvalidator.OneOfCaseInsensitive(
@@ -87,7 +87,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				PlanModifiers: []planmodifier.Bool{boolplanmodifier.RequiresReplace()},
 			},
 			"default_statement_definition_id": schema.StringAttribute{
-				Description:   "Organization level default `statementDefinitionId` to be used when there is no statement definition linked to the account.\n\nStatement definitions are used to generate bill statements, which are informative backing sheets to invoices. ",
+				Description:   "Organization level default `statementDefinitionId` to be used when there is no statement definition linked to the account.\n\nStatement definitions are used to generate bill statements, which are informative backing sheets to invoices.",
 				Optional:      true,
 				PlanModifiers: []planmodifier.String{stringplanmodifier.RequiresReplace()},
 			},
@@ -117,7 +117,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				PlanModifiers: []planmodifier.Bool{boolplanmodifier.RequiresReplace()},
 			},
 			"suppressed_empty_bills": schema.BoolAttribute{
-				Description:   "Boolean setting that supresses generating bills that have no line items. \n\n* **TRUE** - prevents generating bills with no line items.\n* **FALSE** - bills are still generated even when they have no line items. ",
+				Description:   "Boolean setting that supresses generating bills that have no line items. \n\n* **TRUE** - prevents generating bills with no line items.\n* **FALSE** - bills are still generated even when they have no line items.",
 				Optional:      true,
 				PlanModifiers: []planmodifier.Bool{boolplanmodifier.RequiresReplace()},
 			},
@@ -159,7 +159,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				Default:       stringdefault.StaticString("2022-01-01"),
 			},
 			"timezone": schema.StringAttribute{
-				Description:   "Sets the timezone for the Organization. ",
+				Description:   "Sets the timezone for the Organization.",
 				Computed:      true,
 				Optional:      true,
 				PlanModifiers: []planmodifier.String{stringplanmodifier.RequiresReplace()},

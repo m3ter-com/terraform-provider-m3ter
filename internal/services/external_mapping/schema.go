@@ -18,7 +18,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 	return schema.Schema{
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
-				Description:   "The UUID of the entity. ",
+				Description:   "The UUID of the entity.",
 				Computed:      true,
 				PlanModifiers: []planmodifier.String{stringplanmodifier.UseStateForUnknown()},
 			},
@@ -27,23 +27,23 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				PlanModifiers: []planmodifier.String{stringplanmodifier.RequiresReplace()},
 			},
 			"external_id": schema.StringAttribute{
-				Description: "The unique identifier (UUID) of the entity in the external system. This UUID should already exist in the external system. ",
+				Description: "The unique identifier (UUID) of the entity in the external system. This UUID should already exist in the external system.",
 				Required:    true,
 			},
 			"external_system": schema.StringAttribute{
-				Description: "The name of the external system where the entity you are mapping resides. ",
+				Description: "The name of the external system where the entity you are mapping resides.",
 				Required:    true,
 			},
 			"external_table": schema.StringAttribute{
-				Description: "The name of the table in ther external system where the entity resides. ",
+				Description: "The name of the table in ther external system where the entity resides.",
 				Required:    true,
 			},
 			"m3ter_entity": schema.StringAttribute{
-				Description: "The name of the m3ter entity that you are creating or modifying an External Mapping for. As an example, this could be an \"Account\". ",
+				Description: "The name of the m3ter entity that you are creating or modifying an External Mapping for. As an example, this could be an \"Account\".",
 				Required:    true,
 			},
 			"m3ter_id": schema.StringAttribute{
-				Description: "The unique identifier (UUID) of the m3ter entity. ",
+				Description: "The unique identifier (UUID) of the m3ter entity.",
 				Required:    true,
 			},
 			"integration_config_id": schema.StringAttribute{

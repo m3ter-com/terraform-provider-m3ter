@@ -124,7 +124,7 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 							Computed:    true,
 						},
 						"credit_type_id": schema.StringAttribute{
-							Description: "**OBSOLETE - this is deprecated and no longer used.** ",
+							Description: "**OBSOLETE - this is deprecated and no longer used.**",
 							Computed:    true,
 						},
 					},

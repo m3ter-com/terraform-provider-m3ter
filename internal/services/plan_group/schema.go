@@ -21,7 +21,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 	return schema.Schema{
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
-				Description:   "The UUID of the entity. ",
+				Description:   "The UUID of the entity.",
 				Computed:      true,
 				PlanModifiers: []planmodifier.String{stringplanmodifier.UseStateForUnknown()},
 			},
@@ -46,7 +46,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				Optional:    true,
 			},
 			"minimum_spend": schema.Float64Attribute{
-				Description: "The minimum spend amount for the PlanGroup. ",
+				Description: "The minimum spend amount for the PlanGroup.",
 				Optional:    true,
 				Validators: []validator.Float64{
 					float64validator.AtLeast(0),

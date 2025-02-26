@@ -37,7 +37,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				Required:    true,
 			},
 			"credentials": schema.StringAttribute{
-				Description: "The credentials required for the webhook. ",
+				Description: "The credentials required for the webhook.",
 				Required:    true,
 				CustomType:  jsontypes.NormalizedType{},
 			},

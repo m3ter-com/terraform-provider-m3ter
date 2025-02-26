@@ -23,7 +23,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 	return schema.Schema{
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
-				Description:   "The UUID of the entity. ",
+				Description:   "The UUID of the entity.",
 				Computed:      true,
 				PlanModifiers: []planmodifier.String{stringplanmodifier.UseStateForUnknown()},
 			},
@@ -36,7 +36,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				Required:    true,
 			},
 			"currency": schema.StringAttribute{
-				Description: "The currency code used for the Balance amount. For example: USD, GBP or EUR. ",
+				Description: "The currency code used for the Balance amount. For example: USD, GBP or EUR.",
 				Required:    true,
 			},
 			"end_date": schema.StringAttribute{
@@ -50,7 +50,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				CustomType:  timetypes.RFC3339Type{},
 			},
 			"balance_draw_down_description": schema.StringAttribute{
-				Description: "A description for the bill line items for draw-down charges against the Balance. *(Optional).*\n",
+				Description: "A description for the bill line items for draw-down charges against the Balance. *(Optional).*",
 				Optional:    true,
 			},
 			"code": schema.StringAttribute{
@@ -70,7 +70,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				Optional:    true,
 			},
 			"name": schema.StringAttribute{
-				Description: "The official name for the Balance. ",
+				Description: "The official name for the Balance.",
 				Optional:    true,
 			},
 			"overage_description": schema.StringAttribute{
@@ -82,7 +82,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				Optional:    true,
 			},
 			"rollover_amount": schema.Float64Attribute{
-				Description: "The maximum amount that can be carried over past the Balance end date for draw-down at billing if there is any unused Balance amount when the end date is reached. Works with `rolloverEndDate` to define the amount and duration of a Balance \"grace period\". *(Optional)*\n\n**Notes:**\n- If you leave `rolloverAmount` empty and only enter a `rolloverEndDate`, any amount left over after the Balance end date is reached will be drawn-down against up to the specified `rolloverEndDate`.\n- You must enter a `rolloverEndDate`. If you only enter a `rolloverAmount` without entering a `rolloverEndDate`, you'll receive an error when trying to create or update the Balance.\n- If you don't want to grant any grace period for outstanding Balance amounts, then do not use `rolloverAmount` and `rolloverEndDate`. ",
+				Description: "The maximum amount that can be carried over past the Balance end date for draw-down at billing if there is any unused Balance amount when the end date is reached. Works with `rolloverEndDate` to define the amount and duration of a Balance \"grace period\". *(Optional)*\n\n**Notes:**\n- If you leave `rolloverAmount` empty and only enter a `rolloverEndDate`, any amount left over after the Balance end date is reached will be drawn-down against up to the specified `rolloverEndDate`.\n- You must enter a `rolloverEndDate`. If you only enter a `rolloverAmount` without entering a `rolloverEndDate`, you'll receive an error when trying to create or update the Balance.\n- If you don't want to grant any grace period for outstanding Balance amounts, then do not use `rolloverAmount` and `rolloverEndDate`.",
 				Optional:    true,
 				Validators: []validator.Float64{
 					float64validator.AtLeast(0),

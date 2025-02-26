@@ -49,7 +49,7 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
 						"id": schema.StringAttribute{
-							Description: "The UUID of the entity. ",
+							Description: "The UUID of the entity.",
 							Computed:    true,
 						},
 						"version": schema.Int64Attribute{
@@ -88,7 +88,7 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							},
 						},
 						"auto_generate_statement_mode": schema.StringAttribute{
-							Description: "Specify whether to auto-generate statements once Bills are approved or locked.\n\n- **None**. Statements will not be auto-generated.\n- **JSON**. Statements are auto-generated in JSON format.\n- **JSON and CSV**. Statements are auto-generated in both JSON and CSV formats. ",
+							Description: "Specify whether to auto-generate statements once Bills are approved or locked.\n\n- **None**. Statements will not be auto-generated.\n- **JSON**. Statements are auto-generated in JSON format.\n- **JSON and CSV**. Statements are auto-generated in both JSON and CSV formats.\navailable values: \"NONE\", \"JSON\", \"JSON_AND_CSV\"",
 							Computed:    true,
 							Validators: []validator.String{
 								stringvalidator.OneOfCaseInsensitive(
