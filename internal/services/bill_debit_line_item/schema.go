@@ -21,7 +21,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 	return schema.Schema{
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
-				Description:   "The UUID of the entity. ",
+				Description:   "The UUID of the entity.",
 				Computed:      true,
 				PlanModifiers: []planmodifier.String{stringplanmodifier.UseStateForUnknown()},
 			},
@@ -49,7 +49,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				Required:    true,
 			},
 			"referenced_bill_id": schema.StringAttribute{
-				Description: "The UUID of the bill for the line item. ",
+				Description: "The UUID of the bill for the line item.",
 				Required:    true,
 			},
 			"referenced_line_item_id": schema.StringAttribute{
@@ -71,7 +71,8 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				Optional:    true,
 			},
 			"line_item_type": schema.StringAttribute{
-				Optional: true,
+				Description: "available values: \"STANDING_CHARGE\", \"USAGE\", \"COUNTER_RUNNING_TOTAL_CHARGE\", \"COUNTER_ADJUSTMENT_DEBIT\", \"COUNTER_ADJUSTMENT_CREDIT\", \"USAGE_CREDIT\", \"MINIMUM_SPEND\", \"MINIMUM_SPEND_REFUND\", \"CREDIT_DEDUCTION\", \"MANUAL_ADJUSTMENT\", \"CREDIT_MEMO\", \"DEBIT_MEMO\", \"COMMITMENT_CONSUMED\", \"COMMITMENT_FEE\", \"OVERAGE_SURCHARGE\", \"OVERAGE_USAGE\", \"BALANCE_CONSUMED\", \"BALANCE_FEE\"",
+				Optional:    true,
 				Validators: []validator.String{
 					stringvalidator.OneOfCaseInsensitive(
 						"STANDING_CHARGE",

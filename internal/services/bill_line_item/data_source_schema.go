@@ -29,7 +29,7 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Required: true,
 			},
 			"aggregation_id": schema.StringAttribute{
-				Description: "A unique identifier (UUID) for the Aggregation that contributes to this Bill line item. ",
+				Description: "A unique identifier (UUID) for the Aggregation that contributes to this Bill line item.",
 				Computed:    true,
 			},
 			"average_unit_price": schema.Float64Attribute{
@@ -40,7 +40,7 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Computed: true,
 			},
 			"commitment_id": schema.StringAttribute{
-				Description: "The unique identifier (UUID) of the Commitment *(if this is used)*. ",
+				Description: "The unique identifier (UUID) of the Commitment *(if this is used)*.",
 				Computed:    true,
 			},
 			"compound_aggregation_id": schema.StringAttribute{
@@ -48,7 +48,7 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Computed:    true,
 			},
 			"contract_id": schema.StringAttribute{
-				Description: "The unique identifier (UUID) for the contract associated with this line item. ",
+				Description: "The unique identifier (UUID) for the contract associated with this line item.",
 				Computed:    true,
 			},
 			"conversion_rate": schema.Float64Attribute{
@@ -71,7 +71,7 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Computed:    true,
 			},
 			"currency": schema.StringAttribute{
-				Description: "The currency in which the line item is billed, represented as a currency code. For example, USD, GBP, or EUR. ",
+				Description: "The currency in which the line item is billed, represented as a currency code. For example, USD, GBP, or EUR.",
 				Computed:    true,
 			},
 			"description": schema.StringAttribute{
@@ -97,7 +97,8 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Computed:    true,
 			},
 			"line_item_type": schema.StringAttribute{
-				Computed: true,
+				Description: "available values: \"STANDING_CHARGE\", \"USAGE\", \"COUNTER_RUNNING_TOTAL_CHARGE\", \"COUNTER_ADJUSTMENT_DEBIT\", \"COUNTER_ADJUSTMENT_CREDIT\", \"USAGE_CREDIT\", \"MINIMUM_SPEND\", \"MINIMUM_SPEND_REFUND\", \"CREDIT_DEDUCTION\", \"MANUAL_ADJUSTMENT\", \"CREDIT_MEMO\", \"DEBIT_MEMO\", \"COMMITMENT_CONSUMED\", \"COMMITMENT_FEE\", \"OVERAGE_SURCHARGE\", \"OVERAGE_USAGE\", \"BALANCE_CONSUMED\", \"BALANCE_FEE\"",
+				Computed:    true,
 				Validators: []validator.String{
 					stringvalidator.OneOfCaseInsensitive(
 						"STANDING_CHARGE",
@@ -122,7 +123,7 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				},
 			},
 			"meter_id": schema.StringAttribute{
-				Description: "The unique identifier (UUID) of the Meter responsible for tracking usage. ",
+				Description: "The unique identifier (UUID) of the Meter responsible for tracking usage.",
 				Computed:    true,
 			},
 			"plan_group_id": schema.StringAttribute{
@@ -130,22 +131,22 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Computed:    true,
 			},
 			"plan_id": schema.StringAttribute{
-				Description: "A unique identifier (UUID) for the billing Plan associated with this line item, ",
+				Description: "A unique identifier (UUID) for the billing Plan associated with this line item,",
 				Computed:    true,
 			},
 			"pricing_id": schema.StringAttribute{
-				Description: "The unique identifier (UUID) of the Pricing used for this line item, ",
+				Description: "The unique identifier (UUID) of the Pricing used for this line item,",
 				Computed:    true,
 			},
 			"product_code": schema.StringAttribute{
 				Computed: true,
 			},
 			"product_id": schema.StringAttribute{
-				Description: "The unique identifier (UUID) for the associated Product. ",
+				Description: "The unique identifier (UUID) for the associated Product.",
 				Computed:    true,
 			},
 			"product_name": schema.StringAttribute{
-				Description: "The name of the Product associated with this line item. ",
+				Description: "The name of the Product associated with this line item.",
 				Computed:    true,
 			},
 			"quantity": schema.Float64Attribute{
@@ -153,7 +154,7 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Computed:    true,
 			},
 			"reason_id": schema.StringAttribute{
-				Description: "The UUID of the reason used for the line item. \n\nA unique identifier (UUID) for the reason or justification for this line item, if applicable. ",
+				Description: "The UUID of the reason used for the line item. \n\nA unique identifier (UUID) for the reason or justification for this line item, if applicable.",
 				Computed:    true,
 			},
 			"referenced_bill_id": schema.StringAttribute{
@@ -165,7 +166,7 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Computed:    true,
 			},
 			"sequence_number": schema.Int64Attribute{
-				Description: "The number used for sequential invoices. ",
+				Description: "The number used for sequential invoices.",
 				Computed:    true,
 			},
 			"service_period_end_date": schema.StringAttribute{
@@ -174,7 +175,7 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				CustomType:  timetypes.RFC3339Type{},
 			},
 			"service_period_start_date": schema.StringAttribute{
-				Description: "The *(inclusive)* start date for the service period in ISO 8601 format. ",
+				Description: "The *(inclusive)* start date for the service period in ISO 8601 format.",
 				Computed:    true,
 				CustomType:  timetypes.RFC3339Type{},
 			},
@@ -183,7 +184,7 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Computed:    true,
 			},
 			"unit": schema.StringAttribute{
-				Description: "Specifies the unit type. For example: **MB**, **GB**, **api_calls**, and so on.  ",
+				Description: "Specifies the unit type. For example: **MB**, **GB**, **api_calls**, and so on.",
 				Computed:    true,
 			},
 			"units": schema.Float64Attribute{
@@ -207,15 +208,15 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
 						"band_quantity": schema.Float64Attribute{
-							Description: "Usage amount within the band. ",
+							Description: "Usage amount within the band.",
 							Computed:    true,
 						},
 						"band_subtotal": schema.Float64Attribute{
-							Description: "Subtotal amount for the band. ",
+							Description: "Subtotal amount for the band.",
 							Computed:    true,
 						},
 						"band_units": schema.Float64Attribute{
-							Description: "The number of units used within the band. ",
+							Description: "The number of units used within the band.",
 							Computed:    true,
 						},
 						"credit_type_id": schema.StringAttribute{
@@ -223,7 +224,7 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 							Computed:    true,
 						},
 						"fixed_price": schema.Float64Attribute{
-							Description: "Fixed price is a charge entered for certain pricing types such as Stairstep, Custom Tiered, and Custom Volume. It is a set price and not dependent on usage.\n\n\n",
+							Description: "Fixed price is a charge entered for certain pricing types such as Stairstep, Custom Tiered, and Custom Volume. It is a set price and not dependent on usage.",
 							Computed:    true,
 						},
 						"lower_limit": schema.Float64Attribute{
@@ -231,15 +232,15 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 							Computed:    true,
 						},
 						"pricing_band_id": schema.StringAttribute{
-							Description: "The UUID for the pricing band. ",
+							Description: "The UUID for the pricing band.",
 							Computed:    true,
 						},
 						"unit_price": schema.Float64Attribute{
-							Description: "The price per unit in the band. ",
+							Description: "The price per unit in the band.",
 							Computed:    true,
 						},
 						"unit_subtotal": schema.Float64Attribute{
-							Description: "The subtotal of the unit usage. ",
+							Description: "The subtotal of the unit usage.",
 							Computed:    true,
 						},
 					},

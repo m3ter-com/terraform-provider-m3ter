@@ -46,7 +46,7 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
 						"id": schema.StringAttribute{
-							Description: "The UUID of the entity. ",
+							Description: "The UUID of the entity.",
 							Computed:    true,
 						},
 						"version": schema.Int64Attribute{
@@ -75,7 +75,7 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							ElementType: types.StringType,
 						},
 						"billing_frequency": schema.StringAttribute{
-							Description: "Defines how often Bills are generated.\n\n* **Daily**. Starting at midnight each day, covering a twenty-four hour period following.\n\n* **Weekly**. Starting at midnight on a Monday morning covering the seven-day period following.\n\n* **Monthly**. Starting at midnight on the morning of the first day of each month covering the entire calendar month following.\n\n* **Annually**. Starting at midnight on the morning of the first day of each year covering the entire calendar year following.\n\n* **Ad_Hoc**. Use this setting when a custom billing schedule is used for billing an Account, such as for billing of Prepayment/Commitment fees using a custom billing schedule.\n",
+							Description: "Defines how often Bills are generated.\n\n* **Daily**. Starting at midnight each day, covering a twenty-four hour period following.\n\n* **Weekly**. Starting at midnight on a Monday morning covering the seven-day period following.\n\n* **Monthly**. Starting at midnight on the morning of the first day of each month covering the entire calendar month following.\n\n* **Annually**. Starting at midnight on the morning of the first day of each year covering the entire calendar year following.\n\n* **Ad_Hoc**. Use this setting when a custom billing schedule is used for billing an Account, such as for billing of Prepayment/Commitment fees using a custom billing schedule.\navailable values: \"DAILY\", \"WEEKLY\", \"MONTHLY\", \"ANNUALLY\", \"AD_HOC\"",
 							Computed:    true,
 							Validators: []validator.String{
 								stringvalidator.OneOfCaseInsensitive(
@@ -136,7 +136,7 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							CustomType:  timetypes.RFC3339Type{},
 						},
 						"external_invoice_date": schema.StringAttribute{
-							Description: "For accounting purposes, the date set at Organization level to use for external invoicing with respect to billing periods - two options:\n* `FIRST_DAY_OF_NEXT_PERIOD` *(Default)*. Used when you want to recognize usage revenue in the following period.\n* `LAST_DAY_OF_ARREARS`. Used when you want to recognize usage revenue in the same period that it's consumed, instead of in the following period.\n\nFor example, if the retrieved Bill was on a monthly billing frequency and the billing period for the Bill is September 2023 and the *External invoice date* is set at `FIRST_DAY_OF_NEXT_PERIOD`, then the `externalInvoiceDate` will be `\"2023-10-01\"`. ",
+							Description: "For accounting purposes, the date set at Organization level to use for external invoicing with respect to billing periods - two options:\n* `FIRST_DAY_OF_NEXT_PERIOD` *(Default)*. Used when you want to recognize usage revenue in the following period.\n* `LAST_DAY_OF_ARREARS`. Used when you want to recognize usage revenue in the same period that it's consumed, instead of in the following period.\n\nFor example, if the retrieved Bill was on a monthly billing frequency and the billing period for the Bill is September 2023 and the *External invoice date* is set at `FIRST_DAY_OF_NEXT_PERIOD`, then the `externalInvoiceDate` will be `\"2023-10-01\"`.",
 							Computed:    true,
 							CustomType:  timetypes.RFC3339Type{},
 						},
@@ -159,7 +159,7 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Computed:    true,
 						},
 						"status": schema.StringAttribute{
-							Description: "The current status of the BillJob, indicating its progress or completion state.",
+							Description: "The current status of the BillJob, indicating its progress or completion state.\navailable values: \"PENDING\", \"INITIALIZING\", \"RUNNING\", \"COMPLETE\", \"CANCELLED\"",
 							Computed:    true,
 							Validators: []validator.String{
 								stringvalidator.OneOfCaseInsensitive(
@@ -184,7 +184,7 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Computed:    true,
 						},
 						"type": schema.StringAttribute{
-							Description: "Specifies the type of BillJob. \n\n* **CREATE** Returned for a *Create BillJob* call.\n* **RECALCULATE** Returned for a successful *Create Recalculation BillJob* call.",
+							Description: "Specifies the type of BillJob. \n\n* **CREATE** Returned for a *Create BillJob* call.\n* **RECALCULATE** Returned for a successful *Create Recalculation BillJob* call.\navailable values: \"CREATE\", \"RECALCULATE\"",
 							Computed:    true,
 							Validators: []validator.String{
 								stringvalidator.OneOfCaseInsensitive("CREATE", "RECALCULATE"),

@@ -64,7 +64,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 							ElementType: types.StringType,
 						},
 						"effect": schema.StringAttribute{
-							Description: "Specifies whether or not the user is allowed to perform the action on the resource.\n\n**NOTE:** Use lower case, for example: `\"allow\"`. If you use upper case, you'll receive an error.",
+							Description: "Specifies whether or not the user is allowed to perform the action on the resource.\n\n**NOTE:** Use lower case, for example: `\"allow\"`. If you use upper case, you'll receive an error.\navailable values: \"ALLOW\", \"DENY\"",
 							Required:    true,
 							Validators: []validator.String{
 								stringvalidator.OneOfCaseInsensitive("ALLOW", "DENY"),
@@ -79,7 +79,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				},
 			},
 			"version": schema.Int64Attribute{
-				Description: "The version number of the entity:\n* **Create entity:** Not valid for initial insertion of new entity - do not use for Create. On initial Create, version is set at 1 and listed in the response.\n* **Update Entity:** On Update, version is required and must match the existing version because a check is performed to ensure sequential versioning is preserved. Version is incremented by 1 and listed in the response.\n\n",
+				Description: "The version number of the entity:\n* **Create entity:** Not valid for initial insertion of new entity - do not use for Create. On initial Create, version is set at 1 and listed in the response.\n* **Update Entity:** On Update, version is required and must match the existing version because a check is performed to ensure sequential versioning is preserved. Version is incremented by 1 and listed in the response.",
 				Optional:    true,
 			},
 			"created_by": schema.StringAttribute{
@@ -101,7 +101,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				Computed:    true,
 			},
 			"managed_policy": schema.BoolAttribute{
-				Description: "Indicates whether this is a system generated Managed Permission Policy. ",
+				Description: "Indicates whether this is a system generated Managed Permission Policy.",
 				Computed:    true,
 			},
 		},

@@ -70,11 +70,11 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							CustomType:  timetypes.RFC3339Type{},
 						},
 						"email": schema.StringAttribute{
-							Description: "The email address for this user. ",
+							Description: "The email address for this user.",
 							Computed:    true,
 						},
 						"first_accepted_terms_and_conditions": schema.StringAttribute{
-							Description: "The date and time *(in ISO 8601 format)* when this user first accepted the the m3ter terms and conditions.  ",
+							Description: "The date and time *(in ISO 8601 format)* when this user first accepted the the m3ter terms and conditions.",
 							Computed:    true,
 							CustomType:  timetypes.RFC3339Type{},
 						},
@@ -83,7 +83,7 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Computed:    true,
 						},
 						"last_accepted_terms_and_conditions": schema.StringAttribute{
-							Description: "The date and time *(in ISO 8601 format)* when this user last accepted the the m3ter terms and conditions.  ",
+							Description: "The date and time *(in ISO 8601 format)* when this user last accepted the the m3ter terms and conditions.",
 							Computed:    true,
 							CustomType:  timetypes.RFC3339Type{},
 						},
@@ -92,7 +92,7 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Computed:    true,
 						},
 						"last_name": schema.StringAttribute{
-							Description: "The surname of the user. ",
+							Description: "The surname of the user.",
 							Computed:    true,
 						},
 						"organizations": schema.ListAttribute{
@@ -135,7 +135,7 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 										ElementType: types.StringType,
 									},
 									"effect": schema.StringAttribute{
-										Description: "Specifies whether or not the user is allowed to perform the action on the resource.\n\n**NOTE:** Use lower case, for example: `\"allow\"`. If you use upper case, you'll receive an error.",
+										Description: "Specifies whether or not the user is allowed to perform the action on the resource.\n\n**NOTE:** Use lower case, for example: `\"allow\"`. If you use upper case, you'll receive an error.\navailable values: \"ALLOW\", \"DENY\"",
 										Computed:    true,
 										Validators: []validator.String{
 											stringvalidator.OneOfCaseInsensitive("ALLOW", "DENY"),
@@ -151,11 +151,11 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							},
 						},
 						"support_user": schema.BoolAttribute{
-							Description: "Indicates whether this is a m3ter Support user. ",
+							Description: "Indicates whether this is a m3ter Support user.",
 							Computed:    true,
 						},
 						"version": schema.Int64Attribute{
-							Description: "The version number:\n\n- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.\n- **Update:** On successful Update, the version is incremented by 1 in the response.\n",
+							Description: "The version number:\n\n- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.\n- **Update:** On successful Update, the version is incremented by 1 in the response.",
 							Computed:    true,
 						},
 					},

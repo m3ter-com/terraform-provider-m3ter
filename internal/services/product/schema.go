@@ -19,7 +19,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 	return schema.Schema{
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
-				Description:   "The UUID of the entity. ",
+				Description:   "The UUID of the entity.",
 				Computed:      true,
 				PlanModifiers: []planmodifier.String{stringplanmodifier.UseStateForUnknown()},
 			},
@@ -28,7 +28,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				PlanModifiers: []planmodifier.String{stringplanmodifier.RequiresReplace()},
 			},
 			"code": schema.StringAttribute{
-				Description: "A unique short code to identify the Product. It should not contain control chracters or spaces. ",
+				Description: "A unique short code to identify the Product. It should not contain control chracters or spaces.",
 				Required:    true,
 			},
 			"name": schema.StringAttribute{

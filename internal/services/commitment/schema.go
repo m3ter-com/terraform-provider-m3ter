@@ -25,7 +25,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 	return schema.Schema{
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
-				Description:   "The UUID of the entity. ",
+				Description:   "The UUID of the entity.",
 				Computed:      true,
 				PlanModifiers: []planmodifier.String{stringplanmodifier.UseStateForUnknown()},
 			},
@@ -45,7 +45,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				},
 			},
 			"currency": schema.StringAttribute{
-				Description: "The currency used for the Commitment. For example: USD. ",
+				Description: "The currency used for the Commitment. For example: USD.",
 				Required:    true,
 			},
 			"end_date": schema.StringAttribute{
@@ -59,7 +59,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				CustomType:  timetypes.RFC3339Type{},
 			},
 			"accounting_product_id": schema.StringAttribute{
-				Description: "The unique identifier (UUID) for the Product linked to the Commitment for accounting purposes. *(Optional)* ",
+				Description: "The unique identifier (UUID) for the Product linked to the Commitment for accounting purposes. *(Optional)*",
 				Optional:    true,
 			},
 			"amount_first_bill": schema.Float64Attribute{
@@ -100,7 +100,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				Optional:    true,
 			},
 			"child_billing_mode": schema.StringAttribute{
-				Description: "If the Account is either a Parent or a Child Account, this specifies the Account hierarchy billing mode. The mode determines how billing will be handled and shown on bills for charges due on the Parent Account, and charges due on Child Accounts:\n\n* **Parent Breakdown** - a separate bill line item per Account. Default setting.\n\n* **Parent Summary** - single bill line item for all Accounts.\n\n* **Child** - the Child Account is billed.",
+				Description: "If the Account is either a Parent or a Child Account, this specifies the Account hierarchy billing mode. The mode determines how billing will be handled and shown on bills for charges due on the Parent Account, and charges due on Child Accounts:\n\n* **Parent Breakdown** - a separate bill line item per Account. Default setting.\n\n* **Parent Summary** - single bill line item for all Accounts.\n\n* **Child** - the Child Account is billed.\navailable values: \"PARENT_SUMMARY\", \"PARENT_BREAKDOWN\", \"CHILD\"",
 				Optional:    true,
 				Validators: []validator.String{
 					stringvalidator.OneOfCaseInsensitive(

@@ -45,7 +45,7 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Computed:    true,
 			},
 			"managed_policy": schema.BoolAttribute{
-				Description: "Indicates whether this is a system generated Managed Permission Policy. ",
+				Description: "Indicates whether this is a system generated Managed Permission Policy.",
 				Computed:    true,
 			},
 			"name": schema.StringAttribute{
@@ -57,7 +57,7 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Computed:    true,
 			},
 			"permission_policy": schema.ListNestedAttribute{
-				Description: "Array containing the Permission Policies information. ",
+				Description: "Array containing the Permission Policies information.",
 				Computed:    true,
 				CustomType:  customfield.NewNestedObjectListType[PermissionPolicyPermissionPolicyDataSourceModel](ctx),
 				NestedObject: schema.NestedAttributeObject{
@@ -90,7 +90,7 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 							ElementType: types.StringType,
 						},
 						"effect": schema.StringAttribute{
-							Description: "Specifies whether or not the user is allowed to perform the action on the resource.\n\n**NOTE:** Use lower case, for example: `\"allow\"`. If you use upper case, you'll receive an error.",
+							Description: "Specifies whether or not the user is allowed to perform the action on the resource.\n\n**NOTE:** Use lower case, for example: `\"allow\"`. If you use upper case, you'll receive an error.\navailable values: \"ALLOW\", \"DENY\"",
 							Computed:    true,
 							Validators: []validator.String{
 								stringvalidator.OneOfCaseInsensitive("ALLOW", "DENY"),

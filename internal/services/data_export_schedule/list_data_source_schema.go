@@ -74,7 +74,8 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							CustomType:  timetypes.RFC3339Type{},
 						},
 						"export_file_format": schema.StringAttribute{
-							Computed: true,
+							Description: "available values: \"CSV\", \"JSON\"",
+							Computed:    true,
 							Validators: []validator.String{
 								stringvalidator.OneOfCaseInsensitive("CSV", "JSON"),
 							},
@@ -92,7 +93,8 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Computed:    true,
 						},
 						"schedule_type": schema.StringAttribute{
-							Computed: true,
+							Description: "available values: \"HOURLY\", \"DAILY\", \"AD_HOC\"",
+							Computed:    true,
 							Validators: []validator.String{
 								stringvalidator.OneOfCaseInsensitive(
 									"HOURLY",
@@ -102,7 +104,8 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							},
 						},
 						"source_type": schema.StringAttribute{
-							Computed: true,
+							Description: "available values: \"USAGE\", \"OPERATIONAL\"",
+							Computed:    true,
 							Validators: []validator.String{
 								stringvalidator.OneOfCaseInsensitive("USAGE", "OPERATIONAL"),
 							},

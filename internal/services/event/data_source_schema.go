@@ -37,7 +37,7 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				CustomType:  timetypes.RFC3339Type{},
 			},
 			"m3ter_event": schema.StringAttribute{
-				Description: "The Data Transfer Object (DTO) containing the details of the Event. ",
+				Description: "The Data Transfer Object (DTO) containing the details of the Event.",
 				Computed:    true,
 				CustomType:  jsontypes.NormalizedType{},
 			},

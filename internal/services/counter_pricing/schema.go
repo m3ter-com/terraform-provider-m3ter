@@ -20,7 +20,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 	return schema.Schema{
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
-				Description:   "The UUID of the entity. ",
+				Description:   "The UUID of the entity.",
 				Computed:      true,
 				PlanModifiers: []planmodifier.String{stringplanmodifier.UseStateForUnknown()},
 			},
@@ -61,7 +61,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 							Optional:    true,
 						},
 						"credit_type_id": schema.StringAttribute{
-							Description: "**OBSOLETE - this is deprecated and no longer used.** ",
+							Description: "**OBSOLETE - this is deprecated and no longer used.**",
 							Optional:    true,
 						},
 					},

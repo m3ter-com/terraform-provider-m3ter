@@ -22,7 +22,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 	return schema.Schema{
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
-				Description:   "The UUID of the entity. ",
+				Description:   "The UUID of the entity.",
 				Computed:      true,
 				PlanModifiers: []planmodifier.String{stringplanmodifier.UseStateForUnknown()},
 			},
@@ -39,7 +39,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				Required:    true,
 			},
 			"plan_template_id": schema.StringAttribute{
-				Description: "UUID of the PlanTemplate the Plan belongs to. ",
+				Description: "UUID of the PlanTemplate the Plan belongs to.",
 				Required:    true,
 			},
 			"account_id": schema.StringAttribute{
@@ -123,7 +123,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				Computed:    true,
 			},
 			"product_id": schema.StringAttribute{
-				Description: "UUID of the Product the Plan belongs to. ",
+				Description: "UUID of the Product the Plan belongs to.",
 				Computed:    true,
 			},
 		},

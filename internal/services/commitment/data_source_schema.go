@@ -28,11 +28,11 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Required: true,
 			},
 			"account_id": schema.StringAttribute{
-				Description: "The unique identifier (UUID) for the end customer Account the Commitment is added to. ",
+				Description: "The unique identifier (UUID) for the end customer Account the Commitment is added to.",
 				Computed:    true,
 			},
 			"accounting_product_id": schema.StringAttribute{
-				Description: "The unique identifier (UUID) for the Product linked to the Commitment for accounting purposes.\n",
+				Description: "The unique identifier (UUID) for the Product linked to the Commitment for accounting purposes.",
 				Computed:    true,
 			},
 			"amount": schema.Float64Attribute{
@@ -69,7 +69,7 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Computed:    true,
 			},
 			"child_billing_mode": schema.StringAttribute{
-				Description: "If the Account is either a Parent or a Child Account, this specifies the Account hierarchy billing mode. The mode determines how billing will be handled and shown on bills for charges due on the Parent Account, and charges due on Child Accounts:\n\n* **Parent Breakdown** - a separate bill line item per Account. Default setting.\n\n* **Parent Summary** - single bill line item for all Accounts.\n\n* **Child** - the Child Account is billed.",
+				Description: "If the Account is either a Parent or a Child Account, this specifies the Account hierarchy billing mode. The mode determines how billing will be handled and shown on bills for charges due on the Parent Account, and charges due on Child Accounts:\n\n* **Parent Breakdown** - a separate bill line item per Account. Default setting.\n\n* **Parent Summary** - single bill line item for all Accounts.\n\n* **Child** - the Child Account is billed.\navailable values: \"PARENT_SUMMARY\", \"PARENT_BREAKDOWN\", \"CHILD\"",
 				Computed:    true,
 				Validators: []validator.String{
 					stringvalidator.OneOfCaseInsensitive(
@@ -137,7 +137,7 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Computed:    true,
 			},
 			"separate_overage_usage": schema.BoolAttribute{
-				Description: "A boolean value indicating whether the overage usage is billed separately or together. If overage usage is separated and a Commitment amount has been consumed by an Account, any subsequent line items on Bills against the Account for usage will show as separate \"overage usage\" charges, not simply as \"usage\" charges:\n\n* **TRUE** - billed separately.\n* **FALSE** - billed together. ",
+				Description: "A boolean value indicating whether the overage usage is billed separately or together. If overage usage is separated and a Commitment amount has been consumed by an Account, any subsequent line items on Bills against the Account for usage will show as separate \"overage usage\" charges, not simply as \"usage\" charges:\n\n* **TRUE** - billed separately.\n* **FALSE** - billed together.",
 				Computed:    true,
 			},
 			"start_date": schema.StringAttribute{

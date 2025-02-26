@@ -33,7 +33,8 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Computed:    true,
 			},
 			"source_type": schema.StringAttribute{
-				Computed: true,
+				Description: "available values: \"USAGE\", \"OPERATIONAL\"",
+				Computed:    true,
 				Validators: []validator.String{
 					stringvalidator.OneOfCaseInsensitive("USAGE", "OPERATIONAL"),
 				},
@@ -44,7 +45,8 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				CustomType:  timetypes.RFC3339Type{},
 			},
 			"status": schema.StringAttribute{
-				Computed: true,
+				Description: "available values: \"PENDING\", \"RUNNING\", \"SUCCEEDED\", \"FAILED\"",
+				Computed:    true,
 				Validators: []validator.String{
 					stringvalidator.OneOfCaseInsensitive(
 						"PENDING",

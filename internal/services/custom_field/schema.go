@@ -21,7 +21,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 	return schema.Schema{
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
-				Description:   "The UUID of the entity. ",
+				Description:   "The UUID of the entity.",
 				Computed:      true,
 				PlanModifiers: []planmodifier.String{stringplanmodifier.UseStateForUnknown(), stringplanmodifier.RequiresReplace()},
 			},
@@ -35,55 +35,55 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				PlanModifiers: []planmodifier.Int64{int64planmodifier.RequiresReplace()},
 			},
 			"account": schema.MapAttribute{
-				Description:   "Updates to Account entity CustomFields. ",
+				Description:   "Updates to Account entity CustomFields.",
 				Optional:      true,
 				ElementType:   jsontypes.NormalizedType{},
 				PlanModifiers: []planmodifier.Map{mapplanmodifier.RequiresReplace()},
 			},
 			"account_plan": schema.MapAttribute{
-				Description:   "Updates to accountPlan entity CustomFields. ",
+				Description:   "Updates to accountPlan entity CustomFields.",
 				Optional:      true,
 				ElementType:   jsontypes.NormalizedType{},
 				PlanModifiers: []planmodifier.Map{mapplanmodifier.RequiresReplace()},
 			},
 			"aggregation": schema.MapAttribute{
-				Description:   "Updates to simple Aggregation entity CustomFields. ",
+				Description:   "Updates to simple Aggregation entity CustomFields.",
 				Optional:      true,
 				ElementType:   jsontypes.NormalizedType{},
 				PlanModifiers: []planmodifier.Map{mapplanmodifier.RequiresReplace()},
 			},
 			"compound_aggregation": schema.MapAttribute{
-				Description:   "Updates to Compound Aggregation entity CustomFields. ",
+				Description:   "Updates to Compound Aggregation entity CustomFields.",
 				Optional:      true,
 				ElementType:   jsontypes.NormalizedType{},
 				PlanModifiers: []planmodifier.Map{mapplanmodifier.RequiresReplace()},
 			},
 			"meter": schema.MapAttribute{
-				Description:   "Updates to Meter entity CustomFields. ",
+				Description:   "Updates to Meter entity CustomFields.",
 				Optional:      true,
 				ElementType:   jsontypes.NormalizedType{},
 				PlanModifiers: []planmodifier.Map{mapplanmodifier.RequiresReplace()},
 			},
 			"organization": schema.MapAttribute{
-				Description:   "Updates to Organization CustomFields. ",
+				Description:   "Updates to Organization CustomFields.",
 				Optional:      true,
 				ElementType:   jsontypes.NormalizedType{},
 				PlanModifiers: []planmodifier.Map{mapplanmodifier.RequiresReplace()},
 			},
 			"plan": schema.MapAttribute{
-				Description:   "Updates to Plan entity CustomFields. ",
+				Description:   "Updates to Plan entity CustomFields.",
 				Optional:      true,
 				ElementType:   jsontypes.NormalizedType{},
 				PlanModifiers: []planmodifier.Map{mapplanmodifier.RequiresReplace()},
 			},
 			"plan_template": schema.MapAttribute{
-				Description:   "Updates to planTemplate entity CustomFields. ",
+				Description:   "Updates to planTemplate entity CustomFields.",
 				Optional:      true,
 				ElementType:   jsontypes.NormalizedType{},
 				PlanModifiers: []planmodifier.Map{mapplanmodifier.RequiresReplace()},
 			},
 			"product": schema.MapAttribute{
-				Description:   "Updates to Product entity CustomFields. ",
+				Description:   "Updates to Product entity CustomFields.",
 				Optional:      true,
 				ElementType:   jsontypes.NormalizedType{},
 				PlanModifiers: []planmodifier.Map{mapplanmodifier.RequiresReplace()},

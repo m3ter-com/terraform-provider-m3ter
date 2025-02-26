@@ -29,7 +29,7 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Computed:    true,
 			},
 			"auto_approve_bills_grace_period_unit": schema.StringAttribute{
-				Description: " ",
+				Description: "available values: \"MINUTES\", \"HOURS\", \"DAYS\"",
 				Computed:    true,
 				Validators: []validator.String{
 					stringvalidator.OneOfCaseInsensitive(
@@ -40,7 +40,7 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				},
 			},
 			"auto_generate_statement_mode": schema.StringAttribute{
-				Description: "Specifies whether to auto-generate statements once Bills are *approved* or *locked*. It will not auto-generate if a bill is in *pending* state.\n\nThe default value is **None**.\n\n- **None**. Statements will not be auto-generated.\n- **JSON**. Statements are auto-generated in JSON format.\n- **JSON and CSV**. Statements are auto-generated in both JSON and CSV formats. ",
+				Description: "Specifies whether to auto-generate statements once Bills are *approved* or *locked*. It will not auto-generate if a bill is in *pending* state.\n\nThe default value is **None**.\n\n- **None**. Statements will not be auto-generated.\n- **JSON**. Statements are auto-generated in JSON format.\n- **JSON and CSV**. Statements are auto-generated in both JSON and CSV formats.\navailable values: \"NONE\", \"JSON\", \"JSON_AND_CSV\"",
 				Computed:    true,
 				Validators: []validator.String{
 					stringvalidator.OneOfCaseInsensitive(
@@ -80,7 +80,7 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Computed:    true,
 			},
 			"default_statement_definition_id": schema.StringAttribute{
-				Description: "Organization level default `statementDefinitionId` to be used when there is no statement definition linked to the account.\n\nStatement definitions are used to generate bill statements, which are informative backing sheets to invoices. ",
+				Description: "Organization level default `statementDefinitionId` to be used when there is no statement definition linked to the account.\n\nStatement definitions are used to generate bill statements, which are informative backing sheets to invoices.",
 				Computed:    true,
 			},
 			"dt_created": schema.StringAttribute{
@@ -94,13 +94,14 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				CustomType:  timetypes.RFC3339Type{},
 			},
 			"external_invoice_date": schema.StringAttribute{
-				Computed: true,
+				Description: "available values: \"LAST_DAY_OF_ARREARS\", \"FIRST_DAY_OF_NEXT_PERIOD\"",
+				Computed:    true,
 				Validators: []validator.String{
 					stringvalidator.OneOfCaseInsensitive("LAST_DAY_OF_ARREARS", "FIRST_DAY_OF_NEXT_PERIOD"),
 				},
 			},
 			"id": schema.StringAttribute{
-				Description: "The UUID of the entity. ",
+				Description: "The UUID of the entity.",
 				Computed:    true,
 			},
 			"last_modified_by": schema.StringAttribute{
@@ -129,11 +130,11 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Computed:    true,
 			},
 			"suppressed_empty_bills": schema.BoolAttribute{
-				Description: "Specifies whether to supress generating bills that have no line items. \n\n* **TRUE** - prevents generating bills with no line items.\n* **FALSE** - bills are still generated even when they have no line items. ",
+				Description: "Specifies whether to supress generating bills that have no line items. \n\n* **TRUE** - prevents generating bills with no line items.\n* **FALSE** - bills are still generated even when they have no line items.",
 				Computed:    true,
 			},
 			"timezone": schema.StringAttribute{
-				Description: "The timezone for the Organization. ",
+				Description: "The timezone for the Organization.",
 				Computed:    true,
 			},
 			"version": schema.Int64Attribute{
@@ -162,7 +163,7 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				ElementType: types.StringType,
 			},
 			"currency_conversions": schema.ListNestedAttribute{
-				Description: "Currency conversion rates from Bill currency to Organization currency. \n\nFor example, if Account is billed in GBP and Organization is set to USD, Bill line items are calculated in GBP and then converted to USD using the defined rate. ",
+				Description: "Currency conversion rates from Bill currency to Organization currency. \n\nFor example, if Account is billed in GBP and Organization is set to USD, Bill line items are calculated in GBP and then converted to USD using the defined rate.",
 				Computed:    true,
 				CustomType:  customfield.NewNestedObjectListType[OrganizationConfigCurrencyConversionsDataSourceModel](ctx),
 				NestedObject: schema.NestedAttributeObject{

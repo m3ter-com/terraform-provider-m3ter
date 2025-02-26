@@ -24,7 +24,7 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Required: true,
 			},
 			"code": schema.StringAttribute{
-				Description: "A unique short code to identify the Product. It should not contain control chracters or spaces. ",
+				Description: "A unique short code to identify the Product. It should not contain control chracters or spaces.",
 				Computed:    true,
 			},
 			"created_by": schema.StringAttribute{
