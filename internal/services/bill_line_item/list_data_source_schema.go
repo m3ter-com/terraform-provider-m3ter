@@ -165,7 +165,7 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Computed:    true,
 						},
 						"line_item_type": schema.StringAttribute{
-							Description: "available values: \"STANDING_CHARGE\", \"USAGE\", \"COUNTER_RUNNING_TOTAL_CHARGE\", \"COUNTER_ADJUSTMENT_DEBIT\", \"COUNTER_ADJUSTMENT_CREDIT\", \"USAGE_CREDIT\", \"MINIMUM_SPEND\", \"MINIMUM_SPEND_REFUND\", \"CREDIT_DEDUCTION\", \"MANUAL_ADJUSTMENT\", \"CREDIT_MEMO\", \"DEBIT_MEMO\", \"COMMITMENT_CONSUMED\", \"COMMITMENT_FEE\", \"OVERAGE_SURCHARGE\", \"OVERAGE_USAGE\", \"BALANCE_CONSUMED\", \"BALANCE_FEE\"",
+							Description: "Available values: \"STANDING_CHARGE\", \"USAGE\", \"COUNTER_RUNNING_TOTAL_CHARGE\", \"COUNTER_ADJUSTMENT_DEBIT\", \"COUNTER_ADJUSTMENT_CREDIT\", \"USAGE_CREDIT\", \"MINIMUM_SPEND\", \"MINIMUM_SPEND_REFUND\", \"CREDIT_DEDUCTION\", \"MANUAL_ADJUSTMENT\", \"CREDIT_MEMO\", \"DEBIT_MEMO\", \"COMMITMENT_CONSUMED\", \"COMMITMENT_FEE\", \"OVERAGE_SURCHARGE\", \"OVERAGE_USAGE\", \"BALANCE_CONSUMED\", \"BALANCE_FEE\".",
 							Computed:    true,
 							Validators: []validator.String{
 								stringvalidator.OneOfCaseInsensitive(

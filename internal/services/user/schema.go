@@ -73,7 +73,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 							ElementType: types.StringType,
 						},
 						"effect": schema.StringAttribute{
-							Description: "Specifies whether or not the user is allowed to perform the action on the resource.\n\n**NOTE:** Use lower case, for example: `\"allow\"`. If you use upper case, you'll receive an error.\navailable values: \"ALLOW\", \"DENY\"",
+							Description: "Specifies whether or not the user is allowed to perform the action on the resource.\n\n**NOTE:** Use lower case, for example: `\"allow\"`. If you use upper case, you'll receive an error.\nAvailable values: \"ALLOW\", \"DENY\".",
 							Required:    true,
 							Validators: []validator.String{
 								stringvalidator.OneOfCaseInsensitive("ALLOW", "DENY"),
