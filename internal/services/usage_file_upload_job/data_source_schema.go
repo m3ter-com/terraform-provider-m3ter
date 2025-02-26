@@ -39,7 +39,7 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Computed:    true,
 			},
 			"status": schema.StringAttribute{
-				Description: "The status of the file upload job.\navailable values: \"notUploaded\", \"running\", \"failed\", \"succeeded\"",
+				Description: "The status of the file upload job.\nAvailable values: \"notUploaded\", \"running\", \"failed\", \"succeeded\".",
 				Computed:    true,
 				Validators: []validator.String{
 					stringvalidator.OneOfCaseInsensitive(
