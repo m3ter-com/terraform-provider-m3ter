@@ -1,7 +1,7 @@
 resource "m3ter_account" "example_account" {
   org_id = "orgId"
   code = "JS!?Q0]r] ]$]"
-  email_address = "dev@stainlessapi.com"
+  email_address = "dev@stainless.com"
   name = "x"
   address = {
     address_line1 = "addressLine1"
