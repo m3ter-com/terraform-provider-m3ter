@@ -1,6 +1,6 @@
 resource "m3ter_user_invitation" "example_user_invitation" {
   org_id = "orgId"
-  email = "dev@stainlessapi.com"
+  email = "dev@stainless.com"
   first_name = "x"
   last_name = "x"
   contact_number = "contactNumber"
