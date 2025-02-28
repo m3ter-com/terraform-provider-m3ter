@@ -49,7 +49,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				},
 			},
 			"rounding_mode": schema.StringAttribute{
-				Description: "Available values: \"UP\", \"DOWN\", \"CEILING\", \"FLOOR\", \"HALF_UP\", \"HALF_DOWN\", \"HALF_EVEN\", \"UNNECESSARY\".",
+				Description: `Available values: "UP", "DOWN", "CEILING", "FLOOR", "HALF_UP", "HALF_DOWN", "HALF_EVEN", "UNNECESSARY".`,
 				Optional:    true,
 				Validators: []validator.String{
 					stringvalidator.OneOfCaseInsensitive(
