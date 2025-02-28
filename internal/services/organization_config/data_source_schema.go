@@ -29,7 +29,7 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Computed:    true,
 			},
 			"auto_approve_bills_grace_period_unit": schema.StringAttribute{
-				Description: "Available values: \"MINUTES\", \"HOURS\", \"DAYS\".",
+				Description: `Available values: "MINUTES", "HOURS", "DAYS".`,
 				Computed:    true,
 				Validators: []validator.String{
 					stringvalidator.OneOfCaseInsensitive(
@@ -94,7 +94,7 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				CustomType:  timetypes.RFC3339Type{},
 			},
 			"external_invoice_date": schema.StringAttribute{
-				Description: "Available values: \"LAST_DAY_OF_ARREARS\", \"FIRST_DAY_OF_NEXT_PERIOD\".",
+				Description: `Available values: "LAST_DAY_OF_ARREARS", "FIRST_DAY_OF_NEXT_PERIOD".`,
 				Computed:    true,
 				Validators: []validator.String{
 					stringvalidator.OneOfCaseInsensitive("LAST_DAY_OF_ARREARS", "FIRST_DAY_OF_NEXT_PERIOD"),

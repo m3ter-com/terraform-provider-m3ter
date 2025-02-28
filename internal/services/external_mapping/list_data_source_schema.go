@@ -65,7 +65,7 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Computed:    true,
 						},
 						"m3ter_entity": schema.StringAttribute{
-							Description: "The name of the m3ter entity that is part of the External Mapping. For example, this could be \"Account\".",
+							Description: `The name of the m3ter entity that is part of the External Mapping. For example, this could be "Account".`,
 							Computed:    true,
 						},
 						"m3ter_id": schema.StringAttribute{
