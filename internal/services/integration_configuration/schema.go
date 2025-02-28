@@ -78,7 +78,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 						},
 					},
 					"destination": schema.StringAttribute{
-						Description: "Available values: \"WEBHOOK\", \"NETSUITE\", \"STRIPE\", \"STRIPE_TEST\", \"AWS\", \"PADDLE\", \"PADDLE_SANDBOX\", \"SALESFORCE\", \"XERO\", \"CHARGEBEE\", \"QUICKBOOKS\", \"QUICKBOOKS_SANDBOX\", \"M3TER\".",
+						Description: `Available values: "WEBHOOK", "NETSUITE", "STRIPE", "STRIPE_TEST", "AWS", "PADDLE", "PADDLE_SANDBOX", "SALESFORCE", "XERO", "CHARGEBEE", "QUICKBOOKS", "QUICKBOOKS_SANDBOX", "M3TER".`,
 						Optional:    true,
 						Validators: []validator.String{
 							stringvalidator.OneOfCaseInsensitive(
@@ -161,7 +161,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				Computed:    true,
 			},
 			"status": schema.StringAttribute{
-				Description: "Available values: \"WAITING\", \"STARTED\", \"COMPLETE\", \"ERROR\", \"AWAITING_RETRY\", \"AUTH_FAILED\", \"ACCOUNTING_PERIOD_CLOSED\", \"INVOICE_ALREADY_PAID\", \"DISABLED\".",
+				Description: `Available values: "WAITING", "STARTED", "COMPLETE", "ERROR", "AWAITING_RETRY", "AUTH_FAILED", "ACCOUNTING_PERIOD_CLOSED", "INVOICE_ALREADY_PAID", "DISABLED".`,
 				Computed:    true,
 				Validators: []validator.String{
 					stringvalidator.OneOfCaseInsensitive(

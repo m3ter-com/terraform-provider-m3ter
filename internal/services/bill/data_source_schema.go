@@ -40,7 +40,7 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Computed: true,
 			},
 			"billing_frequency": schema.StringAttribute{
-				Description: "Available values: \"DAILY\", \"WEEKLY\", \"MONTHLY\", \"ANNUALLY\", \"AD_HOC\", \"MIXED\".",
+				Description: `Available values: "DAILY", "WEEKLY", "MONTHLY", "ANNUALLY", "AD_HOC", "MIXED".`,
 				Computed:    true,
 				Validators: []validator.String{
 					stringvalidator.OneOfCaseInsensitive(
@@ -138,7 +138,7 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				CustomType: timetypes.RFC3339Type{},
 			},
 			"status": schema.StringAttribute{
-				Description: "Available values: \"PENDING\", \"APPROVED\".",
+				Description: `Available values: "PENDING", "APPROVED".`,
 				Computed:    true,
 				Validators: []validator.String{
 					stringvalidator.OneOfCaseInsensitive("PENDING", "APPROVED"),
@@ -201,7 +201,7 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 							Computed:    true,
 						},
 						"line_item_type": schema.StringAttribute{
-							Description: "Available values: \"STANDING_CHARGE\", \"USAGE\", \"COUNTER_RUNNING_TOTAL_CHARGE\", \"COUNTER_ADJUSTMENT_DEBIT\", \"COUNTER_ADJUSTMENT_CREDIT\", \"USAGE_CREDIT\", \"MINIMUM_SPEND\", \"MINIMUM_SPEND_REFUND\", \"CREDIT_DEDUCTION\", \"MANUAL_ADJUSTMENT\", \"CREDIT_MEMO\", \"DEBIT_MEMO\", \"COMMITMENT_CONSUMED\", \"COMMITMENT_FEE\", \"OVERAGE_SURCHARGE\", \"OVERAGE_USAGE\", \"BALANCE_CONSUMED\", \"BALANCE_FEE\".",
+							Description: `Available values: "STANDING_CHARGE", "USAGE", "COUNTER_RUNNING_TOTAL_CHARGE", "COUNTER_ADJUSTMENT_DEBIT", "COUNTER_ADJUSTMENT_CREDIT", "USAGE_CREDIT", "MINIMUM_SPEND", "MINIMUM_SPEND_REFUND", "CREDIT_DEDUCTION", "MANUAL_ADJUSTMENT", "CREDIT_MEMO", "DEBIT_MEMO", "COMMITMENT_CONSUMED", "COMMITMENT_FEE", "OVERAGE_SURCHARGE", "OVERAGE_USAGE", "BALANCE_CONSUMED", "BALANCE_FEE".`,
 							Computed:    true,
 							Validators: []validator.String{
 								stringvalidator.OneOfCaseInsensitive(

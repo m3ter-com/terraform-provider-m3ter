@@ -70,7 +70,7 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Computed:    true,
 						},
 						"aggregation_type": schema.StringAttribute{
-							Description: "Available values: \"SIMPLE\", \"COMPOUND\".",
+							Description: `Available values: "SIMPLE", "COMPOUND".`,
 							Computed:    true,
 							Validators: []validator.String{
 								stringvalidator.OneOfCaseInsensitive("SIMPLE", "COMPOUND"),

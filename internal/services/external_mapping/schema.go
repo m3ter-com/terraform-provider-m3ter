@@ -39,7 +39,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				Required:    true,
 			},
 			"m3ter_entity": schema.StringAttribute{
-				Description: "The name of the m3ter entity that you are creating or modifying an External Mapping for. As an example, this could be an \"Account\".",
+				Description: `The name of the m3ter entity that you are creating or modifying an External Mapping for. As an example, this could be an "Account".`,
 				Required:    true,
 			},
 			"m3ter_id": schema.StringAttribute{
