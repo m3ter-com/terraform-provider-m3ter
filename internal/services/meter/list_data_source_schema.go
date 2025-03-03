@@ -24,17 +24,17 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 				Required: true,
 			},
 			"codes": schema.ListAttribute{
-				Description: "list of codes to retrieve",
+				Description: "List of Meter codes to retrieve. These are the unique short codes that identify each Meter.",
 				Optional:    true,
 				ElementType: types.StringType,
 			},
 			"ids": schema.ListAttribute{
-				Description: "list of ids to retrieve",
+				Description: "List of Meter IDs to retrieve.",
 				Optional:    true,
 				ElementType: types.StringType,
 			},
 			"product_id": schema.ListAttribute{
-				Description: "The UUIDs of the products to retrieve meters for",
+				Description: "The UUIDs of the Products to retrieve Meters for.",
 				Optional:    true,
 				ElementType: types.StringType,
 			},

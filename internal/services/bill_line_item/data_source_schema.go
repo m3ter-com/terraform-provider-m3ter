@@ -195,6 +195,11 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Description: "The version number:\n- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.\n- **Update:** On successful Update, the version is incremented by 1 in the response.",
 				Computed:    true,
 			},
+			"group": schema.MapAttribute{
+				Computed:    true,
+				CustomType:  customfield.NewMapType[types.String](ctx),
+				ElementType: types.StringType,
+			},
 			"segment": schema.MapAttribute{
 				Description: "Specifies the segment name or identifier when segmented Aggregation is used. This is relevant for more complex billing structures.",
 				Computed:    true,

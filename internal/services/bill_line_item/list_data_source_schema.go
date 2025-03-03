@@ -156,6 +156,11 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Computed:    true,
 							CustomType:  timetypes.RFC3339Type{},
 						},
+						"group": schema.MapAttribute{
+							Computed:    true,
+							CustomType:  customfield.NewMapType[types.String](ctx),
+							ElementType: types.StringType,
+						},
 						"json_usage_generated": schema.BoolAttribute{
 							Description: "Boolean flag indicating whether the Bill line item has associated statement usage in JSON format. When a Bill statement is generated, usage line items have their usage stored in JSON format.\n\nSee [Working with Bill Statements](https://www.m3ter.com/docs/guides/running-viewing-and-managing-bills/working-with-bill-statements) for more information.",
 							Computed:    true,

@@ -290,6 +290,9 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 									"balance_id": schema.StringAttribute{
 										Computed: true,
 									},
+									"charge_id": schema.StringAttribute{
+										Computed: true,
+									},
 									"child_account_code": schema.StringAttribute{
 										Description: "If part of a Parent/Child account billing hierarchy, this is the code for the child Account.",
 										Computed:    true,
