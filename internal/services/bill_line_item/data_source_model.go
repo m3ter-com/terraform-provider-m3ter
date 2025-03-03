@@ -52,6 +52,7 @@ type BillLineItemDataSourceModel struct {
 	Unit                   types.String                                                       `tfsdk:"unit" json:"unit,computed"`
 	Units                  types.Float64                                                      `tfsdk:"units" json:"units,computed"`
 	Version                types.Int64                                                        `tfsdk:"version" json:"version,computed"`
+	Group                  customfield.Map[types.String]                                      `tfsdk:"group" json:"group,computed"`
 	Segment                customfield.Map[types.String]                                      `tfsdk:"segment" json:"segment,computed"`
 	BandUsage              customfield.NestedObjectList[BillLineItemBandUsageDataSourceModel] `tfsdk:"band_usage" json:"bandUsage,computed"`
 }
