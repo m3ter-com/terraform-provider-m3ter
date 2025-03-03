@@ -5,7 +5,6 @@ package webhook
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
@@ -58,10 +57,62 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Description: "The ID of the user who created this item.",
 							Computed:    true,
 						},
-						"credentials": schema.StringAttribute{
-							Description: "This schema defines the credentials required for m3ter request signing.",
+						"credentials": schema.SingleNestedAttribute{
+							Description: "Response representing a set of credentials used for signing m3ter requests.",
 							Computed:    true,
-							CustomType:  jsontypes.NormalizedType{},
+							CustomType:  customfield.NewNestedObjectType[WebhooksCredentialsDataSourceModel](ctx),
+							Attributes: map[string]schema.Attribute{
+								"id": schema.StringAttribute{
+									Description: "The UUID of the entity.",
+									Computed:    true,
+								},
+								"destination": schema.StringAttribute{
+									Description: "the system the integration is for",
+									Computed:    true,
+								},
+								"type": schema.StringAttribute{
+									Description: "the type of credentials",
+									Computed:    true,
+								},
+								"version": schema.Int64Attribute{
+									Description: "The version number:\n- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.\n- **Update:** On successful Update, the version is incremented by 1 in the response.",
+									Computed:    true,
+								},
+								"api_key": schema.StringAttribute{
+									Description: "The API key provided by m3ter. This key is part of the credential set required for signing requests and authenticating with m3ter services.",
+									Computed:    true,
+								},
+								"created_by": schema.StringAttribute{
+									Description: "The ID of the user who created this item.",
+									Computed:    true,
+								},
+								"destination_id": schema.StringAttribute{
+									Description: "the destinationId the integration is for",
+									Computed:    true,
+								},
+								"dt_created": schema.StringAttribute{
+									Description: "The DateTime when this item was created *(in ISO-8601 format)*.",
+									Computed:    true,
+									CustomType:  timetypes.RFC3339Type{},
+								},
+								"dt_last_modified": schema.StringAttribute{
+									Description: "The DateTime when this item was last modified *(in ISO-8601 format)*.",
+									Computed:    true,
+									CustomType:  timetypes.RFC3339Type{},
+								},
+								"last_modified_by": schema.StringAttribute{
+									Description: "The ID of the user who last modified this item.",
+									Computed:    true,
+								},
+								"name": schema.StringAttribute{
+									Description: "the name of the credentials",
+									Computed:    true,
+								},
+								"secret": schema.StringAttribute{
+									Description: "The secret associated with the API key. This secret is used in conjunction with the API key to generate a signature for secure authentication.",
+									Computed:    true,
+								},
+							},
 						},
 						"description": schema.StringAttribute{
 							Computed: true,

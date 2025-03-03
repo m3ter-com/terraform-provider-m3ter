@@ -1,7 +1,7 @@
 resource "m3ter_webhook" "example_webhook" {
   org_id = "orgId"
   credentials = {
-    apiKey = "x"
+    api_key = "x"
     secret = "x"
     type = "M3TER_SIGNED_REQUEST"
     empty = true

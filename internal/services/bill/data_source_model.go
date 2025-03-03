@@ -76,6 +76,7 @@ type BillLineItemsDataSourceModel struct {
 	ID                     types.String                                                                  `tfsdk:"id" json:"id,computed"`
 	AggregationID          types.String                                                                  `tfsdk:"aggregation_id" json:"aggregationId,computed"`
 	BalanceID              types.String                                                                  `tfsdk:"balance_id" json:"balanceId,computed"`
+	ChargeID               types.String                                                                  `tfsdk:"charge_id" json:"chargeId,computed"`
 	ChildAccountCode       types.String                                                                  `tfsdk:"child_account_code" json:"childAccountCode,computed"`
 	ChildAccountID         types.String                                                                  `tfsdk:"child_account_id" json:"childAccountId,computed"`
 	CommitmentID           types.String                                                                  `tfsdk:"commitment_id" json:"commitmentId,computed"`

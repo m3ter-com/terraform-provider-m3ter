@@ -51,6 +51,7 @@ type BillLineItemsItemsDataSourceModel struct {
 	Description            types.String                                                        `tfsdk:"description" json:"description,computed"`
 	DtCreated              timetypes.RFC3339                                                   `tfsdk:"dt_created" json:"dtCreated,computed" format:"date-time"`
 	DtLastModified         timetypes.RFC3339                                                   `tfsdk:"dt_last_modified" json:"dtLastModified,computed" format:"date-time"`
+	Group                  customfield.Map[types.String]                                       `tfsdk:"group" json:"group,computed"`
 	JsonUsageGenerated     types.Bool                                                          `tfsdk:"json_usage_generated" json:"jsonUsageGenerated,computed"`
 	LastModifiedBy         types.String                                                        `tfsdk:"last_modified_by" json:"lastModifiedBy,computed"`
 	LineItemType           types.String                                                        `tfsdk:"line_item_type" json:"lineItemType,computed"`
