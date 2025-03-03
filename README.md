@@ -32,7 +32,7 @@ provider "m3ter" {
   api_key = "My API Key" # or set M3TER_API_KEY env variable
   api_secret = "My API Secret" # or set M3TER_API_SECRET env variable
   token = "My Token" # or set M3TER_API_TOKEN env variable
-  org_id = "My Org ID"
+  org_id = "My Org ID" # or set M3TER_ORG_ID env variable
 }
 
 # Configure a resource
@@ -55,10 +55,10 @@ If an environment variable is provided, then the option does not need to be set 
 
 | Property   | Environment variable | Required | Default value |
 | ---------- | -------------------- | -------- | ------------- |
-| org_id     | -                    | true     | —             |
 | api_secret | `M3TER_API_SECRET`   | true     | —             |
 | api_key    | `M3TER_API_KEY`      | true     | —             |
 | token      | `M3TER_API_TOKEN`    | false    | —             |
+| org_id     | `M3TER_ORG_ID`       | false    | —             |
 
 ## Semantic versioning
 
