@@ -75,7 +75,7 @@ type M3terProviderModel struct {
 	APIKey    types.String `tfsdk:"api_key" json:"api_key,required"`
 	APISecret types.String `tfsdk:"api_secret" json:"api_secret,required"`
 	Token     types.String `tfsdk:"token" json:"token,optional"`
-	OrgID     types.String `tfsdk:"org_id" json:"org_id,required"`
+	OrgID     types.String `tfsdk:"org_id" json:"org_id,optional"`
 }
 
 func (p *M3terProvider) Metadata(ctx context.Context, req provider.MetadataRequest, resp *provider.MetadataResponse) {
@@ -100,7 +100,7 @@ func ProviderSchema(ctx context.Context) schema.Schema {
 				Optional: true,
 			},
 			"org_id": schema.StringAttribute{
-				Required: true,
+				Optional: true,
 			},
 		},
 	}
@@ -129,6 +129,9 @@ func (p *M3terProvider) Configure(ctx context.Context, req provider.ConfigureReq
 	}
 	if o, ok := os.LookupEnv("M3TER_API_TOKEN"); ok {
 		opts = append(opts, option.WithToken(o))
+	}
+	if o, ok := os.LookupEnv("M3TER_ORG_ID"); ok {
+		opts = append(opts, option.WithOrgID(o))
 	}
 	if !data.APIKey.IsNull() {
 		opts = append(opts, option.WithAPIKey(data.APIKey.ValueString()))
