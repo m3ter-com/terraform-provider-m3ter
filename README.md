@@ -55,10 +55,10 @@ If an environment variable is provided, then the option does not need to be set 
 
 | Property   | Environment variable | Required | Default value |
 | ---------- | -------------------- | -------- | ------------- |
+| org_id     | `M3TER_ORG_ID`       | true     | —             |
 | api_secret | `M3TER_API_SECRET`   | true     | —             |
 | api_key    | `M3TER_API_KEY`      | true     | —             |
 | token      | `M3TER_API_TOKEN`    | false    | —             |
-| org_id     | `M3TER_ORG_ID`       | false    | —             |
 
 ## Semantic versioning
 
