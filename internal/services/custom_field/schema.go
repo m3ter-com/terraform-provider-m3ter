@@ -5,7 +5,6 @@ package custom_field
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -13,6 +12,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/mapplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 )
 
 var _ resource.ResourceWithConfigValidators = (*CustomFieldResource)(nil)
@@ -37,55 +37,55 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 			"account": schema.MapAttribute{
 				Description:   "Updates to Account entity CustomFields.",
 				Optional:      true,
-				ElementType:   jsontypes.NormalizedType{},
+				ElementType:   types.DynamicType,
 				PlanModifiers: []planmodifier.Map{mapplanmodifier.RequiresReplace()},
 			},
 			"account_plan": schema.MapAttribute{
 				Description:   "Updates to accountPlan entity CustomFields.",
 				Optional:      true,
-				ElementType:   jsontypes.NormalizedType{},
+				ElementType:   types.DynamicType,
 				PlanModifiers: []planmodifier.Map{mapplanmodifier.RequiresReplace()},
 			},
 			"aggregation": schema.MapAttribute{
 				Description:   "Updates to simple Aggregation entity CustomFields.",
 				Optional:      true,
-				ElementType:   jsontypes.NormalizedType{},
+				ElementType:   types.DynamicType,
 				PlanModifiers: []planmodifier.Map{mapplanmodifier.RequiresReplace()},
 			},
 			"compound_aggregation": schema.MapAttribute{
 				Description:   "Updates to Compound Aggregation entity CustomFields.",
 				Optional:      true,
-				ElementType:   jsontypes.NormalizedType{},
+				ElementType:   types.DynamicType,
 				PlanModifiers: []planmodifier.Map{mapplanmodifier.RequiresReplace()},
 			},
 			"meter": schema.MapAttribute{
 				Description:   "Updates to Meter entity CustomFields.",
 				Optional:      true,
-				ElementType:   jsontypes.NormalizedType{},
+				ElementType:   types.DynamicType,
 				PlanModifiers: []planmodifier.Map{mapplanmodifier.RequiresReplace()},
 			},
 			"organization": schema.MapAttribute{
 				Description:   "Updates to Organization CustomFields.",
 				Optional:      true,
-				ElementType:   jsontypes.NormalizedType{},
+				ElementType:   types.DynamicType,
 				PlanModifiers: []planmodifier.Map{mapplanmodifier.RequiresReplace()},
 			},
 			"plan": schema.MapAttribute{
 				Description:   "Updates to Plan entity CustomFields.",
 				Optional:      true,
-				ElementType:   jsontypes.NormalizedType{},
+				ElementType:   types.DynamicType,
 				PlanModifiers: []planmodifier.Map{mapplanmodifier.RequiresReplace()},
 			},
 			"plan_template": schema.MapAttribute{
 				Description:   "Updates to planTemplate entity CustomFields.",
 				Optional:      true,
-				ElementType:   jsontypes.NormalizedType{},
+				ElementType:   types.DynamicType,
 				PlanModifiers: []planmodifier.Map{mapplanmodifier.RequiresReplace()},
 			},
 			"product": schema.MapAttribute{
 				Description:   "Updates to Product entity CustomFields.",
 				Optional:      true,
-				ElementType:   jsontypes.NormalizedType{},
+				ElementType:   types.DynamicType,
 				PlanModifiers: []planmodifier.Map{mapplanmodifier.RequiresReplace()},
 			},
 			"created_by": schema.StringAttribute{

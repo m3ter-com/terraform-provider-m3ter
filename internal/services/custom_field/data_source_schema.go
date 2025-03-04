@@ -5,10 +5,10 @@ package custom_field
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/m3ter-com/terraform-provider-m3ter/internal/customfield"
 )
 
@@ -49,56 +49,56 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 			"account": schema.MapAttribute{
 				Description: "CustomFields added to Account entities.",
 				Computed:    true,
-				CustomType:  customfield.NewMapType[jsontypes.Normalized](ctx),
-				ElementType: jsontypes.NormalizedType{},
+				CustomType:  customfield.NewMapType[types.Dynamic](ctx),
+				ElementType: types.DynamicType,
 			},
 			"account_plan": schema.MapAttribute{
 				Description: "CustomFields added to accountPlan entities.",
 				Computed:    true,
-				CustomType:  customfield.NewMapType[jsontypes.Normalized](ctx),
-				ElementType: jsontypes.NormalizedType{},
+				CustomType:  customfield.NewMapType[types.Dynamic](ctx),
+				ElementType: types.DynamicType,
 			},
 			"aggregation": schema.MapAttribute{
 				Description: "CustomFields added to simple Aggregation entities.",
 				Computed:    true,
-				CustomType:  customfield.NewMapType[jsontypes.Normalized](ctx),
-				ElementType: jsontypes.NormalizedType{},
+				CustomType:  customfield.NewMapType[types.Dynamic](ctx),
+				ElementType: types.DynamicType,
 			},
 			"compound_aggregation": schema.MapAttribute{
 				Description: "CustomFields added to Compound Aggregation entities.",
 				Computed:    true,
-				CustomType:  customfield.NewMapType[jsontypes.Normalized](ctx),
-				ElementType: jsontypes.NormalizedType{},
+				CustomType:  customfield.NewMapType[types.Dynamic](ctx),
+				ElementType: types.DynamicType,
 			},
 			"meter": schema.MapAttribute{
 				Description: "CustomFields added to Meter entities.",
 				Computed:    true,
-				CustomType:  customfield.NewMapType[jsontypes.Normalized](ctx),
-				ElementType: jsontypes.NormalizedType{},
+				CustomType:  customfield.NewMapType[types.Dynamic](ctx),
+				ElementType: types.DynamicType,
 			},
 			"organization": schema.MapAttribute{
 				Description: "CustomFields added to the Organization.",
 				Computed:    true,
-				CustomType:  customfield.NewMapType[jsontypes.Normalized](ctx),
-				ElementType: jsontypes.NormalizedType{},
+				CustomType:  customfield.NewMapType[types.Dynamic](ctx),
+				ElementType: types.DynamicType,
 			},
 			"plan": schema.MapAttribute{
 				Description: "CustomFields added to Plan entities.",
 				Computed:    true,
-				CustomType:  customfield.NewMapType[jsontypes.Normalized](ctx),
-				ElementType: jsontypes.NormalizedType{},
+				CustomType:  customfield.NewMapType[types.Dynamic](ctx),
+				ElementType: types.DynamicType,
 			},
 			"plan_template": schema.MapAttribute{
 				Description: "CustomFields added to planTemplate entities.",
 				Computed:    true,
-				CustomType:  customfield.NewMapType[jsontypes.Normalized](ctx),
-				ElementType: jsontypes.NormalizedType{},
+				CustomType:  customfield.NewMapType[types.Dynamic](ctx),
+				ElementType: types.DynamicType,
 			},
 			"product": schema.MapAttribute{
 				Description: "CustomFields added to Product entities.",
 				Computed:    true,
-				CustomType:  customfield.NewMapType[jsontypes.Normalized](ctx),
-				ElementType: jsontypes.NormalizedType{},
+				CustomType:  customfield.NewMapType[types.Dynamic](ctx),
+				ElementType: types.DynamicType,
 			},
 		},
 	}
