@@ -1,31 +1,31 @@
 resource "m3ter_custom_field" "example_custom_field" {
   org_id = "orgId"
   account = {
-    foo = "bar"
+    foo = "string"
   }
   account_plan = {
-    foo = "bar"
+    foo = "string"
   }
   aggregation = {
-    foo = "bar"
+    foo = "string"
   }
   compound_aggregation = {
-    foo = "bar"
+    foo = "string"
   }
   meter = {
-    foo = "bar"
+    foo = "string"
   }
   organization = {
-    foo = "bar"
+    foo = "string"
   }
   plan = {
-    foo = "bar"
+    foo = "string"
   }
   plan_template = {
-    foo = "bar"
+    foo = "string"
   }
   product = {
-    foo = "bar"
+    foo = "string"
   }
   version = 0
 }
