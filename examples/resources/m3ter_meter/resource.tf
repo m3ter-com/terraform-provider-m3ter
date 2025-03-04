@@ -8,11 +8,11 @@ resource "m3ter_meter" "example_meter" {
     unit = "x"
   }]
   derived_fields = [{
-    calculation = "x"
     category = "WHO"
     code = "{1{}}_"
     name = "x"
     unit = "x"
+    calculation = "x"
   }]
   name = "x"
   custom_fields = {

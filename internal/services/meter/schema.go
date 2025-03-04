@@ -78,10 +78,6 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				Required:    true,
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
-						"calculation": schema.StringAttribute{
-							Description: "The calculation used to transform the value of submitted `dataFields` in usage data. Calculation can reference `dataFields`, `customFields`, or system `Timestamp` fields. \n*(Example: datafieldms  datafieldgb)*",
-							Required:    true,
-						},
 						"category": schema.StringAttribute{
 							Description: "The type of field (WHO, WHAT, WHERE, MEASURE, METADATA, INCOME, COST, OTHER).\nAvailable values: \"WHO\", \"WHERE\", \"WHAT\", \"OTHER\", \"METADATA\", \"MEASURE\", \"INCOME\", \"COST\".",
 							Required:    true,
@@ -109,6 +105,10 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 						"unit": schema.StringAttribute{
 							Description: "The units to measure the data with. Should conform to *Unified Code for Units of Measure* (UCUM). Required only for numeric field categories.",
 							Optional:    true,
+						},
+						"calculation": schema.StringAttribute{
+							Description: "The calculation used to transform the value of submitted `dataFields` in usage data. Calculation can reference `dataFields`, `customFields`, or system `Timestamp` fields. \n*(Example: datafieldms  datafieldgb)*",
+							Required:    true,
 						},
 					},
 				},

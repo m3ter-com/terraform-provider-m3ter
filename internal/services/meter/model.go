@@ -41,9 +41,9 @@ type MeterDataFieldsModel struct {
 }
 
 type MeterDerivedFieldsModel struct {
-	Calculation types.String `tfsdk:"calculation" json:"calculation,required"`
 	Category    types.String `tfsdk:"category" json:"category,required"`
 	Code        types.String `tfsdk:"code" json:"code,required"`
 	Name        types.String `tfsdk:"name" json:"name,required"`
 	Unit        types.String `tfsdk:"unit" json:"unit,optional"`
+	Calculation types.String `tfsdk:"calculation" json:"calculation,required"`
 }
