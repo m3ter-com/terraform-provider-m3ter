@@ -3,17 +3,17 @@
 package bill_debit_line_item_test
 
 import (
-	"context"
-	"testing"
+  "context"
+  "testing"
 
-	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/bill_debit_line_item"
-	"github.com/m3ter-com/terraform-provider-m3ter/internal/test_helpers"
+  "github.com/m3ter-com/terraform-provider-m3ter/internal/services/bill_debit_line_item"
+  "github.com/m3ter-com/terraform-provider-m3ter/internal/test_helpers"
 )
 
 func TestBillDebitLineItemModelSchemaParity(t *testing.T) {
-	t.Parallel()
-	model := (*bill_debit_line_item.BillDebitLineItemModel)(nil)
-	schema := bill_debit_line_item.ResourceSchema(context.TODO())
-	errs := test_helpers.ValidateResourceModelSchemaIntegrity(model, schema)
-	errs.Report(t)
+  t.Parallel()
+  model := (*bill_debit_line_item.BillDebitLineItemModel)(nil)
+  schema := bill_debit_line_item.ResourceSchema(context.TODO())
+  errs := test_helpers.ValidateResourceModelSchemaIntegrity(model, schema)
+  errs.Report(t)
 }

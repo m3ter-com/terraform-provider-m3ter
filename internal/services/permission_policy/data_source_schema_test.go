@@ -3,17 +3,17 @@
 package permission_policy_test
 
 import (
-	"context"
-	"testing"
+  "context"
+  "testing"
 
-	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/permission_policy"
-	"github.com/m3ter-com/terraform-provider-m3ter/internal/test_helpers"
+  "github.com/m3ter-com/terraform-provider-m3ter/internal/services/permission_policy"
+  "github.com/m3ter-com/terraform-provider-m3ter/internal/test_helpers"
 )
 
 func TestPermissionPolicyDataSourceModelSchemaParity(t *testing.T) {
-	t.Parallel()
-	model := (*permission_policy.PermissionPolicyDataSourceModel)(nil)
-	schema := permission_policy.DataSourceSchema(context.TODO())
-	errs := test_helpers.ValidateDataSourceModelSchemaIntegrity(model, schema)
-	errs.Report(t)
+  t.Parallel()
+  model := (*permission_policy.PermissionPolicyDataSourceModel)(nil)
+  schema := permission_policy.DataSourceSchema(context.TODO())
+  errs := test_helpers.ValidateDataSourceModelSchemaIntegrity(model, schema)
+  errs.Report(t)
 }

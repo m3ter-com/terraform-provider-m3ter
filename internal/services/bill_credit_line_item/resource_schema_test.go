@@ -3,17 +3,17 @@
 package bill_credit_line_item_test
 
 import (
-	"context"
-	"testing"
+  "context"
+  "testing"
 
-	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/bill_credit_line_item"
-	"github.com/m3ter-com/terraform-provider-m3ter/internal/test_helpers"
+  "github.com/m3ter-com/terraform-provider-m3ter/internal/services/bill_credit_line_item"
+  "github.com/m3ter-com/terraform-provider-m3ter/internal/test_helpers"
 )
 
 func TestBillCreditLineItemModelSchemaParity(t *testing.T) {
-	t.Parallel()
-	model := (*bill_credit_line_item.BillCreditLineItemModel)(nil)
-	schema := bill_credit_line_item.ResourceSchema(context.TODO())
-	errs := test_helpers.ValidateResourceModelSchemaIntegrity(model, schema)
-	errs.Report(t)
+  t.Parallel()
+  model := (*bill_credit_line_item.BillCreditLineItemModel)(nil)
+  schema := bill_credit_line_item.ResourceSchema(context.TODO())
+  errs := test_helpers.ValidateResourceModelSchemaIntegrity(model, schema)
+  errs.Report(t)
 }
