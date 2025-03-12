@@ -3,18 +3,18 @@
 package credit_reason
 
 import (
-	"context"
-	"fmt"
-	"io"
-	"net/http"
+  "context"
+  "fmt"
+  "io"
+  "net/http"
 
-	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	"github.com/m3ter-com/m3ter-sdk-go"
-	"github.com/m3ter-com/m3ter-sdk-go/option"
-	"github.com/m3ter-com/terraform-provider-m3ter/internal/apijson"
-	"github.com/m3ter-com/terraform-provider-m3ter/internal/importpath"
-	"github.com/m3ter-com/terraform-provider-m3ter/internal/logging"
+  "github.com/hashicorp/terraform-plugin-framework/resource"
+  "github.com/hashicorp/terraform-plugin-framework/types"
+  "github.com/m3ter-com/m3ter-sdk-go"
+  "github.com/m3ter-com/m3ter-sdk-go/option"
+  "github.com/m3ter-com/terraform-provider-m3ter/internal/apijson"
+  "github.com/m3ter-com/terraform-provider-m3ter/internal/importpath"
+  "github.com/m3ter-com/terraform-provider-m3ter/internal/logging"
 )
 
 // Ensure provider defined types fully satisfy framework interfaces.
@@ -23,226 +23,226 @@ var _ resource.ResourceWithModifyPlan = (*CreditReasonResource)(nil)
 var _ resource.ResourceWithImportState = (*CreditReasonResource)(nil)
 
 func NewResource() resource.Resource {
-	return &CreditReasonResource{}
+  return &CreditReasonResource{}
 }
 
 // CreditReasonResource defines the resource implementation.
 type CreditReasonResource struct {
-	client *m3ter.Client
+  client *m3ter.Client
 }
 
 func (r *CreditReasonResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_credit_reason"
+  resp.TypeName = req.ProviderTypeName + "_credit_reason"
 }
 
 func (r *CreditReasonResource) Configure(ctx context.Context, req resource.ConfigureRequest, resp *resource.ConfigureResponse) {
-	if req.ProviderData == nil {
-		return
-	}
+  if req.ProviderData == nil {
+    return
+  }
 
-	client, ok := req.ProviderData.(*m3ter.Client)
+  client, ok := req.ProviderData.(*m3ter.Client)
 
-	if !ok {
-		resp.Diagnostics.AddError(
-			"unexpected resource configure type",
-			fmt.Sprintf("Expected *m3ter.Client, got: %T. Please report this issue to the provider developers.", req.ProviderData),
-		)
+  if !ok {
+    resp.Diagnostics.AddError(
+      "unexpected resource configure type",
+      fmt.Sprintf("Expected *m3ter.Client, got: %T. Please report this issue to the provider developers.", req.ProviderData),
+    )
 
-		return
-	}
+    return
+  }
 
-	r.client = client
+  r.client = client
 }
 
 func (r *CreditReasonResource) Create(ctx context.Context, req resource.CreateRequest, resp *resource.CreateResponse) {
-	var data *CreditReasonModel
+  var data *CreditReasonModel
 
-	resp.Diagnostics.Append(req.Plan.Get(ctx, &data)...)
+  resp.Diagnostics.Append(req.Plan.Get(ctx, &data)...)
 
-	if resp.Diagnostics.HasError() {
-		return
-	}
+  if resp.Diagnostics.HasError() {
+    return
+  }
 
-	dataBytes, err := data.MarshalJSON()
-	if err != nil {
-		resp.Diagnostics.AddError("failed to serialize http request", err.Error())
-		return
-	}
-	res := new(http.Response)
-	_, err = r.client.CreditReasons.New(
-		ctx,
-		m3ter.CreditReasonNewParams{
-			OrgID: m3ter.F(data.OrgID.ValueString()),
-		},
-		option.WithRequestBody("application/json", dataBytes),
-		option.WithResponseBodyInto(&res),
-		option.WithMiddleware(logging.Middleware(ctx)),
-	)
-	if err != nil {
-		resp.Diagnostics.AddError("failed to make http request", err.Error())
-		return
-	}
-	bytes, _ := io.ReadAll(res.Body)
-	err = apijson.UnmarshalComputed(bytes, &data)
-	if err != nil {
-		resp.Diagnostics.AddError("failed to deserialize http request", err.Error())
-		return
-	}
+  dataBytes, err := data.MarshalJSON()
+  if err != nil {
+    resp.Diagnostics.AddError("failed to serialize http request", err.Error())
+    return
+  }
+  res := new(http.Response)
+  _, err = r.client.CreditReasons.New(
+    ctx,
+    m3ter.CreditReasonNewParams{
+      OrgID: m3ter.F(data.OrgID.ValueString()),
+    },
+    option.WithRequestBody("application/json", dataBytes),
+    option.WithResponseBodyInto(&res),
+    option.WithMiddleware(logging.Middleware(ctx)),
+  )
+  if err != nil {
+    resp.Diagnostics.AddError("failed to make http request", err.Error())
+    return
+  }
+  bytes, _ := io.ReadAll(res.Body)
+  err = apijson.UnmarshalComputed(bytes, &data)
+  if err != nil {
+    resp.Diagnostics.AddError("failed to deserialize http request", err.Error())
+    return
+  }
 
-	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
+  resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
 
 func (r *CreditReasonResource) Update(ctx context.Context, req resource.UpdateRequest, resp *resource.UpdateResponse) {
-	var data *CreditReasonModel
+  var data  *CreditReasonModel
 
-	resp.Diagnostics.Append(req.Plan.Get(ctx, &data)...)
+  resp.Diagnostics.Append(req.Plan.Get(ctx, &data)...)
 
-	if resp.Diagnostics.HasError() {
-		return
-	}
+  if resp.Diagnostics.HasError() {
+    return
+  }
 
-	var state *CreditReasonModel
+  var state  *CreditReasonModel
 
-	resp.Diagnostics.Append(req.State.Get(ctx, &state)...)
+  resp.Diagnostics.Append(req.State.Get(ctx, &state)...)
 
-	if resp.Diagnostics.HasError() {
-		return
-	}
+  if resp.Diagnostics.HasError() {
+    return
+  }
 
-	dataBytes, err := data.MarshalJSONForUpdate(*state)
-	if err != nil {
-		resp.Diagnostics.AddError("failed to serialize http request", err.Error())
-		return
-	}
-	res := new(http.Response)
-	_, err = r.client.CreditReasons.Update(
-		ctx,
-		data.ID.ValueString(),
-		m3ter.CreditReasonUpdateParams{
-			OrgID: m3ter.F(data.OrgID.ValueString()),
-		},
-		option.WithRequestBody("application/json", dataBytes),
-		option.WithResponseBodyInto(&res),
-		option.WithMiddleware(logging.Middleware(ctx)),
-	)
-	if err != nil {
-		resp.Diagnostics.AddError("failed to make http request", err.Error())
-		return
-	}
-	bytes, _ := io.ReadAll(res.Body)
-	err = apijson.UnmarshalComputed(bytes, &data)
-	if err != nil {
-		resp.Diagnostics.AddError("failed to deserialize http request", err.Error())
-		return
-	}
+  dataBytes, err := data.MarshalJSONForUpdate(*state)
+  if err != nil {
+    resp.Diagnostics.AddError("failed to serialize http request", err.Error())
+    return
+  }
+  res := new(http.Response)
+  _, err = r.client.CreditReasons.Update(
+    ctx,
+    data.ID.ValueString(),
+    m3ter.CreditReasonUpdateParams{
+      OrgID: m3ter.F(data.OrgID.ValueString()),
+    },
+    option.WithRequestBody("application/json", dataBytes),
+    option.WithResponseBodyInto(&res),
+    option.WithMiddleware(logging.Middleware(ctx)),
+  )
+  if err != nil {
+    resp.Diagnostics.AddError("failed to make http request", err.Error())
+    return
+  }
+  bytes, _ := io.ReadAll(res.Body)
+  err = apijson.UnmarshalComputed(bytes, &data)
+  if err != nil {
+    resp.Diagnostics.AddError("failed to deserialize http request", err.Error())
+    return
+  }
 
-	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
+  resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
 
 func (r *CreditReasonResource) Read(ctx context.Context, req resource.ReadRequest, resp *resource.ReadResponse) {
-	var data *CreditReasonModel
+  var data  *CreditReasonModel
 
-	resp.Diagnostics.Append(req.State.Get(ctx, &data)...)
+  resp.Diagnostics.Append(req.State.Get(ctx, &data)...)
 
-	if resp.Diagnostics.HasError() {
-		return
-	}
+  if resp.Diagnostics.HasError() {
+    return
+  }
 
-	res := new(http.Response)
-	_, err := r.client.CreditReasons.Get(
-		ctx,
-		data.ID.ValueString(),
-		m3ter.CreditReasonGetParams{
-			OrgID: m3ter.F(data.OrgID.ValueString()),
-		},
-		option.WithResponseBodyInto(&res),
-		option.WithMiddleware(logging.Middleware(ctx)),
-	)
-	if res != nil && res.StatusCode == 404 {
-		resp.Diagnostics.AddWarning("Resource not found", "The resource was not found on the server and will be removed from state.")
-		resp.State.RemoveResource(ctx)
-		return
-	}
-	if err != nil {
-		resp.Diagnostics.AddError("failed to make http request", err.Error())
-		return
-	}
-	bytes, _ := io.ReadAll(res.Body)
-	err = apijson.Unmarshal(bytes, &data)
-	if err != nil {
-		resp.Diagnostics.AddError("failed to deserialize http request", err.Error())
-		return
-	}
+  res := new(http.Response)
+  _, err := r.client.CreditReasons.Get(
+    ctx,
+    data.ID.ValueString(),
+    m3ter.CreditReasonGetParams{
+      OrgID: m3ter.F(data.OrgID.ValueString()),
+    },
+    option.WithResponseBodyInto(&res),
+    option.WithMiddleware(logging.Middleware(ctx)),
+  )
+  if res != nil && res.StatusCode == 404 {
+  resp.Diagnostics.AddWarning("Resource not found", "The resource was not found on the server and will be removed from state.")
+    resp.State.RemoveResource(ctx)
+    return
+  }
+  if err != nil {
+    resp.Diagnostics.AddError("failed to make http request", err.Error())
+    return
+  }
+  bytes, _ := io.ReadAll(res.Body)
+  err = apijson.Unmarshal(bytes, &data)
+  if err != nil {
+    resp.Diagnostics.AddError("failed to deserialize http request", err.Error())
+    return
+  }
 
-	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
+  resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
 
 func (r *CreditReasonResource) Delete(ctx context.Context, req resource.DeleteRequest, resp *resource.DeleteResponse) {
-	var data *CreditReasonModel
+  var data  *CreditReasonModel
 
-	resp.Diagnostics.Append(req.State.Get(ctx, &data)...)
+  resp.Diagnostics.Append(req.State.Get(ctx, &data)...)
 
-	if resp.Diagnostics.HasError() {
-		return
-	}
+  if resp.Diagnostics.HasError() {
+    return
+  }
 
-	_, err := r.client.CreditReasons.Delete(
-		ctx,
-		data.ID.ValueString(),
-		m3ter.CreditReasonDeleteParams{
-			OrgID: m3ter.F(data.OrgID.ValueString()),
-		},
-		option.WithMiddleware(logging.Middleware(ctx)),
-	)
-	if err != nil {
-		resp.Diagnostics.AddError("failed to make http request", err.Error())
-		return
-	}
+  _, err := r.client.CreditReasons.Delete(
+    ctx,
+    data.ID.ValueString(),
+    m3ter.CreditReasonDeleteParams{
+      OrgID: m3ter.F(data.OrgID.ValueString()),
+    },
+    option.WithMiddleware(logging.Middleware(ctx)),
+  )
+  if err != nil {
+    resp.Diagnostics.AddError("failed to make http request", err.Error())
+    return
+  }
 
-	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
+  resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
 
 func (r *CreditReasonResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	var data *CreditReasonModel = new(CreditReasonModel)
+  var data *CreditReasonModel = new(CreditReasonModel)
 
-	path_org_id := ""
-	path_id := ""
-	diags := importpath.ParseImportID(
-		req.ID,
-		"<org_id>/<id>",
-		&path_org_id,
-		&path_id,
-	)
-	resp.Diagnostics.Append(diags...)
-	if resp.Diagnostics.HasError() {
-		return
-	}
+  path_org_id := ""
+  path_id := ""
+  diags := importpath.ParseImportID(
+    req.ID,
+    "<org_id>/<id>",
+    &path_org_id,
+    &path_id,
+  )
+  resp.Diagnostics.Append(diags...)
+  if resp.Diagnostics.HasError() {
+    return
+  }
 
-	data.OrgID = types.StringValue(path_org_id)
-	data.ID = types.StringValue(path_id)
+  data.OrgID = types.StringValue(path_org_id)
+  data.ID = types.StringValue(path_id)
 
-	res := new(http.Response)
-	_, err := r.client.CreditReasons.Get(
-		ctx,
-		path_id,
-		m3ter.CreditReasonGetParams{
-			OrgID: m3ter.F(path_org_id),
-		},
-		option.WithResponseBodyInto(&res),
-		option.WithMiddleware(logging.Middleware(ctx)),
-	)
-	if err != nil {
-		resp.Diagnostics.AddError("failed to make http request", err.Error())
-		return
-	}
-	bytes, _ := io.ReadAll(res.Body)
-	err = apijson.Unmarshal(bytes, &data)
-	if err != nil {
-		resp.Diagnostics.AddError("failed to deserialize http request", err.Error())
-		return
-	}
+  res := new(http.Response)
+  _, err := r.client.CreditReasons.Get(
+    ctx,
+    path_id,
+    m3ter.CreditReasonGetParams{
+      OrgID: m3ter.F(path_org_id),
+    },
+    option.WithResponseBodyInto(&res),
+    option.WithMiddleware(logging.Middleware(ctx)),
+  )
+  if err != nil {
+    resp.Diagnostics.AddError("failed to make http request", err.Error())
+    return
+  }
+  bytes, _ := io.ReadAll(res.Body)
+  err = apijson.Unmarshal(bytes, &data)
+  if err != nil {
+    resp.Diagnostics.AddError("failed to deserialize http request", err.Error())
+    return
+  }
 
-	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
+  resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
 
 func (r *CreditReasonResource) ModifyPlan(_ context.Context, _ resource.ModifyPlanRequest, _ *resource.ModifyPlanResponse) {
