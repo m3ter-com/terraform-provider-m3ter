@@ -3,17 +3,17 @@
 package account_plan_test
 
 import (
-	"context"
-	"testing"
+  "context"
+  "testing"
 
-	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/account_plan"
-	"github.com/m3ter-com/terraform-provider-m3ter/internal/test_helpers"
+  "github.com/m3ter-com/terraform-provider-m3ter/internal/services/account_plan"
+  "github.com/m3ter-com/terraform-provider-m3ter/internal/test_helpers"
 )
 
 func TestAccountPlanDataSourceModelSchemaParity(t *testing.T) {
-	t.Parallel()
-	model := (*account_plan.AccountPlanDataSourceModel)(nil)
-	schema := account_plan.DataSourceSchema(context.TODO())
-	errs := test_helpers.ValidateDataSourceModelSchemaIntegrity(model, schema)
-	errs.Report(t)
+  t.Parallel()
+  model := (*account_plan.AccountPlanDataSourceModel)(nil)
+  schema := account_plan.DataSourceSchema(context.TODO())
+  errs := test_helpers.ValidateDataSourceModelSchemaIntegrity(model, schema)
+  errs.Report(t)
 }
