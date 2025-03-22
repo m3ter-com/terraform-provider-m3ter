@@ -7,6 +7,7 @@ import (
   "os"
 
   "github.com/hashicorp/terraform-plugin-framework/datasource"
+  "github.com/hashicorp/terraform-plugin-framework/path"
   "github.com/hashicorp/terraform-plugin-framework/provider"
   "github.com/hashicorp/terraform-plugin-framework/provider/schema"
   "github.com/hashicorp/terraform-plugin-framework/resource"
@@ -72,10 +73,10 @@ type M3terProvider struct {
 // M3terProviderModel describes the provider data model.
 type M3terProviderModel struct {
 BaseURL types.String `tfsdk:"base_url" json:"base_url,optional"`
-APIKey types.String `tfsdk:"api_key" json:"api_key,required"`
-APISecret types.String `tfsdk:"api_secret" json:"api_secret,required"`
+APIKey types.String `tfsdk:"api_key" json:"api_key,optional"`
+APISecret types.String `tfsdk:"api_secret" json:"api_secret,optional"`
 Token types.String `tfsdk:"token" json:"token,optional"`
-OrgID types.String `tfsdk:"org_id" json:"org_id,required"`
+OrgID types.String `tfsdk:"org_id" json:"org_id,optional"`
 }
 
 func (p *M3terProvider) Metadata(ctx context.Context, req provider.MetadataRequest, resp *provider.MetadataResponse) {
@@ -91,16 +92,16 @@ func ProviderSchema(ctx context.Context) (schema.Schema) {
         Optional: true,
       },
       "api_key": schema.StringAttribute{
-        Required: true,
+        Optional: true,
       },
       "api_secret": schema.StringAttribute{
-        Required: true,
+        Optional: true,
       },
       "token": schema.StringAttribute{
         Optional: true,
       },
       "org_id": schema.StringAttribute{
-        Required: true,
+        Optional: true,
       },
     },
   }
@@ -118,32 +119,55 @@ func (p *M3terProvider) Configure(ctx context.Context, req provider.ConfigureReq
 
   opts := []option.RequestOption{}
 
-  if !data.BaseURL.IsNull() {
-    opts = append(opts, option.WithBaseURL(data.BaseURL.ValueString()))
+  if !data.BaseURL.IsNull() && !data.BaseURL.IsUnknown() {
+      opts = append(opts, option.WithBaseURL(data.BaseURL.ValueString()))
+  } else if o, ok := os.LookupEnv("M3TER_BASE_URL"); ok {
+      opts = append(opts, option.WithBaseURL(o))
   }
-  if o, ok := os.LookupEnv("M3TER_API_KEY"); ok {
-    opts = append(opts, option.WithAPIKey(o))
+
+  if !data.APIKey.IsNull() && !data.APIKey.IsUnknown() {
+      opts = append(opts, option.WithAPIKey(data.APIKey.ValueString()))
+  } else if o, ok := os.LookupEnv("M3TER_API_KEY"); ok {
+      opts = append(opts, option.WithAPIKey(o))
+  } else {
+      resp.Diagnostics.AddAttributeError(
+          path.Root("api_key"),
+          "Missing api_key value",
+          "The api_key field is required. Set it in provider configuration or via the \"M3TER_API_KEY\" environment variable.",
+      )
+      return
   }
-  if o, ok := os.LookupEnv("M3TER_API_SECRET"); ok {
-    opts = append(opts, option.WithAPISecret(o))
+
+  if !data.APISecret.IsNull() && !data.APISecret.IsUnknown() {
+      opts = append(opts, option.WithAPISecret(data.APISecret.ValueString()))
+  } else if o, ok := os.LookupEnv("M3TER_API_SECRET"); ok {
+      opts = append(opts, option.WithAPISecret(o))
+  } else {
+      resp.Diagnostics.AddAttributeError(
+          path.Root("api_secret"),
+          "Missing api_secret value",
+          "The api_secret field is required. Set it in provider configuration or via the \"M3TER_API_SECRET\" environment variable.",
+      )
+      return
   }
-  if o, ok := os.LookupEnv("M3TER_API_TOKEN"); ok {
-    opts = append(opts, option.WithToken(o))
+
+  if !data.Token.IsNull() && !data.Token.IsUnknown() {
+      opts = append(opts, option.WithToken(data.Token.ValueString()))
+  } else if o, ok := os.LookupEnv("M3TER_API_TOKEN"); ok {
+      opts = append(opts, option.WithToken(o))
   }
-  if o, ok := os.LookupEnv("M3TER_ORG_ID"); ok {
-    opts = append(opts, option.WithOrgID(o))
-  }
-  if (!data.APIKey.IsNull()) {
-    opts = append(opts, option.WithAPIKey(data.APIKey.ValueString()))
-  }
-  if (!data.APISecret.IsNull()) {
-    opts = append(opts, option.WithAPISecret(data.APISecret.ValueString()))
-  }
-  if (!data.Token.IsNull()) {
-    opts = append(opts, option.WithToken(data.Token.ValueString()))
-  }
-  if (!data.OrgID.IsNull()) {
-    opts = append(opts, option.WithOrgID(data.OrgID.ValueString()))
+
+  if !data.OrgID.IsNull() && !data.OrgID.IsUnknown() {
+      opts = append(opts, option.WithOrgID(data.OrgID.ValueString()))
+  } else if o, ok := os.LookupEnv("M3TER_ORG_ID"); ok {
+      opts = append(opts, option.WithOrgID(o))
+  } else {
+      resp.Diagnostics.AddAttributeError(
+          path.Root("org_id"),
+          "Missing org_id value",
+          "The org_id field is required. Set it in provider configuration or via the \"M3TER_ORG_ID\" environment variable.",
+      )
+      return
   }
 
   client := m3ter.NewClient(
