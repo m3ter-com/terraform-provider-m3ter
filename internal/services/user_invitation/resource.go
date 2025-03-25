@@ -93,49 +93,7 @@ func (r *UserInvitationResource) Create(ctx context.Context, req resource.Create
 }
 
 func (r *UserInvitationResource) Update(ctx context.Context, req resource.UpdateRequest, resp *resource.UpdateResponse) {
-  var data  *UserInvitationModel
-
-  resp.Diagnostics.Append(req.Plan.Get(ctx, &data)...)
-
-  if resp.Diagnostics.HasError() {
-    return
-  }
-
-  var state  *UserInvitationModel
-
-  resp.Diagnostics.Append(req.State.Get(ctx, &state)...)
-
-  if resp.Diagnostics.HasError() {
-    return
-  }
-
-  dataBytes, err := data.MarshalJSONForUpdate(*state)
-  if err != nil {
-    resp.Diagnostics.AddError("failed to serialize http request", err.Error())
-    return
-  }
-  res := new(http.Response)
-  _, err = r.client.Users.Invitations.New(
-    ctx,
-    m3ter.UserInvitationNewParams{
-      OrgID: m3ter.F(data.ID.ValueString()),
-    },
-    option.WithRequestBody("application/json", dataBytes),
-    option.WithResponseBodyInto(&res),
-    option.WithMiddleware(logging.Middleware(ctx)),
-  )
-  if err != nil {
-    resp.Diagnostics.AddError("failed to make http request", err.Error())
-    return
-  }
-  bytes, _ := io.ReadAll(res.Body)
-  err = apijson.UnmarshalComputed(bytes, &data)
-  if err != nil {
-    resp.Diagnostics.AddError("failed to deserialize http request", err.Error())
-    return
-  }
-
-  resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
+  // Update is not supported for this resource
 }
 
 func (r *UserInvitationResource) Read(ctx context.Context, req resource.ReadRequest, resp *resource.ReadResponse) {

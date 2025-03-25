@@ -8,8 +8,6 @@ import (
   "github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
   "github.com/hashicorp/terraform-plugin-framework/resource"
   "github.com/hashicorp/terraform-plugin-framework/resource/schema"
-  "github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
-  "github.com/hashicorp/terraform-plugin-framework/resource/schema/mapplanmodifier"
   "github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
   "github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
   "github.com/hashicorp/terraform-plugin-framework/types"
@@ -23,7 +21,7 @@ func ResourceSchema(ctx context.Context) (schema.Schema) {
       "id": schema.StringAttribute{
         Description: "The UUID of the entity.",
         Computed: true,
-        PlanModifiers: []planmodifier.String{stringplanmodifier.UseStateForUnknown(), stringplanmodifier.RequiresReplace()},
+        PlanModifiers: []planmodifier.String{stringplanmodifier.UseStateForUnknown()},
       },
       "org_id": schema.StringAttribute{
         Required: true,
@@ -32,61 +30,51 @@ func ResourceSchema(ctx context.Context) (schema.Schema) {
       "version": schema.Int64Attribute{
         Description: "The version number of the entity:\n- **Create entity:** Not valid for initial insertion of new entity - *do not use for Create*. On initial Create, version is set at 1 and listed in the response.\n- **Update Entity:**  On Update, version is required and must match the existing version because a check is performed to ensure sequential versioning is preserved. Version is incremented by 1 and listed in the response.",
         Optional: true,
-        PlanModifiers: []planmodifier.Int64{int64planmodifier.RequiresReplace()},
       },
       "account": schema.MapAttribute{
         Description: "Updates to Account entity CustomFields.",
         Optional: true,
         ElementType: types.DynamicType,
-        PlanModifiers: []planmodifier.Map{mapplanmodifier.RequiresReplace()},
       },
       "account_plan": schema.MapAttribute{
         Description: "Updates to accountPlan entity CustomFields.",
         Optional: true,
         ElementType: types.DynamicType,
-        PlanModifiers: []planmodifier.Map{mapplanmodifier.RequiresReplace()},
       },
       "aggregation": schema.MapAttribute{
         Description: "Updates to simple Aggregation entity CustomFields.",
         Optional: true,
         ElementType: types.DynamicType,
-        PlanModifiers: []planmodifier.Map{mapplanmodifier.RequiresReplace()},
       },
       "compound_aggregation": schema.MapAttribute{
         Description: "Updates to Compound Aggregation entity CustomFields.",
         Optional: true,
         ElementType: types.DynamicType,
-        PlanModifiers: []planmodifier.Map{mapplanmodifier.RequiresReplace()},
       },
       "meter": schema.MapAttribute{
         Description: "Updates to Meter entity CustomFields.",
         Optional: true,
         ElementType: types.DynamicType,
-        PlanModifiers: []planmodifier.Map{mapplanmodifier.RequiresReplace()},
       },
       "organization": schema.MapAttribute{
         Description: "Updates to Organization CustomFields.",
         Optional: true,
         ElementType: types.DynamicType,
-        PlanModifiers: []planmodifier.Map{mapplanmodifier.RequiresReplace()},
       },
       "plan": schema.MapAttribute{
         Description: "Updates to Plan entity CustomFields.",
         Optional: true,
         ElementType: types.DynamicType,
-        PlanModifiers: []planmodifier.Map{mapplanmodifier.RequiresReplace()},
       },
       "plan_template": schema.MapAttribute{
         Description: "Updates to planTemplate entity CustomFields.",
         Optional: true,
         ElementType: types.DynamicType,
-        PlanModifiers: []planmodifier.Map{mapplanmodifier.RequiresReplace()},
       },
       "product": schema.MapAttribute{
         Description: "Updates to Product entity CustomFields.",
         Optional: true,
         ElementType: types.DynamicType,
-        PlanModifiers: []planmodifier.Map{mapplanmodifier.RequiresReplace()},
       },
       "created_by": schema.StringAttribute{
         Description: "The id of the user who created this custom field.",
