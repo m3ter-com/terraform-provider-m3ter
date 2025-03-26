@@ -27,7 +27,11 @@ PermissionPolicy customfield.NestedObjectList[PermissionPolicyPermissionPolicyDa
 
 func (m *PermissionPolicyDataSourceModel) toReadParams(_ context.Context) (params m3ter.PermissionPolicyGetParams, diags diag.Diagnostics) {
   params = m3ter.PermissionPolicyGetParams{
-    OrgID: m3ter.F(m.OrgID.ValueString()),
+
+  }
+
+  if !m.OrgID.IsNull() {
+    params.OrgID = m3ter.F(m.OrgID.ValueString())
   }
 
   return

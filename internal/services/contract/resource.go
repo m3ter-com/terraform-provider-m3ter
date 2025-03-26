@@ -63,6 +63,14 @@ func (r *ContractResource) Create(ctx context.Context, req resource.CreateReques
     return
   }
 
+  params := m3ter.ContractNewParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   dataBytes, err := data.MarshalJSON()
   if err != nil {
     resp.Diagnostics.AddError("failed to serialize http request", err.Error())
@@ -71,9 +79,7 @@ func (r *ContractResource) Create(ctx context.Context, req resource.CreateReques
   res := new(http.Response)
   _, err = r.client.Contracts.New(
     ctx,
-    m3ter.ContractNewParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithRequestBody("application/json", dataBytes),
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
@@ -109,6 +115,14 @@ func (r *ContractResource) Update(ctx context.Context, req resource.UpdateReques
     return
   }
 
+  params := m3ter.ContractUpdateParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   dataBytes, err := data.MarshalJSONForUpdate(*state)
   if err != nil {
     resp.Diagnostics.AddError("failed to serialize http request", err.Error())
@@ -118,9 +132,7 @@ func (r *ContractResource) Update(ctx context.Context, req resource.UpdateReques
   _, err = r.client.Contracts.Update(
     ctx,
     data.ID.ValueString(),
-    m3ter.ContractUpdateParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithRequestBody("application/json", dataBytes),
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
@@ -148,13 +160,19 @@ func (r *ContractResource) Read(ctx context.Context, req resource.ReadRequest, r
     return
   }
 
+  params := m3ter.ContractGetParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   res := new(http.Response)
   _, err := r.client.Contracts.Get(
     ctx,
     data.ID.ValueString(),
-    m3ter.ContractGetParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
   )
@@ -186,12 +204,18 @@ func (r *ContractResource) Delete(ctx context.Context, req resource.DeleteReques
     return
   }
 
+  params := m3ter.ContractDeleteParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   _, err := r.client.Contracts.Delete(
     ctx,
     data.ID.ValueString(),
-    m3ter.ContractDeleteParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithMiddleware(logging.Middleware(ctx)),
   )
   if err != nil {

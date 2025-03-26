@@ -38,7 +38,11 @@ PricingBands customfield.NestedObjectList[CounterPricingPricingBandsDataSourceMo
 
 func (m *CounterPricingDataSourceModel) toReadParams(_ context.Context) (params m3ter.CounterPricingGetParams, diags diag.Diagnostics) {
   params = m3ter.CounterPricingGetParams{
-    OrgID: m3ter.F(m.OrgID.ValueString()),
+
+  }
+
+  if !m.OrgID.IsNull() {
+    params.OrgID = m3ter.F(m.OrgID.ValueString())
   }
 
   return

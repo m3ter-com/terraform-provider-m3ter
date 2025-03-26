@@ -17,7 +17,7 @@ Data customfield.NestedObjectList[CurrenciesItemsDataSourceModel] `json:"data,co
 }
 
 type CurrenciesDataSourceModel struct {
-OrgID types.String `tfsdk:"org_id" path:"orgId,required"`
+OrgID types.String `tfsdk:"org_id" path:"orgId,optional"`
 Archived types.Bool `tfsdk:"archived" query:"archived,optional"`
 Codes *[]types.String `tfsdk:"codes" query:"codes,optional"`
 IDs *[]types.String `tfsdk:"ids" query:"ids,optional"`
@@ -36,13 +36,15 @@ func (m *CurrenciesDataSourceModel) toListParams(_ context.Context) (params m3te
   }
 
   params = m3ter.CurrencyListParams{
-    OrgID: m3ter.F(m.OrgID.ValueString()),
     Codes: m3ter.F(mCodes),
     IDs: m3ter.F(mIDs),
   }
 
   if !m.Archived.IsNull() {
     params.Archived = m3ter.F(m.Archived.ValueBool())
+  }
+  if !m.OrgID.IsNull() {
+    params.OrgID = m3ter.F(m.OrgID.ValueString())
   }
 
   return

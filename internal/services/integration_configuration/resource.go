@@ -63,6 +63,14 @@ func (r *IntegrationConfigurationResource) Create(ctx context.Context, req resou
     return
   }
 
+  params := m3ter.IntegrationConfigurationNewParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   dataBytes, err := data.MarshalJSON()
   if err != nil {
     resp.Diagnostics.AddError("failed to serialize http request", err.Error())
@@ -71,9 +79,7 @@ func (r *IntegrationConfigurationResource) Create(ctx context.Context, req resou
   res := new(http.Response)
   _, err = r.client.IntegrationConfigurations.New(
     ctx,
-    m3ter.IntegrationConfigurationNewParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithRequestBody("application/json", dataBytes),
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
@@ -109,6 +115,14 @@ func (r *IntegrationConfigurationResource) Update(ctx context.Context, req resou
     return
   }
 
+  params := m3ter.IntegrationConfigurationUpdateParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   dataBytes, err := data.MarshalJSONForUpdate(*state)
   if err != nil {
     resp.Diagnostics.AddError("failed to serialize http request", err.Error())
@@ -118,9 +132,7 @@ func (r *IntegrationConfigurationResource) Update(ctx context.Context, req resou
   _, err = r.client.IntegrationConfigurations.Update(
     ctx,
     data.ID.ValueString(),
-    m3ter.IntegrationConfigurationUpdateParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithRequestBody("application/json", dataBytes),
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
@@ -148,13 +160,19 @@ func (r *IntegrationConfigurationResource) Read(ctx context.Context, req resourc
     return
   }
 
+  params := m3ter.IntegrationConfigurationGetParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   res := new(http.Response)
   _, err := r.client.IntegrationConfigurations.Get(
     ctx,
     data.ID.ValueString(),
-    m3ter.IntegrationConfigurationGetParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
   )
@@ -186,12 +204,18 @@ func (r *IntegrationConfigurationResource) Delete(ctx context.Context, req resou
     return
   }
 
+  params := m3ter.IntegrationConfigurationDeleteParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   _, err := r.client.IntegrationConfigurations.Delete(
     ctx,
     data.ID.ValueString(),
-    m3ter.IntegrationConfigurationDeleteParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithMiddleware(logging.Middleware(ctx)),
   )
   if err != nil {

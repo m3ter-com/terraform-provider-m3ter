@@ -63,6 +63,14 @@ func (r *CounterResource) Create(ctx context.Context, req resource.CreateRequest
     return
   }
 
+  params := m3ter.CounterNewParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   dataBytes, err := data.MarshalJSON()
   if err != nil {
     resp.Diagnostics.AddError("failed to serialize http request", err.Error())
@@ -71,9 +79,7 @@ func (r *CounterResource) Create(ctx context.Context, req resource.CreateRequest
   res := new(http.Response)
   _, err = r.client.Counters.New(
     ctx,
-    m3ter.CounterNewParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithRequestBody("application/json", dataBytes),
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
@@ -109,6 +115,14 @@ func (r *CounterResource) Update(ctx context.Context, req resource.UpdateRequest
     return
   }
 
+  params := m3ter.CounterUpdateParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   dataBytes, err := data.MarshalJSONForUpdate(*state)
   if err != nil {
     resp.Diagnostics.AddError("failed to serialize http request", err.Error())
@@ -118,9 +132,7 @@ func (r *CounterResource) Update(ctx context.Context, req resource.UpdateRequest
   _, err = r.client.Counters.Update(
     ctx,
     data.ID.ValueString(),
-    m3ter.CounterUpdateParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithRequestBody("application/json", dataBytes),
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
@@ -148,13 +160,19 @@ func (r *CounterResource) Read(ctx context.Context, req resource.ReadRequest, re
     return
   }
 
+  params := m3ter.CounterGetParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   res := new(http.Response)
   _, err := r.client.Counters.Get(
     ctx,
     data.ID.ValueString(),
-    m3ter.CounterGetParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
   )
@@ -186,12 +204,18 @@ func (r *CounterResource) Delete(ctx context.Context, req resource.DeleteRequest
     return
   }
 
+  params := m3ter.CounterDeleteParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   _, err := r.client.Counters.Delete(
     ctx,
     data.ID.ValueString(),
-    m3ter.CounterDeleteParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithMiddleware(logging.Middleware(ctx)),
   )
   if err != nil {

@@ -31,7 +31,11 @@ DerivedFields customfield.NestedObjectList[MeterDerivedFieldsDataSourceModel] `t
 
 func (m *MeterDataSourceModel) toReadParams(_ context.Context) (params m3ter.MeterGetParams, diags diag.Diagnostics) {
   params = m3ter.MeterGetParams{
-    OrgID: m3ter.F(m.OrgID.ValueString()),
+
+  }
+
+  if !m.OrgID.IsNull() {
+    params.OrgID = m3ter.F(m.OrgID.ValueString())
   }
 
   return

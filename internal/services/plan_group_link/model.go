@@ -10,7 +10,7 @@ import (
 
 type PlanGroupLinkModel struct {
 ID types.String `tfsdk:"id" json:"id,computed"`
-OrgID types.String `tfsdk:"org_id" path:"orgId,required"`
+OrgID types.String `tfsdk:"org_id" path:"orgId,optional"`
 PlanGroupID types.String `tfsdk:"plan_group_id" json:"planGroupId,required"`
 PlanID types.String `tfsdk:"plan_id" json:"planId,required"`
 Version types.Int64 `tfsdk:"version" json:"version,optional"`

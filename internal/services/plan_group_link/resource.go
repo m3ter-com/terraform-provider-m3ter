@@ -63,6 +63,14 @@ func (r *PlanGroupLinkResource) Create(ctx context.Context, req resource.CreateR
     return
   }
 
+  params := m3ter.PlanGroupLinkNewParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   dataBytes, err := data.MarshalJSON()
   if err != nil {
     resp.Diagnostics.AddError("failed to serialize http request", err.Error())
@@ -71,9 +79,7 @@ func (r *PlanGroupLinkResource) Create(ctx context.Context, req resource.CreateR
   res := new(http.Response)
   _, err = r.client.PlanGroupLinks.New(
     ctx,
-    m3ter.PlanGroupLinkNewParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithRequestBody("application/json", dataBytes),
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
@@ -109,6 +115,14 @@ func (r *PlanGroupLinkResource) Update(ctx context.Context, req resource.UpdateR
     return
   }
 
+  params := m3ter.PlanGroupLinkUpdateParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   dataBytes, err := data.MarshalJSONForUpdate(*state)
   if err != nil {
     resp.Diagnostics.AddError("failed to serialize http request", err.Error())
@@ -118,9 +132,7 @@ func (r *PlanGroupLinkResource) Update(ctx context.Context, req resource.UpdateR
   _, err = r.client.PlanGroupLinks.Update(
     ctx,
     data.ID.ValueString(),
-    m3ter.PlanGroupLinkUpdateParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithRequestBody("application/json", dataBytes),
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
@@ -148,13 +160,19 @@ func (r *PlanGroupLinkResource) Read(ctx context.Context, req resource.ReadReque
     return
   }
 
+  params := m3ter.PlanGroupLinkGetParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   res := new(http.Response)
   _, err := r.client.PlanGroupLinks.Get(
     ctx,
     data.ID.ValueString(),
-    m3ter.PlanGroupLinkGetParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
   )
@@ -186,12 +204,18 @@ func (r *PlanGroupLinkResource) Delete(ctx context.Context, req resource.DeleteR
     return
   }
 
+  params := m3ter.PlanGroupLinkDeleteParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   _, err := r.client.PlanGroupLinks.Delete(
     ctx,
     data.ID.ValueString(),
-    m3ter.PlanGroupLinkDeleteParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithMiddleware(logging.Middleware(ctx)),
   )
   if err != nil {

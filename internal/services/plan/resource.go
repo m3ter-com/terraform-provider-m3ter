@@ -63,6 +63,14 @@ func (r *PlanResource) Create(ctx context.Context, req resource.CreateRequest, r
     return
   }
 
+  params := m3ter.PlanNewParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   dataBytes, err := data.MarshalJSON()
   if err != nil {
     resp.Diagnostics.AddError("failed to serialize http request", err.Error())
@@ -71,9 +79,7 @@ func (r *PlanResource) Create(ctx context.Context, req resource.CreateRequest, r
   res := new(http.Response)
   _, err = r.client.Plans.New(
     ctx,
-    m3ter.PlanNewParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithRequestBody("application/json", dataBytes),
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
@@ -109,6 +115,14 @@ func (r *PlanResource) Update(ctx context.Context, req resource.UpdateRequest, r
     return
   }
 
+  params := m3ter.PlanUpdateParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   dataBytes, err := data.MarshalJSONForUpdate(*state)
   if err != nil {
     resp.Diagnostics.AddError("failed to serialize http request", err.Error())
@@ -118,9 +132,7 @@ func (r *PlanResource) Update(ctx context.Context, req resource.UpdateRequest, r
   _, err = r.client.Plans.Update(
     ctx,
     data.ID.ValueString(),
-    m3ter.PlanUpdateParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithRequestBody("application/json", dataBytes),
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
@@ -148,13 +160,19 @@ func (r *PlanResource) Read(ctx context.Context, req resource.ReadRequest, resp 
     return
   }
 
+  params := m3ter.PlanGetParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   res := new(http.Response)
   _, err := r.client.Plans.Get(
     ctx,
     data.ID.ValueString(),
-    m3ter.PlanGetParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
   )
@@ -186,12 +204,18 @@ func (r *PlanResource) Delete(ctx context.Context, req resource.DeleteRequest, r
     return
   }
 
+  params := m3ter.PlanDeleteParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   _, err := r.client.Plans.Delete(
     ctx,
     data.ID.ValueString(),
-    m3ter.PlanDeleteParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithMiddleware(logging.Middleware(ctx)),
   )
   if err != nil {

@@ -23,7 +23,7 @@ func ListDataSourceSchema(ctx context.Context) (schema.Schema) {
         Required: true,
       },
       "org_id": schema.StringAttribute{
-        Required: true,
+        Optional: true,
       },
       "transaction_type_id": schema.StringAttribute{
         Optional: true,

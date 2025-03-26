@@ -18,7 +18,7 @@ Data customfield.NestedObjectList[EventsItemsDataSourceModel] `json:"data,comput
 }
 
 type EventsDataSourceModel struct {
-OrgID types.String `tfsdk:"org_id" path:"orgId,required"`
+OrgID types.String `tfsdk:"org_id" path:"orgId,optional"`
 AccountID types.String `tfsdk:"account_id" query:"accountId,optional"`
 EventName types.String `tfsdk:"event_name" query:"eventName,optional"`
 EventType types.String `tfsdk:"event_type" query:"eventType,optional"`
@@ -38,7 +38,6 @@ func (m *EventsDataSourceModel) toListParams(_ context.Context) (params m3ter.Ev
   }
 
   params = m3ter.EventListParams{
-    OrgID: m3ter.F(m.OrgID.ValueString()),
     IDs: m3ter.F(mIDs),
   }
 
@@ -62,6 +61,9 @@ func (m *EventsDataSourceModel) toListParams(_ context.Context) (params m3ter.Ev
   }
   if !m.ResourceID.IsNull() {
     params.ResourceID = m3ter.F(m.ResourceID.ValueString())
+  }
+  if !m.OrgID.IsNull() {
+    params.OrgID = m3ter.F(m.OrgID.ValueString())
   }
 
   return

@@ -17,14 +17,18 @@ Data customfield.NestedObjectList[UserInvitationsItemsDataSourceModel] `json:"da
 }
 
 type UserInvitationsDataSourceModel struct {
-OrgID types.String `tfsdk:"org_id" path:"orgId,required"`
+OrgID types.String `tfsdk:"org_id" path:"orgId,optional"`
 MaxItems types.Int64 `tfsdk:"max_items"`
 Items customfield.NestedObjectList[UserInvitationsItemsDataSourceModel] `tfsdk:"items"`
 }
 
 func (m *UserInvitationsDataSourceModel) toListParams(_ context.Context) (params m3ter.UserInvitationListParams, diags diag.Diagnostics) {
   params = m3ter.UserInvitationListParams{
-    OrgID: m3ter.F(m.OrgID.ValueString()),
+
+  }
+
+  if !m.OrgID.IsNull() {
+    params.OrgID = m3ter.F(m.OrgID.ValueString())
   }
 
   return

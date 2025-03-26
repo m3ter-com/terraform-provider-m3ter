@@ -11,7 +11,7 @@ import (
 
 type BillJobModel struct {
 ID types.String `tfsdk:"id" json:"id,computed"`
-OrgID types.String `tfsdk:"org_id" path:"orgId,required"`
+OrgID types.String `tfsdk:"org_id" path:"orgId,optional"`
 BillDate timetypes.RFC3339 `tfsdk:"bill_date" json:"billDate,optional" format:"date"`
 BillFrequencyInterval types.Int64 `tfsdk:"bill_frequency_interval" json:"billFrequencyInterval,optional"`
 BillingFrequency types.String `tfsdk:"billing_frequency" json:"billingFrequency,optional"`

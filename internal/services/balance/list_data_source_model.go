@@ -17,7 +17,7 @@ Data customfield.NestedObjectList[BalancesItemsDataSourceModel] `json:"data,comp
 }
 
 type BalancesDataSourceModel struct {
-OrgID types.String `tfsdk:"org_id" path:"orgId,required"`
+OrgID types.String `tfsdk:"org_id" path:"orgId,optional"`
 AccountID types.String `tfsdk:"account_id" query:"accountId,optional"`
 EndDateEnd types.String `tfsdk:"end_date_end" query:"endDateEnd,optional"`
 EndDateStart types.String `tfsdk:"end_date_start" query:"endDateStart,optional"`
@@ -27,7 +27,7 @@ Items customfield.NestedObjectList[BalancesItemsDataSourceModel] `tfsdk:"items"`
 
 func (m *BalancesDataSourceModel) toListParams(_ context.Context) (params m3ter.BalanceListParams, diags diag.Diagnostics) {
   params = m3ter.BalanceListParams{
-    OrgID: m3ter.F(m.OrgID.ValueString()),
+
   }
 
   if !m.AccountID.IsNull() {
@@ -38,6 +38,9 @@ func (m *BalancesDataSourceModel) toListParams(_ context.Context) (params m3ter.
   }
   if !m.EndDateStart.IsNull() {
     params.EndDateStart = m3ter.F(m.EndDateStart.ValueString())
+  }
+  if !m.OrgID.IsNull() {
+    params.OrgID = m3ter.F(m.OrgID.ValueString())
   }
 
   return

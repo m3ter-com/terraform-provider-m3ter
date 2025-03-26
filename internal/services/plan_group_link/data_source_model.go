@@ -25,7 +25,11 @@ Version types.Int64 `tfsdk:"version" json:"version,computed"`
 
 func (m *PlanGroupLinkDataSourceModel) toReadParams(_ context.Context) (params m3ter.PlanGroupLinkGetParams, diags diag.Diagnostics) {
   params = m3ter.PlanGroupLinkGetParams{
-    OrgID: m3ter.F(m.OrgID.ValueString()),
+
+  }
+
+  if !m.OrgID.IsNull() {
+    params.OrgID = m3ter.F(m.OrgID.ValueString())
   }
 
   return

@@ -37,7 +37,11 @@ CustomFields customfield.Map[types.Dynamic] `tfsdk:"custom_fields" json:"customF
 
 func (m *PlanGroupDataSourceModel) toReadParams(_ context.Context) (params m3ter.PlanGroupGetParams, diags diag.Diagnostics) {
   params = m3ter.PlanGroupGetParams{
-    OrgID: m3ter.F(m.OrgID.ValueString()),
+
+  }
+
+  if !m.OrgID.IsNull() {
+    params.OrgID = m3ter.F(m.OrgID.ValueString())
   }
 
   return

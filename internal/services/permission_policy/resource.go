@@ -63,6 +63,14 @@ func (r *PermissionPolicyResource) Create(ctx context.Context, req resource.Crea
     return
   }
 
+  params := m3ter.PermissionPolicyNewParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   dataBytes, err := data.MarshalJSON()
   if err != nil {
     resp.Diagnostics.AddError("failed to serialize http request", err.Error())
@@ -71,9 +79,7 @@ func (r *PermissionPolicyResource) Create(ctx context.Context, req resource.Crea
   res := new(http.Response)
   _, err = r.client.PermissionPolicies.New(
     ctx,
-    m3ter.PermissionPolicyNewParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithRequestBody("application/json", dataBytes),
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
@@ -109,6 +115,14 @@ func (r *PermissionPolicyResource) Update(ctx context.Context, req resource.Upda
     return
   }
 
+  params := m3ter.PermissionPolicyUpdateParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   dataBytes, err := data.MarshalJSONForUpdate(*state)
   if err != nil {
     resp.Diagnostics.AddError("failed to serialize http request", err.Error())
@@ -118,9 +132,7 @@ func (r *PermissionPolicyResource) Update(ctx context.Context, req resource.Upda
   _, err = r.client.PermissionPolicies.Update(
     ctx,
     data.ID.ValueString(),
-    m3ter.PermissionPolicyUpdateParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithRequestBody("application/json", dataBytes),
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
@@ -148,13 +160,19 @@ func (r *PermissionPolicyResource) Read(ctx context.Context, req resource.ReadRe
     return
   }
 
+  params := m3ter.PermissionPolicyGetParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   res := new(http.Response)
   _, err := r.client.PermissionPolicies.Get(
     ctx,
     data.ID.ValueString(),
-    m3ter.PermissionPolicyGetParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
   )
@@ -186,12 +204,18 @@ func (r *PermissionPolicyResource) Delete(ctx context.Context, req resource.Dele
     return
   }
 
+  params := m3ter.PermissionPolicyDeleteParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   _, err := r.client.PermissionPolicies.Delete(
     ctx,
     data.ID.ValueString(),
-    m3ter.PermissionPolicyDeleteParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithMiddleware(logging.Middleware(ctx)),
   )
   if err != nil {

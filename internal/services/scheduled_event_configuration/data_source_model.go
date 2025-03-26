@@ -27,7 +27,11 @@ Version types.Int64 `tfsdk:"version" json:"version,computed"`
 
 func (m *ScheduledEventConfigurationDataSourceModel) toReadParams(_ context.Context) (params m3ter.ScheduledEventConfigurationGetParams, diags diag.Diagnostics) {
   params = m3ter.ScheduledEventConfigurationGetParams{
-    OrgID: m3ter.F(m.OrgID.ValueString()),
+
+  }
+
+  if !m.OrgID.IsNull() {
+    params.OrgID = m3ter.F(m.OrgID.ValueString())
   }
 
   return

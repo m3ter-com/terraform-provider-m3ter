@@ -16,7 +16,7 @@ Data customfield.NestedObjectList[UsageFileUploadJobsItemsDataSourceModel] `json
 }
 
 type UsageFileUploadJobsDataSourceModel struct {
-OrgID types.String `tfsdk:"org_id" path:"orgId,required"`
+OrgID types.String `tfsdk:"org_id" path:"orgId,optional"`
 DateCreatedEnd types.String `tfsdk:"date_created_end" query:"dateCreatedEnd,optional"`
 DateCreatedStart types.String `tfsdk:"date_created_start" query:"dateCreatedStart,optional"`
 FileKey types.String `tfsdk:"file_key" query:"fileKey,optional"`
@@ -26,7 +26,7 @@ Items customfield.NestedObjectList[UsageFileUploadJobsItemsDataSourceModel] `tfs
 
 func (m *UsageFileUploadJobsDataSourceModel) toListParams(_ context.Context) (params m3ter.UsageFileUploadJobListParams, diags diag.Diagnostics) {
   params = m3ter.UsageFileUploadJobListParams{
-    OrgID: m3ter.F(m.OrgID.ValueString()),
+
   }
 
   if !m.DateCreatedEnd.IsNull() {
@@ -37,6 +37,9 @@ func (m *UsageFileUploadJobsDataSourceModel) toListParams(_ context.Context) (pa
   }
   if !m.FileKey.IsNull() {
     params.FileKey = m3ter.F(m.FileKey.ValueString())
+  }
+  if !m.OrgID.IsNull() {
+    params.OrgID = m3ter.F(m.OrgID.ValueString())
   }
 
   return

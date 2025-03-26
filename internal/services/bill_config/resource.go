@@ -63,6 +63,14 @@ func (r *BillConfigResource) Create(ctx context.Context, req resource.CreateRequ
     return
   }
 
+  params := m3ter.BillConfigUpdateParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   dataBytes, err := data.MarshalJSON()
   if err != nil {
     resp.Diagnostics.AddError("failed to serialize http request", err.Error())
@@ -71,9 +79,7 @@ func (r *BillConfigResource) Create(ctx context.Context, req resource.CreateRequ
   res := new(http.Response)
   _, err = r.client.BillConfig.Update(
     ctx,
-    m3ter.BillConfigUpdateParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithRequestBody("application/json", dataBytes),
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
@@ -109,6 +115,14 @@ func (r *BillConfigResource) Update(ctx context.Context, req resource.UpdateRequ
     return
   }
 
+  params := m3ter.BillConfigUpdateParams{
+
+  }
+
+  if !data.ID.IsNull() {
+    params.OrgID = m3ter.F(data.ID.ValueString())
+  }
+
   dataBytes, err := data.MarshalJSONForUpdate(*state)
   if err != nil {
     resp.Diagnostics.AddError("failed to serialize http request", err.Error())
@@ -117,9 +131,7 @@ func (r *BillConfigResource) Update(ctx context.Context, req resource.UpdateRequ
   res := new(http.Response)
   _, err = r.client.BillConfig.Update(
     ctx,
-    m3ter.BillConfigUpdateParams{
-      OrgID: m3ter.F(data.ID.ValueString()),
-    },
+    params,
     option.WithRequestBody("application/json", dataBytes),
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
@@ -147,12 +159,18 @@ func (r *BillConfigResource) Read(ctx context.Context, req resource.ReadRequest,
     return
   }
 
+  params := m3ter.BillConfigGetParams{
+
+  }
+
+  if !data.ID.IsNull() {
+    params.OrgID = m3ter.F(data.ID.ValueString())
+  }
+
   res := new(http.Response)
   _, err := r.client.BillConfig.Get(
     ctx,
-    m3ter.BillConfigGetParams{
-      OrgID: m3ter.F(data.ID.ValueString()),
-    },
+    params,
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
   )

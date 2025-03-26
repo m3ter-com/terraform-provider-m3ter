@@ -63,6 +63,14 @@ func (r *CompoundAggregationResource) Create(ctx context.Context, req resource.C
     return
   }
 
+  params := m3ter.CompoundAggregationNewParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   dataBytes, err := data.MarshalJSON()
   if err != nil {
     resp.Diagnostics.AddError("failed to serialize http request", err.Error())
@@ -71,9 +79,7 @@ func (r *CompoundAggregationResource) Create(ctx context.Context, req resource.C
   res := new(http.Response)
   _, err = r.client.CompoundAggregations.New(
     ctx,
-    m3ter.CompoundAggregationNewParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithRequestBody("application/json", dataBytes),
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
@@ -109,6 +115,14 @@ func (r *CompoundAggregationResource) Update(ctx context.Context, req resource.U
     return
   }
 
+  params := m3ter.CompoundAggregationUpdateParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   dataBytes, err := data.MarshalJSONForUpdate(*state)
   if err != nil {
     resp.Diagnostics.AddError("failed to serialize http request", err.Error())
@@ -118,9 +132,7 @@ func (r *CompoundAggregationResource) Update(ctx context.Context, req resource.U
   _, err = r.client.CompoundAggregations.Update(
     ctx,
     data.ID.ValueString(),
-    m3ter.CompoundAggregationUpdateParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithRequestBody("application/json", dataBytes),
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
@@ -148,13 +160,19 @@ func (r *CompoundAggregationResource) Read(ctx context.Context, req resource.Rea
     return
   }
 
+  params := m3ter.CompoundAggregationGetParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   res := new(http.Response)
   _, err := r.client.CompoundAggregations.Get(
     ctx,
     data.ID.ValueString(),
-    m3ter.CompoundAggregationGetParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
   )
@@ -186,12 +204,18 @@ func (r *CompoundAggregationResource) Delete(ctx context.Context, req resource.D
     return
   }
 
+  params := m3ter.CompoundAggregationDeleteParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   _, err := r.client.CompoundAggregations.Delete(
     ctx,
     data.ID.ValueString(),
-    m3ter.CompoundAggregationDeleteParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithMiddleware(logging.Middleware(ctx)),
   )
   if err != nil {

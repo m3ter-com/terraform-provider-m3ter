@@ -11,7 +11,7 @@ import (
 
 type PricingModel struct {
 ID types.String `tfsdk:"id" json:"id,computed"`
-OrgID types.String `tfsdk:"org_id" path:"orgId,required"`
+OrgID types.String `tfsdk:"org_id" path:"orgId,optional"`
 StartDate timetypes.RFC3339 `tfsdk:"start_date" json:"startDate,required" format:"date-time"`
 PricingBands *[]*PricingPricingBandsModel `tfsdk:"pricing_bands" json:"pricingBands,required"`
 AccountingProductID types.String `tfsdk:"accounting_product_id" json:"accountingProductId,optional"`

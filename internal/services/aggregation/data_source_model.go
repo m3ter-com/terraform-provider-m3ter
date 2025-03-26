@@ -38,7 +38,11 @@ Segments customfield.List[customfield.Map[types.String]] `tfsdk:"segments" json:
 
 func (m *AggregationDataSourceModel) toReadParams(_ context.Context) (params m3ter.AggregationGetParams, diags diag.Diagnostics) {
   params = m3ter.AggregationGetParams{
-    OrgID: m3ter.F(m.OrgID.ValueString()),
+
+  }
+
+  if !m.OrgID.IsNull() {
+    params.OrgID = m3ter.F(m.OrgID.ValueString())
   }
 
   return

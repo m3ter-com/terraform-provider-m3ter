@@ -10,7 +10,7 @@ import (
 
 type PermissionPolicyModel struct {
 ID types.String `tfsdk:"id" json:"id,computed"`
-OrgID types.String `tfsdk:"org_id" path:"orgId,required"`
+OrgID types.String `tfsdk:"org_id" path:"orgId,optional"`
 Name types.String `tfsdk:"name" json:"name,required"`
 PermissionPolicy *[]*PermissionPolicyPermissionPolicyModel `tfsdk:"permission_policy" json:"permissionPolicy,required"`
 Version types.Int64 `tfsdk:"version" json:"version,optional"`

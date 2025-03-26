@@ -43,7 +43,11 @@ CurrencyConversions customfield.NestedObjectList[BillJobCurrencyConversionsDataS
 
 func (m *BillJobDataSourceModel) toReadParams(_ context.Context) (params m3ter.BillJobGetParams, diags diag.Diagnostics) {
   params = m3ter.BillJobGetParams{
-    OrgID: m3ter.F(m.OrgID.ValueString()),
+
+  }
+
+  if !m.OrgID.IsNull() {
+    params.OrgID = m3ter.F(m.OrgID.ValueString())
   }
 
   return

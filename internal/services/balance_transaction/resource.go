@@ -60,6 +60,14 @@ func (r *BalanceTransactionResource) Create(ctx context.Context, req resource.Cr
     return
   }
 
+  params := m3ter.BalanceTransactionNewParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   dataBytes, err := data.MarshalJSON()
   if err != nil {
     resp.Diagnostics.AddError("failed to serialize http request", err.Error())
@@ -69,9 +77,7 @@ func (r *BalanceTransactionResource) Create(ctx context.Context, req resource.Cr
   _, err = r.client.Balances.Transactions.New(
     ctx,
     data.BalanceID.ValueString(),
-    m3ter.BalanceTransactionNewParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithRequestBody("application/json", dataBytes),
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),

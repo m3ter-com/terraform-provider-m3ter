@@ -32,7 +32,11 @@ CustomFields customfield.Map[types.Dynamic] `tfsdk:"custom_fields" json:"customF
 
 func (m *ContractDataSourceModel) toReadParams(_ context.Context) (params m3ter.ContractGetParams, diags diag.Diagnostics) {
   params = m3ter.ContractGetParams{
-    OrgID: m3ter.F(m.OrgID.ValueString()),
+
+  }
+
+  if !m.OrgID.IsNull() {
+    params.OrgID = m3ter.F(m.OrgID.ValueString())
   }
 
   return

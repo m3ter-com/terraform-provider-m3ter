@@ -63,6 +63,14 @@ func (r *MeterResource) Create(ctx context.Context, req resource.CreateRequest, 
     return
   }
 
+  params := m3ter.MeterNewParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   dataBytes, err := data.MarshalJSON()
   if err != nil {
     resp.Diagnostics.AddError("failed to serialize http request", err.Error())
@@ -71,9 +79,7 @@ func (r *MeterResource) Create(ctx context.Context, req resource.CreateRequest, 
   res := new(http.Response)
   _, err = r.client.Meters.New(
     ctx,
-    m3ter.MeterNewParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithRequestBody("application/json", dataBytes),
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
@@ -109,6 +115,14 @@ func (r *MeterResource) Update(ctx context.Context, req resource.UpdateRequest, 
     return
   }
 
+  params := m3ter.MeterUpdateParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   dataBytes, err := data.MarshalJSONForUpdate(*state)
   if err != nil {
     resp.Diagnostics.AddError("failed to serialize http request", err.Error())
@@ -118,9 +132,7 @@ func (r *MeterResource) Update(ctx context.Context, req resource.UpdateRequest, 
   _, err = r.client.Meters.Update(
     ctx,
     data.ID.ValueString(),
-    m3ter.MeterUpdateParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithRequestBody("application/json", dataBytes),
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
@@ -148,13 +160,19 @@ func (r *MeterResource) Read(ctx context.Context, req resource.ReadRequest, resp
     return
   }
 
+  params := m3ter.MeterGetParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   res := new(http.Response)
   _, err := r.client.Meters.Get(
     ctx,
     data.ID.ValueString(),
-    m3ter.MeterGetParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
   )
@@ -186,12 +204,18 @@ func (r *MeterResource) Delete(ctx context.Context, req resource.DeleteRequest, 
     return
   }
 
+  params := m3ter.MeterDeleteParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   _, err := r.client.Meters.Delete(
     ctx,
     data.ID.ValueString(),
-    m3ter.MeterDeleteParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithMiddleware(logging.Middleware(ctx)),
   )
   if err != nil {

@@ -63,6 +63,14 @@ func (r *DebitReasonResource) Create(ctx context.Context, req resource.CreateReq
     return
   }
 
+  params := m3ter.DebitReasonNewParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   dataBytes, err := data.MarshalJSON()
   if err != nil {
     resp.Diagnostics.AddError("failed to serialize http request", err.Error())
@@ -71,9 +79,7 @@ func (r *DebitReasonResource) Create(ctx context.Context, req resource.CreateReq
   res := new(http.Response)
   _, err = r.client.DebitReasons.New(
     ctx,
-    m3ter.DebitReasonNewParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithRequestBody("application/json", dataBytes),
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
@@ -109,6 +115,14 @@ func (r *DebitReasonResource) Update(ctx context.Context, req resource.UpdateReq
     return
   }
 
+  params := m3ter.DebitReasonUpdateParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   dataBytes, err := data.MarshalJSONForUpdate(*state)
   if err != nil {
     resp.Diagnostics.AddError("failed to serialize http request", err.Error())
@@ -118,9 +132,7 @@ func (r *DebitReasonResource) Update(ctx context.Context, req resource.UpdateReq
   _, err = r.client.DebitReasons.Update(
     ctx,
     data.ID.ValueString(),
-    m3ter.DebitReasonUpdateParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithRequestBody("application/json", dataBytes),
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
@@ -148,13 +160,19 @@ func (r *DebitReasonResource) Read(ctx context.Context, req resource.ReadRequest
     return
   }
 
+  params := m3ter.DebitReasonGetParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   res := new(http.Response)
   _, err := r.client.DebitReasons.Get(
     ctx,
     data.ID.ValueString(),
-    m3ter.DebitReasonGetParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
   )
@@ -186,12 +204,18 @@ func (r *DebitReasonResource) Delete(ctx context.Context, req resource.DeleteReq
     return
   }
 
+  params := m3ter.DebitReasonDeleteParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   _, err := r.client.DebitReasons.Delete(
     ctx,
     data.ID.ValueString(),
-    m3ter.DebitReasonDeleteParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithMiddleware(logging.Middleware(ctx)),
   )
   if err != nil {

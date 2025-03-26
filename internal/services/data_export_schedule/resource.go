@@ -63,6 +63,14 @@ func (r *DataExportScheduleResource) Create(ctx context.Context, req resource.Cr
     return
   }
 
+  params := m3ter.DataExportScheduleNewParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   dataBytes, err := data.MarshalJSON()
   if err != nil {
     resp.Diagnostics.AddError("failed to serialize http request", err.Error())
@@ -71,9 +79,7 @@ func (r *DataExportScheduleResource) Create(ctx context.Context, req resource.Cr
   res := new(http.Response)
   _, err = r.client.DataExports.Schedules.New(
     ctx,
-    m3ter.DataExportScheduleNewParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithRequestBody("application/json", dataBytes),
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
@@ -109,6 +115,14 @@ func (r *DataExportScheduleResource) Update(ctx context.Context, req resource.Up
     return
   }
 
+  params := m3ter.DataExportScheduleUpdateParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   dataBytes, err := data.MarshalJSONForUpdate(*state)
   if err != nil {
     resp.Diagnostics.AddError("failed to serialize http request", err.Error())
@@ -118,9 +132,7 @@ func (r *DataExportScheduleResource) Update(ctx context.Context, req resource.Up
   _, err = r.client.DataExports.Schedules.Update(
     ctx,
     data.ID.ValueString(),
-    m3ter.DataExportScheduleUpdateParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithRequestBody("application/json", dataBytes),
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
@@ -148,13 +160,19 @@ func (r *DataExportScheduleResource) Read(ctx context.Context, req resource.Read
     return
   }
 
+  params := m3ter.DataExportScheduleGetParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   res := new(http.Response)
   _, err := r.client.DataExports.Schedules.Get(
     ctx,
     data.ID.ValueString(),
-    m3ter.DataExportScheduleGetParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
   )
@@ -186,12 +204,18 @@ func (r *DataExportScheduleResource) Delete(ctx context.Context, req resource.De
     return
   }
 
+  params := m3ter.DataExportScheduleDeleteParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   _, err := r.client.DataExports.Schedules.Delete(
     ctx,
     data.ID.ValueString(),
-    m3ter.DataExportScheduleDeleteParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithMiddleware(logging.Middleware(ctx)),
   )
   if err != nil {

@@ -24,7 +24,7 @@ func ListDataSourceSchema(ctx context.Context) (schema.Schema) {
         Required: true,
       },
       "org_id": schema.StringAttribute{
-        Required: true,
+        Optional: true,
       },
       "max_items": schema.Int64Attribute{
         Description: "Max items to fetch, default: 1000",

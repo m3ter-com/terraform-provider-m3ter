@@ -17,14 +17,18 @@ Data customfield.NestedObjectList[PermissionPoliciesItemsDataSourceModel] `json:
 }
 
 type PermissionPoliciesDataSourceModel struct {
-OrgID types.String `tfsdk:"org_id" path:"orgId,required"`
+OrgID types.String `tfsdk:"org_id" path:"orgId,optional"`
 MaxItems types.Int64 `tfsdk:"max_items"`
 Items customfield.NestedObjectList[PermissionPoliciesItemsDataSourceModel] `tfsdk:"items"`
 }
 
 func (m *PermissionPoliciesDataSourceModel) toListParams(_ context.Context) (params m3ter.PermissionPolicyListParams, diags diag.Diagnostics) {
   params = m3ter.PermissionPolicyListParams{
-    OrgID: m3ter.F(m.OrgID.ValueString()),
+
+  }
+
+  if !m.OrgID.IsNull() {
+    params.OrgID = m3ter.F(m.OrgID.ValueString())
   }
 
   return

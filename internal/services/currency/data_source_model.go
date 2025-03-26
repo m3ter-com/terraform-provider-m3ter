@@ -28,7 +28,11 @@ Version types.Int64 `tfsdk:"version" json:"version,computed"`
 
 func (m *CurrencyDataSourceModel) toReadParams(_ context.Context) (params m3ter.CurrencyGetParams, diags diag.Diagnostics) {
   params = m3ter.CurrencyGetParams{
-    OrgID: m3ter.F(m.OrgID.ValueString()),
+
+  }
+
+  if !m.OrgID.IsNull() {
+    params.OrgID = m3ter.F(m.OrgID.ValueString())
   }
 
   return

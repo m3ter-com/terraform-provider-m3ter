@@ -17,7 +17,7 @@ Data customfield.NestedObjectList[NotificationConfigurationsItemsDataSourceModel
 }
 
 type NotificationConfigurationsDataSourceModel struct {
-OrgID types.String `tfsdk:"org_id" path:"orgId,required"`
+OrgID types.String `tfsdk:"org_id" path:"orgId,optional"`
 Active types.Bool `tfsdk:"active" query:"active,optional"`
 EventName types.String `tfsdk:"event_name" query:"eventName,optional"`
 IDs *[]types.String `tfsdk:"ids" query:"ids,optional"`
@@ -32,7 +32,6 @@ func (m *NotificationConfigurationsDataSourceModel) toListParams(_ context.Conte
   }
 
   params = m3ter.NotificationConfigurationListParams{
-    OrgID: m3ter.F(m.OrgID.ValueString()),
     IDs: m3ter.F(mIDs),
   }
 
@@ -41,6 +40,9 @@ func (m *NotificationConfigurationsDataSourceModel) toListParams(_ context.Conte
   }
   if !m.EventName.IsNull() {
     params.EventName = m3ter.F(m.EventName.ValueString())
+  }
+  if !m.OrgID.IsNull() {
+    params.OrgID = m3ter.F(m.OrgID.ValueString())
   }
 
   return

@@ -10,7 +10,7 @@ import (
 
 type BillConfigModel struct {
 ID types.String `tfsdk:"id" json:"id,computed"`
-OrgID types.String `tfsdk:"org_id" path:"orgId,required"`
+OrgID types.String `tfsdk:"org_id" path:"orgId,optional"`
 BillLockDate timetypes.RFC3339 `tfsdk:"bill_lock_date" json:"billLockDate,optional" format:"date"`
 Version types.Int64 `tfsdk:"version" json:"version,optional"`
 CreatedBy types.String `tfsdk:"created_by" json:"createdBy,computed"`

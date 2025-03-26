@@ -63,6 +63,14 @@ func (r *NotificationConfigurationResource) Create(ctx context.Context, req reso
     return
   }
 
+  params := m3ter.NotificationConfigurationNewParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   dataBytes, err := data.MarshalJSON()
   if err != nil {
     resp.Diagnostics.AddError("failed to serialize http request", err.Error())
@@ -71,9 +79,7 @@ func (r *NotificationConfigurationResource) Create(ctx context.Context, req reso
   res := new(http.Response)
   _, err = r.client.NotificationConfigurations.New(
     ctx,
-    m3ter.NotificationConfigurationNewParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithRequestBody("application/json", dataBytes),
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
@@ -109,6 +115,14 @@ func (r *NotificationConfigurationResource) Update(ctx context.Context, req reso
     return
   }
 
+  params := m3ter.NotificationConfigurationUpdateParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   dataBytes, err := data.MarshalJSONForUpdate(*state)
   if err != nil {
     resp.Diagnostics.AddError("failed to serialize http request", err.Error())
@@ -118,9 +132,7 @@ func (r *NotificationConfigurationResource) Update(ctx context.Context, req reso
   _, err = r.client.NotificationConfigurations.Update(
     ctx,
     data.ID.ValueString(),
-    m3ter.NotificationConfigurationUpdateParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithRequestBody("application/json", dataBytes),
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
@@ -148,13 +160,19 @@ func (r *NotificationConfigurationResource) Read(ctx context.Context, req resour
     return
   }
 
+  params := m3ter.NotificationConfigurationGetParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   res := new(http.Response)
   _, err := r.client.NotificationConfigurations.Get(
     ctx,
     data.ID.ValueString(),
-    m3ter.NotificationConfigurationGetParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
   )
@@ -186,12 +204,18 @@ func (r *NotificationConfigurationResource) Delete(ctx context.Context, req reso
     return
   }
 
+  params := m3ter.NotificationConfigurationDeleteParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   _, err := r.client.NotificationConfigurations.Delete(
     ctx,
     data.ID.ValueString(),
-    m3ter.NotificationConfigurationDeleteParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithMiddleware(logging.Middleware(ctx)),
   )
   if err != nil {

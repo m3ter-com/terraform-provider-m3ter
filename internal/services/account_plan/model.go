@@ -10,7 +10,7 @@ import (
 
 type AccountPlanModel struct {
 ID types.String `tfsdk:"id" json:"id,computed"`
-OrgID types.String `tfsdk:"org_id" path:"orgId,required"`
+OrgID types.String `tfsdk:"org_id" path:"orgId,optional"`
 AccountID types.String `tfsdk:"account_id" json:"accountId,required"`
 StartDate timetypes.RFC3339 `tfsdk:"start_date" json:"startDate,required" format:"date-time"`
 BillEpoch timetypes.RFC3339 `tfsdk:"bill_epoch" json:"billEpoch,optional" format:"date"`

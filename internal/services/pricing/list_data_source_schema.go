@@ -22,7 +22,7 @@ func ListDataSourceSchema(ctx context.Context) (schema.Schema) {
   return schema.Schema{
     Attributes: map[string]schema.Attribute{
       "org_id": schema.StringAttribute{
-        Required: true,
+        Optional: true,
       },
       "date": schema.StringAttribute{
         Description: "Date on which to retrieve active Pricings.",

@@ -63,6 +63,14 @@ func (r *UserInvitationResource) Create(ctx context.Context, req resource.Create
     return
   }
 
+  params := m3ter.UserInvitationNewParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   dataBytes, err := data.MarshalJSON()
   if err != nil {
     resp.Diagnostics.AddError("failed to serialize http request", err.Error())
@@ -71,9 +79,7 @@ func (r *UserInvitationResource) Create(ctx context.Context, req resource.Create
   res := new(http.Response)
   _, err = r.client.Users.Invitations.New(
     ctx,
-    m3ter.UserInvitationNewParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithRequestBody("application/json", dataBytes),
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
@@ -105,13 +111,19 @@ func (r *UserInvitationResource) Read(ctx context.Context, req resource.ReadRequ
     return
   }
 
+  params := m3ter.UserInvitationGetParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   res := new(http.Response)
   _, err := r.client.Users.Invitations.Get(
     ctx,
     data.ID.ValueString(),
-    m3ter.UserInvitationGetParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
   )
