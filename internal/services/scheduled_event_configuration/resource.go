@@ -63,6 +63,14 @@ func (r *ScheduledEventConfigurationResource) Create(ctx context.Context, req re
     return
   }
 
+  params := m3ter.ScheduledEventConfigurationNewParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   dataBytes, err := data.MarshalJSON()
   if err != nil {
     resp.Diagnostics.AddError("failed to serialize http request", err.Error())
@@ -71,9 +79,7 @@ func (r *ScheduledEventConfigurationResource) Create(ctx context.Context, req re
   res := new(http.Response)
   _, err = r.client.ScheduledEventConfigurations.New(
     ctx,
-    m3ter.ScheduledEventConfigurationNewParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithRequestBody("application/json", dataBytes),
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
@@ -109,6 +115,14 @@ func (r *ScheduledEventConfigurationResource) Update(ctx context.Context, req re
     return
   }
 
+  params := m3ter.ScheduledEventConfigurationUpdateParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   dataBytes, err := data.MarshalJSONForUpdate(*state)
   if err != nil {
     resp.Diagnostics.AddError("failed to serialize http request", err.Error())
@@ -118,9 +132,7 @@ func (r *ScheduledEventConfigurationResource) Update(ctx context.Context, req re
   _, err = r.client.ScheduledEventConfigurations.Update(
     ctx,
     data.ID.ValueString(),
-    m3ter.ScheduledEventConfigurationUpdateParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithRequestBody("application/json", dataBytes),
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
@@ -148,13 +160,19 @@ func (r *ScheduledEventConfigurationResource) Read(ctx context.Context, req reso
     return
   }
 
+  params := m3ter.ScheduledEventConfigurationGetParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   res := new(http.Response)
   _, err := r.client.ScheduledEventConfigurations.Get(
     ctx,
     data.ID.ValueString(),
-    m3ter.ScheduledEventConfigurationGetParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
   )
@@ -186,12 +204,18 @@ func (r *ScheduledEventConfigurationResource) Delete(ctx context.Context, req re
     return
   }
 
+  params := m3ter.ScheduledEventConfigurationDeleteParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   _, err := r.client.ScheduledEventConfigurations.Delete(
     ctx,
     data.ID.ValueString(),
-    m3ter.ScheduledEventConfigurationDeleteParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithMiddleware(logging.Middleware(ctx)),
   )
   if err != nil {

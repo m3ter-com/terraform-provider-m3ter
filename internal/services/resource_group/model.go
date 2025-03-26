@@ -10,8 +10,8 @@ import (
 
 type ResourceGroupModel struct {
 ID types.String `tfsdk:"id" json:"id,computed"`
-OrgID types.String `tfsdk:"org_id" path:"orgId,required"`
 Type types.String `tfsdk:"type" path:"type,required"`
+OrgID types.String `tfsdk:"org_id" path:"orgId,optional"`
 Name types.String `tfsdk:"name" json:"name,required"`
 Version types.Int64 `tfsdk:"version" json:"version,optional"`
 CreatedBy types.String `tfsdk:"created_by" json:"createdBy,computed"`

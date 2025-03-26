@@ -63,6 +63,14 @@ func (r *CounterAdjustmentResource) Create(ctx context.Context, req resource.Cre
     return
   }
 
+  params := m3ter.CounterAdjustmentNewParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   dataBytes, err := data.MarshalJSON()
   if err != nil {
     resp.Diagnostics.AddError("failed to serialize http request", err.Error())
@@ -71,9 +79,7 @@ func (r *CounterAdjustmentResource) Create(ctx context.Context, req resource.Cre
   res := new(http.Response)
   _, err = r.client.CounterAdjustments.New(
     ctx,
-    m3ter.CounterAdjustmentNewParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithRequestBody("application/json", dataBytes),
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
@@ -109,6 +115,14 @@ func (r *CounterAdjustmentResource) Update(ctx context.Context, req resource.Upd
     return
   }
 
+  params := m3ter.CounterAdjustmentUpdateParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   dataBytes, err := data.MarshalJSONForUpdate(*state)
   if err != nil {
     resp.Diagnostics.AddError("failed to serialize http request", err.Error())
@@ -118,9 +132,7 @@ func (r *CounterAdjustmentResource) Update(ctx context.Context, req resource.Upd
   _, err = r.client.CounterAdjustments.Update(
     ctx,
     data.ID.ValueString(),
-    m3ter.CounterAdjustmentUpdateParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithRequestBody("application/json", dataBytes),
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
@@ -148,13 +160,19 @@ func (r *CounterAdjustmentResource) Read(ctx context.Context, req resource.ReadR
     return
   }
 
+  params := m3ter.CounterAdjustmentGetParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   res := new(http.Response)
   _, err := r.client.CounterAdjustments.Get(
     ctx,
     data.ID.ValueString(),
-    m3ter.CounterAdjustmentGetParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
   )
@@ -186,12 +204,18 @@ func (r *CounterAdjustmentResource) Delete(ctx context.Context, req resource.Del
     return
   }
 
+  params := m3ter.CounterAdjustmentDeleteParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   _, err := r.client.CounterAdjustments.Delete(
     ctx,
     data.ID.ValueString(),
-    m3ter.CounterAdjustmentDeleteParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithMiddleware(logging.Middleware(ctx)),
   )
   if err != nil {

@@ -9,8 +9,8 @@ import (
 )
 
 type DataExportDestinationModel struct {
-OrgID types.String `tfsdk:"org_id" path:"orgId,required"`
 ID types.String `tfsdk:"id" path:"id,optional"`
+OrgID types.String `tfsdk:"org_id" path:"orgId,optional"`
 BucketName types.String `tfsdk:"bucket_name" json:"bucketName,required"`
 Code types.String `tfsdk:"code" json:"code,required"`
 IamRoleArn types.String `tfsdk:"iam_role_arn" json:"iamRoleArn,required"`

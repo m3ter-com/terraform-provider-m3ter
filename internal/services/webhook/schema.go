@@ -19,11 +19,11 @@ var _ resource.ResourceWithConfigValidators = (*WebhookResource)(nil)
 func ResourceSchema(ctx context.Context) (schema.Schema) {
   return schema.Schema{
     Attributes: map[string]schema.Attribute{
-      "org_id": schema.StringAttribute{
-        Required: true,
+      "id": schema.StringAttribute{
+        Optional: true,
         PlanModifiers: []planmodifier.String{stringplanmodifier.RequiresReplace()},
       },
-      "id": schema.StringAttribute{
+      "org_id": schema.StringAttribute{
         Optional: true,
         PlanModifiers: []planmodifier.String{stringplanmodifier.RequiresReplace()},
       },

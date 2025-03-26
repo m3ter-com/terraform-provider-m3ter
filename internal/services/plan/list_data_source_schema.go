@@ -20,7 +20,7 @@ func ListDataSourceSchema(ctx context.Context) (schema.Schema) {
   return schema.Schema{
     Attributes: map[string]schema.Attribute{
       "org_id": schema.StringAttribute{
-        Required: true,
+        Optional: true,
       },
       "product_id": schema.StringAttribute{
         Description: "UUID of the Product to retrieve Plans for.",

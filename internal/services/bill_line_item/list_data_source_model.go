@@ -18,14 +18,18 @@ Data customfield.NestedObjectList[BillLineItemsItemsDataSourceModel] `json:"data
 
 type BillLineItemsDataSourceModel struct {
 BillID types.String `tfsdk:"bill_id" path:"billId,required"`
-OrgID types.String `tfsdk:"org_id" path:"orgId,required"`
+OrgID types.String `tfsdk:"org_id" path:"orgId,optional"`
 MaxItems types.Int64 `tfsdk:"max_items"`
 Items customfield.NestedObjectList[BillLineItemsItemsDataSourceModel] `tfsdk:"items"`
 }
 
 func (m *BillLineItemsDataSourceModel) toListParams(_ context.Context) (params m3ter.BillLineItemListParams, diags diag.Diagnostics) {
   params = m3ter.BillLineItemListParams{
-    OrgID: m3ter.F(m.OrgID.ValueString()),
+
+  }
+
+  if !m.OrgID.IsNull() {
+    params.OrgID = m3ter.F(m.OrgID.ValueString())
   }
 
   return

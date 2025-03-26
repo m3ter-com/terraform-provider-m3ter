@@ -23,7 +23,11 @@ M3terEvent jsontypes.Normalized `tfsdk:"m3ter_event" json:"m3terEvent,computed"`
 
 func (m *EventDataSourceModel) toReadParams(_ context.Context) (params m3ter.EventGetParams, diags diag.Diagnostics) {
   params = m3ter.EventGetParams{
-    OrgID: m3ter.F(m.OrgID.ValueString()),
+
+  }
+
+  if !m.OrgID.IsNull() {
+    params.OrgID = m3ter.F(m.OrgID.ValueString())
   }
 
   return

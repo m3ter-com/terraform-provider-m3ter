@@ -11,7 +11,7 @@ import (
 
 type CompoundAggregationModel struct {
 ID types.String `tfsdk:"id" json:"id,computed"`
-OrgID types.String `tfsdk:"org_id" path:"orgId,required"`
+OrgID types.String `tfsdk:"org_id" path:"orgId,optional"`
 Calculation types.String `tfsdk:"calculation" json:"calculation,required"`
 Name types.String `tfsdk:"name" json:"name,required"`
 QuantityPerUnit types.Float64 `tfsdk:"quantity_per_unit" json:"quantityPerUnit,required"`

@@ -26,7 +26,7 @@ func ResourceSchema(ctx context.Context) (schema.Schema) {
         PlanModifiers: []planmodifier.String{stringplanmodifier.UseStateForUnknown()},
       },
       "org_id": schema.StringAttribute{
-        Required: true,
+        Optional: true,
         PlanModifiers: []planmodifier.String{stringplanmodifier.RequiresReplace()},
       },
       "account_id": schema.StringAttribute{

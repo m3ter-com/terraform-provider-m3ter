@@ -10,7 +10,7 @@ import (
 
 type ExternalMappingModel struct {
 ID types.String `tfsdk:"id" json:"id,computed"`
-OrgID types.String `tfsdk:"org_id" path:"orgId,required"`
+OrgID types.String `tfsdk:"org_id" path:"orgId,optional"`
 ExternalID types.String `tfsdk:"external_id" json:"externalId,required"`
 ExternalSystem types.String `tfsdk:"external_system" json:"externalSystem,required"`
 ExternalTable types.String `tfsdk:"external_table" json:"externalTable,required"`

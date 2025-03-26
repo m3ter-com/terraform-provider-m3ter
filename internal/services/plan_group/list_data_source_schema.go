@@ -20,7 +20,7 @@ func ListDataSourceSchema(ctx context.Context) (schema.Schema) {
   return schema.Schema{
     Attributes: map[string]schema.Attribute{
       "org_id": schema.StringAttribute{
-        Required: true,
+        Optional: true,
       },
       "account_id": schema.ListAttribute{
         Description: "Optional filter. The list of Account IDs to which the PlanGroups belong.",

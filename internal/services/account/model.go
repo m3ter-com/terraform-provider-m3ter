@@ -12,7 +12,7 @@ import (
 
 type AccountModel struct {
 ID types.String `tfsdk:"id" json:"id,computed"`
-OrgID types.String `tfsdk:"org_id" path:"orgId,required"`
+OrgID types.String `tfsdk:"org_id" path:"orgId,optional"`
 Code types.String `tfsdk:"code" json:"code,required"`
 EmailAddress types.String `tfsdk:"email_address" json:"emailAddress,required"`
 Name types.String `tfsdk:"name" json:"name,required"`

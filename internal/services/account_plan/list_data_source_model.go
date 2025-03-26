@@ -17,7 +17,7 @@ Data customfield.NestedObjectList[AccountPlansItemsDataSourceModel] `json:"data,
 }
 
 type AccountPlansDataSourceModel struct {
-OrgID types.String `tfsdk:"org_id" path:"orgId,required"`
+OrgID types.String `tfsdk:"org_id" path:"orgId,optional"`
 Account types.String `tfsdk:"account" query:"account,optional"`
 Contract types.String `tfsdk:"contract" query:"contract,optional"`
 Date types.String `tfsdk:"date" query:"date,optional"`
@@ -36,7 +36,6 @@ func (m *AccountPlansDataSourceModel) toListParams(_ context.Context) (params m3
   }
 
   params = m3ter.AccountPlanListParams{
-    OrgID: m3ter.F(m.OrgID.ValueString()),
     IDs: m3ter.F(mIDs),
   }
 
@@ -57,6 +56,9 @@ func (m *AccountPlansDataSourceModel) toListParams(_ context.Context) (params m3
   }
   if !m.Product.IsNull() {
     params.Product = m3ter.F(m.Product.ValueString())
+  }
+  if !m.OrgID.IsNull() {
+    params.OrgID = m3ter.F(m.OrgID.ValueString())
   }
 
   return

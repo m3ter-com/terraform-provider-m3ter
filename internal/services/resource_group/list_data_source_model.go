@@ -17,15 +17,19 @@ Data customfield.NestedObjectList[ResourceGroupsItemsDataSourceModel] `json:"dat
 }
 
 type ResourceGroupsDataSourceModel struct {
-OrgID types.String `tfsdk:"org_id" path:"orgId,required"`
 Type types.String `tfsdk:"type" path:"type,required"`
+OrgID types.String `tfsdk:"org_id" path:"orgId,optional"`
 MaxItems types.Int64 `tfsdk:"max_items"`
 Items customfield.NestedObjectList[ResourceGroupsItemsDataSourceModel] `tfsdk:"items"`
 }
 
 func (m *ResourceGroupsDataSourceModel) toListParams(_ context.Context) (params m3ter.ResourceGroupListParams, diags diag.Diagnostics) {
   params = m3ter.ResourceGroupListParams{
-    OrgID: m3ter.F(m.OrgID.ValueString()),
+
+  }
+
+  if !m.OrgID.IsNull() {
+    params.OrgID = m3ter.F(m.OrgID.ValueString())
   }
 
   return

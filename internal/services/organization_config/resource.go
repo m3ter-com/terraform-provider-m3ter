@@ -63,6 +63,14 @@ func (r *OrganizationConfigResource) Create(ctx context.Context, req resource.Cr
     return
   }
 
+  params := m3ter.OrganizationConfigUpdateParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   dataBytes, err := data.MarshalJSON()
   if err != nil {
     resp.Diagnostics.AddError("failed to serialize http request", err.Error())
@@ -71,9 +79,7 @@ func (r *OrganizationConfigResource) Create(ctx context.Context, req resource.Cr
   res := new(http.Response)
   _, err = r.client.OrganizationConfig.Update(
     ctx,
-    m3ter.OrganizationConfigUpdateParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithRequestBody("application/json", dataBytes),
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
@@ -109,6 +115,14 @@ func (r *OrganizationConfigResource) Update(ctx context.Context, req resource.Up
     return
   }
 
+  params := m3ter.OrganizationConfigUpdateParams{
+
+  }
+
+  if !data.ID.IsNull() {
+    params.OrgID = m3ter.F(data.ID.ValueString())
+  }
+
   dataBytes, err := data.MarshalJSONForUpdate(*state)
   if err != nil {
     resp.Diagnostics.AddError("failed to serialize http request", err.Error())
@@ -117,9 +131,7 @@ func (r *OrganizationConfigResource) Update(ctx context.Context, req resource.Up
   res := new(http.Response)
   _, err = r.client.OrganizationConfig.Update(
     ctx,
-    m3ter.OrganizationConfigUpdateParams{
-      OrgID: m3ter.F(data.ID.ValueString()),
-    },
+    params,
     option.WithRequestBody("application/json", dataBytes),
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
@@ -147,12 +159,18 @@ func (r *OrganizationConfigResource) Read(ctx context.Context, req resource.Read
     return
   }
 
+  params := m3ter.OrganizationConfigGetParams{
+
+  }
+
+  if !data.ID.IsNull() {
+    params.OrgID = m3ter.F(data.ID.ValueString())
+  }
+
   res := new(http.Response)
   _, err := r.client.OrganizationConfig.Get(
     ctx,
-    m3ter.OrganizationConfigGetParams{
-      OrgID: m3ter.F(data.ID.ValueString()),
-    },
+    params,
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
   )

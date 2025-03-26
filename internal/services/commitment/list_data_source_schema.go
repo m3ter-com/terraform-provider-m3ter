@@ -23,7 +23,7 @@ func ListDataSourceSchema(ctx context.Context) (schema.Schema) {
   return schema.Schema{
     Attributes: map[string]schema.Attribute{
       "org_id": schema.StringAttribute{
-        Required: true,
+        Optional: true,
       },
       "account_id": schema.StringAttribute{
         Description: "The unique identifier (UUID) for the Account. This parameter helps filter the Commitments related to a specific end-customer Account.",

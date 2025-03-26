@@ -25,7 +25,11 @@ Version types.Int64 `tfsdk:"version" json:"version,computed"`
 
 func (m *ResourceGroupDataSourceModel) toReadParams(_ context.Context) (params m3ter.ResourceGroupGetParams, diags diag.Diagnostics) {
   params = m3ter.ResourceGroupGetParams{
-    OrgID: m3ter.F(m.OrgID.ValueString()),
+
+  }
+
+  if !m.OrgID.IsNull() {
+    params.OrgID = m3ter.F(m.OrgID.ValueString())
   }
 
   return

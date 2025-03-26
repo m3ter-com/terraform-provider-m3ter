@@ -59,7 +59,11 @@ BandUsage customfield.NestedObjectList[BillLineItemBandUsageDataSourceModel] `tf
 
 func (m *BillLineItemDataSourceModel) toReadParams(_ context.Context) (params m3ter.BillLineItemGetParams, diags diag.Diagnostics) {
   params = m3ter.BillLineItemGetParams{
-    OrgID: m3ter.F(m.OrgID.ValueString()),
+
+  }
+
+  if !m.OrgID.IsNull() {
+    params.OrgID = m3ter.F(m.OrgID.ValueString())
   }
 
   return

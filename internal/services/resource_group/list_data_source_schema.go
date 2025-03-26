@@ -18,11 +18,11 @@ var _ datasource.DataSourceWithConfigValidators = (*ResourceGroupsDataSource)(ni
 func ListDataSourceSchema(ctx context.Context) (schema.Schema) {
   return schema.Schema{
     Attributes: map[string]schema.Attribute{
-      "org_id": schema.StringAttribute{
-        Required: true,
-      },
       "type": schema.StringAttribute{
         Required: true,
+      },
+      "org_id": schema.StringAttribute{
+        Optional: true,
       },
       "max_items": schema.Int64Attribute{
         Description: "Max items to fetch, default: 1000",

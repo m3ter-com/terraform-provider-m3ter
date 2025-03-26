@@ -17,7 +17,7 @@ Data customfield.NestedObjectList[CounterPricingsItemsDataSourceModel] `json:"da
 }
 
 type CounterPricingsDataSourceModel struct {
-OrgID types.String `tfsdk:"org_id" path:"orgId,required"`
+OrgID types.String `tfsdk:"org_id" path:"orgId,optional"`
 Date types.String `tfsdk:"date" query:"date,optional"`
 PlanID types.String `tfsdk:"plan_id" query:"planId,optional"`
 PlanTemplateID types.String `tfsdk:"plan_template_id" query:"planTemplateId,optional"`
@@ -33,7 +33,6 @@ func (m *CounterPricingsDataSourceModel) toListParams(_ context.Context) (params
   }
 
   params = m3ter.CounterPricingListParams{
-    OrgID: m3ter.F(m.OrgID.ValueString()),
     IDs: m3ter.F(mIDs),
   }
 
@@ -45,6 +44,9 @@ func (m *CounterPricingsDataSourceModel) toListParams(_ context.Context) (params
   }
   if !m.PlanTemplateID.IsNull() {
     params.PlanTemplateID = m3ter.F(m.PlanTemplateID.ValueString())
+  }
+  if !m.OrgID.IsNull() {
+    params.OrgID = m3ter.F(m.OrgID.ValueString())
   }
 
   return

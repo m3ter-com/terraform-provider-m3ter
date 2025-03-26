@@ -63,6 +63,14 @@ func (r *CounterPricingResource) Create(ctx context.Context, req resource.Create
     return
   }
 
+  params := m3ter.CounterPricingNewParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   dataBytes, err := data.MarshalJSON()
   if err != nil {
     resp.Diagnostics.AddError("failed to serialize http request", err.Error())
@@ -71,9 +79,7 @@ func (r *CounterPricingResource) Create(ctx context.Context, req resource.Create
   res := new(http.Response)
   _, err = r.client.CounterPricings.New(
     ctx,
-    m3ter.CounterPricingNewParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithRequestBody("application/json", dataBytes),
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
@@ -109,6 +115,14 @@ func (r *CounterPricingResource) Update(ctx context.Context, req resource.Update
     return
   }
 
+  params := m3ter.CounterPricingUpdateParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   dataBytes, err := data.MarshalJSONForUpdate(*state)
   if err != nil {
     resp.Diagnostics.AddError("failed to serialize http request", err.Error())
@@ -118,9 +132,7 @@ func (r *CounterPricingResource) Update(ctx context.Context, req resource.Update
   _, err = r.client.CounterPricings.Update(
     ctx,
     data.ID.ValueString(),
-    m3ter.CounterPricingUpdateParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithRequestBody("application/json", dataBytes),
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
@@ -148,13 +160,19 @@ func (r *CounterPricingResource) Read(ctx context.Context, req resource.ReadRequ
     return
   }
 
+  params := m3ter.CounterPricingGetParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   res := new(http.Response)
   _, err := r.client.CounterPricings.Get(
     ctx,
     data.ID.ValueString(),
-    m3ter.CounterPricingGetParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
   )
@@ -186,12 +204,18 @@ func (r *CounterPricingResource) Delete(ctx context.Context, req resource.Delete
     return
   }
 
+  params := m3ter.CounterPricingDeleteParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   _, err := r.client.CounterPricings.Delete(
     ctx,
     data.ID.ValueString(),
-    m3ter.CounterPricingDeleteParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithMiddleware(logging.Middleware(ctx)),
   )
   if err != nil {

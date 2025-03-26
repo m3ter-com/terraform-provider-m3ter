@@ -10,7 +10,7 @@ import (
 
 type CounterAdjustmentModel struct {
 ID types.String `tfsdk:"id" json:"id,computed"`
-OrgID types.String `tfsdk:"org_id" path:"orgId,required"`
+OrgID types.String `tfsdk:"org_id" path:"orgId,optional"`
 AccountID types.String `tfsdk:"account_id" json:"accountId,required"`
 CounterID types.String `tfsdk:"counter_id" json:"counterId,required"`
 Value types.Int64 `tfsdk:"value" json:"value,required"`

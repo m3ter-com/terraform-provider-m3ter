@@ -10,7 +10,7 @@ import (
 
 type ScheduledEventConfigurationModel struct {
 ID types.String `tfsdk:"id" json:"id,computed"`
-OrgID types.String `tfsdk:"org_id" path:"orgId,required"`
+OrgID types.String `tfsdk:"org_id" path:"orgId,optional"`
 Entity types.String `tfsdk:"entity" json:"entity,required"`
 Field types.String `tfsdk:"field" json:"field,required"`
 Name types.String `tfsdk:"name" json:"name,required"`

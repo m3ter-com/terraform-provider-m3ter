@@ -11,7 +11,7 @@ import (
 
 type IntegrationConfigurationModel struct {
 ID types.String `tfsdk:"id" json:"id,computed"`
-OrgID types.String `tfsdk:"org_id" path:"orgId,required"`
+OrgID types.String `tfsdk:"org_id" path:"orgId,optional"`
 Destination types.String `tfsdk:"destination" json:"destination,required"`
 DestinationID types.String `tfsdk:"destination_id" json:"destinationId,required"`
 EntityID types.String `tfsdk:"entity_id" json:"entityId,required"`

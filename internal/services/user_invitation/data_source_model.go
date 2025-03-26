@@ -32,7 +32,11 @@ PermissionPolicyIDs customfield.List[types.String] `tfsdk:"permission_policy_ids
 
 func (m *UserInvitationDataSourceModel) toReadParams(_ context.Context) (params m3ter.UserInvitationGetParams, diags diag.Diagnostics) {
   params = m3ter.UserInvitationGetParams{
-    OrgID: m3ter.F(m.OrgID.ValueString()),
+
+  }
+
+  if !m.OrgID.IsNull() {
+    params.OrgID = m3ter.F(m.OrgID.ValueString())
   }
 
   return

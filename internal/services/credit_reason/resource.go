@@ -63,6 +63,14 @@ func (r *CreditReasonResource) Create(ctx context.Context, req resource.CreateRe
     return
   }
 
+  params := m3ter.CreditReasonNewParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   dataBytes, err := data.MarshalJSON()
   if err != nil {
     resp.Diagnostics.AddError("failed to serialize http request", err.Error())
@@ -71,9 +79,7 @@ func (r *CreditReasonResource) Create(ctx context.Context, req resource.CreateRe
   res := new(http.Response)
   _, err = r.client.CreditReasons.New(
     ctx,
-    m3ter.CreditReasonNewParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithRequestBody("application/json", dataBytes),
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
@@ -109,6 +115,14 @@ func (r *CreditReasonResource) Update(ctx context.Context, req resource.UpdateRe
     return
   }
 
+  params := m3ter.CreditReasonUpdateParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   dataBytes, err := data.MarshalJSONForUpdate(*state)
   if err != nil {
     resp.Diagnostics.AddError("failed to serialize http request", err.Error())
@@ -118,9 +132,7 @@ func (r *CreditReasonResource) Update(ctx context.Context, req resource.UpdateRe
   _, err = r.client.CreditReasons.Update(
     ctx,
     data.ID.ValueString(),
-    m3ter.CreditReasonUpdateParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithRequestBody("application/json", dataBytes),
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
@@ -148,13 +160,19 @@ func (r *CreditReasonResource) Read(ctx context.Context, req resource.ReadReques
     return
   }
 
+  params := m3ter.CreditReasonGetParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   res := new(http.Response)
   _, err := r.client.CreditReasons.Get(
     ctx,
     data.ID.ValueString(),
-    m3ter.CreditReasonGetParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
   )
@@ -186,12 +204,18 @@ func (r *CreditReasonResource) Delete(ctx context.Context, req resource.DeleteRe
     return
   }
 
+  params := m3ter.CreditReasonDeleteParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   _, err := r.client.CreditReasons.Delete(
     ctx,
     data.ID.ValueString(),
-    m3ter.CreditReasonDeleteParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithMiddleware(logging.Middleware(ctx)),
   )
   if err != nil {

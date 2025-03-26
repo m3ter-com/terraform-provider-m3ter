@@ -63,6 +63,14 @@ func (r *CommitmentResource) Create(ctx context.Context, req resource.CreateRequ
     return
   }
 
+  params := m3ter.CommitmentNewParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   dataBytes, err := data.MarshalJSON()
   if err != nil {
     resp.Diagnostics.AddError("failed to serialize http request", err.Error())
@@ -71,9 +79,7 @@ func (r *CommitmentResource) Create(ctx context.Context, req resource.CreateRequ
   res := new(http.Response)
   _, err = r.client.Commitments.New(
     ctx,
-    m3ter.CommitmentNewParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithRequestBody("application/json", dataBytes),
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
@@ -109,6 +115,14 @@ func (r *CommitmentResource) Update(ctx context.Context, req resource.UpdateRequ
     return
   }
 
+  params := m3ter.CommitmentUpdateParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   dataBytes, err := data.MarshalJSONForUpdate(*state)
   if err != nil {
     resp.Diagnostics.AddError("failed to serialize http request", err.Error())
@@ -118,9 +132,7 @@ func (r *CommitmentResource) Update(ctx context.Context, req resource.UpdateRequ
   _, err = r.client.Commitments.Update(
     ctx,
     data.ID.ValueString(),
-    m3ter.CommitmentUpdateParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithRequestBody("application/json", dataBytes),
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
@@ -148,13 +160,19 @@ func (r *CommitmentResource) Read(ctx context.Context, req resource.ReadRequest,
     return
   }
 
+  params := m3ter.CommitmentGetParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   res := new(http.Response)
   _, err := r.client.Commitments.Get(
     ctx,
     data.ID.ValueString(),
-    m3ter.CommitmentGetParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
   )
@@ -186,12 +204,18 @@ func (r *CommitmentResource) Delete(ctx context.Context, req resource.DeleteRequ
     return
   }
 
+  params := m3ter.CommitmentDeleteParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   _, err := r.client.Commitments.Delete(
     ctx,
     data.ID.ValueString(),
-    m3ter.CommitmentDeleteParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithMiddleware(logging.Middleware(ctx)),
   )
   if err != nil {

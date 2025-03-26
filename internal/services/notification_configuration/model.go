@@ -10,7 +10,7 @@ import (
 
 type NotificationConfigurationModel struct {
 ID types.String `tfsdk:"id" json:"id,computed"`
-OrgID types.String `tfsdk:"org_id" path:"orgId,required"`
+OrgID types.String `tfsdk:"org_id" path:"orgId,optional"`
 Code types.String `tfsdk:"code" json:"code,required"`
 Description types.String `tfsdk:"description" json:"description,required"`
 EventName types.String `tfsdk:"event_name" json:"eventName,required"`

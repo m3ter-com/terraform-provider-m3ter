@@ -11,7 +11,7 @@ import (
 
 type OrganizationConfigModel struct {
 ID types.String `tfsdk:"id" json:"id,computed"`
-OrgID types.String `tfsdk:"org_id" path:"orgId,required"`
+OrgID types.String `tfsdk:"org_id" path:"orgId,optional"`
 DaysBeforeBillDue types.Int64 `tfsdk:"days_before_bill_due" json:"daysBeforeBillDue,required"`
 AutoApproveBillsGracePeriod types.Int64 `tfsdk:"auto_approve_bills_grace_period" json:"autoApproveBillsGracePeriod,optional"`
 AutoApproveBillsGracePeriodUnit types.String `tfsdk:"auto_approve_bills_grace_period_unit" json:"autoApproveBillsGracePeriodUnit,optional"`

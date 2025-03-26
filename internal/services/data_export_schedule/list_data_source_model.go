@@ -17,7 +17,7 @@ Data customfield.NestedObjectList[DataExportSchedulesItemsDataSourceModel] `json
 }
 
 type DataExportSchedulesDataSourceModel struct {
-OrgID types.String `tfsdk:"org_id" path:"orgId,required"`
+OrgID types.String `tfsdk:"org_id" path:"orgId,optional"`
 IDs *[]types.String `tfsdk:"ids" query:"ids,optional"`
 MaxItems types.Int64 `tfsdk:"max_items"`
 Items customfield.NestedObjectList[DataExportSchedulesItemsDataSourceModel] `tfsdk:"items"`
@@ -30,8 +30,11 @@ func (m *DataExportSchedulesDataSourceModel) toListParams(_ context.Context) (pa
   }
 
   params = m3ter.DataExportScheduleListParams{
-    OrgID: m3ter.F(m.OrgID.ValueString()),
     IDs: m3ter.F(mIDs),
+  }
+
+  if !m.OrgID.IsNull() {
+    params.OrgID = m3ter.F(m.OrgID.ValueString())
   }
 
   return

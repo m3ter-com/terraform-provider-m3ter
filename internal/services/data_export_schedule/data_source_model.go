@@ -25,7 +25,11 @@ OperationalDataTypes customfield.List[types.String] `tfsdk:"operational_data_typ
 
 func (m *DataExportScheduleDataSourceModel) toReadParams(_ context.Context) (params m3ter.DataExportScheduleGetParams, diags diag.Diagnostics) {
   params = m3ter.DataExportScheduleGetParams{
-    OrgID: m3ter.F(m.OrgID.ValueString()),
+
+  }
+
+  if !m.OrgID.IsNull() {
+    params.OrgID = m3ter.F(m.OrgID.ValueString())
   }
 
   return

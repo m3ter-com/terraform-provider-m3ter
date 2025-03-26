@@ -10,7 +10,7 @@ import (
 
 type CustomFieldModel struct {
 ID types.String `tfsdk:"id" json:"id,computed"`
-OrgID types.String `tfsdk:"org_id" path:"orgId,required"`
+OrgID types.String `tfsdk:"org_id" path:"orgId,optional"`
 Version types.Int64 `tfsdk:"version" json:"version,optional"`
 Account *map[string]types.Dynamic `tfsdk:"account" json:"account,optional"`
 AccountPlan *map[string]types.Dynamic `tfsdk:"account_plan" json:"accountPlan,optional"`

@@ -60,6 +60,14 @@ func (r *WebhookResource) Create(ctx context.Context, req resource.CreateRequest
     return
   }
 
+  params := m3ter.WebhookNewParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   dataBytes, err := data.MarshalJSON()
   if err != nil {
     resp.Diagnostics.AddError("failed to serialize http request", err.Error())
@@ -68,9 +76,7 @@ func (r *WebhookResource) Create(ctx context.Context, req resource.CreateRequest
   res := new(http.Response)
   _, err = r.client.Webhooks.New(
     ctx,
-    m3ter.WebhookNewParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithRequestBody("application/json", dataBytes),
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
@@ -106,6 +112,14 @@ func (r *WebhookResource) Update(ctx context.Context, req resource.UpdateRequest
     return
   }
 
+  params := m3ter.WebhookUpdateParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   dataBytes, err := data.MarshalJSONForUpdate(*state)
   if err != nil {
     resp.Diagnostics.AddError("failed to serialize http request", err.Error())
@@ -115,9 +129,7 @@ func (r *WebhookResource) Update(ctx context.Context, req resource.UpdateRequest
   _, err = r.client.Webhooks.Update(
     ctx,
     data.ID.ValueString(),
-    m3ter.WebhookUpdateParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithRequestBody("application/json", dataBytes),
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
@@ -145,13 +157,19 @@ func (r *WebhookResource) Read(ctx context.Context, req resource.ReadRequest, re
     return
   }
 
+  params := m3ter.WebhookGetParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   res := new(http.Response)
   _, err := r.client.Webhooks.Get(
     ctx,
     data.ID.ValueString(),
-    m3ter.WebhookGetParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
   )
@@ -183,12 +201,18 @@ func (r *WebhookResource) Delete(ctx context.Context, req resource.DeleteRequest
     return
   }
 
+  params := m3ter.WebhookDeleteParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   _, err := r.client.Webhooks.Delete(
     ctx,
     data.ID.ValueString(),
-    m3ter.WebhookDeleteParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithMiddleware(logging.Middleware(ctx)),
   )
   if err != nil {

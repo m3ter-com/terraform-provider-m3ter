@@ -11,7 +11,7 @@ import (
 type BillCreditLineItemModel struct {
 ID types.String `tfsdk:"id" json:"id,computed"`
 BillID types.String `tfsdk:"bill_id" path:"billId,required"`
-OrgID types.String `tfsdk:"org_id" path:"orgId,required"`
+OrgID types.String `tfsdk:"org_id" path:"orgId,optional"`
 Amount types.Float64 `tfsdk:"amount" json:"amount,required"`
 Description types.String `tfsdk:"description" json:"description,required"`
 ProductID types.String `tfsdk:"product_id" json:"productId,required"`

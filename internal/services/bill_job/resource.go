@@ -63,6 +63,14 @@ func (r *BillJobResource) Create(ctx context.Context, req resource.CreateRequest
     return
   }
 
+  params := m3ter.BillJobNewParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   dataBytes, err := data.MarshalJSON()
   if err != nil {
     resp.Diagnostics.AddError("failed to serialize http request", err.Error())
@@ -71,9 +79,7 @@ func (r *BillJobResource) Create(ctx context.Context, req resource.CreateRequest
   res := new(http.Response)
   _, err = r.client.BillJobs.New(
     ctx,
-    m3ter.BillJobNewParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithRequestBody("application/json", dataBytes),
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
@@ -105,13 +111,19 @@ func (r *BillJobResource) Read(ctx context.Context, req resource.ReadRequest, re
     return
   }
 
+  params := m3ter.BillJobGetParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   res := new(http.Response)
   _, err := r.client.BillJobs.Get(
     ctx,
     data.ID.ValueString(),
-    m3ter.BillJobGetParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
   )

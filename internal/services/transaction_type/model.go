@@ -10,7 +10,7 @@ import (
 
 type TransactionTypeModel struct {
 ID types.String `tfsdk:"id" json:"id,computed"`
-OrgID types.String `tfsdk:"org_id" path:"orgId,required"`
+OrgID types.String `tfsdk:"org_id" path:"orgId,optional"`
 Name types.String `tfsdk:"name" json:"name,required"`
 Archived types.Bool `tfsdk:"archived" json:"archived,optional"`
 Code types.String `tfsdk:"code" json:"code,optional"`

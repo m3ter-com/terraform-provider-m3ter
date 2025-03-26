@@ -63,6 +63,14 @@ func (r *BillCreditLineItemResource) Create(ctx context.Context, req resource.Cr
     return
   }
 
+  params := m3ter.BillCreditLineItemNewParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   dataBytes, err := data.MarshalJSON()
   if err != nil {
     resp.Diagnostics.AddError("failed to serialize http request", err.Error())
@@ -72,9 +80,7 @@ func (r *BillCreditLineItemResource) Create(ctx context.Context, req resource.Cr
   _, err = r.client.Bills.CreditLineItems.New(
     ctx,
     data.BillID.ValueString(),
-    m3ter.BillCreditLineItemNewParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithRequestBody("application/json", dataBytes),
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
@@ -110,6 +116,14 @@ func (r *BillCreditLineItemResource) Update(ctx context.Context, req resource.Up
     return
   }
 
+  params := m3ter.BillCreditLineItemUpdateParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   dataBytes, err := data.MarshalJSONForUpdate(*state)
   if err != nil {
     resp.Diagnostics.AddError("failed to serialize http request", err.Error())
@@ -120,9 +134,7 @@ func (r *BillCreditLineItemResource) Update(ctx context.Context, req resource.Up
     ctx,
     data.BillID.ValueString(),
     data.ID.ValueString(),
-    m3ter.BillCreditLineItemUpdateParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithRequestBody("application/json", dataBytes),
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
@@ -150,14 +162,20 @@ func (r *BillCreditLineItemResource) Read(ctx context.Context, req resource.Read
     return
   }
 
+  params := m3ter.BillCreditLineItemGetParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   res := new(http.Response)
   _, err := r.client.Bills.CreditLineItems.Get(
     ctx,
     data.BillID.ValueString(),
     data.ID.ValueString(),
-    m3ter.BillCreditLineItemGetParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
   )
@@ -189,13 +207,19 @@ func (r *BillCreditLineItemResource) Delete(ctx context.Context, req resource.De
     return
   }
 
+  params := m3ter.BillCreditLineItemDeleteParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   _, err := r.client.Bills.CreditLineItems.Delete(
     ctx,
     data.BillID.ValueString(),
     data.ID.ValueString(),
-    m3ter.BillCreditLineItemDeleteParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithMiddleware(logging.Middleware(ctx)),
   )
   if err != nil {
