@@ -50,7 +50,11 @@ FeeDates customfield.NestedObjectList[CommitmentFeeDatesDataSourceModel] `tfsdk:
 
 func (m *CommitmentDataSourceModel) toReadParams(_ context.Context) (params m3ter.CommitmentGetParams, diags diag.Diagnostics) {
   params = m3ter.CommitmentGetParams{
-    OrgID: m3ter.F(m.OrgID.ValueString()),
+
+  }
+
+  if !m.OrgID.IsNull() {
+    params.OrgID = m3ter.F(m.OrgID.ValueString())
   }
 
   return

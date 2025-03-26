@@ -21,7 +21,7 @@ func ListDataSourceSchema(ctx context.Context) (schema.Schema) {
   return schema.Schema{
     Attributes: map[string]schema.Attribute{
       "org_id": schema.StringAttribute{
-        Required: true,
+        Optional: true,
       },
       "account_id": schema.StringAttribute{
         Description: "The Account ID associated with the Event to filter the results. Returns the Events that have been generated for the Account.",

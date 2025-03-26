@@ -10,7 +10,7 @@ import (
 
 type UserInvitationModel struct {
 ID types.String `tfsdk:"id" json:"id,computed"`
-OrgID types.String `tfsdk:"org_id" path:"orgId,required"`
+OrgID types.String `tfsdk:"org_id" path:"orgId,optional"`
 Email types.String `tfsdk:"email" json:"email,required"`
 FirstName types.String `tfsdk:"first_name" json:"firstName,required"`
 LastName types.String `tfsdk:"last_name" json:"lastName,required"`

@@ -17,7 +17,7 @@ Data customfield.NestedObjectList[ProductsItemsDataSourceModel] `json:"data,comp
 }
 
 type ProductsDataSourceModel struct {
-OrgID types.String `tfsdk:"org_id" path:"orgId,required"`
+OrgID types.String `tfsdk:"org_id" path:"orgId,optional"`
 IDs *[]types.String `tfsdk:"ids" query:"ids,optional"`
 MaxItems types.Int64 `tfsdk:"max_items"`
 Items customfield.NestedObjectList[ProductsItemsDataSourceModel] `tfsdk:"items"`
@@ -30,8 +30,11 @@ func (m *ProductsDataSourceModel) toListParams(_ context.Context) (params m3ter.
   }
 
   params = m3ter.ProductListParams{
-    OrgID: m3ter.F(m.OrgID.ValueString()),
     IDs: m3ter.F(mIDs),
+  }
+
+  if !m.OrgID.IsNull() {
+    params.OrgID = m3ter.F(m.OrgID.ValueString())
   }
 
   return

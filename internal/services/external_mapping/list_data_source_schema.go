@@ -20,7 +20,7 @@ func ListDataSourceSchema(ctx context.Context) (schema.Schema) {
   return schema.Schema{
     Attributes: map[string]schema.Attribute{
       "org_id": schema.StringAttribute{
-        Required: true,
+        Optional: true,
       },
       "external_system_id": schema.StringAttribute{
         Description: "The name of the external system to use as a filter.\n\nFor example, if you want to list only those external mappings created for your Organization for the Salesforce external system, use:\n\n`?externalSystemId=Salesforce`",

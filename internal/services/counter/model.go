@@ -10,7 +10,7 @@ import (
 
 type CounterModel struct {
 ID types.String `tfsdk:"id" json:"id,computed"`
-OrgID types.String `tfsdk:"org_id" path:"orgId,required"`
+OrgID types.String `tfsdk:"org_id" path:"orgId,optional"`
 Name types.String `tfsdk:"name" json:"name,required"`
 Unit types.String `tfsdk:"unit" json:"unit,required"`
 Code types.String `tfsdk:"code" json:"code,optional"`

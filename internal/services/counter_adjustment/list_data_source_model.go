@@ -17,7 +17,7 @@ Data customfield.NestedObjectList[CounterAdjustmentsItemsDataSourceModel] `json:
 }
 
 type CounterAdjustmentsDataSourceModel struct {
-OrgID types.String `tfsdk:"org_id" path:"orgId,required"`
+OrgID types.String `tfsdk:"org_id" path:"orgId,optional"`
 AccountID types.String `tfsdk:"account_id" query:"accountId,optional"`
 CounterID types.String `tfsdk:"counter_id" query:"counterId,optional"`
 Date types.String `tfsdk:"date" query:"date,optional"`
@@ -31,7 +31,7 @@ Items customfield.NestedObjectList[CounterAdjustmentsItemsDataSourceModel] `tfsd
 
 func (m *CounterAdjustmentsDataSourceModel) toListParams(_ context.Context) (params m3ter.CounterAdjustmentListParams, diags diag.Diagnostics) {
   params = m3ter.CounterAdjustmentListParams{
-    OrgID: m3ter.F(m.OrgID.ValueString()),
+
   }
 
   if !m.AccountID.IsNull() {
@@ -54,6 +54,9 @@ func (m *CounterAdjustmentsDataSourceModel) toListParams(_ context.Context) (par
   }
   if !m.EndDateStart.IsNull() {
     params.EndDateStart = m3ter.F(m.EndDateStart.ValueString())
+  }
+  if !m.OrgID.IsNull() {
+    params.OrgID = m3ter.F(m.OrgID.ValueString())
   }
 
   return

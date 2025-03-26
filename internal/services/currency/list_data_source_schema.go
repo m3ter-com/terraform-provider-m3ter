@@ -21,7 +21,7 @@ func ListDataSourceSchema(ctx context.Context) (schema.Schema) {
   return schema.Schema{
     Attributes: map[string]schema.Attribute{
       "org_id": schema.StringAttribute{
-        Required: true,
+        Optional: true,
       },
       "archived": schema.BoolAttribute{
         Description: "Filter by archived flag. A True / False flag indicating whether to return Currencies that are archived *(obsolete)*.\n\n* TRUE - return archived Currencies.\n* FALSE - archived Currencies are not returned.",

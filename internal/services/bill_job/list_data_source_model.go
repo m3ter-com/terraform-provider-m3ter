@@ -17,7 +17,7 @@ Data customfield.NestedObjectList[BillJobsItemsDataSourceModel] `json:"data,comp
 }
 
 type BillJobsDataSourceModel struct {
-OrgID types.String `tfsdk:"org_id" path:"orgId,required"`
+OrgID types.String `tfsdk:"org_id" path:"orgId,optional"`
 Active types.String `tfsdk:"active" query:"active,optional"`
 Status types.String `tfsdk:"status" query:"status,optional"`
 MaxItems types.Int64 `tfsdk:"max_items"`
@@ -26,7 +26,7 @@ Items customfield.NestedObjectList[BillJobsItemsDataSourceModel] `tfsdk:"items"`
 
 func (m *BillJobsDataSourceModel) toListParams(_ context.Context) (params m3ter.BillJobListParams, diags diag.Diagnostics) {
   params = m3ter.BillJobListParams{
-    OrgID: m3ter.F(m.OrgID.ValueString()),
+
   }
 
   if !m.Active.IsNull() {
@@ -34,6 +34,9 @@ func (m *BillJobsDataSourceModel) toListParams(_ context.Context) (params m3ter.
   }
   if !m.Status.IsNull() {
     params.Status = m3ter.F(m.Status.ValueString())
+  }
+  if !m.OrgID.IsNull() {
+    params.OrgID = m3ter.F(m.OrgID.ValueString())
   }
 
   return

@@ -17,7 +17,7 @@ Data customfield.NestedObjectList[DataExportJobsItemsDataSourceModel] `json:"dat
 }
 
 type DataExportJobsDataSourceModel struct {
-OrgID types.String `tfsdk:"org_id" path:"orgId,required"`
+OrgID types.String `tfsdk:"org_id" path:"orgId,optional"`
 DateCreatedEnd types.String `tfsdk:"date_created_end" query:"dateCreatedEnd,optional"`
 DateCreatedStart types.String `tfsdk:"date_created_start" query:"dateCreatedStart,optional"`
 ScheduleID types.String `tfsdk:"schedule_id" query:"scheduleId,optional"`
@@ -34,7 +34,6 @@ func (m *DataExportJobsDataSourceModel) toListParams(_ context.Context) (params 
   }
 
   params = m3ter.DataExportJobListParams{
-    OrgID: m3ter.F(m.OrgID.ValueString()),
     IDs: m3ter.F(mIDs),
   }
 
@@ -49,6 +48,9 @@ func (m *DataExportJobsDataSourceModel) toListParams(_ context.Context) (params 
   }
   if !m.Status.IsNull() {
     params.Status = m3ter.F(m3ter.DataExportJobListParamsStatus(m.Status.ValueString()))
+  }
+  if !m.OrgID.IsNull() {
+    params.OrgID = m3ter.F(m.OrgID.ValueString())
   }
 
   return

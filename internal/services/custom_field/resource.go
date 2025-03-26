@@ -63,6 +63,14 @@ func (r *CustomFieldResource) Create(ctx context.Context, req resource.CreateReq
     return
   }
 
+  params := m3ter.CustomFieldUpdateParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   dataBytes, err := data.MarshalJSON()
   if err != nil {
     resp.Diagnostics.AddError("failed to serialize http request", err.Error())
@@ -71,9 +79,7 @@ func (r *CustomFieldResource) Create(ctx context.Context, req resource.CreateReq
   res := new(http.Response)
   _, err = r.client.CustomFields.Update(
     ctx,
-    m3ter.CustomFieldUpdateParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithRequestBody("application/json", dataBytes),
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
@@ -109,6 +115,14 @@ func (r *CustomFieldResource) Update(ctx context.Context, req resource.UpdateReq
     return
   }
 
+  params := m3ter.CustomFieldUpdateParams{
+
+  }
+
+  if !data.ID.IsNull() {
+    params.OrgID = m3ter.F(data.ID.ValueString())
+  }
+
   dataBytes, err := data.MarshalJSONForUpdate(*state)
   if err != nil {
     resp.Diagnostics.AddError("failed to serialize http request", err.Error())
@@ -117,9 +131,7 @@ func (r *CustomFieldResource) Update(ctx context.Context, req resource.UpdateReq
   res := new(http.Response)
   _, err = r.client.CustomFields.Update(
     ctx,
-    m3ter.CustomFieldUpdateParams{
-      OrgID: m3ter.F(data.ID.ValueString()),
-    },
+    params,
     option.WithRequestBody("application/json", dataBytes),
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
@@ -147,12 +159,18 @@ func (r *CustomFieldResource) Read(ctx context.Context, req resource.ReadRequest
     return
   }
 
+  params := m3ter.CustomFieldGetParams{
+
+  }
+
+  if !data.ID.IsNull() {
+    params.OrgID = m3ter.F(data.ID.ValueString())
+  }
+
   res := new(http.Response)
   _, err := r.client.CustomFields.Get(
     ctx,
-    m3ter.CustomFieldGetParams{
-      OrgID: m3ter.F(data.ID.ValueString()),
-    },
+    params,
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
   )

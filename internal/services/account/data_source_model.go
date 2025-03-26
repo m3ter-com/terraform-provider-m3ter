@@ -39,7 +39,11 @@ Address customfield.NestedObject[AccountAddressDataSourceModel] `tfsdk:"address"
 
 func (m *AccountDataSourceModel) toReadParams(_ context.Context) (params m3ter.AccountGetParams, diags diag.Diagnostics) {
   params = m3ter.AccountGetParams{
-    OrgID: m3ter.F(m.OrgID.ValueString()),
+
+  }
+
+  if !m.OrgID.IsNull() {
+    params.OrgID = m3ter.F(m.OrgID.ValueString())
   }
 
   return

@@ -11,7 +11,7 @@ import (
 type BalanceTransactionModel struct {
 ID types.String `tfsdk:"id" json:"id,computed"`
 BalanceID types.String `tfsdk:"balance_id" path:"balanceId,required"`
-OrgID types.String `tfsdk:"org_id" path:"orgId,required"`
+OrgID types.String `tfsdk:"org_id" path:"orgId,optional"`
 Amount types.Float64 `tfsdk:"amount" json:"amount,required"`
 AppliedDate timetypes.RFC3339 `tfsdk:"applied_date" json:"appliedDate,optional" format:"date-time"`
 CurrencyPaid types.String `tfsdk:"currency_paid" json:"currencyPaid,optional"`

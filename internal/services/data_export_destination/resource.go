@@ -60,6 +60,14 @@ func (r *DataExportDestinationResource) Create(ctx context.Context, req resource
     return
   }
 
+  params := m3ter.DataExportDestinationNewParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   dataBytes, err := data.MarshalJSON()
   if err != nil {
     resp.Diagnostics.AddError("failed to serialize http request", err.Error())
@@ -68,9 +76,7 @@ func (r *DataExportDestinationResource) Create(ctx context.Context, req resource
   res := new(http.Response)
   _, err = r.client.DataExports.Destinations.New(
     ctx,
-    m3ter.DataExportDestinationNewParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithRequestBody("application/json", dataBytes),
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
@@ -106,6 +112,14 @@ func (r *DataExportDestinationResource) Update(ctx context.Context, req resource
     return
   }
 
+  params := m3ter.DataExportDestinationUpdateParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   dataBytes, err := data.MarshalJSONForUpdate(*state)
   if err != nil {
     resp.Diagnostics.AddError("failed to serialize http request", err.Error())
@@ -115,9 +129,7 @@ func (r *DataExportDestinationResource) Update(ctx context.Context, req resource
   _, err = r.client.DataExports.Destinations.Update(
     ctx,
     data.ID.ValueString(),
-    m3ter.DataExportDestinationUpdateParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithRequestBody("application/json", dataBytes),
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
@@ -145,13 +157,19 @@ func (r *DataExportDestinationResource) Read(ctx context.Context, req resource.R
     return
   }
 
+  params := m3ter.DataExportDestinationGetParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   res := new(http.Response)
   _, err := r.client.DataExports.Destinations.Get(
     ctx,
     data.ID.ValueString(),
-    m3ter.DataExportDestinationGetParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
   )
@@ -183,12 +201,18 @@ func (r *DataExportDestinationResource) Delete(ctx context.Context, req resource
     return
   }
 
+  params := m3ter.DataExportDestinationDeleteParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   _, err := r.client.DataExports.Destinations.Delete(
     ctx,
     data.ID.ValueString(),
-    m3ter.DataExportDestinationDeleteParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithMiddleware(logging.Middleware(ctx)),
   )
   if err != nil {

@@ -63,6 +63,14 @@ func (r *ResourceGroupResource) Create(ctx context.Context, req resource.CreateR
     return
   }
 
+  params := m3ter.ResourceGroupNewParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   dataBytes, err := data.MarshalJSON()
   if err != nil {
     resp.Diagnostics.AddError("failed to serialize http request", err.Error())
@@ -72,9 +80,7 @@ func (r *ResourceGroupResource) Create(ctx context.Context, req resource.CreateR
   _, err = r.client.ResourceGroups.New(
     ctx,
     data.Type.ValueString(),
-    m3ter.ResourceGroupNewParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithRequestBody("application/json", dataBytes),
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
@@ -110,6 +116,14 @@ func (r *ResourceGroupResource) Update(ctx context.Context, req resource.UpdateR
     return
   }
 
+  params := m3ter.ResourceGroupUpdateParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   dataBytes, err := data.MarshalJSONForUpdate(*state)
   if err != nil {
     resp.Diagnostics.AddError("failed to serialize http request", err.Error())
@@ -120,9 +134,7 @@ func (r *ResourceGroupResource) Update(ctx context.Context, req resource.UpdateR
     ctx,
     data.Type.ValueString(),
     data.ID.ValueString(),
-    m3ter.ResourceGroupUpdateParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithRequestBody("application/json", dataBytes),
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
@@ -150,14 +162,20 @@ func (r *ResourceGroupResource) Read(ctx context.Context, req resource.ReadReque
     return
   }
 
+  params := m3ter.ResourceGroupGetParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   res := new(http.Response)
   _, err := r.client.ResourceGroups.Get(
     ctx,
     data.Type.ValueString(),
     data.ID.ValueString(),
-    m3ter.ResourceGroupGetParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
   )
@@ -189,13 +207,19 @@ func (r *ResourceGroupResource) Delete(ctx context.Context, req resource.DeleteR
     return
   }
 
+  params := m3ter.ResourceGroupDeleteParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   _, err := r.client.ResourceGroups.Delete(
     ctx,
     data.Type.ValueString(),
     data.ID.ValueString(),
-    m3ter.ResourceGroupDeleteParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithMiddleware(logging.Middleware(ctx)),
   )
   if err != nil {

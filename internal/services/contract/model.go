@@ -10,7 +10,7 @@ import (
 
 type ContractModel struct {
 ID types.String `tfsdk:"id" json:"id,computed"`
-OrgID types.String `tfsdk:"org_id" path:"orgId,required"`
+OrgID types.String `tfsdk:"org_id" path:"orgId,optional"`
 AccountID types.String `tfsdk:"account_id" json:"accountId,required"`
 EndDate timetypes.RFC3339 `tfsdk:"end_date" json:"endDate,required" format:"date"`
 Name types.String `tfsdk:"name" json:"name,required"`

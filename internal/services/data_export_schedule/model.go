@@ -9,7 +9,7 @@ import (
 
 type DataExportScheduleModel struct {
 ID types.String `tfsdk:"id" json:"id,computed"`
-OrgID types.String `tfsdk:"org_id" path:"orgId,required"`
+OrgID types.String `tfsdk:"org_id" path:"orgId,optional"`
 SourceType types.String `tfsdk:"source_type" json:"sourceType,required"`
 Aggregation types.String `tfsdk:"aggregation" json:"aggregation,optional"`
 AggregationFrequency types.String `tfsdk:"aggregation_frequency" json:"aggregationFrequency,optional"`

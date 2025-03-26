@@ -17,7 +17,7 @@ Data customfield.NestedObjectList[ExternalMappingsItemsDataSourceModel] `json:"d
 }
 
 type ExternalMappingsDataSourceModel struct {
-OrgID types.String `tfsdk:"org_id" path:"orgId,required"`
+OrgID types.String `tfsdk:"org_id" path:"orgId,optional"`
 ExternalSystemID types.String `tfsdk:"external_system_id" query:"externalSystemId,optional"`
 IntegrationConfigID types.String `tfsdk:"integration_config_id" query:"integrationConfigId,optional"`
 M3terIDs *[]types.String `tfsdk:"m3ter_ids" query:"m3terIds,optional"`
@@ -32,7 +32,6 @@ func (m *ExternalMappingsDataSourceModel) toListParams(_ context.Context) (param
   }
 
   params = m3ter.ExternalMappingListParams{
-    OrgID: m3ter.F(m.OrgID.ValueString()),
     M3terIDs: m3ter.F(mM3terIDs),
   }
 
@@ -41,6 +40,9 @@ func (m *ExternalMappingsDataSourceModel) toListParams(_ context.Context) (param
   }
   if !m.IntegrationConfigID.IsNull() {
     params.IntegrationConfigID = m3ter.F(m.IntegrationConfigID.ValueString())
+  }
+  if !m.OrgID.IsNull() {
+    params.OrgID = m3ter.F(m.OrgID.ValueString())
   }
 
   return

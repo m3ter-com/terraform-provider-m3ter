@@ -17,7 +17,7 @@ Data customfield.NestedObjectList[MetersItemsDataSourceModel] `json:"data,comput
 }
 
 type MetersDataSourceModel struct {
-OrgID types.String `tfsdk:"org_id" path:"orgId,required"`
+OrgID types.String `tfsdk:"org_id" path:"orgId,optional"`
 Codes *[]types.String `tfsdk:"codes" query:"codes,optional"`
 IDs *[]types.String `tfsdk:"ids" query:"ids,optional"`
 ProductID *[]types.String `tfsdk:"product_id" query:"productId,optional"`
@@ -40,10 +40,13 @@ func (m *MetersDataSourceModel) toListParams(_ context.Context) (params m3ter.Me
   }
 
   params = m3ter.MeterListParams{
-    OrgID: m3ter.F(m.OrgID.ValueString()),
     Codes: m3ter.F(mCodes),
     IDs: m3ter.F(mIDs),
     ProductID: m3ter.F(mProductID),
+  }
+
+  if !m.OrgID.IsNull() {
+    params.OrgID = m3ter.F(m.OrgID.ValueString())
   }
 
   return

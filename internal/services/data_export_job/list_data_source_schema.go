@@ -21,7 +21,7 @@ func ListDataSourceSchema(ctx context.Context) (schema.Schema) {
   return schema.Schema{
     Attributes: map[string]schema.Attribute{
       "org_id": schema.StringAttribute{
-        Required: true,
+        Optional: true,
       },
       "date_created_end": schema.StringAttribute{
         Description: "Include only Job entities created before this date. Format: yyyy-MM-dd'T'HH:mm:ss'Z'",

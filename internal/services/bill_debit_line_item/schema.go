@@ -30,7 +30,7 @@ func ResourceSchema(ctx context.Context) (schema.Schema) {
         PlanModifiers: []planmodifier.String{stringplanmodifier.RequiresReplace()},
       },
       "org_id": schema.StringAttribute{
-        Required: true,
+        Optional: true,
         PlanModifiers: []planmodifier.String{stringplanmodifier.RequiresReplace()},
       },
       "amount": schema.Float64Attribute{

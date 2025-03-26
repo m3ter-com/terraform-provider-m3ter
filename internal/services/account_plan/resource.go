@@ -63,6 +63,14 @@ func (r *AccountPlanResource) Create(ctx context.Context, req resource.CreateReq
     return
   }
 
+  params := m3ter.AccountPlanNewParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   dataBytes, err := data.MarshalJSON()
   if err != nil {
     resp.Diagnostics.AddError("failed to serialize http request", err.Error())
@@ -71,9 +79,7 @@ func (r *AccountPlanResource) Create(ctx context.Context, req resource.CreateReq
   res := new(http.Response)
   _, err = r.client.AccountPlans.New(
     ctx,
-    m3ter.AccountPlanNewParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithRequestBody("application/json", dataBytes),
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
@@ -109,6 +115,14 @@ func (r *AccountPlanResource) Update(ctx context.Context, req resource.UpdateReq
     return
   }
 
+  params := m3ter.AccountPlanUpdateParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   dataBytes, err := data.MarshalJSONForUpdate(*state)
   if err != nil {
     resp.Diagnostics.AddError("failed to serialize http request", err.Error())
@@ -118,9 +132,7 @@ func (r *AccountPlanResource) Update(ctx context.Context, req resource.UpdateReq
   _, err = r.client.AccountPlans.Update(
     ctx,
     data.ID.ValueString(),
-    m3ter.AccountPlanUpdateParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithRequestBody("application/json", dataBytes),
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
@@ -148,13 +160,19 @@ func (r *AccountPlanResource) Read(ctx context.Context, req resource.ReadRequest
     return
   }
 
+  params := m3ter.AccountPlanGetParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   res := new(http.Response)
   _, err := r.client.AccountPlans.Get(
     ctx,
     data.ID.ValueString(),
-    m3ter.AccountPlanGetParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
   )
@@ -186,12 +204,18 @@ func (r *AccountPlanResource) Delete(ctx context.Context, req resource.DeleteReq
     return
   }
 
+  params := m3ter.AccountPlanDeleteParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   _, err := r.client.AccountPlans.Delete(
     ctx,
     data.ID.ValueString(),
-    m3ter.AccountPlanDeleteParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithMiddleware(logging.Middleware(ctx)),
   )
   if err != nil {

@@ -10,7 +10,7 @@ import (
 
 type AggregationModel struct {
 ID types.String `tfsdk:"id" json:"id,computed"`
-OrgID types.String `tfsdk:"org_id" path:"orgId,required"`
+OrgID types.String `tfsdk:"org_id" path:"orgId,optional"`
 Aggregation types.String `tfsdk:"aggregation" json:"aggregation,required"`
 MeterID types.String `tfsdk:"meter_id" json:"meterId,required"`
 Name types.String `tfsdk:"name" json:"name,required"`

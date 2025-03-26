@@ -41,7 +41,11 @@ ProductIDs customfield.List[types.String] `tfsdk:"product_ids" json:"productIds,
 
 func (m *BalanceDataSourceModel) toReadParams(_ context.Context) (params m3ter.BalanceGetParams, diags diag.Diagnostics) {
   params = m3ter.BalanceGetParams{
-    OrgID: m3ter.F(m.OrgID.ValueString()),
+
+  }
+
+  if !m.OrgID.IsNull() {
+    params.OrgID = m3ter.F(m.OrgID.ValueString())
   }
 
   return

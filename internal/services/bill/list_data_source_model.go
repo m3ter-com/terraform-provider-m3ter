@@ -17,7 +17,7 @@ Data customfield.NestedObjectList[BillsItemsDataSourceModel] `json:"data,compute
 }
 
 type BillsDataSourceModel struct {
-OrgID types.String `tfsdk:"org_id" path:"orgId,required"`
+OrgID types.String `tfsdk:"org_id" path:"orgId,optional"`
 AccountID types.String `tfsdk:"account_id" query:"accountId,optional"`
 BillDate types.String `tfsdk:"bill_date" query:"billDate,optional"`
 BillDateEnd types.String `tfsdk:"bill_date_end" query:"billDateEnd,optional"`
@@ -41,7 +41,6 @@ func (m *BillsDataSourceModel) toListParams(_ context.Context) (params m3ter.Bil
   }
 
   params = m3ter.BillListParams{
-    OrgID: m3ter.F(m.OrgID.ValueString()),
     IDs: m3ter.F(mIDs),
   }
 
@@ -77,6 +76,9 @@ func (m *BillsDataSourceModel) toListParams(_ context.Context) (params m3ter.Bil
   }
   if !m.Status.IsNull() {
     params.Status = m3ter.F(m3ter.BillListParamsStatus(m.Status.ValueString()))
+  }
+  if !m.OrgID.IsNull() {
+    params.OrgID = m3ter.F(m.OrgID.ValueString())
   }
 
   return

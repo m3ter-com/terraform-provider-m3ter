@@ -46,7 +46,11 @@ CurrencyConversions customfield.NestedObjectList[OrganizationConfigCurrencyConve
 
 func (m *OrganizationConfigDataSourceModel) toReadParams(_ context.Context) (params m3ter.OrganizationConfigGetParams, diags diag.Diagnostics) {
   params = m3ter.OrganizationConfigGetParams{
-    OrgID: m3ter.F(m.OrgID.ValueString()),
+
+  }
+
+  if !m.OrgID.IsNull() {
+    params.OrgID = m3ter.F(m.OrgID.ValueString())
   }
 
   return

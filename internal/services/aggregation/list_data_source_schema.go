@@ -21,7 +21,7 @@ func ListDataSourceSchema(ctx context.Context) (schema.Schema) {
   return schema.Schema{
     Attributes: map[string]schema.Attribute{
       "org_id": schema.StringAttribute{
-        Required: true,
+        Optional: true,
       },
       "codes": schema.ListAttribute{
         Description: "List of Aggregation codes to retrieve. These are unique short codes to identify each Aggregation.",

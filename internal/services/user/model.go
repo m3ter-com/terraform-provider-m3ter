@@ -11,7 +11,7 @@ import (
 
 type UserModel struct {
 ID types.String `tfsdk:"id" path:"id,required"`
-OrgID types.String `tfsdk:"org_id" path:"orgId,required"`
+OrgID types.String `tfsdk:"org_id" path:"orgId,optional"`
 DtEndAccess timetypes.RFC3339 `tfsdk:"dt_end_access" json:"dtEndAccess,optional" format:"date-time"`
 Version types.Int64 `tfsdk:"version" json:"version,optional"`
 PermissionPolicy customfield.NestedObjectList[UserPermissionPolicyModel] `tfsdk:"permission_policy" json:"permissionPolicy,computed_optional"`

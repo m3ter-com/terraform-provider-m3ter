@@ -18,7 +18,7 @@ Data customfield.NestedObjectList[BalanceTransactionsItemsDataSourceModel] `json
 
 type BalanceTransactionsDataSourceModel struct {
 BalanceID types.String `tfsdk:"balance_id" path:"balanceId,required"`
-OrgID types.String `tfsdk:"org_id" path:"orgId,required"`
+OrgID types.String `tfsdk:"org_id" path:"orgId,optional"`
 TransactionTypeID types.String `tfsdk:"transaction_type_id" query:"transactionTypeId,optional"`
 MaxItems types.Int64 `tfsdk:"max_items"`
 Items customfield.NestedObjectList[BalanceTransactionsItemsDataSourceModel] `tfsdk:"items"`
@@ -26,11 +26,14 @@ Items customfield.NestedObjectList[BalanceTransactionsItemsDataSourceModel] `tfs
 
 func (m *BalanceTransactionsDataSourceModel) toListParams(_ context.Context) (params m3ter.BalanceTransactionListParams, diags diag.Diagnostics) {
   params = m3ter.BalanceTransactionListParams{
-    OrgID: m3ter.F(m.OrgID.ValueString()),
+
   }
 
   if !m.TransactionTypeID.IsNull() {
     params.TransactionTypeID = m3ter.F(m.TransactionTypeID.ValueString())
+  }
+  if !m.OrgID.IsNull() {
+    params.OrgID = m3ter.F(m.OrgID.ValueString())
   }
 
   return

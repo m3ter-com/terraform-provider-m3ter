@@ -21,7 +21,7 @@ func ListDataSourceSchema(ctx context.Context) (schema.Schema) {
   return schema.Schema{
     Attributes: map[string]schema.Attribute{
       "org_id": schema.StringAttribute{
-        Required: true,
+        Optional: true,
       },
       "codes": schema.ListAttribute{
         Description: "List of Meter codes to retrieve. These are the unique short codes that identify each Meter.",

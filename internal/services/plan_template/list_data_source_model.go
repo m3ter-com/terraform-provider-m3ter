@@ -17,7 +17,7 @@ Data customfield.NestedObjectList[PlanTemplatesItemsDataSourceModel] `json:"data
 }
 
 type PlanTemplatesDataSourceModel struct {
-OrgID types.String `tfsdk:"org_id" path:"orgId,required"`
+OrgID types.String `tfsdk:"org_id" path:"orgId,optional"`
 ProductID types.String `tfsdk:"product_id" query:"productId,optional"`
 IDs *[]types.String `tfsdk:"ids" query:"ids,optional"`
 MaxItems types.Int64 `tfsdk:"max_items"`
@@ -31,12 +31,14 @@ func (m *PlanTemplatesDataSourceModel) toListParams(_ context.Context) (params m
   }
 
   params = m3ter.PlanTemplateListParams{
-    OrgID: m3ter.F(m.OrgID.ValueString()),
     IDs: m3ter.F(mIDs),
   }
 
   if !m.ProductID.IsNull() {
     params.ProductID = m3ter.F(m.ProductID.ValueString())
+  }
+  if !m.OrgID.IsNull() {
+    params.OrgID = m3ter.F(m.OrgID.ValueString())
   }
 
   return

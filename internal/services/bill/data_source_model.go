@@ -50,7 +50,11 @@ LineItems customfield.NestedObjectList[BillLineItemsDataSourceModel] `tfsdk:"lin
 
 func (m *BillDataSourceModel) toReadParams(_ context.Context) (params m3ter.BillGetParams, diags diag.Diagnostics) {
   params = m3ter.BillGetParams{
-    OrgID: m3ter.F(m.OrgID.ValueString()),
+
+  }
+
+  if !m.OrgID.IsNull() {
+    params.OrgID = m3ter.F(m.OrgID.ValueString())
   }
 
   return

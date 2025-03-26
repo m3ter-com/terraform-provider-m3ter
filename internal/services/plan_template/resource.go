@@ -63,6 +63,14 @@ func (r *PlanTemplateResource) Create(ctx context.Context, req resource.CreateRe
     return
   }
 
+  params := m3ter.PlanTemplateNewParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   dataBytes, err := data.MarshalJSON()
   if err != nil {
     resp.Diagnostics.AddError("failed to serialize http request", err.Error())
@@ -71,9 +79,7 @@ func (r *PlanTemplateResource) Create(ctx context.Context, req resource.CreateRe
   res := new(http.Response)
   _, err = r.client.PlanTemplates.New(
     ctx,
-    m3ter.PlanTemplateNewParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithRequestBody("application/json", dataBytes),
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
@@ -109,6 +115,14 @@ func (r *PlanTemplateResource) Update(ctx context.Context, req resource.UpdateRe
     return
   }
 
+  params := m3ter.PlanTemplateUpdateParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   dataBytes, err := data.MarshalJSONForUpdate(*state)
   if err != nil {
     resp.Diagnostics.AddError("failed to serialize http request", err.Error())
@@ -118,9 +132,7 @@ func (r *PlanTemplateResource) Update(ctx context.Context, req resource.UpdateRe
   _, err = r.client.PlanTemplates.Update(
     ctx,
     data.ID.ValueString(),
-    m3ter.PlanTemplateUpdateParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithRequestBody("application/json", dataBytes),
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
@@ -148,13 +160,19 @@ func (r *PlanTemplateResource) Read(ctx context.Context, req resource.ReadReques
     return
   }
 
+  params := m3ter.PlanTemplateGetParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   res := new(http.Response)
   _, err := r.client.PlanTemplates.Get(
     ctx,
     data.ID.ValueString(),
-    m3ter.PlanTemplateGetParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
   )
@@ -186,12 +204,18 @@ func (r *PlanTemplateResource) Delete(ctx context.Context, req resource.DeleteRe
     return
   }
 
+  params := m3ter.PlanTemplateDeleteParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   _, err := r.client.PlanTemplates.Delete(
     ctx,
     data.ID.ValueString(),
-    m3ter.PlanTemplateDeleteParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithMiddleware(logging.Middleware(ctx)),
   )
   if err != nil {

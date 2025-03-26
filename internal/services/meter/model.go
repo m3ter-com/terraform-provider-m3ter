@@ -10,7 +10,7 @@ import (
 
 type MeterModel struct {
 ID types.String `tfsdk:"id" json:"id,computed"`
-OrgID types.String `tfsdk:"org_id" path:"orgId,required"`
+OrgID types.String `tfsdk:"org_id" path:"orgId,optional"`
 Code types.String `tfsdk:"code" json:"code,required"`
 Name types.String `tfsdk:"name" json:"name,required"`
 DataFields *[]*MeterDataFieldsModel `tfsdk:"data_fields" json:"dataFields,required"`

@@ -10,7 +10,7 @@ import (
 
 type PlanGroupModel struct {
 ID types.String `tfsdk:"id" json:"id,computed"`
-OrgID types.String `tfsdk:"org_id" path:"orgId,required"`
+OrgID types.String `tfsdk:"org_id" path:"orgId,optional"`
 Currency types.String `tfsdk:"currency" json:"currency,required"`
 Name types.String `tfsdk:"name" json:"name,required"`
 AccountID types.String `tfsdk:"account_id" json:"accountId,optional"`

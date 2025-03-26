@@ -63,6 +63,14 @@ func (r *BalanceResource) Create(ctx context.Context, req resource.CreateRequest
     return
   }
 
+  params := m3ter.BalanceNewParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   dataBytes, err := data.MarshalJSON()
   if err != nil {
     resp.Diagnostics.AddError("failed to serialize http request", err.Error())
@@ -71,9 +79,7 @@ func (r *BalanceResource) Create(ctx context.Context, req resource.CreateRequest
   res := new(http.Response)
   _, err = r.client.Balances.New(
     ctx,
-    m3ter.BalanceNewParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithRequestBody("application/json", dataBytes),
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
@@ -109,6 +115,14 @@ func (r *BalanceResource) Update(ctx context.Context, req resource.UpdateRequest
     return
   }
 
+  params := m3ter.BalanceUpdateParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   dataBytes, err := data.MarshalJSONForUpdate(*state)
   if err != nil {
     resp.Diagnostics.AddError("failed to serialize http request", err.Error())
@@ -118,9 +132,7 @@ func (r *BalanceResource) Update(ctx context.Context, req resource.UpdateRequest
   _, err = r.client.Balances.Update(
     ctx,
     data.ID.ValueString(),
-    m3ter.BalanceUpdateParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithRequestBody("application/json", dataBytes),
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
@@ -148,13 +160,19 @@ func (r *BalanceResource) Read(ctx context.Context, req resource.ReadRequest, re
     return
   }
 
+  params := m3ter.BalanceGetParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   res := new(http.Response)
   _, err := r.client.Balances.Get(
     ctx,
     data.ID.ValueString(),
-    m3ter.BalanceGetParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
   )
@@ -186,12 +204,18 @@ func (r *BalanceResource) Delete(ctx context.Context, req resource.DeleteRequest
     return
   }
 
+  params := m3ter.BalanceDeleteParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   _, err := r.client.Balances.Delete(
     ctx,
     data.ID.ValueString(),
-    m3ter.BalanceDeleteParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithMiddleware(logging.Middleware(ctx)),
   )
   if err != nil {

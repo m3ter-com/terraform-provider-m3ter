@@ -63,6 +63,14 @@ func (r *CurrencyResource) Create(ctx context.Context, req resource.CreateReques
     return
   }
 
+  params := m3ter.CurrencyNewParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   dataBytes, err := data.MarshalJSON()
   if err != nil {
     resp.Diagnostics.AddError("failed to serialize http request", err.Error())
@@ -71,9 +79,7 @@ func (r *CurrencyResource) Create(ctx context.Context, req resource.CreateReques
   res := new(http.Response)
   _, err = r.client.Currencies.New(
     ctx,
-    m3ter.CurrencyNewParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithRequestBody("application/json", dataBytes),
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
@@ -109,6 +115,14 @@ func (r *CurrencyResource) Update(ctx context.Context, req resource.UpdateReques
     return
   }
 
+  params := m3ter.CurrencyUpdateParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   dataBytes, err := data.MarshalJSONForUpdate(*state)
   if err != nil {
     resp.Diagnostics.AddError("failed to serialize http request", err.Error())
@@ -118,9 +132,7 @@ func (r *CurrencyResource) Update(ctx context.Context, req resource.UpdateReques
   _, err = r.client.Currencies.Update(
     ctx,
     data.ID.ValueString(),
-    m3ter.CurrencyUpdateParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithRequestBody("application/json", dataBytes),
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
@@ -148,13 +160,19 @@ func (r *CurrencyResource) Read(ctx context.Context, req resource.ReadRequest, r
     return
   }
 
+  params := m3ter.CurrencyGetParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   res := new(http.Response)
   _, err := r.client.Currencies.Get(
     ctx,
     data.ID.ValueString(),
-    m3ter.CurrencyGetParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
   )
@@ -186,12 +204,18 @@ func (r *CurrencyResource) Delete(ctx context.Context, req resource.DeleteReques
     return
   }
 
+  params := m3ter.CurrencyDeleteParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   _, err := r.client.Currencies.Delete(
     ctx,
     data.ID.ValueString(),
-    m3ter.CurrencyDeleteParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithMiddleware(logging.Middleware(ctx)),
   )
   if err != nil {

@@ -63,6 +63,14 @@ func (r *PricingResource) Create(ctx context.Context, req resource.CreateRequest
     return
   }
 
+  params := m3ter.PricingNewParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   dataBytes, err := data.MarshalJSON()
   if err != nil {
     resp.Diagnostics.AddError("failed to serialize http request", err.Error())
@@ -71,9 +79,7 @@ func (r *PricingResource) Create(ctx context.Context, req resource.CreateRequest
   res := new(http.Response)
   _, err = r.client.Pricings.New(
     ctx,
-    m3ter.PricingNewParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithRequestBody("application/json", dataBytes),
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
@@ -109,6 +115,14 @@ func (r *PricingResource) Update(ctx context.Context, req resource.UpdateRequest
     return
   }
 
+  params := m3ter.PricingUpdateParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   dataBytes, err := data.MarshalJSONForUpdate(*state)
   if err != nil {
     resp.Diagnostics.AddError("failed to serialize http request", err.Error())
@@ -118,9 +132,7 @@ func (r *PricingResource) Update(ctx context.Context, req resource.UpdateRequest
   _, err = r.client.Pricings.Update(
     ctx,
     data.ID.ValueString(),
-    m3ter.PricingUpdateParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithRequestBody("application/json", dataBytes),
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
@@ -148,13 +160,19 @@ func (r *PricingResource) Read(ctx context.Context, req resource.ReadRequest, re
     return
   }
 
+  params := m3ter.PricingGetParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   res := new(http.Response)
   _, err := r.client.Pricings.Get(
     ctx,
     data.ID.ValueString(),
-    m3ter.PricingGetParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
   )
@@ -186,12 +204,18 @@ func (r *PricingResource) Delete(ctx context.Context, req resource.DeleteRequest
     return
   }
 
+  params := m3ter.PricingDeleteParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   _, err := r.client.Pricings.Delete(
     ctx,
     data.ID.ValueString(),
-    m3ter.PricingDeleteParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithMiddleware(logging.Middleware(ctx)),
   )
   if err != nil {

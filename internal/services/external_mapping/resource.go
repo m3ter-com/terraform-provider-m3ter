@@ -63,6 +63,14 @@ func (r *ExternalMappingResource) Create(ctx context.Context, req resource.Creat
     return
   }
 
+  params := m3ter.ExternalMappingNewParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   dataBytes, err := data.MarshalJSON()
   if err != nil {
     resp.Diagnostics.AddError("failed to serialize http request", err.Error())
@@ -71,9 +79,7 @@ func (r *ExternalMappingResource) Create(ctx context.Context, req resource.Creat
   res := new(http.Response)
   _, err = r.client.ExternalMappings.New(
     ctx,
-    m3ter.ExternalMappingNewParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithRequestBody("application/json", dataBytes),
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
@@ -109,6 +115,14 @@ func (r *ExternalMappingResource) Update(ctx context.Context, req resource.Updat
     return
   }
 
+  params := m3ter.ExternalMappingUpdateParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   dataBytes, err := data.MarshalJSONForUpdate(*state)
   if err != nil {
     resp.Diagnostics.AddError("failed to serialize http request", err.Error())
@@ -118,9 +132,7 @@ func (r *ExternalMappingResource) Update(ctx context.Context, req resource.Updat
   _, err = r.client.ExternalMappings.Update(
     ctx,
     data.ID.ValueString(),
-    m3ter.ExternalMappingUpdateParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithRequestBody("application/json", dataBytes),
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
@@ -148,13 +160,19 @@ func (r *ExternalMappingResource) Read(ctx context.Context, req resource.ReadReq
     return
   }
 
+  params := m3ter.ExternalMappingGetParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   res := new(http.Response)
   _, err := r.client.ExternalMappings.Get(
     ctx,
     data.ID.ValueString(),
-    m3ter.ExternalMappingGetParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
   )
@@ -186,12 +204,18 @@ func (r *ExternalMappingResource) Delete(ctx context.Context, req resource.Delet
     return
   }
 
+  params := m3ter.ExternalMappingDeleteParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   _, err := r.client.ExternalMappings.Delete(
     ctx,
     data.ID.ValueString(),
-    m3ter.ExternalMappingDeleteParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithMiddleware(logging.Middleware(ctx)),
   )
   if err != nil {

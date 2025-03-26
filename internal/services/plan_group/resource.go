@@ -63,6 +63,14 @@ func (r *PlanGroupResource) Create(ctx context.Context, req resource.CreateReque
     return
   }
 
+  params := m3ter.PlanGroupNewParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   dataBytes, err := data.MarshalJSON()
   if err != nil {
     resp.Diagnostics.AddError("failed to serialize http request", err.Error())
@@ -71,9 +79,7 @@ func (r *PlanGroupResource) Create(ctx context.Context, req resource.CreateReque
   res := new(http.Response)
   _, err = r.client.PlanGroups.New(
     ctx,
-    m3ter.PlanGroupNewParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithRequestBody("application/json", dataBytes),
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
@@ -109,6 +115,14 @@ func (r *PlanGroupResource) Update(ctx context.Context, req resource.UpdateReque
     return
   }
 
+  params := m3ter.PlanGroupUpdateParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   dataBytes, err := data.MarshalJSONForUpdate(*state)
   if err != nil {
     resp.Diagnostics.AddError("failed to serialize http request", err.Error())
@@ -118,9 +132,7 @@ func (r *PlanGroupResource) Update(ctx context.Context, req resource.UpdateReque
   _, err = r.client.PlanGroups.Update(
     ctx,
     data.ID.ValueString(),
-    m3ter.PlanGroupUpdateParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithRequestBody("application/json", dataBytes),
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
@@ -148,13 +160,19 @@ func (r *PlanGroupResource) Read(ctx context.Context, req resource.ReadRequest, 
     return
   }
 
+  params := m3ter.PlanGroupGetParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   res := new(http.Response)
   _, err := r.client.PlanGroups.Get(
     ctx,
     data.ID.ValueString(),
-    m3ter.PlanGroupGetParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithResponseBodyInto(&res),
     option.WithMiddleware(logging.Middleware(ctx)),
   )
@@ -186,12 +204,18 @@ func (r *PlanGroupResource) Delete(ctx context.Context, req resource.DeleteReque
     return
   }
 
+  params := m3ter.PlanGroupDeleteParams{
+
+  }
+
+  if !data.OrgID.IsNull() {
+    params.OrgID = m3ter.F(data.OrgID.ValueString())
+  }
+
   _, err := r.client.PlanGroups.Delete(
     ctx,
     data.ID.ValueString(),
-    m3ter.PlanGroupDeleteParams{
-      OrgID: m3ter.F(data.OrgID.ValueString()),
-    },
+    params,
     option.WithMiddleware(logging.Middleware(ctx)),
   )
   if err != nil {
