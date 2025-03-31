@@ -109,6 +109,7 @@ func ListDataSourceSchema(ctx context.Context) (schema.Schema) {
             "trigger_type": schema.StringAttribute{
               Description: "Specifies the type of trigger for the integration.\nAvailable values: \"EVENT\", \"SCHEDULE\".",
               Computed: true,
+              DeprecationMessage: "This attribute is deprecated.",
               Validators: []validator.String{
               stringvalidator.OneOfCaseInsensitive("EVENT", "SCHEDULE"),
               },
