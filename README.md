@@ -37,7 +37,7 @@ provider "m3ter" {
 
 # Configure a resource
 resource "m3ter_product" "example_product" {
-  org_id = "ORG_ID"
+  org_id = "My Org ID"
 }
 ```
 
