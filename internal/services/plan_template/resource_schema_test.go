@@ -3,17 +3,17 @@
 package plan_template_test
 
 import (
-  "context"
-  "testing"
+	"context"
+	"testing"
 
-  "github.com/m3ter-com/terraform-provider-m3ter/internal/services/plan_template"
-  "github.com/m3ter-com/terraform-provider-m3ter/internal/test_helpers"
+	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/plan_template"
+	"github.com/m3ter-com/terraform-provider-m3ter/internal/test_helpers"
 )
 
 func TestPlanTemplateModelSchemaParity(t *testing.T) {
-  t.Parallel()
-  model := (*plan_template.PlanTemplateModel)(nil)
-  schema := plan_template.ResourceSchema(context.TODO())
-  errs := test_helpers.ValidateResourceModelSchemaIntegrity(model, schema)
-  errs.Report(t)
+	t.Parallel()
+	model := (*plan_template.PlanTemplateModel)(nil)
+	schema := plan_template.ResourceSchema(context.TODO())
+	errs := test_helpers.ValidateResourceModelSchemaIntegrity(model, schema)
+	errs.Report(t)
 }

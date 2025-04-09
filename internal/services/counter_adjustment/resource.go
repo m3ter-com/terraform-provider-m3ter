@@ -3,18 +3,18 @@
 package counter_adjustment
 
 import (
-  "context"
-  "fmt"
-  "io"
-  "net/http"
+	"context"
+	"fmt"
+	"io"
+	"net/http"
 
-  "github.com/hashicorp/terraform-plugin-framework/resource"
-  "github.com/hashicorp/terraform-plugin-framework/types"
-  "github.com/m3ter-com/m3ter-sdk-go"
-  "github.com/m3ter-com/m3ter-sdk-go/option"
-  "github.com/m3ter-com/terraform-provider-m3ter/internal/apijson"
-  "github.com/m3ter-com/terraform-provider-m3ter/internal/importpath"
-  "github.com/m3ter-com/terraform-provider-m3ter/internal/logging"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
+	"github.com/hashicorp/terraform-plugin-framework/types"
+	"github.com/m3ter-com/m3ter-sdk-go"
+	"github.com/m3ter-com/m3ter-sdk-go/option"
+	"github.com/m3ter-com/terraform-provider-m3ter/internal/apijson"
+	"github.com/m3ter-com/terraform-provider-m3ter/internal/importpath"
+	"github.com/m3ter-com/terraform-provider-m3ter/internal/logging"
 )
 
 // Ensure provider defined types fully satisfy framework interfaces.
@@ -23,250 +23,242 @@ var _ resource.ResourceWithModifyPlan = (*CounterAdjustmentResource)(nil)
 var _ resource.ResourceWithImportState = (*CounterAdjustmentResource)(nil)
 
 func NewResource() resource.Resource {
-  return &CounterAdjustmentResource{}
+	return &CounterAdjustmentResource{}
 }
 
 // CounterAdjustmentResource defines the resource implementation.
 type CounterAdjustmentResource struct {
-  client *m3ter.Client
+	client *m3ter.Client
 }
 
 func (r *CounterAdjustmentResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
-  resp.TypeName = req.ProviderTypeName + "_counter_adjustment"
+	resp.TypeName = req.ProviderTypeName + "_counter_adjustment"
 }
 
 func (r *CounterAdjustmentResource) Configure(ctx context.Context, req resource.ConfigureRequest, resp *resource.ConfigureResponse) {
-  if req.ProviderData == nil {
-    return
-  }
+	if req.ProviderData == nil {
+		return
+	}
 
-  client, ok := req.ProviderData.(*m3ter.Client)
+	client, ok := req.ProviderData.(*m3ter.Client)
 
-  if !ok {
-    resp.Diagnostics.AddError(
-      "unexpected resource configure type",
-      fmt.Sprintf("Expected *m3ter.Client, got: %T. Please report this issue to the provider developers.", req.ProviderData),
-    )
+	if !ok {
+		resp.Diagnostics.AddError(
+			"unexpected resource configure type",
+			fmt.Sprintf("Expected *m3ter.Client, got: %T. Please report this issue to the provider developers.", req.ProviderData),
+		)
 
-    return
-  }
+		return
+	}
 
-  r.client = client
+	r.client = client
 }
 
 func (r *CounterAdjustmentResource) Create(ctx context.Context, req resource.CreateRequest, resp *resource.CreateResponse) {
-  var data *CounterAdjustmentModel
+	var data *CounterAdjustmentModel
 
-  resp.Diagnostics.Append(req.Plan.Get(ctx, &data)...)
+	resp.Diagnostics.Append(req.Plan.Get(ctx, &data)...)
 
-  if resp.Diagnostics.HasError() {
-    return
-  }
+	if resp.Diagnostics.HasError() {
+		return
+	}
 
-  params := m3ter.CounterAdjustmentNewParams{
+	params := m3ter.CounterAdjustmentNewParams{}
 
-  }
+	if !data.OrgID.IsNull() {
+		params.OrgID = m3ter.F(data.OrgID.ValueString())
+	}
 
-  if !data.OrgID.IsNull() {
-    params.OrgID = m3ter.F(data.OrgID.ValueString())
-  }
+	dataBytes, err := data.MarshalJSON()
+	if err != nil {
+		resp.Diagnostics.AddError("failed to serialize http request", err.Error())
+		return
+	}
+	res := new(http.Response)
+	_, err = r.client.CounterAdjustments.New(
+		ctx,
+		params,
+		option.WithRequestBody("application/json", dataBytes),
+		option.WithResponseBodyInto(&res),
+		option.WithMiddleware(logging.Middleware(ctx)),
+	)
+	if err != nil {
+		resp.Diagnostics.AddError("failed to make http request", err.Error())
+		return
+	}
+	bytes, _ := io.ReadAll(res.Body)
+	err = apijson.UnmarshalComputed(bytes, &data)
+	if err != nil {
+		resp.Diagnostics.AddError("failed to deserialize http request", err.Error())
+		return
+	}
 
-  dataBytes, err := data.MarshalJSON()
-  if err != nil {
-    resp.Diagnostics.AddError("failed to serialize http request", err.Error())
-    return
-  }
-  res := new(http.Response)
-  _, err = r.client.CounterAdjustments.New(
-    ctx,
-    params,
-    option.WithRequestBody("application/json", dataBytes),
-    option.WithResponseBodyInto(&res),
-    option.WithMiddleware(logging.Middleware(ctx)),
-  )
-  if err != nil {
-    resp.Diagnostics.AddError("failed to make http request", err.Error())
-    return
-  }
-  bytes, _ := io.ReadAll(res.Body)
-  err = apijson.UnmarshalComputed(bytes, &data)
-  if err != nil {
-    resp.Diagnostics.AddError("failed to deserialize http request", err.Error())
-    return
-  }
-
-  resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
+	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
 
 func (r *CounterAdjustmentResource) Update(ctx context.Context, req resource.UpdateRequest, resp *resource.UpdateResponse) {
-  var data  *CounterAdjustmentModel
+	var data *CounterAdjustmentModel
 
-  resp.Diagnostics.Append(req.Plan.Get(ctx, &data)...)
+	resp.Diagnostics.Append(req.Plan.Get(ctx, &data)...)
 
-  if resp.Diagnostics.HasError() {
-    return
-  }
+	if resp.Diagnostics.HasError() {
+		return
+	}
 
-  var state  *CounterAdjustmentModel
+	var state *CounterAdjustmentModel
 
-  resp.Diagnostics.Append(req.State.Get(ctx, &state)...)
+	resp.Diagnostics.Append(req.State.Get(ctx, &state)...)
 
-  if resp.Diagnostics.HasError() {
-    return
-  }
+	if resp.Diagnostics.HasError() {
+		return
+	}
 
-  params := m3ter.CounterAdjustmentUpdateParams{
+	params := m3ter.CounterAdjustmentUpdateParams{}
 
-  }
+	if !data.OrgID.IsNull() {
+		params.OrgID = m3ter.F(data.OrgID.ValueString())
+	}
 
-  if !data.OrgID.IsNull() {
-    params.OrgID = m3ter.F(data.OrgID.ValueString())
-  }
+	dataBytes, err := data.MarshalJSONForUpdate(*state)
+	if err != nil {
+		resp.Diagnostics.AddError("failed to serialize http request", err.Error())
+		return
+	}
+	res := new(http.Response)
+	_, err = r.client.CounterAdjustments.Update(
+		ctx,
+		data.ID.ValueString(),
+		params,
+		option.WithRequestBody("application/json", dataBytes),
+		option.WithResponseBodyInto(&res),
+		option.WithMiddleware(logging.Middleware(ctx)),
+	)
+	if err != nil {
+		resp.Diagnostics.AddError("failed to make http request", err.Error())
+		return
+	}
+	bytes, _ := io.ReadAll(res.Body)
+	err = apijson.UnmarshalComputed(bytes, &data)
+	if err != nil {
+		resp.Diagnostics.AddError("failed to deserialize http request", err.Error())
+		return
+	}
 
-  dataBytes, err := data.MarshalJSONForUpdate(*state)
-  if err != nil {
-    resp.Diagnostics.AddError("failed to serialize http request", err.Error())
-    return
-  }
-  res := new(http.Response)
-  _, err = r.client.CounterAdjustments.Update(
-    ctx,
-    data.ID.ValueString(),
-    params,
-    option.WithRequestBody("application/json", dataBytes),
-    option.WithResponseBodyInto(&res),
-    option.WithMiddleware(logging.Middleware(ctx)),
-  )
-  if err != nil {
-    resp.Diagnostics.AddError("failed to make http request", err.Error())
-    return
-  }
-  bytes, _ := io.ReadAll(res.Body)
-  err = apijson.UnmarshalComputed(bytes, &data)
-  if err != nil {
-    resp.Diagnostics.AddError("failed to deserialize http request", err.Error())
-    return
-  }
-
-  resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
+	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
 
 func (r *CounterAdjustmentResource) Read(ctx context.Context, req resource.ReadRequest, resp *resource.ReadResponse) {
-  var data  *CounterAdjustmentModel
+	var data *CounterAdjustmentModel
 
-  resp.Diagnostics.Append(req.State.Get(ctx, &data)...)
+	resp.Diagnostics.Append(req.State.Get(ctx, &data)...)
 
-  if resp.Diagnostics.HasError() {
-    return
-  }
+	if resp.Diagnostics.HasError() {
+		return
+	}
 
-  params := m3ter.CounterAdjustmentGetParams{
+	params := m3ter.CounterAdjustmentGetParams{}
 
-  }
+	if !data.OrgID.IsNull() {
+		params.OrgID = m3ter.F(data.OrgID.ValueString())
+	}
 
-  if !data.OrgID.IsNull() {
-    params.OrgID = m3ter.F(data.OrgID.ValueString())
-  }
+	res := new(http.Response)
+	_, err := r.client.CounterAdjustments.Get(
+		ctx,
+		data.ID.ValueString(),
+		params,
+		option.WithResponseBodyInto(&res),
+		option.WithMiddleware(logging.Middleware(ctx)),
+	)
+	if res != nil && res.StatusCode == 404 {
+		resp.Diagnostics.AddWarning("Resource not found", "The resource was not found on the server and will be removed from state.")
+		resp.State.RemoveResource(ctx)
+		return
+	}
+	if err != nil {
+		resp.Diagnostics.AddError("failed to make http request", err.Error())
+		return
+	}
+	bytes, _ := io.ReadAll(res.Body)
+	err = apijson.Unmarshal(bytes, &data)
+	if err != nil {
+		resp.Diagnostics.AddError("failed to deserialize http request", err.Error())
+		return
+	}
 
-  res := new(http.Response)
-  _, err := r.client.CounterAdjustments.Get(
-    ctx,
-    data.ID.ValueString(),
-    params,
-    option.WithResponseBodyInto(&res),
-    option.WithMiddleware(logging.Middleware(ctx)),
-  )
-  if res != nil && res.StatusCode == 404 {
-  resp.Diagnostics.AddWarning("Resource not found", "The resource was not found on the server and will be removed from state.")
-    resp.State.RemoveResource(ctx)
-    return
-  }
-  if err != nil {
-    resp.Diagnostics.AddError("failed to make http request", err.Error())
-    return
-  }
-  bytes, _ := io.ReadAll(res.Body)
-  err = apijson.Unmarshal(bytes, &data)
-  if err != nil {
-    resp.Diagnostics.AddError("failed to deserialize http request", err.Error())
-    return
-  }
-
-  resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
+	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
 
 func (r *CounterAdjustmentResource) Delete(ctx context.Context, req resource.DeleteRequest, resp *resource.DeleteResponse) {
-  var data  *CounterAdjustmentModel
+	var data *CounterAdjustmentModel
 
-  resp.Diagnostics.Append(req.State.Get(ctx, &data)...)
+	resp.Diagnostics.Append(req.State.Get(ctx, &data)...)
 
-  if resp.Diagnostics.HasError() {
-    return
-  }
+	if resp.Diagnostics.HasError() {
+		return
+	}
 
-  params := m3ter.CounterAdjustmentDeleteParams{
+	params := m3ter.CounterAdjustmentDeleteParams{}
 
-  }
+	if !data.OrgID.IsNull() {
+		params.OrgID = m3ter.F(data.OrgID.ValueString())
+	}
 
-  if !data.OrgID.IsNull() {
-    params.OrgID = m3ter.F(data.OrgID.ValueString())
-  }
+	_, err := r.client.CounterAdjustments.Delete(
+		ctx,
+		data.ID.ValueString(),
+		params,
+		option.WithMiddleware(logging.Middleware(ctx)),
+	)
+	if err != nil {
+		resp.Diagnostics.AddError("failed to make http request", err.Error())
+		return
+	}
 
-  _, err := r.client.CounterAdjustments.Delete(
-    ctx,
-    data.ID.ValueString(),
-    params,
-    option.WithMiddleware(logging.Middleware(ctx)),
-  )
-  if err != nil {
-    resp.Diagnostics.AddError("failed to make http request", err.Error())
-    return
-  }
-
-  resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
+	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
 
 func (r *CounterAdjustmentResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-  var data *CounterAdjustmentModel = new(CounterAdjustmentModel)
+	var data *CounterAdjustmentModel = new(CounterAdjustmentModel)
 
-  path_org_id := ""
-  path_id := ""
-  diags := importpath.ParseImportID(
-    req.ID,
-    "<org_id>/<id>",
-    &path_org_id,
-    &path_id,
-  )
-  resp.Diagnostics.Append(diags...)
-  if resp.Diagnostics.HasError() {
-    return
-  }
+	path_org_id := ""
+	path_id := ""
+	diags := importpath.ParseImportID(
+		req.ID,
+		"<org_id>/<id>",
+		&path_org_id,
+		&path_id,
+	)
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
 
-  data.OrgID = types.StringValue(path_org_id)
-  data.ID = types.StringValue(path_id)
+	data.OrgID = types.StringValue(path_org_id)
+	data.ID = types.StringValue(path_id)
 
-  res := new(http.Response)
-  _, err := r.client.CounterAdjustments.Get(
-    ctx,
-    path_id,
-    m3ter.CounterAdjustmentGetParams{
-      OrgID: m3ter.F(path_org_id),
-    },
-    option.WithResponseBodyInto(&res),
-    option.WithMiddleware(logging.Middleware(ctx)),
-  )
-  if err != nil {
-    resp.Diagnostics.AddError("failed to make http request", err.Error())
-    return
-  }
-  bytes, _ := io.ReadAll(res.Body)
-  err = apijson.Unmarshal(bytes, &data)
-  if err != nil {
-    resp.Diagnostics.AddError("failed to deserialize http request", err.Error())
-    return
-  }
+	res := new(http.Response)
+	_, err := r.client.CounterAdjustments.Get(
+		ctx,
+		path_id,
+		m3ter.CounterAdjustmentGetParams{
+			OrgID: m3ter.F(path_org_id),
+		},
+		option.WithResponseBodyInto(&res),
+		option.WithMiddleware(logging.Middleware(ctx)),
+	)
+	if err != nil {
+		resp.Diagnostics.AddError("failed to make http request", err.Error())
+		return
+	}
+	bytes, _ := io.ReadAll(res.Body)
+	err = apijson.Unmarshal(bytes, &data)
+	if err != nil {
+		resp.Diagnostics.AddError("failed to deserialize http request", err.Error())
+		return
+	}
 
-  resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
+	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
 
 func (r *CounterAdjustmentResource) ModifyPlan(_ context.Context, _ resource.ModifyPlanRequest, _ *resource.ModifyPlanResponse) {
