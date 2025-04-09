@@ -3,18 +3,18 @@
 package contract
 
 import (
-  "context"
-  "fmt"
-  "io"
-  "net/http"
+	"context"
+	"fmt"
+	"io"
+	"net/http"
 
-  "github.com/hashicorp/terraform-plugin-framework/resource"
-  "github.com/hashicorp/terraform-plugin-framework/types"
-  "github.com/m3ter-com/m3ter-sdk-go"
-  "github.com/m3ter-com/m3ter-sdk-go/option"
-  "github.com/m3ter-com/terraform-provider-m3ter/internal/apijson"
-  "github.com/m3ter-com/terraform-provider-m3ter/internal/importpath"
-  "github.com/m3ter-com/terraform-provider-m3ter/internal/logging"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
+	"github.com/hashicorp/terraform-plugin-framework/types"
+	"github.com/m3ter-com/m3ter-sdk-go"
+	"github.com/m3ter-com/m3ter-sdk-go/option"
+	"github.com/m3ter-com/terraform-provider-m3ter/internal/apijson"
+	"github.com/m3ter-com/terraform-provider-m3ter/internal/importpath"
+	"github.com/m3ter-com/terraform-provider-m3ter/internal/logging"
 )
 
 // Ensure provider defined types fully satisfy framework interfaces.
@@ -23,250 +23,242 @@ var _ resource.ResourceWithModifyPlan = (*ContractResource)(nil)
 var _ resource.ResourceWithImportState = (*ContractResource)(nil)
 
 func NewResource() resource.Resource {
-  return &ContractResource{}
+	return &ContractResource{}
 }
 
 // ContractResource defines the resource implementation.
 type ContractResource struct {
-  client *m3ter.Client
+	client *m3ter.Client
 }
 
 func (r *ContractResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
-  resp.TypeName = req.ProviderTypeName + "_contract"
+	resp.TypeName = req.ProviderTypeName + "_contract"
 }
 
 func (r *ContractResource) Configure(ctx context.Context, req resource.ConfigureRequest, resp *resource.ConfigureResponse) {
-  if req.ProviderData == nil {
-    return
-  }
+	if req.ProviderData == nil {
+		return
+	}
 
-  client, ok := req.ProviderData.(*m3ter.Client)
+	client, ok := req.ProviderData.(*m3ter.Client)
 
-  if !ok {
-    resp.Diagnostics.AddError(
-      "unexpected resource configure type",
-      fmt.Sprintf("Expected *m3ter.Client, got: %T. Please report this issue to the provider developers.", req.ProviderData),
-    )
+	if !ok {
+		resp.Diagnostics.AddError(
+			"unexpected resource configure type",
+			fmt.Sprintf("Expected *m3ter.Client, got: %T. Please report this issue to the provider developers.", req.ProviderData),
+		)
 
-    return
-  }
+		return
+	}
 
-  r.client = client
+	r.client = client
 }
 
 func (r *ContractResource) Create(ctx context.Context, req resource.CreateRequest, resp *resource.CreateResponse) {
-  var data *ContractModel
+	var data *ContractModel
 
-  resp.Diagnostics.Append(req.Plan.Get(ctx, &data)...)
+	resp.Diagnostics.Append(req.Plan.Get(ctx, &data)...)
 
-  if resp.Diagnostics.HasError() {
-    return
-  }
+	if resp.Diagnostics.HasError() {
+		return
+	}
 
-  params := m3ter.ContractNewParams{
+	params := m3ter.ContractNewParams{}
 
-  }
+	if !data.OrgID.IsNull() {
+		params.OrgID = m3ter.F(data.OrgID.ValueString())
+	}
 
-  if !data.OrgID.IsNull() {
-    params.OrgID = m3ter.F(data.OrgID.ValueString())
-  }
+	dataBytes, err := data.MarshalJSON()
+	if err != nil {
+		resp.Diagnostics.AddError("failed to serialize http request", err.Error())
+		return
+	}
+	res := new(http.Response)
+	_, err = r.client.Contracts.New(
+		ctx,
+		params,
+		option.WithRequestBody("application/json", dataBytes),
+		option.WithResponseBodyInto(&res),
+		option.WithMiddleware(logging.Middleware(ctx)),
+	)
+	if err != nil {
+		resp.Diagnostics.AddError("failed to make http request", err.Error())
+		return
+	}
+	bytes, _ := io.ReadAll(res.Body)
+	err = apijson.UnmarshalComputed(bytes, &data)
+	if err != nil {
+		resp.Diagnostics.AddError("failed to deserialize http request", err.Error())
+		return
+	}
 
-  dataBytes, err := data.MarshalJSON()
-  if err != nil {
-    resp.Diagnostics.AddError("failed to serialize http request", err.Error())
-    return
-  }
-  res := new(http.Response)
-  _, err = r.client.Contracts.New(
-    ctx,
-    params,
-    option.WithRequestBody("application/json", dataBytes),
-    option.WithResponseBodyInto(&res),
-    option.WithMiddleware(logging.Middleware(ctx)),
-  )
-  if err != nil {
-    resp.Diagnostics.AddError("failed to make http request", err.Error())
-    return
-  }
-  bytes, _ := io.ReadAll(res.Body)
-  err = apijson.UnmarshalComputed(bytes, &data)
-  if err != nil {
-    resp.Diagnostics.AddError("failed to deserialize http request", err.Error())
-    return
-  }
-
-  resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
+	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
 
 func (r *ContractResource) Update(ctx context.Context, req resource.UpdateRequest, resp *resource.UpdateResponse) {
-  var data  *ContractModel
+	var data *ContractModel
 
-  resp.Diagnostics.Append(req.Plan.Get(ctx, &data)...)
+	resp.Diagnostics.Append(req.Plan.Get(ctx, &data)...)
 
-  if resp.Diagnostics.HasError() {
-    return
-  }
+	if resp.Diagnostics.HasError() {
+		return
+	}
 
-  var state  *ContractModel
+	var state *ContractModel
 
-  resp.Diagnostics.Append(req.State.Get(ctx, &state)...)
+	resp.Diagnostics.Append(req.State.Get(ctx, &state)...)
 
-  if resp.Diagnostics.HasError() {
-    return
-  }
+	if resp.Diagnostics.HasError() {
+		return
+	}
 
-  params := m3ter.ContractUpdateParams{
+	params := m3ter.ContractUpdateParams{}
 
-  }
+	if !data.OrgID.IsNull() {
+		params.OrgID = m3ter.F(data.OrgID.ValueString())
+	}
 
-  if !data.OrgID.IsNull() {
-    params.OrgID = m3ter.F(data.OrgID.ValueString())
-  }
+	dataBytes, err := data.MarshalJSONForUpdate(*state)
+	if err != nil {
+		resp.Diagnostics.AddError("failed to serialize http request", err.Error())
+		return
+	}
+	res := new(http.Response)
+	_, err = r.client.Contracts.Update(
+		ctx,
+		data.ID.ValueString(),
+		params,
+		option.WithRequestBody("application/json", dataBytes),
+		option.WithResponseBodyInto(&res),
+		option.WithMiddleware(logging.Middleware(ctx)),
+	)
+	if err != nil {
+		resp.Diagnostics.AddError("failed to make http request", err.Error())
+		return
+	}
+	bytes, _ := io.ReadAll(res.Body)
+	err = apijson.UnmarshalComputed(bytes, &data)
+	if err != nil {
+		resp.Diagnostics.AddError("failed to deserialize http request", err.Error())
+		return
+	}
 
-  dataBytes, err := data.MarshalJSONForUpdate(*state)
-  if err != nil {
-    resp.Diagnostics.AddError("failed to serialize http request", err.Error())
-    return
-  }
-  res := new(http.Response)
-  _, err = r.client.Contracts.Update(
-    ctx,
-    data.ID.ValueString(),
-    params,
-    option.WithRequestBody("application/json", dataBytes),
-    option.WithResponseBodyInto(&res),
-    option.WithMiddleware(logging.Middleware(ctx)),
-  )
-  if err != nil {
-    resp.Diagnostics.AddError("failed to make http request", err.Error())
-    return
-  }
-  bytes, _ := io.ReadAll(res.Body)
-  err = apijson.UnmarshalComputed(bytes, &data)
-  if err != nil {
-    resp.Diagnostics.AddError("failed to deserialize http request", err.Error())
-    return
-  }
-
-  resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
+	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
 
 func (r *ContractResource) Read(ctx context.Context, req resource.ReadRequest, resp *resource.ReadResponse) {
-  var data  *ContractModel
+	var data *ContractModel
 
-  resp.Diagnostics.Append(req.State.Get(ctx, &data)...)
+	resp.Diagnostics.Append(req.State.Get(ctx, &data)...)
 
-  if resp.Diagnostics.HasError() {
-    return
-  }
+	if resp.Diagnostics.HasError() {
+		return
+	}
 
-  params := m3ter.ContractGetParams{
+	params := m3ter.ContractGetParams{}
 
-  }
+	if !data.OrgID.IsNull() {
+		params.OrgID = m3ter.F(data.OrgID.ValueString())
+	}
 
-  if !data.OrgID.IsNull() {
-    params.OrgID = m3ter.F(data.OrgID.ValueString())
-  }
+	res := new(http.Response)
+	_, err := r.client.Contracts.Get(
+		ctx,
+		data.ID.ValueString(),
+		params,
+		option.WithResponseBodyInto(&res),
+		option.WithMiddleware(logging.Middleware(ctx)),
+	)
+	if res != nil && res.StatusCode == 404 {
+		resp.Diagnostics.AddWarning("Resource not found", "The resource was not found on the server and will be removed from state.")
+		resp.State.RemoveResource(ctx)
+		return
+	}
+	if err != nil {
+		resp.Diagnostics.AddError("failed to make http request", err.Error())
+		return
+	}
+	bytes, _ := io.ReadAll(res.Body)
+	err = apijson.Unmarshal(bytes, &data)
+	if err != nil {
+		resp.Diagnostics.AddError("failed to deserialize http request", err.Error())
+		return
+	}
 
-  res := new(http.Response)
-  _, err := r.client.Contracts.Get(
-    ctx,
-    data.ID.ValueString(),
-    params,
-    option.WithResponseBodyInto(&res),
-    option.WithMiddleware(logging.Middleware(ctx)),
-  )
-  if res != nil && res.StatusCode == 404 {
-  resp.Diagnostics.AddWarning("Resource not found", "The resource was not found on the server and will be removed from state.")
-    resp.State.RemoveResource(ctx)
-    return
-  }
-  if err != nil {
-    resp.Diagnostics.AddError("failed to make http request", err.Error())
-    return
-  }
-  bytes, _ := io.ReadAll(res.Body)
-  err = apijson.Unmarshal(bytes, &data)
-  if err != nil {
-    resp.Diagnostics.AddError("failed to deserialize http request", err.Error())
-    return
-  }
-
-  resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
+	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
 
 func (r *ContractResource) Delete(ctx context.Context, req resource.DeleteRequest, resp *resource.DeleteResponse) {
-  var data  *ContractModel
+	var data *ContractModel
 
-  resp.Diagnostics.Append(req.State.Get(ctx, &data)...)
+	resp.Diagnostics.Append(req.State.Get(ctx, &data)...)
 
-  if resp.Diagnostics.HasError() {
-    return
-  }
+	if resp.Diagnostics.HasError() {
+		return
+	}
 
-  params := m3ter.ContractDeleteParams{
+	params := m3ter.ContractDeleteParams{}
 
-  }
+	if !data.OrgID.IsNull() {
+		params.OrgID = m3ter.F(data.OrgID.ValueString())
+	}
 
-  if !data.OrgID.IsNull() {
-    params.OrgID = m3ter.F(data.OrgID.ValueString())
-  }
+	_, err := r.client.Contracts.Delete(
+		ctx,
+		data.ID.ValueString(),
+		params,
+		option.WithMiddleware(logging.Middleware(ctx)),
+	)
+	if err != nil {
+		resp.Diagnostics.AddError("failed to make http request", err.Error())
+		return
+	}
 
-  _, err := r.client.Contracts.Delete(
-    ctx,
-    data.ID.ValueString(),
-    params,
-    option.WithMiddleware(logging.Middleware(ctx)),
-  )
-  if err != nil {
-    resp.Diagnostics.AddError("failed to make http request", err.Error())
-    return
-  }
-
-  resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
+	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
 
 func (r *ContractResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-  var data *ContractModel = new(ContractModel)
+	var data *ContractModel = new(ContractModel)
 
-  path_org_id := ""
-  path_id := ""
-  diags := importpath.ParseImportID(
-    req.ID,
-    "<org_id>/<id>",
-    &path_org_id,
-    &path_id,
-  )
-  resp.Diagnostics.Append(diags...)
-  if resp.Diagnostics.HasError() {
-    return
-  }
+	path_org_id := ""
+	path_id := ""
+	diags := importpath.ParseImportID(
+		req.ID,
+		"<org_id>/<id>",
+		&path_org_id,
+		&path_id,
+	)
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
 
-  data.OrgID = types.StringValue(path_org_id)
-  data.ID = types.StringValue(path_id)
+	data.OrgID = types.StringValue(path_org_id)
+	data.ID = types.StringValue(path_id)
 
-  res := new(http.Response)
-  _, err := r.client.Contracts.Get(
-    ctx,
-    path_id,
-    m3ter.ContractGetParams{
-      OrgID: m3ter.F(path_org_id),
-    },
-    option.WithResponseBodyInto(&res),
-    option.WithMiddleware(logging.Middleware(ctx)),
-  )
-  if err != nil {
-    resp.Diagnostics.AddError("failed to make http request", err.Error())
-    return
-  }
-  bytes, _ := io.ReadAll(res.Body)
-  err = apijson.Unmarshal(bytes, &data)
-  if err != nil {
-    resp.Diagnostics.AddError("failed to deserialize http request", err.Error())
-    return
-  }
+	res := new(http.Response)
+	_, err := r.client.Contracts.Get(
+		ctx,
+		path_id,
+		m3ter.ContractGetParams{
+			OrgID: m3ter.F(path_org_id),
+		},
+		option.WithResponseBodyInto(&res),
+		option.WithMiddleware(logging.Middleware(ctx)),
+	)
+	if err != nil {
+		resp.Diagnostics.AddError("failed to make http request", err.Error())
+		return
+	}
+	bytes, _ := io.ReadAll(res.Body)
+	err = apijson.Unmarshal(bytes, &data)
+	if err != nil {
+		resp.Diagnostics.AddError("failed to deserialize http request", err.Error())
+		return
+	}
 
-  resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
+	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
 
 func (r *ContractResource) ModifyPlan(_ context.Context, _ resource.ModifyPlanRequest, _ *resource.ModifyPlanResponse) {

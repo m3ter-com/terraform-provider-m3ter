@@ -3,17 +3,17 @@
 package counter_pricing_test
 
 import (
-  "context"
-  "testing"
+	"context"
+	"testing"
 
-  "github.com/m3ter-com/terraform-provider-m3ter/internal/services/counter_pricing"
-  "github.com/m3ter-com/terraform-provider-m3ter/internal/test_helpers"
+	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/counter_pricing"
+	"github.com/m3ter-com/terraform-provider-m3ter/internal/test_helpers"
 )
 
 func TestCounterPricingModelSchemaParity(t *testing.T) {
-  t.Parallel()
-  model := (*counter_pricing.CounterPricingModel)(nil)
-  schema := counter_pricing.ResourceSchema(context.TODO())
-  errs := test_helpers.ValidateResourceModelSchemaIntegrity(model, schema)
-  errs.Report(t)
+	t.Parallel()
+	model := (*counter_pricing.CounterPricingModel)(nil)
+	schema := counter_pricing.ResourceSchema(context.TODO())
+	errs := test_helpers.ValidateResourceModelSchemaIntegrity(model, schema)
+	errs.Report(t)
 }

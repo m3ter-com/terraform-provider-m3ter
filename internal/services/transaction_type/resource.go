@@ -3,18 +3,18 @@
 package transaction_type
 
 import (
-  "context"
-  "fmt"
-  "io"
-  "net/http"
+	"context"
+	"fmt"
+	"io"
+	"net/http"
 
-  "github.com/hashicorp/terraform-plugin-framework/resource"
-  "github.com/hashicorp/terraform-plugin-framework/types"
-  "github.com/m3ter-com/m3ter-sdk-go"
-  "github.com/m3ter-com/m3ter-sdk-go/option"
-  "github.com/m3ter-com/terraform-provider-m3ter/internal/apijson"
-  "github.com/m3ter-com/terraform-provider-m3ter/internal/importpath"
-  "github.com/m3ter-com/terraform-provider-m3ter/internal/logging"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
+	"github.com/hashicorp/terraform-plugin-framework/types"
+	"github.com/m3ter-com/m3ter-sdk-go"
+	"github.com/m3ter-com/m3ter-sdk-go/option"
+	"github.com/m3ter-com/terraform-provider-m3ter/internal/apijson"
+	"github.com/m3ter-com/terraform-provider-m3ter/internal/importpath"
+	"github.com/m3ter-com/terraform-provider-m3ter/internal/logging"
 )
 
 // Ensure provider defined types fully satisfy framework interfaces.
@@ -23,250 +23,242 @@ var _ resource.ResourceWithModifyPlan = (*TransactionTypeResource)(nil)
 var _ resource.ResourceWithImportState = (*TransactionTypeResource)(nil)
 
 func NewResource() resource.Resource {
-  return &TransactionTypeResource{}
+	return &TransactionTypeResource{}
 }
 
 // TransactionTypeResource defines the resource implementation.
 type TransactionTypeResource struct {
-  client *m3ter.Client
+	client *m3ter.Client
 }
 
 func (r *TransactionTypeResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
-  resp.TypeName = req.ProviderTypeName + "_transaction_type"
+	resp.TypeName = req.ProviderTypeName + "_transaction_type"
 }
 
 func (r *TransactionTypeResource) Configure(ctx context.Context, req resource.ConfigureRequest, resp *resource.ConfigureResponse) {
-  if req.ProviderData == nil {
-    return
-  }
+	if req.ProviderData == nil {
+		return
+	}
 
-  client, ok := req.ProviderData.(*m3ter.Client)
+	client, ok := req.ProviderData.(*m3ter.Client)
 
-  if !ok {
-    resp.Diagnostics.AddError(
-      "unexpected resource configure type",
-      fmt.Sprintf("Expected *m3ter.Client, got: %T. Please report this issue to the provider developers.", req.ProviderData),
-    )
+	if !ok {
+		resp.Diagnostics.AddError(
+			"unexpected resource configure type",
+			fmt.Sprintf("Expected *m3ter.Client, got: %T. Please report this issue to the provider developers.", req.ProviderData),
+		)
 
-    return
-  }
+		return
+	}
 
-  r.client = client
+	r.client = client
 }
 
 func (r *TransactionTypeResource) Create(ctx context.Context, req resource.CreateRequest, resp *resource.CreateResponse) {
-  var data *TransactionTypeModel
+	var data *TransactionTypeModel
 
-  resp.Diagnostics.Append(req.Plan.Get(ctx, &data)...)
+	resp.Diagnostics.Append(req.Plan.Get(ctx, &data)...)
 
-  if resp.Diagnostics.HasError() {
-    return
-  }
+	if resp.Diagnostics.HasError() {
+		return
+	}
 
-  params := m3ter.TransactionTypeNewParams{
+	params := m3ter.TransactionTypeNewParams{}
 
-  }
+	if !data.OrgID.IsNull() {
+		params.OrgID = m3ter.F(data.OrgID.ValueString())
+	}
 
-  if !data.OrgID.IsNull() {
-    params.OrgID = m3ter.F(data.OrgID.ValueString())
-  }
+	dataBytes, err := data.MarshalJSON()
+	if err != nil {
+		resp.Diagnostics.AddError("failed to serialize http request", err.Error())
+		return
+	}
+	res := new(http.Response)
+	_, err = r.client.TransactionTypes.New(
+		ctx,
+		params,
+		option.WithRequestBody("application/json", dataBytes),
+		option.WithResponseBodyInto(&res),
+		option.WithMiddleware(logging.Middleware(ctx)),
+	)
+	if err != nil {
+		resp.Diagnostics.AddError("failed to make http request", err.Error())
+		return
+	}
+	bytes, _ := io.ReadAll(res.Body)
+	err = apijson.UnmarshalComputed(bytes, &data)
+	if err != nil {
+		resp.Diagnostics.AddError("failed to deserialize http request", err.Error())
+		return
+	}
 
-  dataBytes, err := data.MarshalJSON()
-  if err != nil {
-    resp.Diagnostics.AddError("failed to serialize http request", err.Error())
-    return
-  }
-  res := new(http.Response)
-  _, err = r.client.TransactionTypes.New(
-    ctx,
-    params,
-    option.WithRequestBody("application/json", dataBytes),
-    option.WithResponseBodyInto(&res),
-    option.WithMiddleware(logging.Middleware(ctx)),
-  )
-  if err != nil {
-    resp.Diagnostics.AddError("failed to make http request", err.Error())
-    return
-  }
-  bytes, _ := io.ReadAll(res.Body)
-  err = apijson.UnmarshalComputed(bytes, &data)
-  if err != nil {
-    resp.Diagnostics.AddError("failed to deserialize http request", err.Error())
-    return
-  }
-
-  resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
+	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
 
 func (r *TransactionTypeResource) Update(ctx context.Context, req resource.UpdateRequest, resp *resource.UpdateResponse) {
-  var data  *TransactionTypeModel
+	var data *TransactionTypeModel
 
-  resp.Diagnostics.Append(req.Plan.Get(ctx, &data)...)
+	resp.Diagnostics.Append(req.Plan.Get(ctx, &data)...)
 
-  if resp.Diagnostics.HasError() {
-    return
-  }
+	if resp.Diagnostics.HasError() {
+		return
+	}
 
-  var state  *TransactionTypeModel
+	var state *TransactionTypeModel
 
-  resp.Diagnostics.Append(req.State.Get(ctx, &state)...)
+	resp.Diagnostics.Append(req.State.Get(ctx, &state)...)
 
-  if resp.Diagnostics.HasError() {
-    return
-  }
+	if resp.Diagnostics.HasError() {
+		return
+	}
 
-  params := m3ter.TransactionTypeUpdateParams{
+	params := m3ter.TransactionTypeUpdateParams{}
 
-  }
+	if !data.OrgID.IsNull() {
+		params.OrgID = m3ter.F(data.OrgID.ValueString())
+	}
 
-  if !data.OrgID.IsNull() {
-    params.OrgID = m3ter.F(data.OrgID.ValueString())
-  }
+	dataBytes, err := data.MarshalJSONForUpdate(*state)
+	if err != nil {
+		resp.Diagnostics.AddError("failed to serialize http request", err.Error())
+		return
+	}
+	res := new(http.Response)
+	_, err = r.client.TransactionTypes.Update(
+		ctx,
+		data.ID.ValueString(),
+		params,
+		option.WithRequestBody("application/json", dataBytes),
+		option.WithResponseBodyInto(&res),
+		option.WithMiddleware(logging.Middleware(ctx)),
+	)
+	if err != nil {
+		resp.Diagnostics.AddError("failed to make http request", err.Error())
+		return
+	}
+	bytes, _ := io.ReadAll(res.Body)
+	err = apijson.UnmarshalComputed(bytes, &data)
+	if err != nil {
+		resp.Diagnostics.AddError("failed to deserialize http request", err.Error())
+		return
+	}
 
-  dataBytes, err := data.MarshalJSONForUpdate(*state)
-  if err != nil {
-    resp.Diagnostics.AddError("failed to serialize http request", err.Error())
-    return
-  }
-  res := new(http.Response)
-  _, err = r.client.TransactionTypes.Update(
-    ctx,
-    data.ID.ValueString(),
-    params,
-    option.WithRequestBody("application/json", dataBytes),
-    option.WithResponseBodyInto(&res),
-    option.WithMiddleware(logging.Middleware(ctx)),
-  )
-  if err != nil {
-    resp.Diagnostics.AddError("failed to make http request", err.Error())
-    return
-  }
-  bytes, _ := io.ReadAll(res.Body)
-  err = apijson.UnmarshalComputed(bytes, &data)
-  if err != nil {
-    resp.Diagnostics.AddError("failed to deserialize http request", err.Error())
-    return
-  }
-
-  resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
+	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
 
 func (r *TransactionTypeResource) Read(ctx context.Context, req resource.ReadRequest, resp *resource.ReadResponse) {
-  var data  *TransactionTypeModel
+	var data *TransactionTypeModel
 
-  resp.Diagnostics.Append(req.State.Get(ctx, &data)...)
+	resp.Diagnostics.Append(req.State.Get(ctx, &data)...)
 
-  if resp.Diagnostics.HasError() {
-    return
-  }
+	if resp.Diagnostics.HasError() {
+		return
+	}
 
-  params := m3ter.TransactionTypeGetParams{
+	params := m3ter.TransactionTypeGetParams{}
 
-  }
+	if !data.OrgID.IsNull() {
+		params.OrgID = m3ter.F(data.OrgID.ValueString())
+	}
 
-  if !data.OrgID.IsNull() {
-    params.OrgID = m3ter.F(data.OrgID.ValueString())
-  }
+	res := new(http.Response)
+	_, err := r.client.TransactionTypes.Get(
+		ctx,
+		data.ID.ValueString(),
+		params,
+		option.WithResponseBodyInto(&res),
+		option.WithMiddleware(logging.Middleware(ctx)),
+	)
+	if res != nil && res.StatusCode == 404 {
+		resp.Diagnostics.AddWarning("Resource not found", "The resource was not found on the server and will be removed from state.")
+		resp.State.RemoveResource(ctx)
+		return
+	}
+	if err != nil {
+		resp.Diagnostics.AddError("failed to make http request", err.Error())
+		return
+	}
+	bytes, _ := io.ReadAll(res.Body)
+	err = apijson.Unmarshal(bytes, &data)
+	if err != nil {
+		resp.Diagnostics.AddError("failed to deserialize http request", err.Error())
+		return
+	}
 
-  res := new(http.Response)
-  _, err := r.client.TransactionTypes.Get(
-    ctx,
-    data.ID.ValueString(),
-    params,
-    option.WithResponseBodyInto(&res),
-    option.WithMiddleware(logging.Middleware(ctx)),
-  )
-  if res != nil && res.StatusCode == 404 {
-  resp.Diagnostics.AddWarning("Resource not found", "The resource was not found on the server and will be removed from state.")
-    resp.State.RemoveResource(ctx)
-    return
-  }
-  if err != nil {
-    resp.Diagnostics.AddError("failed to make http request", err.Error())
-    return
-  }
-  bytes, _ := io.ReadAll(res.Body)
-  err = apijson.Unmarshal(bytes, &data)
-  if err != nil {
-    resp.Diagnostics.AddError("failed to deserialize http request", err.Error())
-    return
-  }
-
-  resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
+	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
 
 func (r *TransactionTypeResource) Delete(ctx context.Context, req resource.DeleteRequest, resp *resource.DeleteResponse) {
-  var data  *TransactionTypeModel
+	var data *TransactionTypeModel
 
-  resp.Diagnostics.Append(req.State.Get(ctx, &data)...)
+	resp.Diagnostics.Append(req.State.Get(ctx, &data)...)
 
-  if resp.Diagnostics.HasError() {
-    return
-  }
+	if resp.Diagnostics.HasError() {
+		return
+	}
 
-  params := m3ter.TransactionTypeDeleteParams{
+	params := m3ter.TransactionTypeDeleteParams{}
 
-  }
+	if !data.OrgID.IsNull() {
+		params.OrgID = m3ter.F(data.OrgID.ValueString())
+	}
 
-  if !data.OrgID.IsNull() {
-    params.OrgID = m3ter.F(data.OrgID.ValueString())
-  }
+	_, err := r.client.TransactionTypes.Delete(
+		ctx,
+		data.ID.ValueString(),
+		params,
+		option.WithMiddleware(logging.Middleware(ctx)),
+	)
+	if err != nil {
+		resp.Diagnostics.AddError("failed to make http request", err.Error())
+		return
+	}
 
-  _, err := r.client.TransactionTypes.Delete(
-    ctx,
-    data.ID.ValueString(),
-    params,
-    option.WithMiddleware(logging.Middleware(ctx)),
-  )
-  if err != nil {
-    resp.Diagnostics.AddError("failed to make http request", err.Error())
-    return
-  }
-
-  resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
+	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
 
 func (r *TransactionTypeResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-  var data *TransactionTypeModel = new(TransactionTypeModel)
+	var data *TransactionTypeModel = new(TransactionTypeModel)
 
-  path_org_id := ""
-  path_id := ""
-  diags := importpath.ParseImportID(
-    req.ID,
-    "<org_id>/<id>",
-    &path_org_id,
-    &path_id,
-  )
-  resp.Diagnostics.Append(diags...)
-  if resp.Diagnostics.HasError() {
-    return
-  }
+	path_org_id := ""
+	path_id := ""
+	diags := importpath.ParseImportID(
+		req.ID,
+		"<org_id>/<id>",
+		&path_org_id,
+		&path_id,
+	)
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
 
-  data.OrgID = types.StringValue(path_org_id)
-  data.ID = types.StringValue(path_id)
+	data.OrgID = types.StringValue(path_org_id)
+	data.ID = types.StringValue(path_id)
 
-  res := new(http.Response)
-  _, err := r.client.TransactionTypes.Get(
-    ctx,
-    path_id,
-    m3ter.TransactionTypeGetParams{
-      OrgID: m3ter.F(path_org_id),
-    },
-    option.WithResponseBodyInto(&res),
-    option.WithMiddleware(logging.Middleware(ctx)),
-  )
-  if err != nil {
-    resp.Diagnostics.AddError("failed to make http request", err.Error())
-    return
-  }
-  bytes, _ := io.ReadAll(res.Body)
-  err = apijson.Unmarshal(bytes, &data)
-  if err != nil {
-    resp.Diagnostics.AddError("failed to deserialize http request", err.Error())
-    return
-  }
+	res := new(http.Response)
+	_, err := r.client.TransactionTypes.Get(
+		ctx,
+		path_id,
+		m3ter.TransactionTypeGetParams{
+			OrgID: m3ter.F(path_org_id),
+		},
+		option.WithResponseBodyInto(&res),
+		option.WithMiddleware(logging.Middleware(ctx)),
+	)
+	if err != nil {
+		resp.Diagnostics.AddError("failed to make http request", err.Error())
+		return
+	}
+	bytes, _ := io.ReadAll(res.Body)
+	err = apijson.Unmarshal(bytes, &data)
+	if err != nil {
+		resp.Diagnostics.AddError("failed to deserialize http request", err.Error())
+		return
+	}
 
-  resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
+	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
 
 func (r *TransactionTypeResource) ModifyPlan(_ context.Context, _ resource.ModifyPlanRequest, _ *resource.ModifyPlanResponse) {

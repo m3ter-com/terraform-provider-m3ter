@@ -3,17 +3,17 @@
 package currency_test
 
 import (
-  "context"
-  "testing"
+	"context"
+	"testing"
 
-  "github.com/m3ter-com/terraform-provider-m3ter/internal/services/currency"
-  "github.com/m3ter-com/terraform-provider-m3ter/internal/test_helpers"
+	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/currency"
+	"github.com/m3ter-com/terraform-provider-m3ter/internal/test_helpers"
 )
 
 func TestCurrencyModelSchemaParity(t *testing.T) {
-  t.Parallel()
-  model := (*currency.CurrencyModel)(nil)
-  schema := currency.ResourceSchema(context.TODO())
-  errs := test_helpers.ValidateResourceModelSchemaIntegrity(model, schema)
-  errs.Report(t)
+	t.Parallel()
+	model := (*currency.CurrencyModel)(nil)
+	schema := currency.ResourceSchema(context.TODO())
+	errs := test_helpers.ValidateResourceModelSchemaIntegrity(model, schema)
+	errs.Report(t)
 }

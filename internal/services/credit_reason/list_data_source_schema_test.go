@@ -3,17 +3,17 @@
 package credit_reason_test
 
 import (
-  "context"
-  "testing"
+	"context"
+	"testing"
 
-  "github.com/m3ter-com/terraform-provider-m3ter/internal/services/credit_reason"
-  "github.com/m3ter-com/terraform-provider-m3ter/internal/test_helpers"
+	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/credit_reason"
+	"github.com/m3ter-com/terraform-provider-m3ter/internal/test_helpers"
 )
 
 func TestCreditReasonsDataSourceModelSchemaParity(t *testing.T) {
-  t.Parallel()
-  model := (*credit_reason.CreditReasonsDataSourceModel)(nil)
-  schema := credit_reason.ListDataSourceSchema(context.TODO())
-  errs := test_helpers.ValidateDataSourceModelSchemaIntegrity(model, schema)
-  errs.Report(t)
+	t.Parallel()
+	model := (*credit_reason.CreditReasonsDataSourceModel)(nil)
+	schema := credit_reason.ListDataSourceSchema(context.TODO())
+	errs := test_helpers.ValidateDataSourceModelSchemaIntegrity(model, schema)
+	errs.Report(t)
 }
