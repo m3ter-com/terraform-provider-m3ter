@@ -1,7 +1,7 @@
 # M3ter Terraform Provider
 
 The [M3ter Terraform provider](https://registry.terraform.io/providers/m3ter-com/m3ter/latest/docs) provides convenient access to
-[the M3ter REST API](https://www.m3ter.com) from Terraform.
+the [M3ter REST API](https://www.m3ter.com) from Terraform.
 
 It is generated with [Stainless](https://www.stainless.com/).
 
