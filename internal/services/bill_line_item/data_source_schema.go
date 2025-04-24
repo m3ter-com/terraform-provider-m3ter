@@ -39,6 +39,9 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 			"balance_id": schema.StringAttribute{
 				Computed: true,
 			},
+			"charge_id": schema.StringAttribute{
+				Computed: true,
+			},
 			"commitment_id": schema.StringAttribute{
 				Description: "The unique identifier (UUID) of the Commitment *(if this is used)*.",
 				Computed:    true,

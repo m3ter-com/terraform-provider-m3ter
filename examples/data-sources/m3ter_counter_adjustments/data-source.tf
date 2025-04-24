@@ -7,4 +7,5 @@ data "m3ter_counter_adjustments" "example_counter_adjustments" {
   date_start = "dateStart"
   end_date_end = "endDateEnd"
   end_date_start = "endDateStart"
+  sort_order = "sortOrder"
 }

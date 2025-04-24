@@ -12,19 +12,24 @@ import (
 )
 
 type DataExportDestinationDataSourceModel struct {
-	ID             types.String      `tfsdk:"id" path:"id,required"`
-	OrgID          types.String      `tfsdk:"org_id" path:"orgId,required"`
-	BucketName     types.String      `tfsdk:"bucket_name" json:"bucketName,computed"`
-	Code           types.String      `tfsdk:"code" json:"code,computed"`
-	CreatedBy      types.String      `tfsdk:"created_by" json:"createdBy,computed"`
-	DtCreated      timetypes.RFC3339 `tfsdk:"dt_created" json:"dtCreated,computed" format:"date-time"`
-	DtLastModified timetypes.RFC3339 `tfsdk:"dt_last_modified" json:"dtLastModified,computed" format:"date-time"`
-	IamRoleArn     types.String      `tfsdk:"iam_role_arn" json:"iamRoleArn,computed"`
-	LastModifiedBy types.String      `tfsdk:"last_modified_by" json:"lastModifiedBy,computed"`
-	Name           types.String      `tfsdk:"name" json:"name,computed"`
-	PartitionOrder types.String      `tfsdk:"partition_order" json:"partitionOrder,computed"`
-	Prefix         types.String      `tfsdk:"prefix" json:"prefix,computed"`
-	Version        types.Int64       `tfsdk:"version" json:"version,computed"`
+	ID                  types.String      `tfsdk:"id" path:"id,required"`
+	OrgID               types.String      `tfsdk:"org_id" path:"orgId,required"`
+	BucketName          types.String      `tfsdk:"bucket_name" json:"bucketName,computed"`
+	Code                types.String      `tfsdk:"code" json:"code,computed"`
+	CreatedBy           types.String      `tfsdk:"created_by" json:"createdBy,computed"`
+	DestinationType     types.String      `tfsdk:"destination_type" json:"destinationType,computed"`
+	DtCreated           timetypes.RFC3339 `tfsdk:"dt_created" json:"dtCreated,computed" format:"date-time"`
+	DtLastModified      timetypes.RFC3339 `tfsdk:"dt_last_modified" json:"dtLastModified,computed" format:"date-time"`
+	IamRoleArn          types.String      `tfsdk:"iam_role_arn" json:"iamRoleArn,computed"`
+	LastModifiedBy      types.String      `tfsdk:"last_modified_by" json:"lastModifiedBy,computed"`
+	Name                types.String      `tfsdk:"name" json:"name,computed"`
+	PartitionOrder      types.String      `tfsdk:"partition_order" json:"partitionOrder,computed"`
+	PoolID              types.String      `tfsdk:"pool_id" json:"poolId,computed"`
+	Prefix              types.String      `tfsdk:"prefix" json:"prefix,computed"`
+	ProjectNumber       types.String      `tfsdk:"project_number" json:"projectNumber,computed"`
+	ProviderID          types.String      `tfsdk:"provider_id" json:"providerId,computed"`
+	ServiceAccountEmail types.String      `tfsdk:"service_account_email" json:"serviceAccountEmail,computed"`
+	Version             types.Int64       `tfsdk:"version" json:"version,computed"`
 }
 
 func (m *DataExportDestinationDataSourceModel) toReadParams(_ context.Context) (params m3ter.DataExportDestinationGetParams, diags diag.Diagnostics) {

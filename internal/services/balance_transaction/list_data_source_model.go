@@ -19,6 +19,7 @@ type BalanceTransactionsDataListDataSourceEnvelope struct {
 type BalanceTransactionsDataSourceModel struct {
 	BalanceID         types.String                                                          `tfsdk:"balance_id" path:"balanceId,required"`
 	OrgID             types.String                                                          `tfsdk:"org_id" path:"orgId,optional"`
+	ScheduleID        types.String                                                          `tfsdk:"schedule_id" query:"scheduleId,optional"`
 	TransactionTypeID types.String                                                          `tfsdk:"transaction_type_id" query:"transactionTypeId,optional"`
 	MaxItems          types.Int64                                                           `tfsdk:"max_items"`
 	Items             customfield.NestedObjectList[BalanceTransactionsItemsDataSourceModel] `tfsdk:"items"`
@@ -27,6 +28,9 @@ type BalanceTransactionsDataSourceModel struct {
 func (m *BalanceTransactionsDataSourceModel) toListParams(_ context.Context) (params m3ter.BalanceTransactionListParams, diags diag.Diagnostics) {
 	params = m3ter.BalanceTransactionListParams{}
 
+	if !m.ScheduleID.IsNull() {
+		params.ScheduleID = m3ter.F(m.ScheduleID.ValueString())
+	}
 	if !m.TransactionTypeID.IsNull() {
 		params.TransactionTypeID = m3ter.F(m.TransactionTypeID.ValueString())
 	}

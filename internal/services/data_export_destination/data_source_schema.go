@@ -35,6 +35,13 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Description: "The id of the user who created the Export Destination.",
 				Computed:    true,
 			},
+			"destination_type": schema.StringAttribute{
+				Description: `Available values: "S3", "GCS".`,
+				Computed:    true,
+				Validators: []validator.String{
+					stringvalidator.OneOfCaseInsensitive("S3", "GCS"),
+				},
+			},
 			"dt_created": schema.StringAttribute{
 				Description: "The DateTime when the Export Destination was created.",
 				Computed:    true,
@@ -64,8 +71,24 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 					stringvalidator.OneOfCaseInsensitive("TYPE_FIRST", "TIME_FIRST"),
 				},
 			},
+			"pool_id": schema.StringAttribute{
+				Description: "The export destination Web Identity Federation poolId.",
+				Computed:    true,
+			},
 			"prefix": schema.StringAttribute{
 				Description: "Location in specified S3 bucket for the Export Destination. If no `prefix` is specified, then the root of the bucket is used.",
+				Computed:    true,
+			},
+			"project_number": schema.StringAttribute{
+				Description: "The export destination GCP projectNumber.",
+				Computed:    true,
+			},
+			"provider_id": schema.StringAttribute{
+				Description: "The export destination Web Identity Federation identity providerId.",
+				Computed:    true,
+			},
+			"service_account_email": schema.StringAttribute{
+				Description: "The export destination service account email.",
 				Computed:    true,
 			},
 			"version": schema.Int64Attribute{

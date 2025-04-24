@@ -12,6 +12,9 @@ resource "m3ter_custom_field" "example_custom_field" {
   compound_aggregation = {
     foo = "string"
   }
+  contract = {
+    foo = "bar"
+  }
   meter = {
     foo = "string"
   }

@@ -5,6 +5,7 @@ package custom_field
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -37,7 +38,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				ElementType: types.DynamicType,
 			},
 			"account_plan": schema.MapAttribute{
-				Description: "Updates to accountPlan entity CustomFields.",
+				Description: "Updates to AccountPlan entity CustomFields.",
 				Optional:    true,
 				ElementType: types.DynamicType,
 			},
@@ -50,6 +51,11 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				Description: "Updates to Compound Aggregation entity CustomFields.",
 				Optional:    true,
 				ElementType: types.DynamicType,
+			},
+			"contract": schema.MapAttribute{
+				Description: "Updates to Contract entity CustomFields.",
+				Optional:    true,
+				ElementType: jsontypes.NormalizedType{},
 			},
 			"meter": schema.MapAttribute{
 				Description: "Updates to Meter entity CustomFields.",

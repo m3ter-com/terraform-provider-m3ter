@@ -7,6 +7,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
@@ -55,6 +56,13 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 						"created_by": schema.StringAttribute{
 							Description: "The id of the user who created the Export Destination.",
 							Computed:    true,
+						},
+						"destination_type": schema.StringAttribute{
+							Description: `Available values: "S3", "GCS".`,
+							Computed:    true,
+							Validators: []validator.String{
+								stringvalidator.OneOfCaseInsensitive("S3", "GCS"),
+							},
 						},
 						"dt_created": schema.StringAttribute{
 							Description: "The DateTime when the Export Destination was created.",

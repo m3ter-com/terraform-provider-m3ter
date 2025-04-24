@@ -5,6 +5,7 @@ package custom_field
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
@@ -69,6 +70,12 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Computed:    true,
 				CustomType:  customfield.NewMapType[types.Dynamic](ctx),
 				ElementType: types.DynamicType,
+			},
+			"contract": schema.MapAttribute{
+				Description: "CustomFields added to Contract entities.",
+				Computed:    true,
+				CustomType:  customfield.NewMapType[jsontypes.Normalized](ctx),
+				ElementType: jsontypes.NormalizedType{},
 			},
 			"meter": schema.MapAttribute{
 				Description: "CustomFields added to Meter entities.",

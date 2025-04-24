@@ -59,7 +59,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				CustomType:  timetypes.RFC3339Type{},
 			},
 			"accounting_product_id": schema.StringAttribute{
-				Description: "The unique identifier (UUID) for the Product linked to the Commitment for accounting purposes. *(Optional)*",
+				Description: "The unique identifier (UUID) for the Product linked to the Commitment for accounting purposes. *(Optional)*\n\n**NOTE:** If you're planning to set up an integration for sending Bills to an external accounts receivable system, please check requirements for your chosen system. Some systems, such as NetSuite, require a Product to be linked with any Bill line items associated with Account Commitments, and the integration will fail if this is not present",
 				Optional:    true,
 			},
 			"amount_first_bill": schema.Float64Attribute{
