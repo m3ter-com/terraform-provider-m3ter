@@ -41,6 +41,7 @@ type BillLineItemsItemsDataSourceModel struct {
 	BalanceID              types.String                                                        `tfsdk:"balance_id" json:"balanceId,computed"`
 	BandUsage              customfield.NestedObjectList[BillLineItemsBandUsageDataSourceModel] `tfsdk:"band_usage" json:"bandUsage,computed"`
 	BillID                 types.String                                                        `tfsdk:"bill_id" json:"billId,computed"`
+	ChargeID               types.String                                                        `tfsdk:"charge_id" json:"chargeId,computed"`
 	CommitmentID           types.String                                                        `tfsdk:"commitment_id" json:"commitmentId,computed"`
 	CompoundAggregationID  types.String                                                        `tfsdk:"compound_aggregation_id" json:"compoundAggregationId,computed"`
 	ContractID             types.String                                                        `tfsdk:"contract_id" json:"contractId,computed"`

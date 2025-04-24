@@ -128,6 +128,8 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 													"HEALTHSCORES_RETRIEVE",
 													"ANOMALIES_RETRIEVE",
 													"EXPORTS_DOWNLOAD",
+													"MARKETPLACE_USAGE_CREATE",
+													"MARKETPLACE_USAGE_RETRIEVE",
 												),
 											),
 										},

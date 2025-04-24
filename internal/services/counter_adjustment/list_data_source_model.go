@@ -25,6 +25,7 @@ type CounterAdjustmentsDataSourceModel struct {
 	DateStart    types.String                                                         `tfsdk:"date_start" query:"dateStart,optional"`
 	EndDateEnd   types.String                                                         `tfsdk:"end_date_end" query:"endDateEnd,optional"`
 	EndDateStart types.String                                                         `tfsdk:"end_date_start" query:"endDateStart,optional"`
+	SortOrder    types.String                                                         `tfsdk:"sort_order" query:"sortOrder,optional"`
 	MaxItems     types.Int64                                                          `tfsdk:"max_items"`
 	Items        customfield.NestedObjectList[CounterAdjustmentsItemsDataSourceModel] `tfsdk:"items"`
 }
@@ -52,6 +53,9 @@ func (m *CounterAdjustmentsDataSourceModel) toListParams(_ context.Context) (par
 	}
 	if !m.EndDateStart.IsNull() {
 		params.EndDateStart = m3ter.F(m.EndDateStart.ValueString())
+	}
+	if !m.SortOrder.IsNull() {
+		params.SortOrder = m3ter.F(m.SortOrder.ValueString())
 	}
 	if !m.OrgID.IsNull() {
 		params.OrgID = m3ter.F(m.OrgID.ValueString())

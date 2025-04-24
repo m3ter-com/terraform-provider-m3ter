@@ -47,6 +47,10 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 				Description: "Only include CounterAdjustments with end dates equal to or later than this date.",
 				Optional:    true,
 			},
+			"sort_order": schema.StringAttribute{
+				Description: "Sort order for the results",
+				Optional:    true,
+			},
 			"max_items": schema.Int64Attribute{
 				Description: "Max items to fetch, default: 1000",
 				Optional:    true,

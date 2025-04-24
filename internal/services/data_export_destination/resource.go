@@ -9,15 +9,18 @@ import (
 	"net/http"
 
 	"github.com/hashicorp/terraform-plugin-framework/resource"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/m3ter-com/m3ter-sdk-go"
 	"github.com/m3ter-com/m3ter-sdk-go/option"
 	"github.com/m3ter-com/terraform-provider-m3ter/internal/apijson"
+	"github.com/m3ter-com/terraform-provider-m3ter/internal/importpath"
 	"github.com/m3ter-com/terraform-provider-m3ter/internal/logging"
 )
 
 // Ensure provider defined types fully satisfy framework interfaces.
 var _ resource.ResourceWithConfigure = (*DataExportDestinationResource)(nil)
 var _ resource.ResourceWithModifyPlan = (*DataExportDestinationResource)(nil)
+var _ resource.ResourceWithImportState = (*DataExportDestinationResource)(nil)
 
 func NewResource() resource.Resource {
 	return &DataExportDestinationResource{}
@@ -209,6 +212,49 @@ func (r *DataExportDestinationResource) Delete(ctx context.Context, req resource
 	)
 	if err != nil {
 		resp.Diagnostics.AddError("failed to make http request", err.Error())
+		return
+	}
+
+	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
+}
+
+func (r *DataExportDestinationResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
+	var data *DataExportDestinationModel = new(DataExportDestinationModel)
+
+	path_org_id := ""
+	path_id := ""
+	diags := importpath.ParseImportID(
+		req.ID,
+		"<org_id>/<id>",
+		&path_org_id,
+		&path_id,
+	)
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
+	data.OrgID = types.StringValue(path_org_id)
+	data.ID = types.StringValue(path_id)
+
+	res := new(http.Response)
+	_, err := r.client.DataExports.Destinations.Get(
+		ctx,
+		path_id,
+		m3ter.DataExportDestinationGetParams{
+			OrgID: m3ter.F(path_org_id),
+		},
+		option.WithResponseBodyInto(&res),
+		option.WithMiddleware(logging.Middleware(ctx)),
+	)
+	if err != nil {
+		resp.Diagnostics.AddError("failed to make http request", err.Error())
+		return
+	}
+	bytes, _ := io.ReadAll(res.Body)
+	err = apijson.Unmarshal(bytes, &data)
+	if err != nil {
+		resp.Diagnostics.AddError("failed to deserialize http request", err.Error())
 		return
 	}
 

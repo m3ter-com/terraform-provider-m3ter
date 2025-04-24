@@ -125,7 +125,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				Computed:    true,
 			},
 			"dt_completed": schema.StringAttribute{
-				Description: "The date and time the integration was completed *(in ISO-8601 format)*.",
+				Description: "The date and time the integration was completed. *(in ISO-8601 format)*.",
 				Computed:    true,
 				CustomType:  timetypes.RFC3339Type{},
 			},
@@ -140,7 +140,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				CustomType:  timetypes.RFC3339Type{},
 			},
 			"dt_started": schema.StringAttribute{
-				Description: "The date and time the integration was started *(in ISO-8601 format)*.",
+				Description: "The date and time the integration run was started *(in ISO-8601 format)*.",
 				Computed:    true,
 				CustomType:  timetypes.RFC3339Type{},
 			},

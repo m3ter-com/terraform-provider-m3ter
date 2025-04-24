@@ -28,11 +28,11 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Computed:    true,
 			},
 			"destination": schema.StringAttribute{
-				Description: "The destination system for the integration.",
+				Description: "The destination system for the integration run.",
 				Computed:    true,
 			},
 			"dt_completed": schema.StringAttribute{
-				Description: "The date and time the integration was completed *(in ISO-8601 format)*.",
+				Description: "The date and time the integration was completed. *(in ISO-8601 format)*.",
 				Computed:    true,
 				CustomType:  timetypes.RFC3339Type{},
 			},
@@ -47,16 +47,16 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				CustomType:  timetypes.RFC3339Type{},
 			},
 			"dt_started": schema.StringAttribute{
-				Description: "The date and time the integration was started *(in ISO-8601 format)*.",
+				Description: "The date and time the integration run was started *(in ISO-8601 format)*.",
 				Computed:    true,
 				CustomType:  timetypes.RFC3339Type{},
 			},
 			"entity_id": schema.StringAttribute{
-				Description: "The unique identifier (UUID) of the entity the integration is for.",
+				Description: "The unique identifier (UUID) of the entity the integration run is for.",
 				Computed:    true,
 			},
 			"entity_type": schema.StringAttribute{
-				Description: "The type of entity the integration is for *(e.g. Bill)*.",
+				Description: "The type of entity the integration run is for. Two options:\n* Bill\n* Notification",
 				Computed:    true,
 			},
 			"error": schema.StringAttribute{

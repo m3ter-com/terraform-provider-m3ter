@@ -25,6 +25,9 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 			"org_id": schema.StringAttribute{
 				Optional: true,
 			},
+			"schedule_id": schema.StringAttribute{
+				Optional: true,
+			},
 			"transaction_type_id": schema.StringAttribute{
 				Optional: true,
 			},
