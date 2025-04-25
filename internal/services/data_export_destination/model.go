@@ -12,6 +12,7 @@ type DataExportDestinationModel struct {
 	ID                  types.String      `tfsdk:"id" json:"id,computed"`
 	OrgID               types.String      `tfsdk:"org_id" path:"orgId,optional"`
 	BucketName          types.String      `tfsdk:"bucket_name" json:"bucketName,required"`
+	DestinationType     types.String      `tfsdk:"destination_type" json:"destinationType,optional"`
 	IamRoleArn          types.String      `tfsdk:"iam_role_arn" json:"iamRoleArn,optional"`
 	PartitionOrder      types.String      `tfsdk:"partition_order" json:"partitionOrder,optional"`
 	PoolID              types.String      `tfsdk:"pool_id" json:"poolId,optional"`
@@ -22,7 +23,6 @@ type DataExportDestinationModel struct {
 	Version             types.Int64       `tfsdk:"version" json:"version,optional"`
 	Code                types.String      `tfsdk:"code" json:"code,computed"`
 	CreatedBy           types.String      `tfsdk:"created_by" json:"createdBy,computed"`
-	DestinationType     types.String      `tfsdk:"destination_type" json:"destinationType,computed"`
 	DtCreated           timetypes.RFC3339 `tfsdk:"dt_created" json:"dtCreated,computed" format:"date-time"`
 	DtLastModified      timetypes.RFC3339 `tfsdk:"dt_last_modified" json:"dtLastModified,computed" format:"date-time"`
 	LastModifiedBy      types.String      `tfsdk:"last_modified_by" json:"lastModifiedBy,computed"`

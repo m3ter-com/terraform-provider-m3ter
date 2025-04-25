@@ -32,6 +32,13 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				Description: "Name of the S3 bucket for the Export Destination.",
 				Required:    true,
 			},
+			"destination_type": schema.StringAttribute{
+				Description: "The type of destination to create. Possible values are: S3\nAvailable values: \"S3\".",
+				Optional:    true,
+				Validators: []validator.String{
+					stringvalidator.OneOfCaseInsensitive("S3", "GCS"),
+				},
+			},
 			"iam_role_arn": schema.StringAttribute{
 				Description: "To enable m3ter to upload a Data Exports to your S3 bucket, the service has to assume an IAM role with PutObject permission for the specified `bucketName`. Create a suitable IAM role in your AWS account and enter ARN:\n\n**Formatting Constraints:**\n* The IAM role ARN must begin with \"arn:aws:iam\".\n* The general format required is: \"arn:aws:iam::<aws account id>:role/<role name>\". For example: \"arn:aws:iam::922609978421:role/IAMRole636\".\n* If the `iamRoleArn` used doesn't comply with this format, then an error message will be returned.\n\n**More Details:** For more details and examples of the Permission and Trust Policies you can use to create the required IAM Role ARN, see [Creating Data Export Destinations](https://www.m3ter.com/docs/guides/data-exports/creating-data-export-destinations) in our main User documentation.",
 				Optional:    true,
@@ -74,13 +81,6 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 			"created_by": schema.StringAttribute{
 				Description: "The id of the user who created the Export Destination.",
 				Computed:    true,
-			},
-			"destination_type": schema.StringAttribute{
-				Description: `Available values: "S3", "GCS".`,
-				Computed:    true,
-				Validators: []validator.String{
-					stringvalidator.OneOfCaseInsensitive("S3", "GCS"),
-				},
 			},
 			"dt_created": schema.StringAttribute{
 				Description: "The DateTime when the Export Destination was created.",

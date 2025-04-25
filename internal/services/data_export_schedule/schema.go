@@ -31,10 +31,10 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				PlanModifiers: []planmodifier.String{stringplanmodifier.RequiresReplace()},
 			},
 			"source_type": schema.StringAttribute{
-				Description: `Available values: "USAGE", "OPERATIONAL".`,
+				Description: "The type of data to export. Possible values are: OPERATIONAL\nAvailable values: \"OPERATIONAL\".",
 				Required:    true,
 				Validators: []validator.String{
-					stringvalidator.OneOfCaseInsensitive("USAGE", "OPERATIONAL"),
+					stringvalidator.OneOfCaseInsensitive("OPERATIONAL", "USAGE"),
 				},
 			},
 			"time_period": schema.StringAttribute{
