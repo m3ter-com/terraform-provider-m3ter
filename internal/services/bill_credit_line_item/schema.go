@@ -30,8 +30,9 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				PlanModifiers: []planmodifier.String{stringplanmodifier.RequiresReplace()},
 			},
 			"org_id": schema.StringAttribute{
-				Optional:      true,
-				PlanModifiers: []planmodifier.String{stringplanmodifier.RequiresReplace()},
+				Optional:           true,
+				DeprecationMessage: "the org id should be set at the client level instead",
+				PlanModifiers:      []planmodifier.String{stringplanmodifier.RequiresReplace()},
 			},
 			"amount": schema.Float64Attribute{
 				Description: "The amount for the line item.",

@@ -25,7 +25,8 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Required: true,
 			},
 			"org_id": schema.StringAttribute{
-				Required: true,
+				Required:           true,
+				DeprecationMessage: "the org id should be set at the client level instead",
 			},
 			"auto_generate_statement_mode": schema.StringAttribute{
 				Description: "Specify whether to auto-generate statements once Bills are approved or locked.\n\n- **None**. Statements will not be auto-generated.\n- **JSON**. Statements are auto-generated in JSON format.\n- **JSON and CSV**. Statements are auto-generated in both JSON and CSV formats.\nAvailable values: \"NONE\", \"JSON\", \"JSON_AND_CSV\".",

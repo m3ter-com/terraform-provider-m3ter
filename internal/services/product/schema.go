@@ -24,8 +24,9 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				PlanModifiers: []planmodifier.String{stringplanmodifier.UseStateForUnknown()},
 			},
 			"org_id": schema.StringAttribute{
-				Optional:      true,
-				PlanModifiers: []planmodifier.String{stringplanmodifier.RequiresReplace()},
+				Optional:           true,
+				DeprecationMessage: "the org id should be set at the client level instead",
+				PlanModifiers:      []planmodifier.String{stringplanmodifier.RequiresReplace()},
 			},
 			"code": schema.StringAttribute{
 				Description: "A unique short code to identify the Product. It should not contain control chracters or spaces.",

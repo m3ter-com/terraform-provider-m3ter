@@ -20,7 +20,8 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 	return schema.Schema{
 		Attributes: map[string]schema.Attribute{
 			"org_id": schema.StringAttribute{
-				Optional: true,
+				Optional:           true,
+				DeprecationMessage: "the org id should be set at the client level instead",
 			},
 			"active": schema.BoolAttribute{
 				Description: "A Boolean flag indicating whether to retrieve only active or only inactive Notifications.\n\n* **TRUE** - only active Notifications are returned. \n* **FALSE** - only inactive Notifications are returned.",

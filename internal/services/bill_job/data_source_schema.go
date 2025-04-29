@@ -24,7 +24,8 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Required: true,
 			},
 			"org_id": schema.StringAttribute{
-				Required: true,
+				Required:           true,
+				DeprecationMessage: "the org id should be set at the client level instead",
 			},
 			"bill_date": schema.StringAttribute{
 				Description: "The specific billing date *(in ISO 8601 format)*, determining when the Bill was generated.\n\nFor example: `\"2023-01-24\"`.",

@@ -22,7 +22,8 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 	return schema.Schema{
 		Attributes: map[string]schema.Attribute{
 			"org_id": schema.StringAttribute{
-				Required: true,
+				Required:           true,
+				DeprecationMessage: "the org id should be set at the client level instead",
 			},
 			"auto_approve_bills_grace_period": schema.Int64Attribute{
 				Description: "Grace period before bills are auto-approved. Used in combination with the field `autoApproveBillsGracePeriodUnit`.",

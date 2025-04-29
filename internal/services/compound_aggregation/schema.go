@@ -28,8 +28,9 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				PlanModifiers: []planmodifier.String{stringplanmodifier.UseStateForUnknown()},
 			},
 			"org_id": schema.StringAttribute{
-				Optional:      true,
-				PlanModifiers: []planmodifier.String{stringplanmodifier.RequiresReplace()},
+				Optional:           true,
+				DeprecationMessage: "the org id should be set at the client level instead",
+				PlanModifiers:      []planmodifier.String{stringplanmodifier.RequiresReplace()},
 			},
 			"calculation": schema.StringAttribute{
 				Description: "String that represents the formula for the calculation. This formula determines how the CompoundAggregation value is calculated. The calculation can reference  simple Aggregations or Custom Fields. This field is required when creating or updating a CompoundAggregation.\n\n**NOTE:** If a simple Aggregation referenced by a Compound Aggregation has a **Quantity per unit** defined or a **Rounding** defined, these will not be factored into the value used by the calculation. For example, if the simple Aggregation referenced has a base value of 100 and has **Quantity per unit** set at 10, the Compound Aggregation calculation *will use the base value of 100 not 10*.",

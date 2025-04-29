@@ -20,7 +20,8 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Required: true,
 			},
 			"org_id": schema.StringAttribute{
-				Required: true,
+				Required:           true,
+				DeprecationMessage: "the org id should be set at the client level instead",
 			},
 			"dt_actioned": schema.StringAttribute{
 				Description: "When an Event was actioned. It follows the ISO 8601 date and time format.\n\nYou can action an Event to indicate that it has been followed up and resolved - this is useful when dealing with integration error Events or ingest failure Events.",

@@ -22,7 +22,8 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 	return schema.Schema{
 		Attributes: map[string]schema.Attribute{
 			"org_id": schema.StringAttribute{
-				Optional: true,
+				Optional:           true,
+				DeprecationMessage: "the org id should be set at the client level instead",
 			},
 			"active": schema.StringAttribute{
 				Description: "Boolean filter to retrieve only active BillJobs and exclude completed or cancelled BillJobs from the results.\n\n* TRUE - only active BillJobs.\n* FALSE - all BillJobs including completed and cancelled BillJobs.",

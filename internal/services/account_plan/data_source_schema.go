@@ -23,7 +23,8 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Required: true,
 			},
 			"org_id": schema.StringAttribute{
-				Required: true,
+				Required:           true,
+				DeprecationMessage: "the org id should be set at the client level instead",
 			},
 			"account_id": schema.StringAttribute{
 				Description: "The unique identifier (UUID) for the Account to which the AccountPlan or AccounPlanGroup is attached.",

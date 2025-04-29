@@ -23,8 +23,9 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				PlanModifiers: []planmodifier.String{stringplanmodifier.UseStateForUnknown()},
 			},
 			"org_id": schema.StringAttribute{
-				Optional:      true,
-				PlanModifiers: []planmodifier.String{stringplanmodifier.RequiresReplace()},
+				Optional:           true,
+				DeprecationMessage: "the org id should be set at the client level instead",
+				PlanModifiers:      []planmodifier.String{stringplanmodifier.RequiresReplace()},
 			},
 			"entity": schema.StringAttribute{
 				Description: "The referenced configuration or billing entity for which the desired scheduled Event will trigger.",

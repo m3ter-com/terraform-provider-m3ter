@@ -21,7 +21,8 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Required: true,
 			},
 			"org_id": schema.StringAttribute{
-				Required: true,
+				Required:           true,
+				DeprecationMessage: "the org id should be set at the client level instead",
 			},
 			"bucket_name": schema.StringAttribute{
 				Description: "Name of the S3 bucket for the Export Destination.",

@@ -19,7 +19,8 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 	return schema.Schema{
 		Attributes: map[string]schema.Attribute{
 			"org_id": schema.StringAttribute{
-				Optional: true,
+				Optional:           true,
+				DeprecationMessage: "the org id should be set at the client level instead",
 			},
 			"date_created_end": schema.StringAttribute{
 				Description: "Include only File Upload jobs created before this date. Required format is ISO-8601: yyyy-MM-dd'T'HH:mm:ss'Z'",

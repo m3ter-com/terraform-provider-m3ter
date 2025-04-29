@@ -21,7 +21,8 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Required: true,
 			},
 			"org_id": schema.StringAttribute{
-				Required: true,
+				Required:           true,
+				DeprecationMessage: "the org id should be set at the client level instead",
 			},
 			"code": schema.StringAttribute{
 				Description: "A unique short code to identify the Product. It should not contain control chracters or spaces.",
