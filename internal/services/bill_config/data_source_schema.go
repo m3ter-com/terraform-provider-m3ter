@@ -16,7 +16,8 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 	return schema.Schema{
 		Attributes: map[string]schema.Attribute{
 			"org_id": schema.StringAttribute{
-				Required: true,
+				Required:           true,
+				DeprecationMessage: "the org id should be set at the client level instead",
 			},
 			"bill_lock_date": schema.StringAttribute{
 				Description: "The global lock date *(in ISO 8601 format)* when all Bills will be locked.\n\nFor example: `\"2024-03-01\"`.",

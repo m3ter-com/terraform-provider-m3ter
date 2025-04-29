@@ -20,7 +20,8 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Required: true,
 			},
 			"org_id": schema.StringAttribute{
-				Required: true,
+				Required:           true,
+				DeprecationMessage: "the org id should be set at the client level instead",
 			},
 			"content_length": schema.Int64Attribute{
 				Description: "The size of the body in bytes. For example: `\"contentLength\": 485`, where 485 is the size in bytes of the file uploaded.",

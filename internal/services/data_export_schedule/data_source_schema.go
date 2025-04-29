@@ -23,7 +23,8 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Required: true,
 			},
 			"org_id": schema.StringAttribute{
-				Required: true,
+				Required:           true,
+				DeprecationMessage: "the org id should be set at the client level instead",
 			},
 			"time_period": schema.StringAttribute{
 				Description: "Define a time period to control the range of usage data you want the data export to contain when it runs:\n\n* **TODAY**. Data collected for the current day up until the time the export runs.\n* **YESTERDAY**. Data collected for the day before the export runs - that is, the 24 hour period from midnight to midnight of the day before.\n* **WEEK_TO_DATE**. Data collected for the period covering the current week to the date and time the export runs, and weeks run Monday to Monday.\n* **CURRENT_MONTH**. Data collected for the current month in which the export is ran up to and including the date and time the export runs.\n* **LAST_30_DAYS**. Data collected for the 30 days prior to the date the export is ran.\n* **LAST_35_DAYS**. Data collected for the 35 days prior to the date the export is ran.\n* **PREVIOUS_WEEK**. Data collected for the previous full week period, and weeks run Monday to Monday.\n* **PREVIOUS_MONTH**. Data collected for the previous full month period.\n\nFor more details and examples, see the [Time Period](https://www.m3ter.com/docs/guides/data-exports/creating-export-schedules#time-period) section in our main User Documentation.\nAvailable values: \"LAST_12_HOURS\", \"TODAY\", \"YESTERDAY\", \"WEEK_TO_DATE\", \"CURRENT_MONTH\", \"LAST_30_DAYS\", \"LAST_35_DAYS\", \"PREVIOUS_WEEK\", \"PREVIOUS_MONTH\".",

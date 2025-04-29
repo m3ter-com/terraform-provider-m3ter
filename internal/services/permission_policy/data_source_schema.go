@@ -24,7 +24,8 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Required: true,
 			},
 			"org_id": schema.StringAttribute{
-				Required: true,
+				Required:           true,
+				DeprecationMessage: "the org id should be set at the client level instead",
 			},
 			"created_by": schema.StringAttribute{
 				Description: "The unique identifier (UUID) of the user who created this Permission Policy.",

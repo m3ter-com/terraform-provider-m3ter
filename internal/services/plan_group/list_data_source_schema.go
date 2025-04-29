@@ -20,7 +20,8 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 	return schema.Schema{
 		Attributes: map[string]schema.Attribute{
 			"org_id": schema.StringAttribute{
-				Optional: true,
+				Optional:           true,
+				DeprecationMessage: "the org id should be set at the client level instead",
 			},
 			"account_id": schema.ListAttribute{
 				Description: "Optional filter. The list of Account IDs to which the PlanGroups belong.",

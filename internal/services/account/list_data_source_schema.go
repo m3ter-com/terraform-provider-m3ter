@@ -23,7 +23,8 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 	return schema.Schema{
 		Attributes: map[string]schema.Attribute{
 			"org_id": schema.StringAttribute{
-				Optional: true,
+				Optional:           true,
+				DeprecationMessage: "the org id should be set at the client level instead",
 			},
 			"codes": schema.ListAttribute{
 				Description: "List of Account Codes to retrieve. \nThese are unique short codes for each Account.",

@@ -20,7 +20,8 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 	return schema.Schema{
 		Attributes: map[string]schema.Attribute{
 			"org_id": schema.StringAttribute{
-				Optional: true,
+				Optional:           true,
+				DeprecationMessage: "the org id should be set at the client level instead",
 			},
 			"codes": schema.ListAttribute{
 				Description: "List of Counter codes to retrieve. These are unique short codes to identify each Counter.",

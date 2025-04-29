@@ -19,7 +19,8 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Required: true,
 			},
 			"org_id": schema.StringAttribute{
-				Required: true,
+				Required:           true,
+				DeprecationMessage: "the org id should be set at the client level instead",
 			},
 			"active": schema.BoolAttribute{
 				Description: "A Boolean flag indicating whether or not the Notification is active.\n\n* **TRUE** - active Notification. \n* **FALSE** - inactive Notification.",

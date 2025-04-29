@@ -20,7 +20,8 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 	return schema.Schema{
 		Attributes: map[string]schema.Attribute{
 			"org_id": schema.StringAttribute{
-				Optional: true,
+				Optional:           true,
+				DeprecationMessage: "the org id should be set at the client level instead",
 			},
 			"archived": schema.BoolAttribute{
 				Description: "Filter using the boolean archived flag. DebitReasons can be archived if they are obsolete.\n* TRUE includes DebitReasons that have been archived.\n* FALSE excludes archived DebitReasons.",

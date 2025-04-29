@@ -21,7 +21,8 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Required: true,
 			},
 			"org_id": schema.StringAttribute{
-				Required: true,
+				Required:           true,
+				DeprecationMessage: "the org id should be set at the client level instead",
 			},
 			"accepted": schema.BoolAttribute{
 				Description: "Boolean indicating whether the user has accepted the invitation.\n\n* TRUE - the invite has been accepted.\n* FALSE - the invite has not yet been accepted.",
