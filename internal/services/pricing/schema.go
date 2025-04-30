@@ -14,7 +14,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	"github.com/m3ter-com/terraform-provider-m3ter/internal/customfield"
 )
 
 var _ resource.ResourceWithConfigValidators = (*PricingResource)(nil)
@@ -145,9 +144,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 			},
 			"overage_pricing_bands": schema.ListNestedAttribute{
 				Description: "Specify Prepayment/Balance overage pricing in pricing bands for the case of a **Tiered** pricing structure.",
-				Computed:    true,
 				Optional:    true,
-				CustomType:  customfield.NewNestedObjectListType[PricingOveragePricingBandsModel](ctx),
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
 						"fixed_price": schema.Float64Attribute{

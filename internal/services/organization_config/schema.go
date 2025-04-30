@@ -17,7 +17,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	"github.com/m3ter-com/terraform-provider-m3ter/internal/customfield"
 )
 
 var _ resource.ResourceWithConfigValidators = (*OrganizationConfigResource)(nil)
@@ -118,6 +117,29 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				},
 				ElementType: types.StringType,
 			},
+			"currency_conversions": schema.ListNestedAttribute{
+				Description: "Define currency conversion rates from *pricing currency* to *billing currency*:\n* You can use the `currency` request parameter with this call to define the billing currency for your Organization - see above.\n* You can also define a billing currency at the individual Account level and this will override the Organization billing currency.\n* A Plan used to set Product consumption charge rates on an Account might use a different pricing currency. At billing, charges are calculated in the pricing currency and then converted into billing currency amounts to appear on Bills. If you haven't defined a currency conversion rate from pricing to billing currency, billing will fail for the Account.",
+				Optional:    true,
+				NestedObject: schema.NestedAttributeObject{
+					Attributes: map[string]schema.Attribute{
+						"from": schema.StringAttribute{
+							Description: "Currency to convert from. For example: GBP.",
+							Required:    true,
+						},
+						"to": schema.StringAttribute{
+							Description: "Currency to convert to. For example: USD.",
+							Required:    true,
+						},
+						"multiplier": schema.Float64Attribute{
+							Description: "Conversion rate between currencies.",
+							Optional:    true,
+							Validators: []validator.Float64{
+								float64validator.AtLeast(0),
+							},
+						},
+					},
+				},
+			},
 			"currency": schema.StringAttribute{
 				Description: "The currency code for the Organization. For example: USD, GBP, or EUR:\n* This defines the *billing currency* for the Organization. You can override this by selecting a different billing currency at individual Account level.\n* You must first define the currencies you want to use in your Organization. See the [Currency](https://www.m3ter.com/docs/api#tag/Currency) section in this API Reference.\n\n**Note:** If you use a different currency as the *pricing currency* for Plans to set charge rates for Product consumption by an Account, you must define a currency conversion rate from the pricing currency to the billing currency before you run billing for the Account, otherwise billing will fail. See below for the `currencyConversions` request parameter.",
 				Computed:    true,
@@ -153,31 +175,6 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				Computed:    true,
 				Optional:    true,
 				Default:     stringdefault.StaticString("2022-01-01"),
-			},
-			"currency_conversions": schema.ListNestedAttribute{
-				Description: "Define currency conversion rates from *pricing currency* to *billing currency*:\n* You can use the `currency` request parameter with this call to define the billing currency for your Organization - see above.\n* You can also define a billing currency at the individual Account level and this will override the Organization billing currency.\n* A Plan used to set Product consumption charge rates on an Account might use a different pricing currency. At billing, charges are calculated in the pricing currency and then converted into billing currency amounts to appear on Bills. If you haven't defined a currency conversion rate from pricing to billing currency, billing will fail for the Account.",
-				Computed:    true,
-				Optional:    true,
-				CustomType:  customfield.NewNestedObjectListType[OrganizationConfigCurrencyConversionsModel](ctx),
-				NestedObject: schema.NestedAttributeObject{
-					Attributes: map[string]schema.Attribute{
-						"from": schema.StringAttribute{
-							Description: "Currency to convert from. For example: GBP.",
-							Required:    true,
-						},
-						"to": schema.StringAttribute{
-							Description: "Currency to convert to. For example: USD.",
-							Required:    true,
-						},
-						"multiplier": schema.Float64Attribute{
-							Description: "Conversion rate between currencies.",
-							Optional:    true,
-							Validators: []validator.Float64{
-								float64validator.AtLeast(0),
-							},
-						},
-					},
-				},
 			},
 			"created_by": schema.StringAttribute{
 				Description: "The id of the user who created this organization config.",

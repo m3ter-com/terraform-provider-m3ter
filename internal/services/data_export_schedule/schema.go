@@ -13,7 +13,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	"github.com/m3ter-com/terraform-provider-m3ter/internal/customfield"
 )
 
 var _ resource.ResourceWithConfigValidators = (*DataExportScheduleResource)(nil)
@@ -100,9 +99,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 			},
 			"aggregations": schema.ListNestedAttribute{
 				Description: "List of aggregations to apply",
-				Computed:    true,
 				Optional:    true,
-				CustomType:  customfield.NewNestedObjectListType[DataExportScheduleAggregationsModel](ctx),
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
 						"field_code": schema.StringAttribute{
@@ -140,9 +137,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 			},
 			"dimension_filters": schema.ListNestedAttribute{
 				Description: "List of dimension filters to apply",
-				Computed:    true,
 				Optional:    true,
-				CustomType:  customfield.NewNestedObjectListType[DataExportScheduleDimensionFiltersModel](ctx),
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
 						"field_code": schema.StringAttribute{
@@ -163,9 +158,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 			},
 			"groups": schema.ListNestedAttribute{
 				Description: "List of groups to apply",
-				Computed:    true,
 				Optional:    true,
-				CustomType:  customfield.NewNestedObjectListType[DataExportScheduleGroupsModel](ctx),
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
 						"group_type": schema.StringAttribute{

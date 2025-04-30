@@ -118,18 +118,9 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				ElementType:   types.StringType,
 				PlanModifiers: []planmodifier.List{listplanmodifier.RequiresReplace()},
 			},
-			"timezone": schema.StringAttribute{
-				Description:   "Specifies the time zone used for the generated Bills, ensuring alignment with the local time zone.",
-				Computed:      true,
-				Optional:      true,
-				PlanModifiers: []planmodifier.String{stringplanmodifier.RequiresReplace()},
-				Default:       stringdefault.StaticString("UTC"),
-			},
 			"currency_conversions": schema.ListNestedAttribute{
 				Description: "An array of currency conversion rates from Bill currency to Organization currency. For example, if Account is billed in GBP and Organization is set to USD, Bill line items are calculated in GBP and then converted to USD using the defined rate.",
-				Computed:    true,
 				Optional:    true,
-				CustomType:  customfield.NewNestedObjectListType[BillJobCurrencyConversionsModel](ctx),
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
 						"from": schema.StringAttribute{
@@ -150,6 +141,13 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 					},
 				},
 				PlanModifiers: []planmodifier.List{listplanmodifier.RequiresReplace()},
+			},
+			"timezone": schema.StringAttribute{
+				Description:   "Specifies the time zone used for the generated Bills, ensuring alignment with the local time zone.",
+				Computed:      true,
+				Optional:      true,
+				PlanModifiers: []planmodifier.String{stringplanmodifier.RequiresReplace()},
+				Default:       stringdefault.StaticString("UTC"),
 			},
 			"created_by": schema.StringAttribute{
 				Description: "The unique identifier (UUID) for the user who created the BillJob.",
