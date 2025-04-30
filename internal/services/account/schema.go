@@ -16,7 +16,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	"github.com/m3ter-com/terraform-provider-m3ter/internal/customfield"
 )
 
 var _ resource.ResourceWithConfigValidators = (*AccountResource)(nil)
@@ -111,9 +110,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 			},
 			"address": schema.SingleNestedAttribute{
 				Description: "Contact address.",
-				Computed:    true,
 				Optional:    true,
-				CustomType:  customfield.NewNestedObjectType[AccountAddressModel](ctx),
 				Attributes: map[string]schema.Attribute{
 					"address_line1": schema.StringAttribute{
 						Optional: true,

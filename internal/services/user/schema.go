@@ -42,9 +42,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 			},
 			"permission_policy": schema.ListNestedAttribute{
 				Description: "An array of permission statements for the user. Each permission statement defines a specific permission for the user.\n\nSee [Understanding, Creating, and Managing Permission Policies](https://www.m3ter.com/docs/guides/organization-and-access-management/creating-and-managing-permissions) for more information.",
-				Computed:    true,
 				Optional:    true,
-				CustomType:  customfield.NewNestedObjectListType[UserPermissionPolicyModel](ctx),
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
 						"action": schema.ListAttribute{

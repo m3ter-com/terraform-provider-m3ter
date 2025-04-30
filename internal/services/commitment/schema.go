@@ -16,7 +16,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	"github.com/m3ter-com/terraform-provider-m3ter/internal/customfield"
 )
 
 var _ resource.ResourceWithConfigValidators = (*CommitmentResource)(nil)
@@ -174,9 +173,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 			},
 			"fee_dates": schema.ListNestedAttribute{
 				Description: "Used for billing any outstanding Commitment fees *on a schedule*.\n\nCreate an array to define a series of bill dates and amounts covering specified service periods:\n- `date` - the billing date *(in ISO-8601 format)*.\n- `amount` - the billed amount.\n- `servicePeriodStartDate` and `servicePeriodEndDate` - defines the service period the bill covers *(in ISO-8601 format)*.\n\n**Notes:**\n* If you try to set `servicePeriodStartDate` *after* `servicePeriodEndDate`, you'll receive an error.\n* You can set `servicePeriodStartDate` and `servicePeriodEndDate` to the *same date* without receiving an error, but *please be sure* your Commitment billing use case requires this.",
-				Computed:    true,
 				Optional:    true,
-				CustomType:  customfield.NewNestedObjectListType[CommitmentFeeDatesModel](ctx),
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
 						"amount": schema.Float64Attribute{
