@@ -34,7 +34,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				Required:    true,
 			},
 			"destination_type": schema.StringAttribute{
-				Description: "The type of destination to create. Possible values are: S3\nAvailable values: \"S3\".",
+				Description: "The type of destination to create. Possible values are: S3\nAvailable values: \"S3\", \"GCS\".",
 				Optional:    true,
 				Validators: []validator.String{
 					stringvalidator.OneOfCaseInsensitive("S3", "GCS"),
