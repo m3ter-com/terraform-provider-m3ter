@@ -14,10 +14,10 @@ type UserInvitationModel struct {
 	Email               types.String      `tfsdk:"email" json:"email,required"`
 	FirstName           types.String      `tfsdk:"first_name" json:"firstName,required"`
 	LastName            types.String      `tfsdk:"last_name" json:"lastName,required"`
-	ContactNumber       types.String      `tfsdk:"contact_number" json:"contactNumber,optional"`
+	ContactNumber       types.String      `tfsdk:"contact_number" json:"contactNumber,optional,no_refresh"`
 	DtEndAccess         timetypes.RFC3339 `tfsdk:"dt_end_access" json:"dtEndAccess,optional" format:"date-time"`
 	DtExpiry            timetypes.RFC3339 `tfsdk:"dt_expiry" json:"dtExpiry,optional" format:"date-time"`
-	M3terUser           types.Bool        `tfsdk:"m3ter_user" json:"m3terUser,optional"`
+	M3terUser           types.Bool        `tfsdk:"m3ter_user" json:"m3terUser,optional,no_refresh"`
 	Version             types.Int64       `tfsdk:"version" json:"version,optional"`
 	PermissionPolicyIDs *[]types.String   `tfsdk:"permission_policy_ids" json:"permissionPolicyIds,optional"`
 	Accepted            types.Bool        `tfsdk:"accepted" json:"accepted,computed"`

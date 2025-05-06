@@ -36,6 +36,6 @@ type WebhookCredentialsModel struct {
 	APIKey  types.String `tfsdk:"api_key" json:"apiKey,required"`
 	Secret  types.String `tfsdk:"secret" json:"secret,required"`
 	Type    types.String `tfsdk:"type" json:"type,required"`
-	Empty   types.Bool   `tfsdk:"empty" json:"empty,optional"`
+	Empty   types.Bool   `tfsdk:"empty" json:"empty,optional,no_refresh"`
 	Version types.Int64  `tfsdk:"version" json:"version,optional"`
 }

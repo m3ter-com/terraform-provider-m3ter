@@ -10,7 +10,7 @@ import (
 type DataExportScheduleModel struct {
 	ID                   types.String                                `tfsdk:"id" json:"id,computed"`
 	OrgID                types.String                                `tfsdk:"org_id" path:"orgId,optional"`
-	SourceType           types.String                                `tfsdk:"source_type" json:"sourceType,required"`
+	SourceType           types.String                                `tfsdk:"source_type" json:"sourceType,required,no_refresh"`
 	TimePeriod           types.String                                `tfsdk:"time_period" json:"timePeriod,optional"`
 	Version              types.Int64                                 `tfsdk:"version" json:"version,optional"`
 	AccountIDs           *[]types.String                             `tfsdk:"account_ids" json:"accountIds,optional"`
