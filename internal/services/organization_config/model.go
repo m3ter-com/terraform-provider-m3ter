@@ -29,11 +29,11 @@ type OrganizationConfigModel struct {
 	CreditApplicationOrder          *[]types.String                                `tfsdk:"credit_application_order" json:"creditApplicationOrder,optional"`
 	CurrencyConversions             *[]*OrganizationConfigCurrencyConversionsModel `tfsdk:"currency_conversions" json:"currencyConversions,optional"`
 	Currency                        types.String                                   `tfsdk:"currency" json:"currency,computed_optional"`
-	DayEpoch                        types.String                                   `tfsdk:"day_epoch" json:"dayEpoch,computed_optional"`
-	MonthEpoch                      types.String                                   `tfsdk:"month_epoch" json:"monthEpoch,computed_optional"`
+	DayEpoch                        types.String                                   `tfsdk:"day_epoch" json:"dayEpoch,computed_optional,no_refresh"`
+	MonthEpoch                      types.String                                   `tfsdk:"month_epoch" json:"monthEpoch,computed_optional,no_refresh"`
 	Timezone                        types.String                                   `tfsdk:"timezone" json:"timezone,computed_optional"`
-	WeekEpoch                       types.String                                   `tfsdk:"week_epoch" json:"weekEpoch,computed_optional"`
-	YearEpoch                       types.String                                   `tfsdk:"year_epoch" json:"yearEpoch,computed_optional"`
+	WeekEpoch                       types.String                                   `tfsdk:"week_epoch" json:"weekEpoch,computed_optional,no_refresh"`
+	YearEpoch                       types.String                                   `tfsdk:"year_epoch" json:"yearEpoch,computed_optional,no_refresh"`
 	CreatedBy                       types.String                                   `tfsdk:"created_by" json:"createdBy,computed"`
 	DtCreated                       timetypes.RFC3339                              `tfsdk:"dt_created" json:"dtCreated,computed" format:"date-time"`
 	DtLastModified                  timetypes.RFC3339                              `tfsdk:"dt_last_modified" json:"dtLastModified,computed" format:"date-time"`

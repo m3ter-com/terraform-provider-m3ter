@@ -23,16 +23,16 @@ type CompoundAggregationModel struct {
 	ProductID                types.String                                    `tfsdk:"product_id" json:"productId,optional"`
 	Version                  types.Int64                                     `tfsdk:"version" json:"version,optional"`
 	CustomFields             *map[string]types.Dynamic                       `tfsdk:"custom_fields" json:"customFields,optional"`
-	Aggregation              types.String                                    `tfsdk:"aggregation" json:"aggregation,computed"`
+	Aggregation              types.String                                    `tfsdk:"aggregation" json:"aggregation,computed,no_refresh"`
 	CreatedBy                types.String                                    `tfsdk:"created_by" json:"createdBy,computed"`
-	CustomSql                types.String                                    `tfsdk:"custom_sql" json:"customSql,computed"`
-	DefaultValue             types.Float64                                   `tfsdk:"default_value" json:"defaultValue,computed"`
+	CustomSql                types.String                                    `tfsdk:"custom_sql" json:"customSql,computed,no_refresh"`
+	DefaultValue             types.Float64                                   `tfsdk:"default_value" json:"defaultValue,computed,no_refresh"`
 	DtCreated                timetypes.RFC3339                               `tfsdk:"dt_created" json:"dtCreated,computed" format:"date-time"`
 	DtLastModified           timetypes.RFC3339                               `tfsdk:"dt_last_modified" json:"dtLastModified,computed" format:"date-time"`
 	LastModifiedBy           types.String                                    `tfsdk:"last_modified_by" json:"lastModifiedBy,computed"`
-	MeterID                  types.String                                    `tfsdk:"meter_id" json:"meterId,computed"`
-	TargetField              types.String                                    `tfsdk:"target_field" json:"targetField,computed"`
-	SegmentedFields          customfield.List[types.String]                  `tfsdk:"segmented_fields" json:"segmentedFields,computed"`
+	MeterID                  types.String                                    `tfsdk:"meter_id" json:"meterId,computed,no_refresh"`
+	TargetField              types.String                                    `tfsdk:"target_field" json:"targetField,computed,no_refresh"`
+	SegmentedFields          customfield.List[types.String]                  `tfsdk:"segmented_fields" json:"segmentedFields,computed,no_refresh"`
 	Segments                 customfield.List[customfield.Map[types.String]] `tfsdk:"segments" json:"segments,computed"`
 }
 

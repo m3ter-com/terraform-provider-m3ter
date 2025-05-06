@@ -20,8 +20,8 @@ type BillCreditLineItemModel struct {
 	ServicePeriodEndDate   timetypes.RFC3339 `tfsdk:"service_period_end_date" json:"servicePeriodEndDate,required" format:"date-time"`
 	ServicePeriodStartDate timetypes.RFC3339 `tfsdk:"service_period_start_date" json:"servicePeriodStartDate,required" format:"date-time"`
 	CreditReasonID         types.String      `tfsdk:"credit_reason_id" json:"creditReasonId,optional"`
-	LineItemType           types.String      `tfsdk:"line_item_type" json:"lineItemType,optional"`
-	ReasonID               types.String      `tfsdk:"reason_id" json:"reasonId,optional"`
+	LineItemType           types.String      `tfsdk:"line_item_type" json:"lineItemType,optional,no_refresh"`
+	ReasonID               types.String      `tfsdk:"reason_id" json:"reasonId,optional,no_refresh"`
 	Version                types.Int64       `tfsdk:"version" json:"version,optional"`
 	CreatedBy              types.String      `tfsdk:"created_by" json:"createdBy,computed"`
 	DtCreated              timetypes.RFC3339 `tfsdk:"dt_created" json:"dtCreated,computed" format:"date-time"`
