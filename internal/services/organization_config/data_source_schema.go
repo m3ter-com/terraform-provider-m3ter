@@ -74,7 +74,6 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 			"day_epoch": schema.StringAttribute{
 				Description: "The first bill date *(in ISO-8601 format)* for daily billing periods.",
 				Computed:    true,
-				CustomType:  timetypes.RFC3339Type{},
 			},
 			"days_before_bill_due": schema.Int64Attribute{
 				Description: "The number of days after the Bill generation date shown on Bills as the due date.",
@@ -116,7 +115,6 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 			"month_epoch": schema.StringAttribute{
 				Description: "The first bill date *(in ISO-8601 format)* for monthly billing periods.",
 				Computed:    true,
-				CustomType:  timetypes.RFC3339Type{},
 			},
 			"scheduled_bill_interval": schema.Float64Attribute{
 				Description: "Specifies the required interval for updating bills. \n\n* **For portions of an hour (minutes)**. Two options: **0.25** (15 minutes) and **0.5** (30 minutes).\n* **For full hours.** Eight possible values: **1**, **2**, **3**, **4**, **6**, **8**, **12**, or **24**.\n* **Default.** The default is **0**, which disables scheduling.",
@@ -145,12 +143,10 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 			"week_epoch": schema.StringAttribute{
 				Description: "The first bill date *(in ISO-8601 format)* for weekly billing periods.",
 				Computed:    true,
-				CustomType:  timetypes.RFC3339Type{},
 			},
 			"year_epoch": schema.StringAttribute{
 				Description: "The first bill date *(in ISO-8601 format)* for yearly billing periods.",
 				Computed:    true,
-				CustomType:  timetypes.RFC3339Type{},
 			},
 			"credit_application_order": schema.ListAttribute{
 				Description: "The order in which any Prepayment or Balance credit amounts on Accounts are to be drawn-down against for billing. Four options:\n- `\"PREPAYMENT\",\"BALANCE\"`. Draw-down against Prepayment credit before Balance credit.\n- `\"BALANCE\",\"PREPAYMENT\"`. Draw-down against Balance credit before Prepayment credit.\n- `\"PREPAYMENT\"`. Only draw-down against Prepayment credit.\n- `\"BALANCE\"`. Only draw-down against Balance credit.",

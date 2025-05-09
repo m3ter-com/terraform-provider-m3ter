@@ -22,7 +22,7 @@ type OrganizationConfigDataSourceModel struct {
 	ConsolidateBills                types.Bool                                                                         `tfsdk:"consolidate_bills" json:"consolidateBills,computed"`
 	CreatedBy                       types.String                                                                       `tfsdk:"created_by" json:"createdBy,computed"`
 	Currency                        types.String                                                                       `tfsdk:"currency" json:"currency,computed"`
-	DayEpoch                        timetypes.RFC3339                                                                  `tfsdk:"day_epoch" json:"dayEpoch,computed" format:"date"`
+	DayEpoch                        types.String                                                                       `tfsdk:"day_epoch" json:"dayEpoch,computed"`
 	DaysBeforeBillDue               types.Int64                                                                        `tfsdk:"days_before_bill_due" json:"daysBeforeBillDue,computed"`
 	DefaultStatementDefinitionID    types.String                                                                       `tfsdk:"default_statement_definition_id" json:"defaultStatementDefinitionId,computed"`
 	DtCreated                       timetypes.RFC3339                                                                  `tfsdk:"dt_created" json:"dtCreated,computed" format:"date-time"`
@@ -31,15 +31,15 @@ type OrganizationConfigDataSourceModel struct {
 	ID                              types.String                                                                       `tfsdk:"id" json:"id,computed"`
 	LastModifiedBy                  types.String                                                                       `tfsdk:"last_modified_by" json:"lastModifiedBy,computed"`
 	MinimumSpendBillInAdvance       types.Bool                                                                         `tfsdk:"minimum_spend_bill_in_advance" json:"minimumSpendBillInAdvance,computed"`
-	MonthEpoch                      timetypes.RFC3339                                                                  `tfsdk:"month_epoch" json:"monthEpoch,computed" format:"date"`
+	MonthEpoch                      types.String                                                                       `tfsdk:"month_epoch" json:"monthEpoch,computed"`
 	ScheduledBillInterval           types.Float64                                                                      `tfsdk:"scheduled_bill_interval" json:"scheduledBillInterval,computed"`
 	SequenceStartNumber             types.Int64                                                                        `tfsdk:"sequence_start_number" json:"sequenceStartNumber,computed"`
 	StandingChargeBillInAdvance     types.Bool                                                                         `tfsdk:"standing_charge_bill_in_advance" json:"standingChargeBillInAdvance,computed"`
 	SuppressedEmptyBills            types.Bool                                                                         `tfsdk:"suppressed_empty_bills" json:"suppressedEmptyBills,computed"`
 	Timezone                        types.String                                                                       `tfsdk:"timezone" json:"timezone,computed"`
 	Version                         types.Int64                                                                        `tfsdk:"version" json:"version,computed"`
-	WeekEpoch                       timetypes.RFC3339                                                                  `tfsdk:"week_epoch" json:"weekEpoch,computed" format:"date"`
-	YearEpoch                       timetypes.RFC3339                                                                  `tfsdk:"year_epoch" json:"yearEpoch,computed" format:"date"`
+	WeekEpoch                       types.String                                                                       `tfsdk:"week_epoch" json:"weekEpoch,computed"`
+	YearEpoch                       types.String                                                                       `tfsdk:"year_epoch" json:"yearEpoch,computed"`
 	CreditApplicationOrder          customfield.List[types.String]                                                     `tfsdk:"credit_application_order" json:"creditApplicationOrder,computed"`
 	CurrencyConversions             customfield.NestedObjectList[OrganizationConfigCurrencyConversionsDataSourceModel] `tfsdk:"currency_conversions" json:"currencyConversions,computed"`
 }
