@@ -40,6 +40,13 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 			"bill_frequency_interval": schema.Int64Attribute{
 				Computed: true,
 			},
+			"bill_job_id": schema.StringAttribute{
+				Computed: true,
+			},
+			"bill_total": schema.Float64Attribute{
+				Description: "The sum total for the Bill.",
+				Computed:    true,
+			},
 			"billing_frequency": schema.StringAttribute{
 				Description: `Available values: "DAILY", "WEEKLY", "MONTHLY", "ANNUALLY", "AD_HOC", "MIXED".`,
 				Computed:    true,
@@ -53,13 +60,6 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 						"MIXED",
 					),
 				},
-			},
-			"bill_job_id": schema.StringAttribute{
-				Computed: true,
-			},
-			"bill_total": schema.Float64Attribute{
-				Description: "The sum total for the Bill.",
-				Computed:    true,
 			},
 			"created_by": schema.StringAttribute{
 				Description: "The unique identifier (UUID) for the user who created the Bill.",
