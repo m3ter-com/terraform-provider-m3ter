@@ -19,9 +19,9 @@ type BillDataSourceModel struct {
 	AccountID                types.String                                                         `tfsdk:"account_id" json:"accountId,computed"`
 	BillDate                 timetypes.RFC3339                                                    `tfsdk:"bill_date" json:"billDate,computed" format:"date"`
 	BillFrequencyInterval    types.Int64                                                          `tfsdk:"bill_frequency_interval" json:"billFrequencyInterval,computed"`
-	BillingFrequency         types.String                                                         `tfsdk:"billing_frequency" json:"billingFrequency,computed"`
 	BillJobID                types.String                                                         `tfsdk:"bill_job_id" json:"billJobId,computed"`
 	BillTotal                types.Float64                                                        `tfsdk:"bill_total" json:"billTotal,computed"`
+	BillingFrequency         types.String                                                         `tfsdk:"billing_frequency" json:"billingFrequency,computed"`
 	CreatedBy                types.String                                                         `tfsdk:"created_by" json:"createdBy,computed"`
 	CreatedDate              timetypes.RFC3339                                                    `tfsdk:"created_date" json:"createdDate,computed" format:"date-time"`
 	CsvStatementGenerated    types.Bool                                                           `tfsdk:"csv_statement_generated" json:"csvStatementGenerated,computed"`
