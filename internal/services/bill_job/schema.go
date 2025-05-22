@@ -146,7 +146,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				Description:   "Specifies the time zone used for the generated Bills, ensuring alignment with the local time zone.",
 				Computed:      true,
 				Optional:      true,
-				PlanModifiers: []planmodifier.String{stringplanmodifier.RequiresReplace()},
+				PlanModifiers: []planmodifier.String{stringplanmodifier.RequiresReplaceIfConfigured()},
 				Default:       stringdefault.StaticString("UTC"),
 			},
 			"created_by": schema.StringAttribute{
