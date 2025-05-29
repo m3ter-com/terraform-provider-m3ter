@@ -77,6 +77,9 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 						"consumptions_accounting_product_id": schema.StringAttribute{
 							Computed: true,
 						},
+						"contract_id": schema.StringAttribute{
+							Computed: true,
+						},
 						"created_by": schema.StringAttribute{
 							Description: "The unique identifier (UUID) for the user who created the Balance.",
 							Computed:    true,

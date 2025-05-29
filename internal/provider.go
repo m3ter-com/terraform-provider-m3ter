@@ -53,6 +53,8 @@ import (
 	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/product"
 	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/resource_group"
 	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/scheduled_event_configuration"
+	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/statement_statement_definition"
+	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/statement_statement_job"
 	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/transaction_type"
 	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/usage_file_upload_job"
 	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/user"
@@ -219,6 +221,8 @@ func (p *M3terProvider) Resources(ctx context.Context) []func() resource.Resourc
 		product.NewResource,
 		resource_group.NewResource,
 		scheduled_event_configuration.NewResource,
+		statement_statement_job.NewResource,
+		statement_statement_definition.NewResource,
 		transaction_type.NewResource,
 		user.NewResource,
 		user_invitation.NewResource,
@@ -302,6 +306,10 @@ func (p *M3terProvider) DataSources(ctx context.Context) []func() datasource.Dat
 		resource_group.NewResourceGroupsDataSource,
 		scheduled_event_configuration.NewScheduledEventConfigurationDataSource,
 		scheduled_event_configuration.NewScheduledEventConfigurationsDataSource,
+		statement_statement_job.NewStatementStatementJobDataSource,
+		statement_statement_job.NewStatementStatementJobsDataSource,
+		statement_statement_definition.NewStatementStatementDefinitionDataSource,
+		statement_statement_definition.NewStatementStatementDefinitionsDataSource,
 		transaction_type.NewTransactionTypeDataSource,
 		transaction_type.NewTransactionTypesDataSource,
 		usage_file_upload_job.NewUsageFileUploadJobDataSource,

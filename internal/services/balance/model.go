@@ -18,6 +18,7 @@ type BalanceModel struct {
 	BalanceDrawDownDescription      types.String      `tfsdk:"balance_draw_down_description" json:"balanceDrawDownDescription,optional"`
 	Code                            types.String      `tfsdk:"code" json:"code,optional"`
 	ConsumptionsAccountingProductID types.String      `tfsdk:"consumptions_accounting_product_id" json:"consumptionsAccountingProductId,optional"`
+	ContractID                      types.String      `tfsdk:"contract_id" json:"contractId,optional"`
 	Description                     types.String      `tfsdk:"description" json:"description,optional"`
 	FeesAccountingProductID         types.String      `tfsdk:"fees_accounting_product_id" json:"feesAccountingProductId,optional"`
 	Name                            types.String      `tfsdk:"name" json:"name,optional"`

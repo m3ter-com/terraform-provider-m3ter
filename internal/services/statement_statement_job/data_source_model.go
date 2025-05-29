@@ -1,0 +1,37 @@
+// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+
+package statement_statement_job
+
+import (
+	"context"
+
+	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
+	"github.com/hashicorp/terraform-plugin-framework/diag"
+	"github.com/hashicorp/terraform-plugin-framework/types"
+	"github.com/m3ter-com/m3ter-sdk-go"
+)
+
+type StatementStatementJobDataSourceModel struct {
+	ID                        types.String      `tfsdk:"id" path:"id,required"`
+	OrgID                     types.String      `tfsdk:"org_id" path:"orgId,required"`
+	BillID                    types.String      `tfsdk:"bill_id" json:"billId,computed"`
+	CreatedBy                 types.String      `tfsdk:"created_by" json:"createdBy,computed"`
+	DtCreated                 timetypes.RFC3339 `tfsdk:"dt_created" json:"dtCreated,computed" format:"date-time"`
+	DtLastModified            timetypes.RFC3339 `tfsdk:"dt_last_modified" json:"dtLastModified,computed" format:"date-time"`
+	IncludeCsvFormat          types.Bool        `tfsdk:"include_csv_format" json:"includeCsvFormat,computed"`
+	LastModifiedBy            types.String      `tfsdk:"last_modified_by" json:"lastModifiedBy,computed"`
+	PresignedJsonStatementURL types.String      `tfsdk:"presigned_json_statement_url" json:"presignedJsonStatementUrl,computed"`
+	StatementID               types.String      `tfsdk:"statement_id" json:"statementId,computed"`
+	StatementJobStatus        types.String      `tfsdk:"statement_job_status" json:"statementJobStatus,computed"`
+	Version                   types.Int64       `tfsdk:"version" json:"version,computed"`
+}
+
+func (m *StatementStatementJobDataSourceModel) toReadParams(_ context.Context) (params m3ter.StatementStatementJobGetParams, diags diag.Diagnostics) {
+	params = m3ter.StatementStatementJobGetParams{}
+
+	if !m.OrgID.IsNull() {
+		params.OrgID = m3ter.F(m.OrgID.ValueString())
+	}
+
+	return
+}

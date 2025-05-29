@@ -7,6 +7,7 @@ resource "m3ter_balance" "example_balance" {
   balance_draw_down_description = "balanceDrawDownDescription"
   code = "JS!?Q0]r] ]$]"
   consumptions_accounting_product_id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+  contract_id = "contractId"
   description = "description"
   fees_accounting_product_id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
   line_item_types = ["STANDING_CHARGE"]

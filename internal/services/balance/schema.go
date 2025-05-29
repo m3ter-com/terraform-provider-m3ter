@@ -62,6 +62,9 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				Description: "Optional Product ID this Balance Consumptions should be attributed to for accounting purposes",
 				Optional:    true,
 			},
+			"contract_id": schema.StringAttribute{
+				Optional: true,
+			},
 			"description": schema.StringAttribute{
 				Description: "A description of the Balance.",
 				Optional:    true,

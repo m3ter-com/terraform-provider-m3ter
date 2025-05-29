@@ -52,6 +52,7 @@ type BalancesItemsDataSourceModel struct {
 	BalanceDrawDownDescription      types.String                   `tfsdk:"balance_draw_down_description" json:"balanceDrawDownDescription,computed"`
 	Code                            types.String                   `tfsdk:"code" json:"code,computed"`
 	ConsumptionsAccountingProductID types.String                   `tfsdk:"consumptions_accounting_product_id" json:"consumptionsAccountingProductId,computed"`
+	ContractID                      types.String                   `tfsdk:"contract_id" json:"contractId,computed"`
 	CreatedBy                       types.String                   `tfsdk:"created_by" json:"createdBy,computed"`
 	Currency                        types.String                   `tfsdk:"currency" json:"currency,computed"`
 	Description                     types.String                   `tfsdk:"description" json:"description,computed"`
