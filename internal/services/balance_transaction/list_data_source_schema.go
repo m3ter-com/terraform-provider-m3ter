@@ -26,8 +26,21 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 				Optional:           true,
 				DeprecationMessage: "the org id should be set at the client level instead",
 			},
-			"schedule_id": schema.StringAttribute{
+			"entity_id": schema.StringAttribute{
 				Optional: true,
+			},
+			"entity_type": schema.StringAttribute{
+				Description: `Available values: "BILL", "COMMITMENT", "USER", "SERVICE_USER", "SCHEDULER".`,
+				Optional:    true,
+				Validators: []validator.String{
+					stringvalidator.OneOfCaseInsensitive(
+						"BILL",
+						"COMMITMENT",
+						"USER",
+						"SERVICE_USER",
+						"SCHEDULER",
+					),
+				},
 			},
 			"transaction_type_id": schema.StringAttribute{
 				Optional: true,
@@ -89,7 +102,7 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Computed:    true,
 						},
 						"entity_type": schema.StringAttribute{
-							Description: "The type of entity associated with the Transaction - identifies who or what was responsible for the Transaction being added to the Balance - such as a **User**, a **Service User**, or a **Bill**.\nAvailable values: \"BILL\", \"COMMITMENT\", \"USER\", \"SERVICE_USER\".",
+							Description: "The type of entity associated with the Transaction - identifies who or what was responsible for the Transaction being added to the Balance - such as a **User**, a **Service User**, or a **Bill**.\nAvailable values: \"BILL\", \"COMMITMENT\", \"USER\", \"SERVICE_USER\", \"SCHEDULER\".",
 							Computed:    true,
 							Validators: []validator.String{
 								stringvalidator.OneOfCaseInsensitive(
@@ -97,6 +110,7 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 									"COMMITMENT",
 									"USER",
 									"SERVICE_USER",
+									"SCHEDULER",
 								),
 							},
 						},

@@ -90,16 +90,17 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Computed:    true,
 						},
 						"period": schema.Int64Attribute{
-							Description: "Defines the Schedule frequency for the Data Export to run in Hours or Days. Used in conjunction with the `scheduleType` parameter.",
+							Description: "Defines the Schedule frequency for the Data Export to run in Hours, Days, or Minutes. Used in conjunction with the `scheduleType` parameter.",
 							Computed:    true,
 						},
 						"schedule_type": schema.StringAttribute{
-							Description: `Available values: "HOURLY", "DAILY", "AD_HOC".`,
+							Description: `Available values: "HOUR", "DAY", "MINUTE", "AD_HOC".`,
 							Computed:    true,
 							Validators: []validator.String{
 								stringvalidator.OneOfCaseInsensitive(
-									"HOURLY",
-									"DAILY",
+									"HOUR",
+									"DAY",
+									"MINUTE",
 									"AD_HOC",
 								),
 							},
