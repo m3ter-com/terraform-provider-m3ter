@@ -29,6 +29,9 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 				Description: "The unique identifier (UUID) for the end customer's account.",
 				Optional:    true,
 			},
+			"contract": schema.StringAttribute{
+				Optional: true,
+			},
 			"end_date_end": schema.StringAttribute{
 				Description: "Only include Balances with end dates earlier than this date.",
 				Optional:    true,
@@ -87,6 +90,12 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 						"currency": schema.StringAttribute{
 							Description: "The currency code used for the Balance amount. For example: USD, GBP or EUR.",
 							Computed:    true,
+						},
+						"custom_fields": schema.MapAttribute{
+							Description: "User defined fields enabling you to attach custom data. The value for a custom field can be either a string or a number.\n\nIf `customFields` can also be defined for this entity at the Organizational level,`customField` values defined at individual level override values of `customFields` with the same name defined at Organization level.\n\nSee [Working with Custom Fields](https://www.m3ter.com/docs/guides/creating-and-managing-products/working-with-custom-fields) in the m3ter documentation for more information.",
+							Computed:    true,
+							CustomType:  customfield.NewMapType[types.Dynamic](ctx),
+							ElementType: types.DynamicType,
 						},
 						"description": schema.StringAttribute{
 							Description: "A description of the Balance.",

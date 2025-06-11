@@ -36,6 +36,7 @@ type BalanceDataSourceModel struct {
 	RolloverEndDate                 timetypes.RFC3339              `tfsdk:"rollover_end_date" json:"rolloverEndDate,computed" format:"date-time"`
 	StartDate                       timetypes.RFC3339              `tfsdk:"start_date" json:"startDate,computed" format:"date-time"`
 	Version                         types.Int64                    `tfsdk:"version" json:"version,computed"`
+	CustomFields                    customfield.Map[types.Dynamic] `tfsdk:"custom_fields" json:"customFields,computed"`
 	LineItemTypes                   customfield.List[types.String] `tfsdk:"line_item_types" json:"lineItemTypes,computed"`
 	ProductIDs                      customfield.List[types.String] `tfsdk:"product_ids" json:"productIds,computed"`
 }

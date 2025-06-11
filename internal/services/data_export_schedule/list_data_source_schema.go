@@ -75,10 +75,14 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							CustomType:  timetypes.RFC3339Type{},
 						},
 						"export_file_format": schema.StringAttribute{
-							Description: `Available values: "CSV", "JSON".`,
+							Description: `Available values: "CSV", "JSON", "JSONL".`,
 							Computed:    true,
 							Validators: []validator.String{
-								stringvalidator.OneOfCaseInsensitive("CSV", "JSON"),
+								stringvalidator.OneOfCaseInsensitive(
+									"CSV",
+									"JSON",
+									"JSONL",
+								),
 							},
 						},
 						"last_modified_by": schema.StringAttribute{

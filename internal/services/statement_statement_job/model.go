@@ -19,7 +19,6 @@ type StatementStatementJobModel struct {
 	DtLastModified            timetypes.RFC3339 `tfsdk:"dt_last_modified" json:"dtLastModified,computed" format:"date-time"`
 	LastModifiedBy            types.String      `tfsdk:"last_modified_by" json:"lastModifiedBy,computed"`
 	PresignedJsonStatementURL types.String      `tfsdk:"presigned_json_statement_url" json:"presignedJsonStatementUrl,computed"`
-	StatementID               types.String      `tfsdk:"statement_id" json:"statementId,computed"`
 	StatementJobStatus        types.String      `tfsdk:"statement_job_status" json:"statementJobStatus,computed"`
 }
 

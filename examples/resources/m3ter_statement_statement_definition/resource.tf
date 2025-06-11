@@ -1,11 +1,9 @@
 resource "m3ter_statement_statement_definition" "example_statement_statement_definition" {
   org_id = "orgId"
-  aggregation_frequency = "DAY"
+  aggregation_frequency = "ORIGINAL"
   dimensions = [{
-    filter = ["string"]
-    name = "x"
-    attributes = ["string"]
-    meter_id = "meterId"
+    dimension_attributes = ["string"]
+    dimension_name = "dimensionName"
   }]
   include_price_per_unit = true
   measures = [{

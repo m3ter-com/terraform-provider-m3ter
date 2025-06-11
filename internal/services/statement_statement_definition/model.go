@@ -32,10 +32,8 @@ func (m StatementStatementDefinitionModel) MarshalJSONForUpdate(state StatementS
 }
 
 type StatementStatementDefinitionDimensionsModel struct {
-	Filter     *[]types.String `tfsdk:"filter" json:"filter,required"`
-	Name       types.String    `tfsdk:"name" json:"name,required"`
-	Attributes *[]types.String `tfsdk:"attributes" json:"attributes,optional"`
-	MeterID    types.String    `tfsdk:"meter_id" json:"meterId,optional"`
+	DimensionAttributes *[]types.String `tfsdk:"dimension_attributes" json:"dimensionAttributes,optional"`
+	DimensionName       types.String    `tfsdk:"dimension_name" json:"dimensionName,optional"`
 }
 
 type StatementStatementDefinitionMeasuresModel struct {

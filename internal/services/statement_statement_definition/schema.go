@@ -32,10 +32,12 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				PlanModifiers:      []planmodifier.String{stringplanmodifier.RequiresReplace()},
 			},
 			"aggregation_frequency": schema.StringAttribute{
-				Description: "This specifies how often the Statement should aggregate data.\nAvailable values: \"DAY\", \"WEEK\", \"MONTH\", \"QUARTER\", \"YEAR\", \"WHOLE_PERIOD\".",
+				Description: "This specifies how often the Statement should aggregate data.\nAvailable values: \"ORIGINAL\", \"HOUR\", \"DAY\", \"WEEK\", \"MONTH\", \"QUARTER\", \"YEAR\", \"WHOLE_PERIOD\".",
 				Required:    true,
 				Validators: []validator.String{
 					stringvalidator.OneOfCaseInsensitive(
+						"ORIGINAL",
+						"HOUR",
 						"DAY",
 						"WEEK",
 						"MONTH",
@@ -62,22 +64,13 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				Optional:    true,
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
-						"filter": schema.ListAttribute{
-							Description: `The value of a Dimension to use as a filter. Use "*" as a wildcard to filter on all Dimension values.`,
-							Required:    true,
-							ElementType: types.StringType,
-						},
-						"name": schema.StringAttribute{
-							Description: "The name of the Dimension to target in the Meter.",
-							Required:    true,
-						},
-						"attributes": schema.ListAttribute{
-							Description: "The Dimension attribute to target.",
+						"dimension_attributes": schema.ListAttribute{
+							Description: "Attributes belonging to the dimension",
 							Optional:    true,
 							ElementType: types.StringType,
 						},
-						"meter_id": schema.StringAttribute{
-							Description: "The unique identifier (UUID) of the Meter containing this Dimension.",
+						"dimension_name": schema.StringAttribute{
+							Description: "The name of a dimension",
 							Optional:    true,
 						},
 					},
@@ -101,7 +94,6 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 										"LATEST",
 										"MEAN",
 										"UNIQUE",
-										"CUSTOM_SQL",
 									),
 								),
 							},

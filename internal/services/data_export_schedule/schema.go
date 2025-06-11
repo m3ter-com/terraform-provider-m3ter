@@ -179,27 +179,6 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 								),
 							},
 						},
-						"field_code": schema.StringAttribute{
-							Description: "Field code to group by",
-							Optional:    true,
-						},
-						"meter_id": schema.StringAttribute{
-							Description: "Meter ID to group by",
-							Optional:    true,
-						},
-						"frequency": schema.StringAttribute{
-							Description: "Frequency of usage data\nAvailable values: \"DAY\", \"HOUR\", \"WEEK\", \"MONTH\", \"QUARTER\".",
-							Optional:    true,
-							Validators: []validator.String{
-								stringvalidator.OneOfCaseInsensitive(
-									"DAY",
-									"HOUR",
-									"WEEK",
-									"MONTH",
-									"QUARTER",
-								),
-							},
-						},
 					},
 				},
 			},
