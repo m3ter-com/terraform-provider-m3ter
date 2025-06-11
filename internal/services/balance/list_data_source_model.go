@@ -19,6 +19,7 @@ type BalancesDataListDataSourceEnvelope struct {
 type BalancesDataSourceModel struct {
 	OrgID        types.String                                               `tfsdk:"org_id" path:"orgId,optional"`
 	AccountID    types.String                                               `tfsdk:"account_id" query:"accountId,optional"`
+	Contract     types.String                                               `tfsdk:"contract" query:"contract,optional"`
 	EndDateEnd   types.String                                               `tfsdk:"end_date_end" query:"endDateEnd,optional"`
 	EndDateStart types.String                                               `tfsdk:"end_date_start" query:"endDateStart,optional"`
 	MaxItems     types.Int64                                                `tfsdk:"max_items"`
@@ -30,6 +31,9 @@ func (m *BalancesDataSourceModel) toListParams(_ context.Context) (params m3ter.
 
 	if !m.AccountID.IsNull() {
 		params.AccountID = m3ter.F(m.AccountID.ValueString())
+	}
+	if !m.Contract.IsNull() {
+		params.Contract = m3ter.F(m.Contract.ValueString())
 	}
 	if !m.EndDateEnd.IsNull() {
 		params.EndDateEnd = m3ter.F(m.EndDateEnd.ValueString())
@@ -55,6 +59,7 @@ type BalancesItemsDataSourceModel struct {
 	ContractID                      types.String                   `tfsdk:"contract_id" json:"contractId,computed"`
 	CreatedBy                       types.String                   `tfsdk:"created_by" json:"createdBy,computed"`
 	Currency                        types.String                   `tfsdk:"currency" json:"currency,computed"`
+	CustomFields                    customfield.Map[types.Dynamic] `tfsdk:"custom_fields" json:"customFields,computed"`
 	Description                     types.String                   `tfsdk:"description" json:"description,computed"`
 	DtCreated                       timetypes.RFC3339              `tfsdk:"dt_created" json:"dtCreated,computed" format:"date-time"`
 	DtLastModified                  timetypes.RFC3339              `tfsdk:"dt_last_modified" json:"dtLastModified,computed" format:"date-time"`

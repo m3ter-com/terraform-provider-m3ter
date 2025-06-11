@@ -8,6 +8,9 @@ resource "m3ter_balance" "example_balance" {
   code = "JS!?Q0]r] ]$]"
   consumptions_accounting_product_id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
   contract_id = "contractId"
+  custom_fields = {
+    foo = "string"
+  }
   description = "description"
   fees_accounting_product_id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
   line_item_types = ["STANDING_CHARGE"]

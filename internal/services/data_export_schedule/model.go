@@ -44,7 +44,4 @@ type DataExportScheduleDimensionFiltersModel struct {
 
 type DataExportScheduleGroupsModel struct {
 	GroupType types.String `tfsdk:"group_type" json:"groupType,optional"`
-	FieldCode types.String `tfsdk:"field_code" json:"fieldCode,optional"`
-	MeterID   types.String `tfsdk:"meter_id" json:"meterId,optional"`
-	Frequency types.String `tfsdk:"frequency" json:"frequency,optional"`
 }

@@ -28,10 +28,12 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				DeprecationMessage: "the org id should be set at the client level instead",
 			},
 			"aggregation_frequency": schema.StringAttribute{
-				Description: "This specifies how often the Statement should aggregate data.\nAvailable values: \"DAY\", \"WEEK\", \"MONTH\", \"QUARTER\", \"YEAR\", \"WHOLE_PERIOD\".",
+				Description: "This specifies how often the Statement should aggregate data.\nAvailable values: \"ORIGINAL\", \"HOUR\", \"DAY\", \"WEEK\", \"MONTH\", \"QUARTER\", \"YEAR\", \"WHOLE_PERIOD\".",
 				Computed:    true,
 				Validators: []validator.String{
 					stringvalidator.OneOfCaseInsensitive(
+						"ORIGINAL",
+						"HOUR",
 						"DAY",
 						"WEEK",
 						"MONTH",
@@ -77,24 +79,14 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				CustomType:  customfield.NewNestedObjectListType[StatementStatementDefinitionDimensionsDataSourceModel](ctx),
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
-						"filter": schema.ListAttribute{
-							Description: `The value of a Dimension to use as a filter. Use "*" as a wildcard to filter on all Dimension values.`,
+						"dimension_attributes": schema.ListAttribute{
+							Description: "Attributes belonging to the dimension",
 							Computed:    true,
 							CustomType:  customfield.NewListType[types.String](ctx),
 							ElementType: types.StringType,
 						},
-						"name": schema.StringAttribute{
-							Description: "The name of the Dimension to target in the Meter.",
-							Computed:    true,
-						},
-						"attributes": schema.ListAttribute{
-							Description: "The Dimension attribute to target.",
-							Computed:    true,
-							CustomType:  customfield.NewListType[types.String](ctx),
-							ElementType: types.StringType,
-						},
-						"meter_id": schema.StringAttribute{
-							Description: "The unique identifier (UUID) of the Meter containing this Dimension.",
+						"dimension_name": schema.StringAttribute{
+							Description: "The name of a dimension",
 							Computed:    true,
 						},
 					},
@@ -119,7 +111,6 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 										"LATEST",
 										"MEAN",
 										"UNIQUE",
-										"CUSTOM_SQL",
 									),
 								),
 							},

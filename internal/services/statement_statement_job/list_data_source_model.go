@@ -55,6 +55,5 @@ type StatementStatementJobsItemsDataSourceModel struct {
 	LastModifiedBy            types.String      `tfsdk:"last_modified_by" json:"lastModifiedBy,computed"`
 	OrgID                     types.String      `tfsdk:"org_id" json:"orgId,computed"`
 	PresignedJsonStatementURL types.String      `tfsdk:"presigned_json_statement_url" json:"presignedJsonStatementUrl,computed"`
-	StatementID               types.String      `tfsdk:"statement_id" json:"statementId,computed"`
 	StatementJobStatus        types.String      `tfsdk:"statement_job_status" json:"statementJobStatus,computed"`
 }

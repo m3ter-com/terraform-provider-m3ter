@@ -49,7 +49,4 @@ type DataExportScheduleDimensionFiltersDataSourceModel struct {
 
 type DataExportScheduleGroupsDataSourceModel struct {
 	GroupType types.String `tfsdk:"group_type" json:"groupType,computed"`
-	FieldCode types.String `tfsdk:"field_code" json:"fieldCode,computed"`
-	MeterID   types.String `tfsdk:"meter_id" json:"meterId,computed"`
-	Frequency types.String `tfsdk:"frequency" json:"frequency,computed"`
 }

@@ -47,10 +47,8 @@ type StatementStatementDefinitionsItemsDataSourceModel struct {
 }
 
 type StatementStatementDefinitionsDimensionsDataSourceModel struct {
-	Filter     customfield.List[types.String] `tfsdk:"filter" json:"filter,computed"`
-	Name       types.String                   `tfsdk:"name" json:"name,computed"`
-	Attributes customfield.List[types.String] `tfsdk:"attributes" json:"attributes,computed"`
-	MeterID    types.String                   `tfsdk:"meter_id" json:"meterId,computed"`
+	DimensionAttributes customfield.List[types.String] `tfsdk:"dimension_attributes" json:"dimensionAttributes,computed"`
+	DimensionName       types.String                   `tfsdk:"dimension_name" json:"dimensionName,computed"`
 }
 
 type StatementStatementDefinitionsMeasuresDataSourceModel struct {

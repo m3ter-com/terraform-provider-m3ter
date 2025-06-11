@@ -175,27 +175,6 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 								),
 							},
 						},
-						"field_code": schema.StringAttribute{
-							Description: "Field code to group by",
-							Computed:    true,
-						},
-						"meter_id": schema.StringAttribute{
-							Description: "Meter ID to group by",
-							Computed:    true,
-						},
-						"frequency": schema.StringAttribute{
-							Description: "Frequency of usage data\nAvailable values: \"DAY\", \"HOUR\", \"WEEK\", \"MONTH\", \"QUARTER\".",
-							Computed:    true,
-							Validators: []validator.String{
-								stringvalidator.OneOfCaseInsensitive(
-									"DAY",
-									"HOUR",
-									"WEEK",
-									"MONTH",
-									"QUARTER",
-								),
-							},
-						},
 					},
 				},
 			},
