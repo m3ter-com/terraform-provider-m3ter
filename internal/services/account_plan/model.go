@@ -20,13 +20,13 @@ type AccountPlanModel struct {
 	EndDate          timetypes.RFC3339         `tfsdk:"end_date" json:"endDate,optional" format:"date-time"`
 	PlanGroupID      types.String              `tfsdk:"plan_group_id" json:"planGroupId,optional"`
 	PlanID           types.String              `tfsdk:"plan_id" json:"planId,optional"`
-	Version          types.Int64               `tfsdk:"version" json:"version,optional"`
 	CustomFields     *map[string]types.Dynamic `tfsdk:"custom_fields" json:"customFields,optional"`
 	CreatedBy        types.String              `tfsdk:"created_by" json:"createdBy,computed"`
 	DtCreated        timetypes.RFC3339         `tfsdk:"dt_created" json:"dtCreated,computed" format:"date-time"`
 	DtLastModified   timetypes.RFC3339         `tfsdk:"dt_last_modified" json:"dtLastModified,computed" format:"date-time"`
 	LastModifiedBy   types.String              `tfsdk:"last_modified_by" json:"lastModifiedBy,computed"`
 	ProductID        types.String              `tfsdk:"product_id" json:"productId,computed"`
+	Version          types.Int64               `tfsdk:"version" json:"version,computed"`
 }
 
 func (m AccountPlanModel) MarshalJSON() (data []byte, err error) {

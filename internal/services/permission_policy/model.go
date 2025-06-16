@@ -13,12 +13,12 @@ type PermissionPolicyModel struct {
 	OrgID            types.String                              `tfsdk:"org_id" path:"orgId,optional"`
 	Name             types.String                              `tfsdk:"name" json:"name,required"`
 	PermissionPolicy *[]*PermissionPolicyPermissionPolicyModel `tfsdk:"permission_policy" json:"permissionPolicy,required"`
-	Version          types.Int64                               `tfsdk:"version" json:"version,optional"`
 	CreatedBy        types.String                              `tfsdk:"created_by" json:"createdBy,computed"`
 	DtCreated        timetypes.RFC3339                         `tfsdk:"dt_created" json:"dtCreated,computed" format:"date-time"`
 	DtLastModified   timetypes.RFC3339                         `tfsdk:"dt_last_modified" json:"dtLastModified,computed" format:"date-time"`
 	LastModifiedBy   types.String                              `tfsdk:"last_modified_by" json:"lastModifiedBy,computed"`
 	ManagedPolicy    types.Bool                                `tfsdk:"managed_policy" json:"managedPolicy,computed"`
+	Version          types.Int64                               `tfsdk:"version" json:"version,computed"`
 }
 
 func (m PermissionPolicyModel) MarshalJSON() (data []byte, err error) {

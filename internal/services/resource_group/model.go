@@ -13,11 +13,11 @@ type ResourceGroupModel struct {
 	Type           types.String      `tfsdk:"type" path:"type,required"`
 	OrgID          types.String      `tfsdk:"org_id" path:"orgId,optional"`
 	Name           types.String      `tfsdk:"name" json:"name,required"`
-	Version        types.Int64       `tfsdk:"version" json:"version,optional"`
 	CreatedBy      types.String      `tfsdk:"created_by" json:"createdBy,computed"`
 	DtCreated      timetypes.RFC3339 `tfsdk:"dt_created" json:"dtCreated,computed" format:"date-time"`
 	DtLastModified timetypes.RFC3339 `tfsdk:"dt_last_modified" json:"dtLastModified,computed" format:"date-time"`
 	LastModifiedBy types.String      `tfsdk:"last_modified_by" json:"lastModifiedBy,computed"`
+	Version        types.Int64       `tfsdk:"version" json:"version,computed"`
 }
 
 func (m ResourceGroupModel) MarshalJSON() (data []byte, err error) {
