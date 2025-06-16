@@ -27,7 +27,6 @@ type PricingModel struct {
 	PlanTemplateID            types.String                        `tfsdk:"plan_template_id" json:"planTemplateId,optional"`
 	TiersSpanPlan             types.Bool                          `tfsdk:"tiers_span_plan" json:"tiersSpanPlan,optional"`
 	Type                      types.String                        `tfsdk:"type" json:"type,optional"`
-	Version                   types.Int64                         `tfsdk:"version" json:"version,optional"`
 	Segment                   *map[string]types.String            `tfsdk:"segment" json:"segment,optional"`
 	OveragePricingBands       *[]*PricingOveragePricingBandsModel `tfsdk:"overage_pricing_bands" json:"overagePricingBands,optional"`
 	AggregationType           types.String                        `tfsdk:"aggregation_type" json:"aggregationType,computed"`
@@ -36,6 +35,7 @@ type PricingModel struct {
 	DtLastModified            timetypes.RFC3339                   `tfsdk:"dt_last_modified" json:"dtLastModified,computed" format:"date-time"`
 	LastModifiedBy            types.String                        `tfsdk:"last_modified_by" json:"lastModifiedBy,computed"`
 	SegmentString             types.String                        `tfsdk:"segment_string" json:"segmentString,computed"`
+	Version                   types.Int64                         `tfsdk:"version" json:"version,computed"`
 }
 
 func (m PricingModel) MarshalJSON() (data []byte, err error) {

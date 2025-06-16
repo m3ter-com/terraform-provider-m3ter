@@ -22,7 +22,6 @@ type AggregationModel struct {
 	Code                types.String                `tfsdk:"code" json:"code,optional"`
 	CustomSql           types.String                `tfsdk:"custom_sql" json:"customSql,optional"`
 	DefaultValue        types.Float64               `tfsdk:"default_value" json:"defaultValue,optional"`
-	Version             types.Int64                 `tfsdk:"version" json:"version,optional"`
 	CustomFields        *map[string]types.Dynamic   `tfsdk:"custom_fields" json:"customFields,optional"`
 	SegmentedFields     *[]types.String             `tfsdk:"segmented_fields" json:"segmentedFields,optional"`
 	Segments            *[]*map[string]types.String `tfsdk:"segments" json:"segments,optional"`
@@ -30,6 +29,7 @@ type AggregationModel struct {
 	DtCreated           timetypes.RFC3339           `tfsdk:"dt_created" json:"dtCreated,computed" format:"date-time"`
 	DtLastModified      timetypes.RFC3339           `tfsdk:"dt_last_modified" json:"dtLastModified,computed" format:"date-time"`
 	LastModifiedBy      types.String                `tfsdk:"last_modified_by" json:"lastModifiedBy,computed"`
+	Version             types.Int64                 `tfsdk:"version" json:"version,computed"`
 }
 
 func (m AggregationModel) MarshalJSON() (data []byte, err error) {

@@ -49,10 +49,6 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				Description: "Purchase Order Number for the Counter Adjustment. *(Optional)*",
 				Optional:    true,
 			},
-			"version": schema.Int64Attribute{
-				Description: "The version number of the entity:\n- **Create entity:** Not valid for initial insertion of new entity - *do not use for Create*. On initial Create, version is set at 1 and listed in the response.\n- **Update Entity:**  On Update, version is required and must match the existing version because a check is performed to ensure sequential versioning is preserved. Version is incremented by 1 and listed in the response.",
-				Optional:    true,
-			},
 			"date": schema.StringAttribute{
 				Description: "The date the CounterAdjustment is created for the Account *(in ISO-8601 date format)*.\n\n**Note:** CounterAdjustments on Accounts are supported down to a *specific day* of granularity - you cannot create more than one CounterAdjustment for any given day using the same Counter and you'll receive an error if you try to do this.",
 				Computed:    true,
@@ -75,6 +71,10 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 			},
 			"last_modified_by": schema.StringAttribute{
 				Description: "The ID of the user who last modified this item.",
+				Computed:    true,
+			},
+			"version": schema.Int64Attribute{
+				Description: "The version number:\n- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.\n- **Update:** On successful Update, the version is incremented by 1 in the response.",
 				Computed:    true,
 			},
 		},

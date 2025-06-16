@@ -18,13 +18,7 @@ import (
 	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/account_plan"
 	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/aggregation"
 	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/balance"
-	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/balance_transaction"
-	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/bill"
 	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/bill_config"
-	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/bill_credit_line_item"
-	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/bill_debit_line_item"
-	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/bill_job"
-	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/bill_line_item"
 	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/commitment"
 	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/compound_aggregation"
 	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/contract"
@@ -33,17 +27,11 @@ import (
 	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/counter_pricing"
 	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/credit_reason"
 	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/currency"
-	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/custom_field"
-	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/data_export_destination"
-	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/data_export_job"
-	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/data_export_schedule"
 	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/debit_reason"
-	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/event"
 	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/external_mapping"
 	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/integration_configuration"
 	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/meter"
 	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/notification_configuration"
-	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/organization_config"
 	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/permission_policy"
 	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/plan"
 	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/plan_group"
@@ -53,12 +41,7 @@ import (
 	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/product"
 	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/resource_group"
 	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/scheduled_event_configuration"
-	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/statement_statement_definition"
-	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/statement_statement_job"
 	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/transaction_type"
-	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/usage_file_upload_job"
-	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/user"
-	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/user_invitation"
 	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/webhook"
 )
 
@@ -190,12 +173,8 @@ func (p *M3terProvider) Resources(ctx context.Context) []func() resource.Resourc
 		account_plan.NewResource,
 		aggregation.NewResource,
 		balance.NewResource,
-		balance_transaction.NewResource,
-		bill_credit_line_item.NewResource,
-		bill_debit_line_item.NewResource,
 		bill_config.NewResource,
 		commitment.NewResource,
-		bill_job.NewResource,
 		compound_aggregation.NewResource,
 		contract.NewResource,
 		counter.NewResource,
@@ -203,15 +182,11 @@ func (p *M3terProvider) Resources(ctx context.Context) []func() resource.Resourc
 		counter_pricing.NewResource,
 		credit_reason.NewResource,
 		currency.NewResource,
-		custom_field.NewResource,
-		data_export_destination.NewResource,
-		data_export_schedule.NewResource,
 		debit_reason.NewResource,
 		external_mapping.NewResource,
 		integration_configuration.NewResource,
 		meter.NewResource,
 		notification_configuration.NewResource,
-		organization_config.NewResource,
 		permission_policy.NewResource,
 		plan.NewResource,
 		plan_group.NewResource,
@@ -221,11 +196,7 @@ func (p *M3terProvider) Resources(ctx context.Context) []func() resource.Resourc
 		product.NewResource,
 		resource_group.NewResource,
 		scheduled_event_configuration.NewResource,
-		statement_statement_job.NewResource,
-		statement_statement_definition.NewResource,
 		transaction_type.NewResource,
-		user.NewResource,
-		user_invitation.NewResource,
 		webhook.NewResource,
 	}
 }
@@ -240,20 +211,9 @@ func (p *M3terProvider) DataSources(ctx context.Context) []func() datasource.Dat
 		aggregation.NewAggregationsDataSource,
 		balance.NewBalanceDataSource,
 		balance.NewBalancesDataSource,
-		balance_transaction.NewBalanceTransactionsDataSource,
-		bill.NewBillDataSource,
-		bill.NewBillsDataSource,
-		bill_credit_line_item.NewBillCreditLineItemDataSource,
-		bill_credit_line_item.NewBillCreditLineItemsDataSource,
-		bill_debit_line_item.NewBillDebitLineItemDataSource,
-		bill_debit_line_item.NewBillDebitLineItemsDataSource,
-		bill_line_item.NewBillLineItemDataSource,
-		bill_line_item.NewBillLineItemsDataSource,
 		bill_config.NewBillConfigDataSource,
 		commitment.NewCommitmentDataSource,
 		commitment.NewCommitmentsDataSource,
-		bill_job.NewBillJobDataSource,
-		bill_job.NewBillJobsDataSource,
 		compound_aggregation.NewCompoundAggregationDataSource,
 		compound_aggregation.NewCompoundAggregationsDataSource,
 		contract.NewContractDataSource,
@@ -268,17 +228,8 @@ func (p *M3terProvider) DataSources(ctx context.Context) []func() datasource.Dat
 		credit_reason.NewCreditReasonsDataSource,
 		currency.NewCurrencyDataSource,
 		currency.NewCurrenciesDataSource,
-		custom_field.NewCustomFieldDataSource,
-		data_export_destination.NewDataExportDestinationDataSource,
-		data_export_destination.NewDataExportDestinationsDataSource,
-		data_export_job.NewDataExportJobDataSource,
-		data_export_job.NewDataExportJobsDataSource,
-		data_export_schedule.NewDataExportScheduleDataSource,
-		data_export_schedule.NewDataExportSchedulesDataSource,
 		debit_reason.NewDebitReasonDataSource,
 		debit_reason.NewDebitReasonsDataSource,
-		event.NewEventDataSource,
-		event.NewEventsDataSource,
 		external_mapping.NewExternalMappingDataSource,
 		external_mapping.NewExternalMappingsDataSource,
 		integration_configuration.NewIntegrationConfigurationDataSource,
@@ -287,7 +238,6 @@ func (p *M3terProvider) DataSources(ctx context.Context) []func() datasource.Dat
 		meter.NewMetersDataSource,
 		notification_configuration.NewNotificationConfigurationDataSource,
 		notification_configuration.NewNotificationConfigurationsDataSource,
-		organization_config.NewOrganizationConfigDataSource,
 		permission_policy.NewPermissionPolicyDataSource,
 		permission_policy.NewPermissionPoliciesDataSource,
 		plan.NewPlanDataSource,
@@ -306,18 +256,8 @@ func (p *M3terProvider) DataSources(ctx context.Context) []func() datasource.Dat
 		resource_group.NewResourceGroupsDataSource,
 		scheduled_event_configuration.NewScheduledEventConfigurationDataSource,
 		scheduled_event_configuration.NewScheduledEventConfigurationsDataSource,
-		statement_statement_job.NewStatementStatementJobDataSource,
-		statement_statement_job.NewStatementStatementJobsDataSource,
-		statement_statement_definition.NewStatementStatementDefinitionDataSource,
-		statement_statement_definition.NewStatementStatementDefinitionsDataSource,
 		transaction_type.NewTransactionTypeDataSource,
 		transaction_type.NewTransactionTypesDataSource,
-		usage_file_upload_job.NewUsageFileUploadJobDataSource,
-		usage_file_upload_job.NewUsageFileUploadJobsDataSource,
-		user.NewUserDataSource,
-		user.NewUsersDataSource,
-		user_invitation.NewUserInvitationDataSource,
-		user_invitation.NewUserInvitationsDataSource,
 		webhook.NewWebhookDataSource,
 		webhook.NewWebhooksDataSource,
 	}

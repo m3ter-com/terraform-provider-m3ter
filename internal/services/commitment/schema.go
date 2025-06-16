@@ -146,10 +146,6 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				Description: "A boolean value indicating whether the overage usage is billed separately or together. If overage usage is separated and a Commitment amount has been consumed by an Account, any subsequent line items on Bills against the Account for usage will show as separate \"overage usage\" charges, not simply as \"usage\" charges:\n\n* **TRUE** - billed separately.\n* **FALSE** - billed together.\n\n**Notes:**\n- Can be used only if no value or 0 has been defined for the `overageSurchargePercent` parameter. If you try to separate overage usage when a value other than 0 has been defined for `overageSurchargePercent`, you'll receive an error.\n- If a priced Plan is used to bill any outstanding Commitment fees due and the Plan is set up with overage pricing on a *tiered pricing structure* and you enable separate bill line items for overage usage, then overage usage charges will be rated according to the overage pricing defined for the tiered pricing on the Plan.",
 				Optional:    true,
 			},
-			"version": schema.Int64Attribute{
-				Description: "The version number of the entity:\n- **Create entity:** Not valid for initial insertion of new entity - *do not use for Create*. On initial Create, version is set at 1 and listed in the response.\n- **Update Entity:**  On Update, version is required and must match the existing version because a check is performed to ensure sequential versioning is preserved. Version is incremented by 1 and listed in the response.",
-				Optional:    true,
-			},
 			"line_item_types": schema.ListAttribute{
 				Description: "Specify the line item charge types that can draw-down at billing against the Commitment amount. Options are:\n- `MINIMUM_SPEND`\n- `STANDING_CHARGE`\n- `USAGE`\n- `\"COUNTER_RUNNING_TOTAL_CHARGE\"`\n- `\"COUNTER_ADJUSTMENT_DEBIT\"`\n\n**NOTE:** If no charge types are specified, by default *all types* can draw-down against the Commitment amount at billing.",
 				Optional:    true,
@@ -217,6 +213,10 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 			},
 			"last_modified_by": schema.StringAttribute{
 				Description: "The unique identifier (UUID) of the user who last modified this Commitment.",
+				Computed:    true,
+			},
+			"version": schema.Int64Attribute{
+				Description: "The version number:\n- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.\n- **Update:** On successful Update, the version is incremented by 1 in the response.",
 				Computed:    true,
 			},
 		},

@@ -84,10 +84,6 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				Description: "The UUID of the statement definition used when Bill statements are generated for the Account. If no statement definition is specified for the Account, the statement definition specified at Organizational level is used.\n\nBill statements can be used as informative backing sheets to invoices. Based on the usage breakdown defined in the statement definition, generated statements give a breakdown of usage charges on Account Bills, which helps customers better understand usage charges incurred over the billing period.\n\nSee [Working with Bill Statements](https://www.m3ter.com/docs/guides/running-viewing-and-managing-bills/working-with-bill-statements) in the m3ter documentation for more details.",
 				Optional:    true,
 			},
-			"version": schema.Int64Attribute{
-				Description: "The version number of the entity:\n- **Create entity:** Not valid for initial insertion of new entity - *do not use for Create*. On initial Create, version is set at 1 and listed in the response.\n- **Update Entity:**  On Update, version is required and must match the existing version because a check is performed to ensure sequential versioning is preserved. Version is incremented by 1 and listed in the response.",
-				Optional:    true,
-			},
 			"config_data": schema.MapAttribute{
 				Description: "Configuration data for the Account\nSupported settings:\n * SendBillsToThirdParties (\"true\"/\"false\")",
 				Optional:    true,
@@ -154,6 +150,10 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 			},
 			"last_modified_by": schema.StringAttribute{
 				Description: "The ID of the user who last modified the Account.",
+				Computed:    true,
+			},
+			"version": schema.Int64Attribute{
+				Description: "The version number:\n- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.\n- **Update:** On successful Update, the version is incremented by 1 in the response.",
 				Computed:    true,
 			},
 		},

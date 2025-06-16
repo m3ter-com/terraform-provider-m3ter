@@ -22,7 +22,6 @@ type AccountModel struct {
 	ParentAccountID           types.String                     `tfsdk:"parent_account_id" json:"parentAccountId,optional"`
 	PurchaseOrderNumber       types.String                     `tfsdk:"purchase_order_number" json:"purchaseOrderNumber,optional"`
 	StatementDefinitionID     types.String                     `tfsdk:"statement_definition_id" json:"statementDefinitionId,optional"`
-	Version                   types.Int64                      `tfsdk:"version" json:"version,optional"`
 	ConfigData                *map[string]jsontypes.Normalized `tfsdk:"config_data" json:"configData,optional"`
 	CreditApplicationOrder    *[]types.String                  `tfsdk:"credit_application_order" json:"creditApplicationOrder,optional"`
 	CustomFields              *map[string]types.Dynamic        `tfsdk:"custom_fields" json:"customFields,optional"`
@@ -31,6 +30,7 @@ type AccountModel struct {
 	DtCreated                 timetypes.RFC3339                `tfsdk:"dt_created" json:"dtCreated,computed" format:"date-time"`
 	DtLastModified            timetypes.RFC3339                `tfsdk:"dt_last_modified" json:"dtLastModified,computed" format:"date-time"`
 	LastModifiedBy            types.String                     `tfsdk:"last_modified_by" json:"lastModifiedBy,computed"`
+	Version                   types.Int64                      `tfsdk:"version" json:"version,computed"`
 }
 
 func (m AccountModel) MarshalJSON() (data []byte, err error) {

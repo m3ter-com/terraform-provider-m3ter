@@ -26,7 +26,6 @@ type BalanceModel struct {
 	OverageSurchargePercent         types.Float64             `tfsdk:"overage_surcharge_percent" json:"overageSurchargePercent,optional"`
 	RolloverAmount                  types.Float64             `tfsdk:"rollover_amount" json:"rolloverAmount,optional"`
 	RolloverEndDate                 timetypes.RFC3339         `tfsdk:"rollover_end_date" json:"rolloverEndDate,optional" format:"date-time"`
-	Version                         types.Int64               `tfsdk:"version" json:"version,optional"`
 	CustomFields                    *map[string]types.Dynamic `tfsdk:"custom_fields" json:"customFields,optional"`
 	LineItemTypes                   *[]types.String           `tfsdk:"line_item_types" json:"lineItemTypes,optional"`
 	ProductIDs                      *[]types.String           `tfsdk:"product_ids" json:"productIds,optional"`
@@ -35,6 +34,7 @@ type BalanceModel struct {
 	DtCreated                       timetypes.RFC3339         `tfsdk:"dt_created" json:"dtCreated,computed" format:"date-time"`
 	DtLastModified                  timetypes.RFC3339         `tfsdk:"dt_last_modified" json:"dtLastModified,computed" format:"date-time"`
 	LastModifiedBy                  types.String              `tfsdk:"last_modified_by" json:"lastModifiedBy,computed"`
+	Version                         types.Int64               `tfsdk:"version" json:"version,computed"`
 }
 
 func (m BalanceModel) MarshalJSON() (data []byte, err error) {

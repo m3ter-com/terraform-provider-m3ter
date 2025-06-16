@@ -109,13 +109,9 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 					},
 					"version": schema.Int64Attribute{
 						Description: "The version number of the entity:\n- **Create entity:** Not valid for initial insertion of new entity - *do not use for Create*. On initial Create, version is set at 1 and listed in the response.\n- **Update Entity:**  On Update, version is required and must match the existing version because a check is performed to ensure sequential versioning is preserved. Version is incremented by 1 and listed in the response.",
-						Optional:    true,
+						Computed:    true,
 					},
 				},
-			},
-			"version": schema.Int64Attribute{
-				Description: "The version number of the entity:\n- **Create entity:** Not valid for initial insertion of new entity - *do not use for Create*. On initial Create, version is set at 1 and listed in the response.\n- **Update Entity:**  On Update, version is required and must match the existing version because a check is performed to ensure sequential versioning is preserved. Version is incremented by 1 and listed in the response.",
-				Optional:    true,
 			},
 			"authorized": schema.BoolAttribute{
 				Description: "A flag indicating whether the integration configuration is authorized. \n\n* TRUE - authorized.\n* FALSE - not authorized.",
@@ -188,6 +184,10 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 			},
 			"url": schema.StringAttribute{
 				Description: "The URL of the entity in the destination system if available.",
+				Computed:    true,
+			},
+			"version": schema.Int64Attribute{
+				Description: "The version number:\n- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.\n- **Update:** On successful Update, the version is incremented by 1 in the response.",
 				Computed:    true,
 			},
 		},

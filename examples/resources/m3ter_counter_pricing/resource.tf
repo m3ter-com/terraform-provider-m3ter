@@ -20,5 +20,4 @@ resource "m3ter_counter_pricing" "example_counter_pricing" {
   pro_rate_adjustment_debit = true
   pro_rate_running_total = true
   running_total_bill_in_advance = true
-  version = 0
 }

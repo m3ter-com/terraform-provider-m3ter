@@ -133,10 +133,6 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 					),
 				},
 			},
-			"version": schema.Int64Attribute{
-				Description: "The version number of the entity:\n- **Create entity:** Not valid for initial insertion of new entity - *do not use for Create*. On initial Create, version is set at 1 and listed in the response.\n- **Update Entity:**  On Update, version is required and must match the existing version because a check is performed to ensure sequential versioning is preserved. Version is incremented by 1 and listed in the response.",
-				Optional:    true,
-			},
 			"segment": schema.MapAttribute{
 				Description: "Specifies the segment value which you are defining a Pricing for using this call:\n- For each segment value defined on a Segmented Aggregation you must create a separate Pricing and use the appropriate `aggregationId` parameter for the call.\n- If you specify a segment value that has not been defined for the Aggregation, you'll receive an error.\n- If you've defined segment values for the Aggregation using a single wildcard or multiple wildcards, you can create Pricing for these wildcard segment values also.\n\nFor more details on creating Pricings for segment values on a Segmented Aggregation using this call, together with some examples, see the [Using API Call to Create Segmented Pricings](https://www.m3ter.com/docs/guides/plans-and-pricing/pricing-plans/pricing-plans-using-segmented-aggregations#using-api-call-to-create-a-segmented-pricing) in our User Documentation.",
 				Optional:    true,
@@ -200,6 +196,10 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 			},
 			"segment_string": schema.StringAttribute{
 				Computed: true,
+			},
+			"version": schema.Int64Attribute{
+				Description: "The version number:\n- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.\n- **Update:** On successful Update, the version is incremented by 1 in the response.",
+				Computed:    true,
 			},
 		},
 	}

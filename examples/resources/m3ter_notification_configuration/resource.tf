@@ -7,5 +7,4 @@ resource "m3ter_notification_configuration" "example_notification_configuration"
   active = true
   always_fire_event = true
   calculation = "calculation"
-  version = 0
 }
