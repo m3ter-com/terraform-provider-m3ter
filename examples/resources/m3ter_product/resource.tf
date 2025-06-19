@@ -3,7 +3,6 @@ resource "m3ter_product" "example_product" {
   code = "JS!?Q0]r] ]$]"
   name = "x"
   custom_fields = {
-    foo = "bar"
+    foo = "string"
   }
-  version = 0
 }

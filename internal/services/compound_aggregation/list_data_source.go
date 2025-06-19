@@ -67,11 +67,7 @@ func (d *CompoundAggregationsDataSource) Read(ctx context.Context, req datasourc
 	if maxItems <= 0 {
 		maxItems = 1000
 	}
-	page, err := d.client.CompoundAggregations.List(
-		ctx,
-		data.OrgID.ValueString(),
-		params,
-	)
+	page, err := d.client.CompoundAggregations.List(ctx, params)
 	if err != nil {
 		resp.Diagnostics.AddError("failed to make http request", err.Error())
 		return

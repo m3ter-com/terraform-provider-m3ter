@@ -5,7 +5,6 @@ package aggregation
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
@@ -22,7 +21,8 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 	return schema.Schema{
 		Attributes: map[string]schema.Attribute{
 			"org_id": schema.StringAttribute{
-				Required: true,
+				Optional:           true,
+				DeprecationMessage: "the org id should be set at the client level instead",
 			},
 			"codes": schema.ListAttribute{
 				Description: "List of Aggregation codes to retrieve. These are unique short codes to identify each Aggregation.",
@@ -37,7 +37,7 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 			"product_id": schema.ListAttribute{
 				Description: "The UUIDs of the Products to retrieve Aggregations for.",
 				Optional:    true,
-				ElementType: jsontypes.NormalizedType{},
+				ElementType: types.StringType,
 			},
 			"max_items": schema.Int64Attribute{
 				Description: "Max items to fetch, default: 1000",
@@ -53,15 +53,18 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
 						"id": schema.StringAttribute{
-							Description: "The UUID of the entity. ",
+							Description: "The UUID of the entity.",
 							Computed:    true,
 						},
 						"version": schema.Int64Attribute{
 							Description: "The version number:\n- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.\n- **Update:** On successful Update, the version is incremented by 1 in the response.",
 							Computed:    true,
 						},
+						"accounting_product_id": schema.StringAttribute{
+							Computed: true,
+						},
 						"aggregation": schema.StringAttribute{
-							Description: "Specifies the computation method applied to usage data collected in `targetField`. Aggregation unit value depends on the **Category** configured for the selected targetField.\n\nEnum: \n\n* **SUM**. Adds the values. Can be applied to a **Measure**, **Income**, or **Cost** `targetField`.\n\n* **MIN**. Uses the minimum value. Can be applied to a **Measure**, **Income**, or **Cost** `targetField`.\n\n* **MAX**. Uses the maximum value. Can be applied to a **Measure**, **Income**, or **Cost** `targetField`.\n\n* **COUNT**. Counts the number of values. Can be applied to a **Who**, **What**, **Where**, **Measure**, **Income**, **Cost** or **Other** `targetField`.\n\n* **LATEST**. Uses the most recent value. Can be applied to a **Measure**, **Income**, or **Cost** `targetField`.\n\n* **MEAN**. Uses the arithmetic mean of the values. Can be applied to a **Measure**, **Income**, or **Cost** `targetField`.\n\n* **UNIQUE**. Uses unique values and returns a count of the number of unique values. Can be applied to a **Metadata** `targetField`.",
+							Description: "Specifies the computation method applied to usage data collected in `targetField`. Aggregation unit value depends on the **Category** configured for the selected targetField.\n\nEnum: \n\n* **SUM**. Adds the values. Can be applied to a **Measure**, **Income**, or **Cost** `targetField`.\n\n* **MIN**. Uses the minimum value. Can be applied to a **Measure**, **Income**, or **Cost** `targetField`.\n\n* **MAX**. Uses the maximum value. Can be applied to a **Measure**, **Income**, or **Cost** `targetField`.\n\n* **COUNT**. Counts the number of values. Can be applied to a **Measure**, **Income**, or **Cost** `targetField`.\n\n* **LATEST**. Uses the most recent value. Can be applied to a **Measure**, **Income**, or **Cost** `targetField`. Note: Based on the timestamp (`ts`) value of usage data measurement submissions. If using this method, please ensure *distinct* `ts` values are used for usage data measurment submissions.\n\n* **MEAN**. Uses the arithmetic mean of the values. Can be applied to a **Measure**, **Income**, or **Cost** `targetField`.\n\n* **UNIQUE**. Uses unique values and returns a count of the number of unique values. Can be applied to a **Metadata** `targetField`.\nAvailable values: \"SUM\", \"MIN\", \"MAX\", \"COUNT\", \"LATEST\", \"MEAN\", \"UNIQUE\".",
 							Computed:    true,
 							Validators: []validator.String{
 								stringvalidator.OneOfCaseInsensitive(
@@ -85,8 +88,11 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 						},
 						"custom_fields": schema.MapAttribute{
 							Computed:    true,
-							CustomType:  customfield.NewMapType[jsontypes.Normalized](ctx),
-							ElementType: jsontypes.NormalizedType{},
+							CustomType:  customfield.NewMapType[types.Dynamic](ctx),
+							ElementType: types.DynamicType,
+						},
+						"custom_sql": schema.StringAttribute{
+							Computed: true,
 						},
 						"default_value": schema.Float64Attribute{
 							Description: "Aggregation value used when no usage data is available to be aggregated. *(Optional)*.\n\n**Note:** Set to 0, if you expect to reference the Aggregation in a Compound Aggregation. This ensures that any null values are passed in correctly to the Compound Aggregation calculation with a value = 0.",
@@ -107,7 +113,7 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Computed:    true,
 						},
 						"meter_id": schema.StringAttribute{
-							Description: "The UUID of the Meter used as the source of usage data for the Aggregation.\n\nEach Aggregation is a child of a Meter, so the Meter must be selected. ",
+							Description: "The UUID of the Meter used as the source of usage data for the Aggregation.\n\nEach Aggregation is a child of a Meter, so the Meter must be selected.",
 							Computed:    true,
 						},
 						"name": schema.StringAttribute{
@@ -119,7 +125,7 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Computed:    true,
 						},
 						"rounding": schema.StringAttribute{
-							Description: "Specifies how you want to deal with non-integer, fractional number Aggregation values.\n\n**NOTES:**\n* **NEAREST** rounds to the nearest half: 5.1 is rounded to 5, and 3.5 is rounded to 4.\n* Also used in combination with `quantityPerUnit`. Rounds the number of units after `quantityPerUnit` is applied. If you set `quantityPerUnit` to a value other than one, you would typically set Rounding to **UP**. For example, suppose you charge by kilobytes per second (KiBy/s), set `quantityPerUnit` = 500, and set charge rate at $0.25 per unit used. If your customer used 48,900 KiBy/s in a billing period, the charge would be 48,900 / 500 = 97.8 rounded up to 98 * 0.25 = $2.45.\n\nEnum: “UP” “DOWN” “NEAREST” “NONE”\n",
+							Description: "Specifies how you want to deal with non-integer, fractional number Aggregation values.\n\n**NOTES:**\n* **NEAREST** rounds to the nearest half: 5.1 is rounded to 5, and 3.5 is rounded to 4.\n* Also used in combination with `quantityPerUnit`. Rounds the number of units after `quantityPerUnit` is applied. If you set `quantityPerUnit` to a value other than one, you would typically set Rounding to **UP**. For example, suppose you charge by kilobytes per second (KiBy/s), set `quantityPerUnit` = 500, and set charge rate at $0.25 per unit used. If your customer used 48,900 KiBy/s in a billing period, the charge would be 48,900 / 500 = 97.8 rounded up to 98 * 0.25 = $2.45.\n\nEnum: ???UP??? ???DOWN??? ???NEAREST??? ???NONE???\nAvailable values: \"UP\", \"DOWN\", \"NEAREST\", \"NONE\".",
 							Computed:    true,
 							Validators: []validator.String{
 								stringvalidator.OneOfCaseInsensitive(
@@ -137,7 +143,7 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							ElementType: types.StringType,
 						},
 						"segments": schema.ListAttribute{
-							Description: "*(Optional)*. Used when creating a segmented Aggregation, which segments the usage data collected by a single Meter. Works together with `segmentedFields`.\n\nContains the values that are to be used as the segments, read from the fields in the meter pointed at by `segmentedFields`.  ",
+							Description: "*(Optional)*. Used when creating a segmented Aggregation, which segments the usage data collected by a single Meter. Works together with `segmentedFields`.\n\nContains the values that are to be used as the segments, read from the fields in the meter pointed at by `segmentedFields`.",
 							Computed:    true,
 							CustomType:  customfield.NewListType[customfield.Map[types.String]](ctx),
 							ElementType: types.MapType{

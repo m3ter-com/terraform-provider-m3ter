@@ -5,7 +5,6 @@ package product
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -18,7 +17,7 @@ type ProductsDataListDataSourceEnvelope struct {
 }
 
 type ProductsDataSourceModel struct {
-	OrgID    types.String                                               `tfsdk:"org_id" path:"orgId,required"`
+	OrgID    types.String                                               `tfsdk:"org_id" path:"orgId,optional"`
 	IDs      *[]types.String                                            `tfsdk:"ids" query:"ids,optional"`
 	MaxItems types.Int64                                                `tfsdk:"max_items"`
 	Items    customfield.NestedObjectList[ProductsItemsDataSourceModel] `tfsdk:"items"`
@@ -34,17 +33,21 @@ func (m *ProductsDataSourceModel) toListParams(_ context.Context) (params m3ter.
 		IDs: m3ter.F(mIDs),
 	}
 
+	if !m.OrgID.IsNull() {
+		params.OrgID = m3ter.F(m.OrgID.ValueString())
+	}
+
 	return
 }
 
 type ProductsItemsDataSourceModel struct {
-	ID             types.String                          `tfsdk:"id" json:"id,computed"`
-	Version        types.Int64                           `tfsdk:"version" json:"version,computed"`
-	Code           types.String                          `tfsdk:"code" json:"code,computed"`
-	CreatedBy      types.String                          `tfsdk:"created_by" json:"createdBy,computed"`
-	CustomFields   customfield.Map[jsontypes.Normalized] `tfsdk:"custom_fields" json:"customFields,computed"`
-	DtCreated      timetypes.RFC3339                     `tfsdk:"dt_created" json:"dtCreated,computed" format:"date-time"`
-	DtLastModified timetypes.RFC3339                     `tfsdk:"dt_last_modified" json:"dtLastModified,computed" format:"date-time"`
-	LastModifiedBy types.String                          `tfsdk:"last_modified_by" json:"lastModifiedBy,computed"`
-	Name           types.String                          `tfsdk:"name" json:"name,computed"`
+	ID             types.String                   `tfsdk:"id" json:"id,computed"`
+	Version        types.Int64                    `tfsdk:"version" json:"version,computed"`
+	Code           types.String                   `tfsdk:"code" json:"code,computed"`
+	CreatedBy      types.String                   `tfsdk:"created_by" json:"createdBy,computed"`
+	CustomFields   customfield.Map[types.Dynamic] `tfsdk:"custom_fields" json:"customFields,computed"`
+	DtCreated      timetypes.RFC3339              `tfsdk:"dt_created" json:"dtCreated,computed" format:"date-time"`
+	DtLastModified timetypes.RFC3339              `tfsdk:"dt_last_modified" json:"dtLastModified,computed" format:"date-time"`
+	LastModifiedBy types.String                   `tfsdk:"last_modified_by" json:"lastModifiedBy,computed"`
+	Name           types.String                   `tfsdk:"name" json:"name,computed"`
 }

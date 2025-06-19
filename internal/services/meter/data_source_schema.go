@@ -5,13 +5,10 @@ package meter
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
-	"github.com/hashicorp/terraform-plugin-framework-validators/datasourcevalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
-	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/m3ter-com/terraform-provider-m3ter/internal/customfield"
@@ -22,12 +19,12 @@ var _ datasource.DataSourceWithConfigValidators = (*MeterDataSource)(nil)
 func DataSourceSchema(ctx context.Context) schema.Schema {
 	return schema.Schema{
 		Attributes: map[string]schema.Attribute{
-			"org_id": schema.StringAttribute{
-				Optional: true,
-			},
 			"id": schema.StringAttribute{
-				Computed: true,
-				Optional: true,
+				Required: true,
+			},
+			"org_id": schema.StringAttribute{
+				Required:           true,
+				DeprecationMessage: "the org id should be set at the client level instead",
 			},
 			"code": schema.StringAttribute{
 				Description: "Code of the Meter - unique short code used to identify the Meter.",
@@ -70,8 +67,8 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 			"custom_fields": schema.MapAttribute{
 				Description: "User defined fields enabling you to attach custom data. The value for a custom field can be either a string or a number.\n\nIf `customFields` can also be defined for this entity at the Organizational level,`customField` values defined at individual level override values of `customFields` with the same name defined at Organization level.\n\nSee [Working with Custom Fields](https://www.m3ter.com/docs/guides/creating-and-managing-products/working-with-custom-fields) in the m3ter documentation for more information.",
 				Computed:    true,
-				CustomType:  customfield.NewMapType[jsontypes.Normalized](ctx),
-				ElementType: jsontypes.NormalizedType{},
+				CustomType:  customfield.NewMapType[types.Dynamic](ctx),
+				ElementType: types.DynamicType,
 			},
 			"data_fields": schema.ListNestedAttribute{
 				Description: "Used to submit categorized raw usage data values for ingest into the platform - either numeric quantitative values or non-numeric data values. At least one required per Meter; maximum 15 per Meter.",
@@ -80,7 +77,7 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
 						"category": schema.StringAttribute{
-							Description: "The type of field (WHO, WHAT, WHERE, MEASURE, METADATA, INCOME, COST, OTHER).",
+							Description: "The type of field (WHO, WHAT, WHERE, MEASURE, METADATA, INCOME, COST, OTHER).\nAvailable values: \"WHO\", \"WHERE\", \"WHAT\", \"OTHER\", \"METADATA\", \"MEASURE\", \"INCOME\", \"COST\".",
 							Computed:    true,
 							Validators: []validator.String{
 								stringvalidator.OneOfCaseInsensitive(
@@ -117,7 +114,7 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
 						"category": schema.StringAttribute{
-							Description: "The type of field (WHO, WHAT, WHERE, MEASURE, METADATA, INCOME, COST, OTHER).",
+							Description: "The type of field (WHO, WHAT, WHERE, MEASURE, METADATA, INCOME, COST, OTHER).\nAvailable values: \"WHO\", \"WHERE\", \"WHAT\", \"OTHER\", \"METADATA\", \"MEASURE\", \"INCOME\", \"COST\".",
 							Computed:    true,
 							Validators: []validator.String{
 								stringvalidator.OneOfCaseInsensitive(
@@ -144,29 +141,10 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 							Description: "The units to measure the data with. Should conform to *Unified Code for Units of Measure* (UCUM). Required only for numeric field categories.",
 							Computed:    true,
 						},
-					},
-				},
-			},
-			"find_one_by": schema.SingleNestedAttribute{
-				Optional: true,
-				Attributes: map[string]schema.Attribute{
-					"org_id": schema.StringAttribute{
-						Required: true,
-					},
-					"codes": schema.ListAttribute{
-						Description: "List of Meter codes to retrieve. These are the unique short codes that identify each Meter.   ",
-						Optional:    true,
-						ElementType: types.StringType,
-					},
-					"ids": schema.ListAttribute{
-						Description: "List of Meter IDs to retrieve. ",
-						Optional:    true,
-						ElementType: types.StringType,
-					},
-					"product_id": schema.ListAttribute{
-						Description: "The UUIDs of the Products to retrieve Meters for.",
-						Optional:    true,
-						ElementType: jsontypes.NormalizedType{},
+						"calculation": schema.StringAttribute{
+							Description: "The calculation used to transform the value of submitted `dataFields` in usage data. Calculation can reference `dataFields`, `customFields`, or system `Timestamp` fields. \n*(Example: datafieldms  datafieldgb)*",
+							Computed:    true,
+						},
 					},
 				},
 			},
@@ -179,9 +157,5 @@ func (d *MeterDataSource) Schema(ctx context.Context, req datasource.SchemaReque
 }
 
 func (d *MeterDataSource) ConfigValidators(_ context.Context) []datasource.ConfigValidator {
-	return []datasource.ConfigValidator{
-		datasourcevalidator.RequiredTogether(path.MatchRoot("id"), path.MatchRoot("orgId")),
-		datasourcevalidator.ExactlyOneOf(path.MatchRoot("find_one_by"), path.MatchRoot("id")),
-		datasourcevalidator.ExactlyOneOf(path.MatchRoot("find_one_by"), path.MatchRoot("orgId")),
-	}
+	return []datasource.ConfigValidator{}
 }

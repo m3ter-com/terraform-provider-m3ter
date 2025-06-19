@@ -18,21 +18,30 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 	return schema.Schema{
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
-				Description:   "The UUID of the entity. ",
+				Description:   "The UUID of the entity.",
 				Computed:      true,
 				PlanModifiers: []planmodifier.String{stringplanmodifier.UseStateForUnknown()},
 			},
 			"org_id": schema.StringAttribute{
-				Required:      true,
-				PlanModifiers: []planmodifier.String{stringplanmodifier.RequiresReplace()},
+				Optional:           true,
+				DeprecationMessage: "the org id should be set at the client level instead",
+				PlanModifiers:      []planmodifier.String{stringplanmodifier.RequiresReplace()},
 			},
-			"version": schema.Int64Attribute{
-				Description: "The version number of the entity:\n- **Create entity:** Not valid for initial insertion of new entity - *do not use for Create*. On initial Create, version is set at 1 and listed in the response.\n- **Update Entity:**  On Update, version is required and must match the existing version because a check is performed to ensure sequential versioning is preserved. Version is incremented by 1 and listed in the response.",
-				Optional:    true,
+			"name": schema.StringAttribute{
+				Description: "Descriptive name for the Counter.",
+				Required:    true,
+			},
+			"unit": schema.StringAttribute{
+				Description: "User defined label for units shown on Bill line items, and indicating to your customers what they are being charged for.",
+				Required:    true,
 			},
 			"code": schema.StringAttribute{
-				Description: "Code of the Counter. A unique short code to identify the Counter.",
-				Computed:    true,
+				Description: "Code for the Counter. A unique short code to identify the Counter.",
+				Optional:    true,
+			},
+			"product_id": schema.StringAttribute{
+				Description: "UUID of the product the Counter belongs to. *(Optional)* - if left blank, the Counter is Global. A Global Counter can be used to price Plans or Plan Templates belonging to any Product.",
+				Optional:    true,
 			},
 			"created_by": schema.StringAttribute{
 				Description: "The ID of the user who created this item.",
@@ -52,16 +61,8 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				Description: "The ID of the user who last modified this item.",
 				Computed:    true,
 			},
-			"name": schema.StringAttribute{
-				Description: "Name of the Counter.",
-				Computed:    true,
-			},
-			"product_id": schema.StringAttribute{
-				Description: "UUID of the product the Counter belongs to. *(Optional)* - if no `productId` is returned, the Counter is Global. A Global Counter can be used to price Plans or Plan Templates belonging to any Product.",
-				Computed:    true,
-			},
-			"unit": schema.StringAttribute{
-				Description: "Label for units shown on Bill line items, and indicating to customers what they are being charged for.",
+			"version": schema.Int64Attribute{
+				Description: "The version number:\n- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.\n- **Update:** On successful Update, the version is incremented by 1 in the response.",
 				Computed:    true,
 			},
 		},

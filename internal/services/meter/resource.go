@@ -63,6 +63,12 @@ func (r *MeterResource) Create(ctx context.Context, req resource.CreateRequest, 
 		return
 	}
 
+	params := m3ter.MeterNewParams{}
+
+	if !data.OrgID.IsNull() {
+		params.OrgID = m3ter.F(data.OrgID.ValueString())
+	}
+
 	dataBytes, err := data.MarshalJSON()
 	if err != nil {
 		resp.Diagnostics.AddError("failed to serialize http request", err.Error())
@@ -71,8 +77,7 @@ func (r *MeterResource) Create(ctx context.Context, req resource.CreateRequest, 
 	res := new(http.Response)
 	_, err = r.client.Meters.New(
 		ctx,
-		data.OrgID.ValueString(),
-		m3ter.MeterNewParams{},
+		params,
 		option.WithRequestBody("application/json", dataBytes),
 		option.WithResponseBodyInto(&res),
 		option.WithMiddleware(logging.Middleware(ctx)),
@@ -108,6 +113,12 @@ func (r *MeterResource) Update(ctx context.Context, req resource.UpdateRequest, 
 		return
 	}
 
+	params := m3ter.MeterUpdateParams{}
+
+	if !data.OrgID.IsNull() {
+		params.OrgID = m3ter.F(data.OrgID.ValueString())
+	}
+
 	dataBytes, err := data.MarshalJSONForUpdate(*state)
 	if err != nil {
 		resp.Diagnostics.AddError("failed to serialize http request", err.Error())
@@ -116,9 +127,8 @@ func (r *MeterResource) Update(ctx context.Context, req resource.UpdateRequest, 
 	res := new(http.Response)
 	_, err = r.client.Meters.Update(
 		ctx,
-		data.OrgID.ValueString(),
 		data.ID.ValueString(),
-		m3ter.MeterUpdateParams{},
+		params,
 		option.WithRequestBody("application/json", dataBytes),
 		option.WithResponseBodyInto(&res),
 		option.WithMiddleware(logging.Middleware(ctx)),
@@ -146,11 +156,17 @@ func (r *MeterResource) Read(ctx context.Context, req resource.ReadRequest, resp
 		return
 	}
 
+	params := m3ter.MeterGetParams{}
+
+	if !data.OrgID.IsNull() {
+		params.OrgID = m3ter.F(data.OrgID.ValueString())
+	}
+
 	res := new(http.Response)
 	_, err := r.client.Meters.Get(
 		ctx,
-		data.OrgID.ValueString(),
 		data.ID.ValueString(),
+		params,
 		option.WithResponseBodyInto(&res),
 		option.WithMiddleware(logging.Middleware(ctx)),
 	)
@@ -164,7 +180,7 @@ func (r *MeterResource) Read(ctx context.Context, req resource.ReadRequest, resp
 		return
 	}
 	bytes, _ := io.ReadAll(res.Body)
-	err = apijson.UnmarshalComputed(bytes, &data)
+	err = apijson.Unmarshal(bytes, &data)
 	if err != nil {
 		resp.Diagnostics.AddError("failed to deserialize http request", err.Error())
 		return
@@ -174,7 +190,32 @@ func (r *MeterResource) Read(ctx context.Context, req resource.ReadRequest, resp
 }
 
 func (r *MeterResource) Delete(ctx context.Context, req resource.DeleteRequest, resp *resource.DeleteResponse) {
+	var data *MeterModel
 
+	resp.Diagnostics.Append(req.State.Get(ctx, &data)...)
+
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
+	params := m3ter.MeterDeleteParams{}
+
+	if !data.OrgID.IsNull() {
+		params.OrgID = m3ter.F(data.OrgID.ValueString())
+	}
+
+	_, err := r.client.Meters.Delete(
+		ctx,
+		data.ID.ValueString(),
+		params,
+		option.WithMiddleware(logging.Middleware(ctx)),
+	)
+	if err != nil {
+		resp.Diagnostics.AddError("failed to make http request", err.Error())
+		return
+	}
+
+	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
 
 func (r *MeterResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
@@ -199,8 +240,10 @@ func (r *MeterResource) ImportState(ctx context.Context, req resource.ImportStat
 	res := new(http.Response)
 	_, err := r.client.Meters.Get(
 		ctx,
-		path_org_id,
 		path_id,
+		m3ter.MeterGetParams{
+			OrgID: m3ter.F(path_org_id),
+		},
 		option.WithResponseBodyInto(&res),
 		option.WithMiddleware(logging.Middleware(ctx)),
 	)
@@ -218,20 +261,6 @@ func (r *MeterResource) ImportState(ctx context.Context, req resource.ImportStat
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
 
-func (r *MeterResource) ModifyPlan(ctx context.Context, req resource.ModifyPlanRequest, resp *resource.ModifyPlanResponse) {
-	if req.State.Raw.IsNull() {
-		resp.Diagnostics.AddWarning(
-			"Resource Destruction Considerations",
-			"This resource cannot be destroyed from Terraform. If you create this resource, it will be "+
-				"present in the API until manually deleted.",
-		)
-	}
-	if req.Plan.Raw.IsNull() {
-		resp.Diagnostics.AddWarning(
-			"Resource Destruction Considerations",
-			"Applying this resource destruction will remove the resource from the Terraform state "+
-				"but will not change it in the API. If you would like to destroy or reset this resource "+
-				"in the API, refer to the documentation for how to do it manually.",
-		)
-	}
+func (r *MeterResource) ModifyPlan(_ context.Context, _ resource.ModifyPlanRequest, _ *resource.ModifyPlanResponse) {
+
 }

@@ -5,7 +5,6 @@ package meter
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
@@ -22,22 +21,23 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 	return schema.Schema{
 		Attributes: map[string]schema.Attribute{
 			"org_id": schema.StringAttribute{
-				Required: true,
+				Optional:           true,
+				DeprecationMessage: "the org id should be set at the client level instead",
 			},
 			"codes": schema.ListAttribute{
-				Description: "List of Meter codes to retrieve. These are the unique short codes that identify each Meter.   ",
+				Description: "List of Meter codes to retrieve. These are the unique short codes that identify each Meter.",
 				Optional:    true,
 				ElementType: types.StringType,
 			},
 			"ids": schema.ListAttribute{
-				Description: "List of Meter IDs to retrieve. ",
+				Description: "List of Meter IDs to retrieve.",
 				Optional:    true,
 				ElementType: types.StringType,
 			},
 			"product_id": schema.ListAttribute{
 				Description: "The UUIDs of the Products to retrieve Meters for.",
 				Optional:    true,
-				ElementType: jsontypes.NormalizedType{},
+				ElementType: types.StringType,
 			},
 			"max_items": schema.Int64Attribute{
 				Description: "Max items to fetch, default: 1000",
@@ -53,7 +53,7 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
 						"id": schema.StringAttribute{
-							Description: "The UUID of the entity. ",
+							Description: "The UUID of the entity.",
 							Computed:    true,
 						},
 						"version": schema.Int64Attribute{
@@ -71,8 +71,8 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 						"custom_fields": schema.MapAttribute{
 							Description: "User defined fields enabling you to attach custom data. The value for a custom field can be either a string or a number.\n\nIf `customFields` can also be defined for this entity at the Organizational level,`customField` values defined at individual level override values of `customFields` with the same name defined at Organization level.\n\nSee [Working with Custom Fields](https://www.m3ter.com/docs/guides/creating-and-managing-products/working-with-custom-fields) in the m3ter documentation for more information.",
 							Computed:    true,
-							CustomType:  customfield.NewMapType[jsontypes.Normalized](ctx),
-							ElementType: jsontypes.NormalizedType{},
+							CustomType:  customfield.NewMapType[types.Dynamic](ctx),
+							ElementType: types.DynamicType,
 						},
 						"data_fields": schema.ListNestedAttribute{
 							Description: "Used to submit categorized raw usage data values for ingest into the platform - either numeric quantitative values or non-numeric data values. At least one required per Meter; maximum 15 per Meter.",
@@ -81,7 +81,7 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							NestedObject: schema.NestedAttributeObject{
 								Attributes: map[string]schema.Attribute{
 									"category": schema.StringAttribute{
-										Description: "The type of field (WHO, WHAT, WHERE, MEASURE, METADATA, INCOME, COST, OTHER).",
+										Description: "The type of field (WHO, WHAT, WHERE, MEASURE, METADATA, INCOME, COST, OTHER).\nAvailable values: \"WHO\", \"WHERE\", \"WHAT\", \"OTHER\", \"METADATA\", \"MEASURE\", \"INCOME\", \"COST\".",
 										Computed:    true,
 										Validators: []validator.String{
 											stringvalidator.OneOfCaseInsensitive(
@@ -118,7 +118,7 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							NestedObject: schema.NestedAttributeObject{
 								Attributes: map[string]schema.Attribute{
 									"category": schema.StringAttribute{
-										Description: "The type of field (WHO, WHAT, WHERE, MEASURE, METADATA, INCOME, COST, OTHER).",
+										Description: "The type of field (WHO, WHAT, WHERE, MEASURE, METADATA, INCOME, COST, OTHER).\nAvailable values: \"WHO\", \"WHERE\", \"WHAT\", \"OTHER\", \"METADATA\", \"MEASURE\", \"INCOME\", \"COST\".",
 										Computed:    true,
 										Validators: []validator.String{
 											stringvalidator.OneOfCaseInsensitive(
@@ -143,6 +143,10 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 									},
 									"unit": schema.StringAttribute{
 										Description: "The units to measure the data with. Should conform to *Unified Code for Units of Measure* (UCUM). Required only for numeric field categories.",
+										Computed:    true,
+									},
+									"calculation": schema.StringAttribute{
+										Description: "The calculation used to transform the value of submitted `dataFields` in usage data. Calculation can reference `dataFields`, `customFields`, or system `Timestamp` fields. \n*(Example: datafieldms  datafieldgb)*",
 										Computed:    true,
 									},
 								},

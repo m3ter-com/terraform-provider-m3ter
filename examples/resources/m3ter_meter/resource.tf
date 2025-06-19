@@ -12,12 +12,12 @@ resource "m3ter_meter" "example_meter" {
     code = "{1{}}_"
     name = "x"
     unit = "x"
+    calculation = "x"
   }]
   name = "x"
   custom_fields = {
-    foo = "bar"
+    foo = "string"
   }
   group_id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
   product_id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-  version = 0
 }

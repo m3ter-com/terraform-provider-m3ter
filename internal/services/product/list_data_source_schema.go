@@ -5,7 +5,6 @@ package product
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
@@ -21,10 +20,11 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 	return schema.Schema{
 		Attributes: map[string]schema.Attribute{
 			"org_id": schema.StringAttribute{
-				Required: true,
+				Optional:           true,
+				DeprecationMessage: "the org id should be set at the client level instead",
 			},
 			"ids": schema.ListAttribute{
-				Description: "List of specific Product UUIDs to retrieve. ",
+				Description: "List of specific Product UUIDs to retrieve.",
 				Optional:    true,
 				ElementType: types.StringType,
 			},
@@ -42,7 +42,7 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
 						"id": schema.StringAttribute{
-							Description: "The UUID of the entity. ",
+							Description: "The UUID of the entity.",
 							Computed:    true,
 						},
 						"version": schema.Int64Attribute{
@@ -50,7 +50,7 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Computed:    true,
 						},
 						"code": schema.StringAttribute{
-							Description: "A unique short code to identify the Product. It should not contain control chracters or spaces. ",
+							Description: "A unique short code to identify the Product. It should not contain control chracters or spaces.",
 							Computed:    true,
 						},
 						"created_by": schema.StringAttribute{
@@ -60,8 +60,8 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 						"custom_fields": schema.MapAttribute{
 							Description: "User defined fields enabling you to attach custom data. The value for a custom field can be either a string or a number.\n\nIf `customFields` can also be defined for this entity at the Organizational level,`customField` values defined at individual level override values of `customFields` with the same name defined at Organization level.\n\nSee [Working with Custom Fields](https://www.m3ter.com/docs/guides/creating-and-managing-products/working-with-custom-fields) in the m3ter documentation for more information.",
 							Computed:    true,
-							CustomType:  customfield.NewMapType[jsontypes.Normalized](ctx),
-							ElementType: jsontypes.NormalizedType{},
+							CustomType:  customfield.NewMapType[types.Dynamic](ctx),
+							ElementType: types.DynamicType,
 						},
 						"dt_created": schema.StringAttribute{
 							Description: "The date and time *(in ISO-8601 format)* when the Product was created.",

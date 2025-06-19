@@ -6,11 +6,8 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
-	"github.com/hashicorp/terraform-plugin-framework-validators/datasourcevalidator"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
-	"github.com/hashicorp/terraform-plugin-framework/path"
-	"github.com/hashicorp/terraform-plugin-framework/types"
 )
 
 var _ datasource.DataSourceWithConfigValidators = (*CounterDataSource)(nil)
@@ -18,12 +15,12 @@ var _ datasource.DataSourceWithConfigValidators = (*CounterDataSource)(nil)
 func DataSourceSchema(ctx context.Context) schema.Schema {
 	return schema.Schema{
 		Attributes: map[string]schema.Attribute{
-			"org_id": schema.StringAttribute{
-				Optional: true,
-			},
 			"id": schema.StringAttribute{
-				Computed: true,
-				Optional: true,
+				Required: true,
+			},
+			"org_id": schema.StringAttribute{
+				Required:           true,
+				DeprecationMessage: "the org id should be set at the client level instead",
 			},
 			"code": schema.StringAttribute{
 				Description: "Code of the Counter. A unique short code to identify the Counter.",
@@ -63,29 +60,6 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Description: "The version number:\n- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.\n- **Update:** On successful Update, the version is incremented by 1 in the response.",
 				Computed:    true,
 			},
-			"find_one_by": schema.SingleNestedAttribute{
-				Optional: true,
-				Attributes: map[string]schema.Attribute{
-					"org_id": schema.StringAttribute{
-						Required: true,
-					},
-					"codes": schema.ListAttribute{
-						Description: "List of Counter codes to retrieve. These are unique short codes to identify each Counter.",
-						Optional:    true,
-						ElementType: types.StringType,
-					},
-					"ids": schema.ListAttribute{
-						Description: "List of Counter IDs to retrieve.",
-						Optional:    true,
-						ElementType: types.StringType,
-					},
-					"product_id": schema.ListAttribute{
-						Description: "List of Products UUIDs to retrieve Counters for.",
-						Optional:    true,
-						ElementType: types.StringType,
-					},
-				},
-			},
 		},
 	}
 }
@@ -95,9 +69,5 @@ func (d *CounterDataSource) Schema(ctx context.Context, req datasource.SchemaReq
 }
 
 func (d *CounterDataSource) ConfigValidators(_ context.Context) []datasource.ConfigValidator {
-	return []datasource.ConfigValidator{
-		datasourcevalidator.RequiredTogether(path.MatchRoot("id"), path.MatchRoot("orgId")),
-		datasourcevalidator.ExactlyOneOf(path.MatchRoot("find_one_by"), path.MatchRoot("id")),
-		datasourcevalidator.ExactlyOneOf(path.MatchRoot("find_one_by"), path.MatchRoot("orgId")),
-	}
+	return []datasource.ConfigValidator{}
 }

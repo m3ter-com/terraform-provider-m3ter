@@ -57,57 +57,29 @@ func (d *AggregationDataSource) Read(ctx context.Context, req datasource.ReadReq
 		return
 	}
 
-	if data.FindOneBy == nil {
-		res := new(http.Response)
-		_, err := d.client.Aggregations.Get(
-			ctx,
-			data.OrgID.ValueString(),
-			data.ID.ValueString(),
-			option.WithResponseBodyInto(&res),
-			option.WithMiddleware(logging.Middleware(ctx)),
-		)
-		if err != nil {
-			resp.Diagnostics.AddError("failed to make http request", err.Error())
-			return
-		}
-		bytes, _ := io.ReadAll(res.Body)
-		err = apijson.UnmarshalComputed(bytes, &data)
-		if err != nil {
-			resp.Diagnostics.AddError("failed to deserialize http request", err.Error())
-			return
-		}
-	} else {
-		params, diags := data.toListParams(ctx)
-		resp.Diagnostics.Append(diags...)
-		if resp.Diagnostics.HasError() {
-			return
-		}
+	params, diags := data.toReadParams(ctx)
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
 
-		env := AggregationDataListDataSourceEnvelope{}
-		page, err := d.client.Aggregations.List(
-			ctx,
-			data.FindOneBy.OrgID.ValueString(),
-			params,
-		)
-		if err != nil {
-			resp.Diagnostics.AddError("failed to make http request", err.Error())
-			return
-		}
-
-		bytes := []byte(page.JSON.RawJSON())
-		err = apijson.UnmarshalComputed(bytes, &env)
-		if err != nil {
-			resp.Diagnostics.AddError("failed to unmarshal http request", err.Error())
-			return
-		}
-
-		if count := len(env.Data.Elements()); count != 1 {
-			resp.Diagnostics.AddError("failed to find exactly one result", fmt.Sprint(count)+" found")
-			return
-		}
-		ts, diags := env.Data.AsStructSliceT(ctx)
-		resp.Diagnostics.Append(diags...)
-		data = &ts[0]
+	res := new(http.Response)
+	_, err := d.client.Aggregations.Get(
+		ctx,
+		data.ID.ValueString(),
+		params,
+		option.WithResponseBodyInto(&res),
+		option.WithMiddleware(logging.Middleware(ctx)),
+	)
+	if err != nil {
+		resp.Diagnostics.AddError("failed to make http request", err.Error())
+		return
+	}
+	bytes, _ := io.ReadAll(res.Body)
+	err = apijson.UnmarshalComputed(bytes, &data)
+	if err != nil {
+		resp.Diagnostics.AddError("failed to deserialize http request", err.Error())
+		return
 	}
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
