@@ -9,24 +9,24 @@ import (
 )
 
 type AccountPlanModel struct {
-	ID               types.String              `tfsdk:"id" json:"id,computed"`
-	OrgID            types.String              `tfsdk:"org_id" path:"orgId,optional"`
-	AccountID        types.String              `tfsdk:"account_id" json:"accountId,required"`
-	StartDate        timetypes.RFC3339         `tfsdk:"start_date" json:"startDate,required" format:"date-time"`
-	BillEpoch        timetypes.RFC3339         `tfsdk:"bill_epoch" json:"billEpoch,optional" format:"date"`
-	ChildBillingMode types.String              `tfsdk:"child_billing_mode" json:"childBillingMode,optional"`
-	Code             types.String              `tfsdk:"code" json:"code,optional"`
-	ContractID       types.String              `tfsdk:"contract_id" json:"contractId,optional"`
-	EndDate          timetypes.RFC3339         `tfsdk:"end_date" json:"endDate,optional" format:"date-time"`
-	PlanGroupID      types.String              `tfsdk:"plan_group_id" json:"planGroupId,optional"`
-	PlanID           types.String              `tfsdk:"plan_id" json:"planId,optional"`
-	CustomFields     *map[string]types.Dynamic `tfsdk:"custom_fields" json:"customFields,optional"`
-	CreatedBy        types.String              `tfsdk:"created_by" json:"createdBy,computed"`
-	DtCreated        timetypes.RFC3339         `tfsdk:"dt_created" json:"dtCreated,computed" format:"date-time"`
-	DtLastModified   timetypes.RFC3339         `tfsdk:"dt_last_modified" json:"dtLastModified,computed" format:"date-time"`
-	LastModifiedBy   types.String              `tfsdk:"last_modified_by" json:"lastModifiedBy,computed"`
-	ProductID        types.String              `tfsdk:"product_id" json:"productId,computed"`
-	Version          types.Int64               `tfsdk:"version" json:"version,computed"`
+	ID               types.String      `tfsdk:"id" json:"id,computed"`
+	OrgID            types.String      `tfsdk:"org_id" path:"orgId,optional"`
+	AccountID        types.String      `tfsdk:"account_id" json:"accountId,required"`
+	StartDate        timetypes.RFC3339 `tfsdk:"start_date" json:"startDate,required" format:"date-time"`
+	BillEpoch        timetypes.RFC3339 `tfsdk:"bill_epoch" json:"billEpoch,optional" format:"date"`
+	ChildBillingMode types.String      `tfsdk:"child_billing_mode" json:"childBillingMode,optional"`
+	Code             types.String      `tfsdk:"code" json:"code,optional"`
+	ContractID       types.String      `tfsdk:"contract_id" json:"contractId,optional"`
+	EndDate          timetypes.RFC3339 `tfsdk:"end_date" json:"endDate,optional" format:"date-time"`
+	PlanGroupID      types.String      `tfsdk:"plan_group_id" json:"planGroupId,optional"`
+	PlanID           types.String      `tfsdk:"plan_id" json:"planId,optional"`
+	CustomFields     types.Dynamic     `tfsdk:"custom_fields" json:"customFields,optional"`
+	CreatedBy        types.String      `tfsdk:"created_by" json:"createdBy,computed"`
+	DtCreated        timetypes.RFC3339 `tfsdk:"dt_created" json:"dtCreated,computed" format:"date-time"`
+	DtLastModified   timetypes.RFC3339 `tfsdk:"dt_last_modified" json:"dtLastModified,computed" format:"date-time"`
+	LastModifiedBy   types.String      `tfsdk:"last_modified_by" json:"lastModifiedBy,computed"`
+	ProductID        types.String      `tfsdk:"product_id" json:"productId,computed"`
+	Version          types.Int64       `tfsdk:"version" json:"version,computed"`
 }
 
 func (m AccountPlanModel) MarshalJSON() (data []byte, err error) {

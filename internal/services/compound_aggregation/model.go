@@ -21,7 +21,7 @@ type CompoundAggregationModel struct {
 	Code                     types.String                                    `tfsdk:"code" json:"code,optional"`
 	EvaluateNullAggregations types.Bool                                      `tfsdk:"evaluate_null_aggregations" json:"evaluateNullAggregations,optional"`
 	ProductID                types.String                                    `tfsdk:"product_id" json:"productId,optional"`
-	CustomFields             *map[string]types.Dynamic                       `tfsdk:"custom_fields" json:"customFields,optional"`
+	CustomFields             types.Dynamic                                   `tfsdk:"custom_fields" json:"customFields,optional"`
 	Aggregation              types.String                                    `tfsdk:"aggregation" json:"aggregation,computed,no_refresh"`
 	CreatedBy                types.String                                    `tfsdk:"created_by" json:"createdBy,computed"`
 	CustomSql                types.String                                    `tfsdk:"custom_sql" json:"customSql,computed,no_refresh"`

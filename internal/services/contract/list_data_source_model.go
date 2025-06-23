@@ -51,18 +51,18 @@ func (m *ContractsDataSourceModel) toListParams(_ context.Context) (params m3ter
 }
 
 type ContractsItemsDataSourceModel struct {
-	ID                  types.String                   `tfsdk:"id" json:"id,computed"`
-	Version             types.Int64                    `tfsdk:"version" json:"version,computed"`
-	AccountID           types.String                   `tfsdk:"account_id" json:"accountId,computed"`
-	Code                types.String                   `tfsdk:"code" json:"code,computed"`
-	CreatedBy           types.String                   `tfsdk:"created_by" json:"createdBy,computed"`
-	CustomFields        customfield.Map[types.Dynamic] `tfsdk:"custom_fields" json:"customFields,computed"`
-	Description         types.String                   `tfsdk:"description" json:"description,computed"`
-	DtCreated           timetypes.RFC3339              `tfsdk:"dt_created" json:"dtCreated,computed" format:"date-time"`
-	DtLastModified      timetypes.RFC3339              `tfsdk:"dt_last_modified" json:"dtLastModified,computed" format:"date-time"`
-	EndDate             timetypes.RFC3339              `tfsdk:"end_date" json:"endDate,computed" format:"date"`
-	LastModifiedBy      types.String                   `tfsdk:"last_modified_by" json:"lastModifiedBy,computed"`
-	Name                types.String                   `tfsdk:"name" json:"name,computed"`
-	PurchaseOrderNumber types.String                   `tfsdk:"purchase_order_number" json:"purchaseOrderNumber,computed"`
-	StartDate           timetypes.RFC3339              `tfsdk:"start_date" json:"startDate,computed" format:"date"`
+	ID                  types.String      `tfsdk:"id" json:"id,computed"`
+	Version             types.Int64       `tfsdk:"version" json:"version,computed"`
+	AccountID           types.String      `tfsdk:"account_id" json:"accountId,computed"`
+	Code                types.String      `tfsdk:"code" json:"code,computed"`
+	CreatedBy           types.String      `tfsdk:"created_by" json:"createdBy,computed"`
+	CustomFields        types.Dynamic     `tfsdk:"custom_fields" json:"customFields,computed"`
+	Description         types.String      `tfsdk:"description" json:"description,computed"`
+	DtCreated           timetypes.RFC3339 `tfsdk:"dt_created" json:"dtCreated,computed" format:"date-time"`
+	DtLastModified      timetypes.RFC3339 `tfsdk:"dt_last_modified" json:"dtLastModified,computed" format:"date-time"`
+	EndDate             timetypes.RFC3339 `tfsdk:"end_date" json:"endDate,computed" format:"date"`
+	LastModifiedBy      types.String      `tfsdk:"last_modified_by" json:"lastModifiedBy,computed"`
+	Name                types.String      `tfsdk:"name" json:"name,computed"`
+	PurchaseOrderNumber types.String      `tfsdk:"purchase_order_number" json:"purchaseOrderNumber,computed"`
+	StartDate           timetypes.RFC3339 `tfsdk:"start_date" json:"startDate,computed" format:"date"`
 }

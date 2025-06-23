@@ -57,7 +57,7 @@ type MetersItemsDataSourceModel struct {
 	Version        types.Int64                                                      `tfsdk:"version" json:"version,computed"`
 	Code           types.String                                                     `tfsdk:"code" json:"code,computed"`
 	CreatedBy      types.String                                                     `tfsdk:"created_by" json:"createdBy,computed"`
-	CustomFields   customfield.Map[types.Dynamic]                                   `tfsdk:"custom_fields" json:"customFields,computed"`
+	CustomFields   types.Dynamic                                                    `tfsdk:"custom_fields" json:"customFields,computed"`
 	DataFields     customfield.NestedObjectList[MetersDataFieldsDataSourceModel]    `tfsdk:"data_fields" json:"dataFields,computed"`
 	DerivedFields  customfield.NestedObjectList[MetersDerivedFieldsDataSourceModel] `tfsdk:"derived_fields" json:"derivedFields,computed"`
 	DtCreated      timetypes.RFC3339                                                `tfsdk:"dt_created" json:"dtCreated,computed" format:"date-time"`

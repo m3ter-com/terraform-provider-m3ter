@@ -97,11 +97,6 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				Optional:    true,
 				CustomType:  timetypes.RFC3339Type{},
 			},
-			"custom_fields": schema.MapAttribute{
-				Description: "User defined fields enabling you to attach custom data. The value for a custom field can be either a string or a number.\n\nIf `customFields` can also be defined for this entity at the Organizational level, `customField` values defined at individual level override values of `customFields` with the same name defined at Organization level.\n\nSee [Working with Custom Fields](https://www.m3ter.com/docs/guides/creating-and-managing-products/working-with-custom-fields) in the m3ter documentation for more information.",
-				Optional:    true,
-				ElementType: types.DynamicType,
-			},
 			"line_item_types": schema.ListAttribute{
 				Description: "Specify the line item charge types that can draw-down at billing against the  Balance amount. Options are:\n- `\"MINIMUM_SPEND\"`\n- `\"STANDING_CHARGE\"`\n- `\"USAGE\"`\n- `\"COUNTER_RUNNING_TOTAL_CHARGE\"`\n- `\"COUNTER_ADJUSTMENT_DEBIT\"`\n\n**NOTE:** If no charge types are specified, by default *all types* can draw-down against the Balance amount at billing.",
 				Optional:    true,
@@ -122,6 +117,10 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				Description: "Specify the Products whose consumption charges due at billing can be drawn-down against the Balance amount.\n\n**Note:** If you don't specify any Products for Balance draw-down, by default the consumption charges for any Product the Account consumes will be drawn-down against the Balance amount.",
 				Optional:    true,
 				ElementType: types.StringType,
+			},
+			"custom_fields": schema.DynamicAttribute{
+				Description: "User defined fields enabling you to attach custom data. The value for a custom field can be either a string or a number.\n\nIf `customFields` can also be defined for this entity at the Organizational level, `customField` values defined at individual level override values of `customFields` with the same name defined at Organization level.\n\nSee [Working with Custom Fields](https://www.m3ter.com/docs/guides/creating-and-managing-products/working-with-custom-fields) in the m3ter documentation for more information.",
+				Optional:    true,
 			},
 			"amount": schema.Float64Attribute{
 				Description: "The financial value that the Balance holds.",

@@ -133,11 +133,9 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Description: "Account level billing currency, such as USD or GBP. Optional attribute:\n- If you define an Account currency, this will be used for bills.\n- If you do not define a currency, the billing currency defined at Organizational will be used.\n\n**Note:** If you've attached a Plan to the Account that uses a different currency to the billing currency, then you must add the relevant currency conversion rate at Organization level to ensure the billing process can convert line items calculated using the Plan currency into the selected billing currency. If you don't add these conversion rates, then bills will fail for the Account.",
 							Computed:    true,
 						},
-						"custom_fields": schema.MapAttribute{
+						"custom_fields": schema.DynamicAttribute{
 							Description: "User defined fields enabling you to attach custom data. The value for a custom field can be either a string or a number.\n\nIf `customFields` can also be defined for this entity at the Organizational level,`customField` values defined at individual level override values of `customFields` with the same name defined at Organization level.\n\nSee [Working with Custom Fields](https://www.m3ter.com/docs/guides/creating-and-managing-products/working-with-custom-fields) in the m3ter documentation for more information.",
 							Computed:    true,
-							CustomType:  customfield.NewMapType[types.Dynamic](ctx),
-							ElementType: types.DynamicType,
 						},
 						"days_before_bill_due": schema.Int64Attribute{
 							Description: "The number of days after the Bill generation date shown on Bills as the due date.",

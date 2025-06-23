@@ -75,10 +75,8 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Description: "The unique identifier (UUID) of the user who created this CompoundAggregation.",
 							Computed:    true,
 						},
-						"custom_fields": schema.MapAttribute{
-							Computed:    true,
-							CustomType:  customfield.NewMapType[types.Dynamic](ctx),
-							ElementType: types.DynamicType,
+						"custom_fields": schema.DynamicAttribute{
+							Computed: true,
 						},
 						"dt_created": schema.StringAttribute{
 							Description: "The date and time *(in ISO-8601 format)* when the CompoundAggregation was created.",
