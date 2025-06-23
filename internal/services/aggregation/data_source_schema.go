@@ -109,11 +109,6 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Description: "The version number:\n- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.\n- **Update:** On successful Update, the version is incremented by 1 in the response.",
 				Computed:    true,
 			},
-			"custom_fields": schema.MapAttribute{
-				Computed:    true,
-				CustomType:  customfield.NewMapType[types.Dynamic](ctx),
-				ElementType: types.DynamicType,
-			},
 			"segmented_fields": schema.ListAttribute{
 				Description: "*(Optional)*. Used when creating a segmented Aggregation, which segments the usage data collected by a single Meter. Works together with `segments`.\n\nThe `Codes` of the fields in the target Meter to use for segmentation purposes.\n\nString `dataFields` on the target Meter can be segmented. Any string `derivedFields` on the target Meter, such as one that concatenates two string `dataFields`, can also be segmented.",
 				Computed:    true,
@@ -127,6 +122,9 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				ElementType: types.MapType{
 					ElemType: types.StringType,
 				},
+			},
+			"custom_fields": schema.DynamicAttribute{
+				Computed: true,
 			},
 		},
 	}

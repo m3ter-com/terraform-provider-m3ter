@@ -58,7 +58,7 @@ type AccountsItemsDataSourceModel struct {
 	CreatedBy                 types.String                                             `tfsdk:"created_by" json:"createdBy,computed"`
 	CreditApplicationOrder    customfield.List[types.String]                           `tfsdk:"credit_application_order" json:"creditApplicationOrder,computed"`
 	Currency                  types.String                                             `tfsdk:"currency" json:"currency,computed"`
-	CustomFields              customfield.Map[types.Dynamic]                           `tfsdk:"custom_fields" json:"customFields,computed"`
+	CustomFields              types.Dynamic                                            `tfsdk:"custom_fields" json:"customFields,computed"`
 	DaysBeforeBillDue         types.Int64                                              `tfsdk:"days_before_bill_due" json:"daysBeforeBillDue,computed"`
 	DtCreated                 timetypes.RFC3339                                        `tfsdk:"dt_created" json:"dtCreated,computed" format:"date-time"`
 	DtLastModified            timetypes.RFC3339                                        `tfsdk:"dt_last_modified" json:"dtLastModified,computed" format:"date-time"`

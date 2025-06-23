@@ -86,10 +86,8 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Description: "The id of the user who created this aggregation.",
 							Computed:    true,
 						},
-						"custom_fields": schema.MapAttribute{
-							Computed:    true,
-							CustomType:  customfield.NewMapType[types.Dynamic](ctx),
-							ElementType: types.DynamicType,
+						"custom_fields": schema.DynamicAttribute{
+							Computed: true,
 						},
 						"custom_sql": schema.StringAttribute{
 							Computed: true,

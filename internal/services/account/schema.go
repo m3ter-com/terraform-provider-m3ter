@@ -99,11 +99,6 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				},
 				ElementType: types.StringType,
 			},
-			"custom_fields": schema.MapAttribute{
-				Description: "User defined fields enabling you to attach custom data. The value for a custom field can be either a string or a number.\n\nIf `customFields` can also be defined for this entity at the Organizational level, `customField` values defined at individual level override values of `customFields` with the same name defined at Organization level.\n\nSee [Working with Custom Fields](https://www.m3ter.com/docs/guides/creating-and-managing-products/working-with-custom-fields) in the m3ter documentation for more information.",
-				Optional:    true,
-				ElementType: types.DynamicType,
-			},
 			"address": schema.SingleNestedAttribute{
 				Description: "Contact address.",
 				Optional:    true,
@@ -133,6 +128,10 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 						Optional: true,
 					},
 				},
+			},
+			"custom_fields": schema.DynamicAttribute{
+				Description: "User defined fields enabling you to attach custom data. The value for a custom field can be either a string or a number.\n\nIf `customFields` can also be defined for this entity at the Organizational level, `customField` values defined at individual level override values of `customFields` with the same name defined at Organization level.\n\nSee [Working with Custom Fields](https://www.m3ter.com/docs/guides/creating-and-managing-products/working-with-custom-fields) in the m3ter documentation for more information.",
+				Optional:    true,
 			},
 			"created_by": schema.StringAttribute{
 				Description: "The ID of the user who created the account.",

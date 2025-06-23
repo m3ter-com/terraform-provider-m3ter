@@ -59,7 +59,7 @@ type AggregationsItemsDataSourceModel struct {
 	Aggregation         types.String                                    `tfsdk:"aggregation" json:"aggregation,computed"`
 	Code                types.String                                    `tfsdk:"code" json:"code,computed"`
 	CreatedBy           types.String                                    `tfsdk:"created_by" json:"createdBy,computed"`
-	CustomFields        customfield.Map[types.Dynamic]                  `tfsdk:"custom_fields" json:"customFields,computed"`
+	CustomFields        types.Dynamic                                   `tfsdk:"custom_fields" json:"customFields,computed"`
 	CustomSql           types.String                                    `tfsdk:"custom_sql" json:"customSql,computed"`
 	DefaultValue        types.Float64                                   `tfsdk:"default_value" json:"defaultValue,computed"`
 	DtCreated           timetypes.RFC3339                               `tfsdk:"dt_created" json:"dtCreated,computed" format:"date-time"`

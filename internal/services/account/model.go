@@ -24,8 +24,8 @@ type AccountModel struct {
 	StatementDefinitionID     types.String                     `tfsdk:"statement_definition_id" json:"statementDefinitionId,optional"`
 	ConfigData                *map[string]jsontypes.Normalized `tfsdk:"config_data" json:"configData,optional"`
 	CreditApplicationOrder    *[]types.String                  `tfsdk:"credit_application_order" json:"creditApplicationOrder,optional"`
-	CustomFields              *map[string]types.Dynamic        `tfsdk:"custom_fields" json:"customFields,optional"`
 	Address                   *AccountAddressModel             `tfsdk:"address" json:"address,optional"`
+	CustomFields              types.Dynamic                    `tfsdk:"custom_fields" json:"customFields,optional"`
 	CreatedBy                 types.String                     `tfsdk:"created_by" json:"createdBy,computed"`
 	DtCreated                 timetypes.RFC3339                `tfsdk:"dt_created" json:"dtCreated,computed" format:"date-time"`
 	DtLastModified            timetypes.RFC3339                `tfsdk:"dt_last_modified" json:"dtLastModified,computed" format:"date-time"`
