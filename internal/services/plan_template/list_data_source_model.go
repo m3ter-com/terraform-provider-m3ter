@@ -46,7 +46,6 @@ func (m *PlanTemplatesDataSourceModel) toListParams(_ context.Context) (params m
 
 type PlanTemplatesItemsDataSourceModel struct {
 	ID                          types.String      `tfsdk:"id" json:"id,computed"`
-	Version                     types.Int64       `tfsdk:"version" json:"version,computed"`
 	BillFrequency               types.String      `tfsdk:"bill_frequency" json:"billFrequency,computed"`
 	BillFrequencyInterval       types.Int64       `tfsdk:"bill_frequency_interval" json:"billFrequencyInterval,computed"`
 	Code                        types.String      `tfsdk:"code" json:"code,computed"`
@@ -67,4 +66,5 @@ type PlanTemplatesItemsDataSourceModel struct {
 	StandingChargeDescription   types.String      `tfsdk:"standing_charge_description" json:"standingChargeDescription,computed"`
 	StandingChargeInterval      types.Int64       `tfsdk:"standing_charge_interval" json:"standingChargeInterval,computed"`
 	StandingChargeOffset        types.Int64       `tfsdk:"standing_charge_offset" json:"standingChargeOffset,computed"`
+	Version                     types.Int64       `tfsdk:"version" json:"version,computed"`
 }

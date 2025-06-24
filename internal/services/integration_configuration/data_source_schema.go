@@ -73,7 +73,7 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Computed:    true,
 			},
 			"status": schema.StringAttribute{
-				Description: `Available values: "WAITING", "STARTED", "COMPLETE", "ERROR", "AWAITING_RETRY", "AUTH_FAILED", "ACCOUNTING_PERIOD_CLOSED", "INVOICE_ALREADY_PAID", "DISABLED".`,
+				Description: `Available values: "WAITING", "STARTED", "COMPLETE", "ERROR", "AWAITING_RETRY", "AUTH_FAILED", "ACCOUNTING_PERIOD_CLOSED", "INVOICE_ALREADY_PAID", "DISABLED", "RATE_LIMIT_RETRY".`,
 				Computed:    true,
 				Validators: []validator.String{
 					stringvalidator.OneOfCaseInsensitive(
@@ -86,6 +86,7 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 						"ACCOUNTING_PERIOD_CLOSED",
 						"INVOICE_ALREADY_PAID",
 						"DISABLED",
+						"RATE_LIMIT_RETRY",
 					),
 				},
 			},

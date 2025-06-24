@@ -50,10 +50,6 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Description: "The UUID of the entity.",
 							Computed:    true,
 						},
-						"version": schema.Int64Attribute{
-							Description: "The version number:\n- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.\n- **Update:** On successful Update, the version is incremented by 1 in the response.",
-							Computed:    true,
-						},
 						"bill_frequency": schema.StringAttribute{
 							Description: "Determines the frequency at which bills are generated.\n\n* **Daily**. Starting at midnight each day, covering the twenty-four hour period following.\n\n* **Weekly**. Starting at midnight on a Monday, covering the seven-day period following.\n\n* **Monthly**. Starting at midnight on the first day of each month, covering the entire calendar month following.\n\n* **Annually**. Starting at midnight on first day of each year covering the entire calendar year following.\nAvailable values: \"DAILY\", \"WEEKLY\", \"MONTHLY\", \"ANNUALLY\", \"AD_HOC\", \"MIXED\".",
 							Computed:    true,
@@ -144,6 +140,10 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 						},
 						"standing_charge_offset": schema.Int64Attribute{
 							Description: "Defines an offset for when the standing charge is first applied. \nFor example, if the bill is issued every three months and the `standingChargeOfset` is 0, then the charge is applied to the first bill *(at three months)*; if 1, it would be applied to the second bill *(at six months)*, and so on.",
+							Computed:    true,
+						},
+						"version": schema.Int64Attribute{
+							Description: "The version number:\n- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.\n- **Update:** On successful Update, the version is incremented by 1 in the response.",
 							Computed:    true,
 						},
 					},

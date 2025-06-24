@@ -16,4 +16,5 @@ resource "m3ter_integration_configuration" "example_integration_configuration" {
   entity_type = "entityType"
   integration_credentials_id = "integrationCredentialsId"
   name = "name"
+  version = 0
 }

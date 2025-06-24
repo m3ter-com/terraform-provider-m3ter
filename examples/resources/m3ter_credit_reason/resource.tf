@@ -3,4 +3,5 @@ resource "m3ter_credit_reason" "example_credit_reason" {
   name = "x"
   archived = true
   code = "code"
+  version = 0
 }

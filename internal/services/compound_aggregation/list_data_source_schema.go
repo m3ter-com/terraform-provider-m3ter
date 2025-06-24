@@ -56,10 +56,6 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Description: "The UUID of the entity.",
 							Computed:    true,
 						},
-						"version": schema.Int64Attribute{
-							Description: "The version number:\n- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.\n- **Update:** On successful Update, the version is incremented by 1 in the response.",
-							Computed:    true,
-						},
 						"accounting_product_id": schema.StringAttribute{
 							Computed: true,
 						},
@@ -130,6 +126,10 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 						},
 						"unit": schema.StringAttribute{
 							Description: "User defined or following the *Unified Code for Units of Measure* (UCUM). \n\nUsed as the label for billing, indicating to your customers what they are being charged for.",
+							Computed:    true,
+						},
+						"version": schema.Int64Attribute{
+							Description: "The version number:\n- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.\n- **Update:** On successful Update, the version is incremented by 1 in the response.",
 							Computed:    true,
 						},
 					},

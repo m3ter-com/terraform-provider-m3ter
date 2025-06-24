@@ -5,4 +5,5 @@ resource "m3ter_counter_adjustment" "example_counter_adjustment" {
   date = "2022-01-04"
   value = 0
   purchase_order_number = "purchaseOrderNumber"
+  version = 0
 }

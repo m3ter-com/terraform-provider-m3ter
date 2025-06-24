@@ -32,6 +32,11 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				Optional:    true,
 				CustomType:  timetypes.RFC3339Type{},
 			},
+			"version": schema.Int64Attribute{
+				Description: "The version number:\n* Default value when newly created is one.\n* On Update, version is required and must match the existing version because a check is performed to ensure sequential versioning is preserved. Version is incremented by 1 and listed in the response",
+				Computed:    true,
+				Optional:    true,
+			},
 			"created_by": schema.StringAttribute{
 				Description: "The id of the user who created this bill config.",
 				Computed:    true,
@@ -48,10 +53,6 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 			},
 			"last_modified_by": schema.StringAttribute{
 				Description: "The id of the user who last modified this bill config.",
-				Computed:    true,
-			},
-			"version": schema.Int64Attribute{
-				Description: "The version number:\n* Default value when newly created is one.\n* Incremented by 1 each time it is updated.",
 				Computed:    true,
 			},
 		},

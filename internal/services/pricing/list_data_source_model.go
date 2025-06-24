@@ -54,7 +54,6 @@ func (m *PricingsDataSourceModel) toListParams(_ context.Context) (params m3ter.
 
 type PricingsItemsDataSourceModel struct {
 	ID                        types.String                                                             `tfsdk:"id" json:"id,computed"`
-	Version                   types.Int64                                                              `tfsdk:"version" json:"version,computed"`
 	AccountingProductID       types.String                                                             `tfsdk:"accounting_product_id" json:"accountingProductId,computed"`
 	AggregationID             types.String                                                             `tfsdk:"aggregation_id" json:"aggregationId,computed"`
 	AggregationType           types.String                                                             `tfsdk:"aggregation_type" json:"aggregationType,computed"`
@@ -79,6 +78,7 @@ type PricingsItemsDataSourceModel struct {
 	StartDate                 timetypes.RFC3339                                                        `tfsdk:"start_date" json:"startDate,computed" format:"date-time"`
 	TiersSpanPlan             types.Bool                                                               `tfsdk:"tiers_span_plan" json:"tiersSpanPlan,computed"`
 	Type                      types.String                                                             `tfsdk:"type" json:"type,computed"`
+	Version                   types.Int64                                                              `tfsdk:"version" json:"version,computed"`
 }
 
 type PricingsOveragePricingBandsDataSourceModel struct {

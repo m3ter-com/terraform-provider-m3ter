@@ -69,10 +69,6 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Description: "The UUID of the entity.",
 							Computed:    true,
 						},
-						"version": schema.Int64Attribute{
-							Description: "The version number:\n- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.\n- **Update:** On successful Update, the version is incremented by 1 in the response.",
-							Computed:    true,
-						},
 						"account_id": schema.StringAttribute{
 							Description: "The unique identifier (UUID) for the Account to which the AccountPlan or AccounPlanGroup is attached.",
 							Computed:    true,
@@ -144,6 +140,10 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Description: "The start date *(in ISO-8601 format)* for the when the AccountPlan or AccountPlanGroup starts to be active for the Account.",
 							Computed:    true,
 							CustomType:  timetypes.RFC3339Type{},
+						},
+						"version": schema.Int64Attribute{
+							Description: "The version number:\n- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.\n- **Update:** On successful Update, the version is incremented by 1 in the response.",
+							Computed:    true,
 						},
 					},
 				},

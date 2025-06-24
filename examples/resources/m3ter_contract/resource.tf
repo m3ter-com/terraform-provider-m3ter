@@ -10,4 +10,5 @@ resource "m3ter_contract" "example_contract" {
   }
   description = "description"
   purchase_order_number = "purchaseOrderNumber"
+  version = 0
 }

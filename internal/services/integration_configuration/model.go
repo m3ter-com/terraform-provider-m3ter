@@ -20,6 +20,7 @@ type IntegrationConfigurationModel struct {
 	Name                     types.String                              `tfsdk:"name" json:"name,required,no_refresh"`
 	ConfigData               *map[string]jsontypes.Normalized          `tfsdk:"config_data" json:"configData,required,no_refresh"`
 	Credentials              *IntegrationConfigurationCredentialsModel `tfsdk:"credentials" json:"credentials,required,no_refresh"`
+	Version                  types.Int64                               `tfsdk:"version" json:"version,computed_optional"`
 	Authorized               types.Bool                                `tfsdk:"authorized" json:"authorized,computed,no_refresh"`
 	CreatedBy                types.String                              `tfsdk:"created_by" json:"createdBy,computed"`
 	DtCompleted              timetypes.RFC3339                         `tfsdk:"dt_completed" json:"dtCompleted,computed" format:"date-time"`
@@ -33,7 +34,6 @@ type IntegrationConfigurationModel struct {
 	Status                   types.String                              `tfsdk:"status" json:"status,computed"`
 	TriggerType              types.String                              `tfsdk:"trigger_type" json:"triggerType,computed,no_refresh"`
 	URL                      types.String                              `tfsdk:"url" json:"url,computed"`
-	Version                  types.Int64                               `tfsdk:"version" json:"version,computed"`
 }
 
 func (m IntegrationConfigurationModel) MarshalJSON() (data []byte, err error) {
@@ -49,5 +49,5 @@ type IntegrationConfigurationCredentialsModel struct {
 	Destination types.String `tfsdk:"destination" json:"destination,optional"`
 	Empty       types.Bool   `tfsdk:"empty" json:"empty,optional"`
 	Name        types.String `tfsdk:"name" json:"name,optional"`
-	Version     types.Int64  `tfsdk:"version" json:"version,computed"`
+	Version     types.Int64  `tfsdk:"version" json:"version,computed_optional"`
 }

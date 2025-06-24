@@ -71,10 +71,6 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Description: "The UUID of the entity.",
 							Computed:    true,
 						},
-						"version": schema.Int64Attribute{
-							Description: "The version number:\n- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.\n- **Update:** On successful Update, the version is incremented by 1 in the response.",
-							Computed:    true,
-						},
 						"account_id": schema.StringAttribute{
 							Description: "The unique identifier (UUID) for the end customer Account the Commitment is added to.",
 							Computed:    true,
@@ -242,6 +238,10 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Description: "The start date of the Commitment period in ISO-8601 format.",
 							Computed:    true,
 							CustomType:  timetypes.RFC3339Type{},
+						},
+						"version": schema.Int64Attribute{
+							Description: "The version number:\n- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.\n- **Update:** On successful Update, the version is incremented by 1 in the response.",
+							Computed:    true,
 						},
 					},
 				},

@@ -47,6 +47,7 @@ resource "m3ter_pricing" "example_pricing" {
   }
   tiers_span_plan = true
   type = "DEBIT"
+  version = 0
 }
 ```
 
@@ -107,6 +108,9 @@ For more details on creating Pricings for segment values on a Segmented Aggregat
 
 * **GLOBAL_CREDIT**. The amount calculated using the Pricing is added to the bill as a credit *(negative amount)*. To prevent negative billing, the bill will be capped at the total of other line items for the entire bill, which might include other Products the Account consumes.
 Available values: "DEBIT", "PRODUCT_CREDIT", "GLOBAL_CREDIT".
+- `version` (Number) The version number of the entity:
+- **Create entity:** Not valid for initial insertion of new entity - *do not use for Create*. On initial Create, version is set at 1 and listed in the response.
+- **Update Entity:**  On Update, version is required and must match the existing version because a check is performed to ensure sequential versioning is preserved. Version is incremented by 1 and listed in the response.
 
 ### Read-Only
 
@@ -117,9 +121,6 @@ Available values: "DEBIT", "PRODUCT_CREDIT", "GLOBAL_CREDIT".
 - `id` (String) The UUID of the entity.
 - `last_modified_by` (String) The ID of the user who last modified this item.
 - `segment_string` (String)
-- `version` (Number) The version number:
-- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.
-- **Update:** On successful Update, the version is incremented by 1 in the response.
 
 <a id="nestedatt--pricing_bands"></a>
 ### Nested Schema for `pricing_bands`

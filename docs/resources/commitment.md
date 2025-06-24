@@ -45,6 +45,7 @@ resource "m3ter_commitment" "example_commitment" {
   overage_surcharge_percent = 0
   product_ids = ["string"]
   separate_overage_usage = true
+  version = 0
 }
 ```
 
@@ -127,6 +128,9 @@ Create an array to define a series of bill dates and amounts covering specified 
 **Notes:**
 - Can be used only if no value or 0 has been defined for the `overageSurchargePercent` parameter. If you try to separate overage usage when a value other than 0 has been defined for `overageSurchargePercent`, you'll receive an error.
 - If a priced Plan is used to bill any outstanding Commitment fees due and the Plan is set up with overage pricing on a *tiered pricing structure* and you enable separate bill line items for overage usage, then overage usage charges will be rated according to the overage pricing defined for the tiered pricing on the Plan.
+- `version` (Number) The version number of the entity:
+- **Create entity:** Not valid for initial insertion of new entity - *do not use for Create*. On initial Create, version is set at 1 and listed in the response.
+- **Update Entity:**  On Update, version is required and must match the existing version because a check is performed to ensure sequential versioning is preserved. Version is incremented by 1 and listed in the response.
 
 ### Read-Only
 
@@ -136,9 +140,6 @@ Create an array to define a series of bill dates and amounts covering specified 
 - `dt_last_modified` (String) The date and time *(in ISO-8601 format)* when the Commitment was last modified.
 - `id` (String) The UUID of the entity.
 - `last_modified_by` (String) The unique identifier (UUID) of the user who last modified this Commitment.
-- `version` (Number) The version number:
-- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.
-- **Update:** On successful Update, the version is incremented by 1 in the response.
 
 <a id="nestedatt--fee_dates"></a>
 ### Nested Schema for `fee_dates`

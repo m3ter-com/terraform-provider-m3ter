@@ -3,4 +3,5 @@ resource "m3ter_transaction_type" "example_transaction_type" {
   name = "x"
   archived = true
   code = "code"
+  version = 0
 }

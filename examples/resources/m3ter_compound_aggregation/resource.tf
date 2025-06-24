@@ -12,4 +12,5 @@ resource "m3ter_compound_aggregation" "example_compound_aggregation" {
   }
   evaluate_null_aggregations = true
   product_id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+  version = 0
 }

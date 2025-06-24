@@ -29,8 +29,8 @@ data "m3ter_balances" "example_balances" {
 
 - `account_id` (String) The unique identifier (UUID) for the end customer's account.
 - `contract` (String)
-- `end_date_end` (String) Only include Balances with end dates earlier than this date.
-- `end_date_start` (String) Only include Balances with end dates equal to or later than this date.
+- `end_date_end` (String) Only include Balances with end dates earlier than this date. If a Balance has a rollover amount configured, then the `rolloverEndDate` will be used as the end date.
+- `end_date_start` (String) Only include Balances with end dates equal to or later than this date. If a Balance has a rollover amount configured, then the `rolloverEndDate` will be used as the end date.
 - `max_items` (Number) Max items to fetch, default: 1000
 - `org_id` (String, Deprecated)
 

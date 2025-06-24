@@ -54,7 +54,6 @@ func (m *CompoundAggregationsDataSourceModel) toListParams(_ context.Context) (p
 
 type CompoundAggregationsItemsDataSourceModel struct {
 	ID                       types.String                                    `tfsdk:"id" json:"id,computed"`
-	Version                  types.Int64                                     `tfsdk:"version" json:"version,computed"`
 	AccountingProductID      types.String                                    `tfsdk:"accounting_product_id" json:"accountingProductId,computed"`
 	Calculation              types.String                                    `tfsdk:"calculation" json:"calculation,computed"`
 	Code                     types.String                                    `tfsdk:"code" json:"code,computed"`
@@ -70,4 +69,5 @@ type CompoundAggregationsItemsDataSourceModel struct {
 	Rounding                 types.String                                    `tfsdk:"rounding" json:"rounding,computed"`
 	Segments                 customfield.List[customfield.Map[types.String]] `tfsdk:"segments" json:"segments,computed"`
 	Unit                     types.String                                    `tfsdk:"unit" json:"unit,computed"`
+	Version                  types.Int64                                     `tfsdk:"version" json:"version,computed"`
 }

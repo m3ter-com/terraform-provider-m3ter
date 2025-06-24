@@ -5,4 +5,5 @@ resource "m3ter_product" "example_product" {
   custom_fields = {
     foo = "string"
   }
+  version = 0
 }
