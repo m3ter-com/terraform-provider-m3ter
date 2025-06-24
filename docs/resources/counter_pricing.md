@@ -35,6 +35,7 @@ resource "m3ter_counter_pricing" "example_counter_pricing" {
   pro_rate_adjustment_debit = true
   pro_rate_running_total = true
   running_total_bill_in_advance = true
+  version = 0
 }
 ```
 
@@ -95,6 +96,9 @@ resource "m3ter_counter_pricing" "example_counter_pricing" {
 * When FALSE, running totals are billed at the end of each billing period.
 
 *(Optional)*.
+- `version` (Number) The version number of the entity:
+- **Create entity:** Not valid for initial insertion of new entity - *do not use for Create*. On initial Create, version is set at 1 and listed in the response.
+- **Update Entity:**  On Update, version is required and must match the existing version because a check is performed to ensure sequential versioning is preserved. Version is incremented by 1 and listed in the response.
 
 ### Read-Only
 
@@ -103,9 +107,6 @@ resource "m3ter_counter_pricing" "example_counter_pricing" {
 - `dt_last_modified` (String) The DateTime when this item was last modified *(in ISO-8601 format)*.
 - `id` (String) The UUID of the entity.
 - `last_modified_by` (String) The ID of the user who last modified this item.
-- `version` (Number) The version number:
-- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.
-- **Update:** On successful Update, the version is incremented by 1 in the response.
 
 <a id="nestedatt--pricing_bands"></a>
 ### Nested Schema for `pricing_bands`

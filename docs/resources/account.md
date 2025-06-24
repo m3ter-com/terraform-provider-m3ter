@@ -42,6 +42,7 @@ resource "m3ter_account" "example_account" {
   parent_account_id = "parentAccountId"
   purchase_order_number = "purchaseOrderNumber"
   statement_definition_id = "statementDefinitionId"
+  version = 0
 }
 ```
 
@@ -103,6 +104,9 @@ Optional attribute - allows you to set a purchase order number that comes throug
 Bill statements can be used as informative backing sheets to invoices. Based on the usage breakdown defined in the statement definition, generated statements give a breakdown of usage charges on Account Bills, which helps customers better understand usage charges incurred over the billing period.
 
 See [Working with Bill Statements](https://www.m3ter.com/docs/guides/running-viewing-and-managing-bills/working-with-bill-statements) in the m3ter documentation for more details.
+- `version` (Number) The version number of the entity:
+- **Create entity:** Not valid for initial insertion of new entity - *do not use for Create*. On initial Create, version is set at 1 and listed in the response.
+- **Update Entity:**  On Update, version is required and must match the existing version because a check is performed to ensure sequential versioning is preserved. Version is incremented by 1 and listed in the response.
 
 ### Read-Only
 
@@ -111,9 +115,6 @@ See [Working with Bill Statements](https://www.m3ter.com/docs/guides/running-vie
 - `dt_last_modified` (String) The DateTime when the Account was last modified *(in ISO 8601 format)*.
 - `id` (String) The UUID of the entity.
 - `last_modified_by` (String) The ID of the user who last modified the Account.
-- `version` (Number) The version number:
-- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.
-- **Update:** On successful Update, the version is incremented by 1 in the response.
 
 <a id="nestedatt--address"></a>
 ### Nested Schema for `address`

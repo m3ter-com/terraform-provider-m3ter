@@ -22,6 +22,7 @@ type CompoundAggregationModel struct {
 	EvaluateNullAggregations types.Bool                                      `tfsdk:"evaluate_null_aggregations" json:"evaluateNullAggregations,optional"`
 	ProductID                types.String                                    `tfsdk:"product_id" json:"productId,optional"`
 	CustomFields             types.Dynamic                                   `tfsdk:"custom_fields" json:"customFields,optional"`
+	Version                  types.Int64                                     `tfsdk:"version" json:"version,computed_optional"`
 	Aggregation              types.String                                    `tfsdk:"aggregation" json:"aggregation,computed,no_refresh"`
 	CreatedBy                types.String                                    `tfsdk:"created_by" json:"createdBy,computed"`
 	CustomSql                types.String                                    `tfsdk:"custom_sql" json:"customSql,computed,no_refresh"`
@@ -31,7 +32,6 @@ type CompoundAggregationModel struct {
 	LastModifiedBy           types.String                                    `tfsdk:"last_modified_by" json:"lastModifiedBy,computed"`
 	MeterID                  types.String                                    `tfsdk:"meter_id" json:"meterId,computed,no_refresh"`
 	TargetField              types.String                                    `tfsdk:"target_field" json:"targetField,computed,no_refresh"`
-	Version                  types.Int64                                     `tfsdk:"version" json:"version,computed"`
 	SegmentedFields          customfield.List[types.String]                  `tfsdk:"segmented_fields" json:"segmentedFields,computed,no_refresh"`
 	Segments                 customfield.List[customfield.Map[types.String]] `tfsdk:"segments" json:"segments,computed"`
 }

@@ -18,6 +18,7 @@ resource "m3ter_transaction_type" "example_transaction_type" {
   name = "x"
   archived = true
   code = "code"
+  version = 0
 }
 ```
 
@@ -36,6 +37,9 @@ resource "m3ter_transaction_type" "example_transaction_type" {
 * FALSE - the entity is not in the archived state.
 - `code` (String) The short code for the entity.
 - `org_id` (String, Deprecated)
+- `version` (Number) The version number of the entity:
+- **Create entity:** Not valid for initial insertion of new entity - *do not use for Create*. On initial Create, version is set at 1 and listed in the response.
+- **Update Entity:**  On Update, version is required and must match the existing version because a check is performed to ensure sequential versioning is preserved. Version is incremented by 1 and listed in the response.
 
 ### Read-Only
 
@@ -44,9 +48,6 @@ resource "m3ter_transaction_type" "example_transaction_type" {
 - `dt_last_modified` (String) The date and time *(in ISO-8601 format)* when the TransactionType was last modified.
 - `id` (String) The UUID of the entity.
 - `last_modified_by` (String) The unique identifier (UUID) of the user who last modified this TransactionType.
-- `version` (Number) The version number:
-- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.
-- **Update:** On successful Update, the version is incremented by 1 in the response.
 
 ## Import
 

@@ -22,6 +22,7 @@ resource "m3ter_notification_configuration" "example_notification_configuration"
   active = true
   always_fire_event = true
   calculation = "calculation"
+  version = 0
 }
 ```
 
@@ -52,6 +53,10 @@ Calculations can reference numeric, string, and boolean Event fields.
 
 See [Creating Calculations](https://www.m3ter.com/docs/guides/utilizing-events-and-notifications/key-concepts-and-relationships#creating-calculations) in the m3ter documentation for more information.
 - `org_id` (String, Deprecated)
+- `version` (Number) The version number for the Notification:
+
+- **Create:** Not valid for initial insertion of new entity - *do not use for Create*. On initial Create, version is set at 1 and listed in the response.
+- **Update:** On Update, version is required and must match the existing version because a check is performed to ensure sequential versioning is preserved. Version is incremented by 1 and listed in the response.
 
 ### Read-Only
 
@@ -60,9 +65,6 @@ See [Creating Calculations](https://www.m3ter.com/docs/guides/utilizing-events-a
 - `dt_last_modified` (String) The DateTime when this item was last modified *(in ISO-8601 format)*.
 - `id` (String) The UUID of the entity.
 - `last_modified_by` (String) The ID of the user who last modified this item.
-- `version` (Number) The version number:
-- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.
-- **Update:** On successful Update, the version is incremented by 1 in the response.
 
 ## Import
 

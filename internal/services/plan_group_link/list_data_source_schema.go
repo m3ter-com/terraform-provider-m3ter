@@ -53,10 +53,6 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Description: "The UUID of the entity.",
 							Computed:    true,
 						},
-						"version": schema.Int64Attribute{
-							Description: "The version number:\n- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.\n- **Update:** On successful Update, the version is incremented by 1 in the response.",
-							Computed:    true,
-						},
 						"created_by": schema.StringAttribute{
 							Description: "The id of the user who created this plan group link.",
 							Computed:    true,
@@ -81,6 +77,10 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 						},
 						"plan_id": schema.StringAttribute{
 							Description: "ID of the linked Plan",
+							Computed:    true,
+						},
+						"version": schema.Int64Attribute{
+							Description: "The version number:\n- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.\n- **Update:** On successful Update, the version is incremented by 1 in the response.",
 							Computed:    true,
 						},
 					},

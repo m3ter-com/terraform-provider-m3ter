@@ -73,10 +73,6 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Description: "The unique identifier (UUID) of the m3ter entity.",
 							Computed:    true,
 						},
-						"version": schema.Int64Attribute{
-							Description: "The version number:\n- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.\n- **Update:** On successful Update, the version is incremented by 1 in the response.",
-							Computed:    true,
-						},
 						"created_by": schema.StringAttribute{
 							Description: "The ID of the user who created this item.",
 							Computed:    true,
@@ -97,6 +93,10 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 						},
 						"last_modified_by": schema.StringAttribute{
 							Description: "The ID of the user who last modified this item.",
+							Computed:    true,
+						},
+						"version": schema.Int64Attribute{
+							Description: "The version number:\n- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.\n- **Update:** On successful Update, the version is incremented by 1 in the response.",
 							Computed:    true,
 						},
 					},

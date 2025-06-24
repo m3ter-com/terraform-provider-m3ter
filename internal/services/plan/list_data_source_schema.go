@@ -54,10 +54,6 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Description: "The UUID of the entity.",
 							Computed:    true,
 						},
-						"version": schema.Int64Attribute{
-							Description: "The version number:\n- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.\n- **Update:** On successful Update, the version is incremented by 1 in the response.",
-							Computed:    true,
-						},
 						"account_id": schema.StringAttribute{
 							Description: "*(Optional)*. The Account ID for which this plan was created as custom/bespoke. A custom/bespoke Plan can only be attached to the specified Account.",
 							Computed:    true,
@@ -138,6 +134,10 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 						},
 						"standing_charge_description": schema.StringAttribute{
 							Description: "Standing charge description *(displayed on the bill line item)*.",
+							Computed:    true,
+						},
+						"version": schema.Int64Attribute{
+							Description: "The version number:\n- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.\n- **Update:** On successful Update, the version is incremented by 1 in the response.",
 							Computed:    true,
 						},
 					},

@@ -35,6 +35,7 @@ resource "m3ter_meter" "example_meter" {
   }
   group_id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
   product_id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+  version = 0
 }
 ```
 
@@ -62,6 +63,9 @@ See [Working with Custom Fields](https://www.m3ter.com/docs/guides/creating-and-
 - `group_id` (String) UUID of the group the Meter belongs to. *(Optional)*.
 - `org_id` (String, Deprecated)
 - `product_id` (String) UUID of the product the Meter belongs to. *(Optional)* - if left blank, the Meter is global.
+- `version` (Number) The version number of the entity:
+- **Create entity:** Not valid for initial insertion of new entity - *do not use for Create*. On initial Create, version is set at 1 and listed in the response.
+- **Update Entity:**  On Update, version is required and must match the existing version because a check is performed to ensure sequential versioning is preserved. Version is incremented by 1 and listed in the response.
 
 ### Read-Only
 
@@ -70,9 +74,6 @@ See [Working with Custom Fields](https://www.m3ter.com/docs/guides/creating-and-
 - `dt_last_modified` (String) The DateTime when the meter was last modified *(in ISO-8601 format)*.
 - `id` (String) The UUID of the entity.
 - `last_modified_by` (String) The id of the user who last modified this meter.
-- `version` (Number) The version number:
-- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.
-- **Update:** On successful Update, the version is incremented by 1 in the response.
 
 <a id="nestedatt--data_fields"></a>
 ### Nested Schema for `data_fields`

@@ -49,7 +49,6 @@ func (m *AccountsDataSourceModel) toListParams(_ context.Context) (params m3ter.
 
 type AccountsItemsDataSourceModel struct {
 	ID                        types.String                                             `tfsdk:"id" json:"id,computed"`
-	Version                   types.Int64                                              `tfsdk:"version" json:"version,computed"`
 	Address                   customfield.NestedObject[AccountsAddressDataSourceModel] `tfsdk:"address" json:"address,computed"`
 	AutoGenerateStatementMode types.String                                             `tfsdk:"auto_generate_statement_mode" json:"autoGenerateStatementMode,computed"`
 	BillEpoch                 timetypes.RFC3339                                        `tfsdk:"bill_epoch" json:"billEpoch,computed" format:"date"`
@@ -68,6 +67,7 @@ type AccountsItemsDataSourceModel struct {
 	ParentAccountID           types.String                                             `tfsdk:"parent_account_id" json:"parentAccountId,computed"`
 	PurchaseOrderNumber       types.String                                             `tfsdk:"purchase_order_number" json:"purchaseOrderNumber,computed"`
 	StatementDefinitionID     types.String                                             `tfsdk:"statement_definition_id" json:"statementDefinitionId,computed"`
+	Version                   types.Int64                                              `tfsdk:"version" json:"version,computed"`
 }
 
 type AccountsAddressDataSourceModel struct {

@@ -27,6 +27,7 @@ resource "m3ter_account_plan" "example_account_plan" {
   end_date = "2019-12-27T18:11:19.117Z"
   plan_group_id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
   plan_id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+  version = 0
 }
 ```
 
@@ -67,6 +68,9 @@ See [Working with Custom Fields](https://www.m3ter.com/docs/guides/creating-and-
 - `plan_id` (String) The unique identifier (UUID) of the Plan to be attached to the Account to create an AccountPlan.
 
 **Note:** Exclusive of the `planGroupId` request parameter - exactly one of `planId` or `planGroupId` must be used per call.
+- `version` (Number) The version number of the entity:
+- **Create entity:** Not valid for initial insertion of new entity - *do not use for Create*. On initial Create, version is set at 1 and listed in the response.
+- **Update Entity:**  On Update, version is required and must match the existing version because a check is performed to ensure sequential versioning is preserved. Version is incremented by 1 and listed in the response.
 
 ### Read-Only
 
@@ -78,9 +82,6 @@ See [Working with Custom Fields](https://www.m3ter.com/docs/guides/creating-and-
 - `product_id` (String) The unique identifier (UUID) for the Product associated with the AccountPlan.
 
 **Note:** Not present in response for AccountPlanGroup - Plan Groups can contain multiple Plans belonging to different Products.
-- `version` (Number) The version number:
-- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.
-- **Update:** On successful Update, the version is incremented by 1 in the response.
 
 ## Import
 

@@ -66,7 +66,6 @@ func (m *CounterAdjustmentsDataSourceModel) toListParams(_ context.Context) (par
 
 type CounterAdjustmentsItemsDataSourceModel struct {
 	ID                  types.String      `tfsdk:"id" json:"id,computed"`
-	Version             types.Int64       `tfsdk:"version" json:"version,computed"`
 	AccountID           types.String      `tfsdk:"account_id" json:"accountId,computed"`
 	CounterID           types.String      `tfsdk:"counter_id" json:"counterId,computed"`
 	CreatedBy           types.String      `tfsdk:"created_by" json:"createdBy,computed"`
@@ -76,4 +75,5 @@ type CounterAdjustmentsItemsDataSourceModel struct {
 	LastModifiedBy      types.String      `tfsdk:"last_modified_by" json:"lastModifiedBy,computed"`
 	PurchaseOrderNumber types.String      `tfsdk:"purchase_order_number" json:"purchaseOrderNumber,computed"`
 	Value               types.Int64       `tfsdk:"value" json:"value,computed"`
+	Version             types.Int64       `tfsdk:"version" json:"version,computed"`
 }

@@ -32,7 +32,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				PlanModifiers:      []planmodifier.String{stringplanmodifier.RequiresReplace()},
 			},
 			"aggregation": schema.StringAttribute{
-				Description: "Specifies the computation method applied to usage data collected in `targetField`. Aggregation unit value depends on the **Category** configured for the selected targetField.\n\nEnum: \n\n* **SUM**. Adds the values. Can be applied to a **Measure**, **Income**, or **Cost** `targetField`.\n\n* **MIN**. Uses the minimum value. Can be applied to a **Measure**, **Income**, or **Cost** `targetField`.\n\n* **MAX**. Uses the maximum value. Can be applied to a **Measure**, **Income**, or **Cost** `targetField`.\n\n* **COUNT**. Counts the number of values. Can be applied to a **Measure**, **Income**, or **Cost** `targetField`.\n\n* **LATEST**. Uses the most recent value. Can be applied to a **Measure**, **Income**, or **Cost** `targetField`. Note: Based on the timestamp (`ts`) value of usage data measurement submissions. If using this method, please ensure *distinct* `ts` values are used for usage data measurment submissions.\n\n* **MEAN**. Uses the arithmetic mean of the values. Can be applied to a **Measure**, **Income**, or **Cost** `targetField`.\n\n* **UNIQUE**. Uses unique values and returns a count of the number of unique values. Can be applied to a **Metadata** `targetField`.\nAvailable values: \"SUM\", \"MIN\", \"MAX\", \"COUNT\", \"LATEST\", \"MEAN\", \"UNIQUE\".",
+				Description: "Specifies the computation method applied to usage data collected in `targetField`. Aggregation unit value depends on the **Category** configured for the selected targetField.\n\nEnum: \n\n* **SUM**. Adds the values. Can be applied to a **Measure**, **Income**, or **Cost** `targetField`.\n\n* **MIN**. Uses the minimum value. Can be applied to a **Measure**, **Income**, or **Cost** `targetField`.\n\n* **MAX**. Uses the maximum value. Can be applied to a **Measure**, **Income**, or **Cost** `targetField`.\n\n* **COUNT**. Counts the number of values. Can be applied to a **Measure**, **Income**, or **Cost** `targetField`.\n\n* **LATEST**. Uses the most recent value. Can be applied to a **Measure**, **Income**, or **Cost** `targetField`. Note: Based on the timestamp (`ts`) value of usage data measurement submissions. If using this method, please ensure *distinct* `ts` values are used for usage data measurment submissions.\n\n* **MEAN**. Uses the arithmetic mean of the values. Can be applied to a **Measure**, **Income**, or **Cost** `targetField`.\n\n* **UNIQUE**. Uses unique values and returns a count of the number of unique values. Can be applied to a **Metadata** `targetField`.\nAvailable values: \"SUM\", \"MIN\", \"MAX\", \"COUNT\", \"LATEST\", \"MEAN\", \"UNIQUE\", \"CUSTOM_SQL\".",
 				Required:    true,
 				Validators: []validator.String{
 					stringvalidator.OneOfCaseInsensitive(
@@ -43,6 +43,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 						"LATEST",
 						"MEAN",
 						"UNIQUE",
+						"CUSTOM_SQL",
 					),
 				},
 			},
@@ -115,6 +116,11 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 			"custom_fields": schema.DynamicAttribute{
 				Optional: true,
 			},
+			"version": schema.Int64Attribute{
+				Description: "The version number of the entity:\n- **Create entity:** Not valid for initial insertion of new entity - *do not use for Create*. On initial Create, version is set at 1 and listed in the response.\n- **Update Entity:**  On Update, version is required and must match the existing version because a check is performed to ensure sequential versioning is preserved. Version is incremented by 1 and listed in the response.",
+				Computed:    true,
+				Optional:    true,
+			},
 			"created_by": schema.StringAttribute{
 				Description: "The id of the user who created this aggregation.",
 				Computed:    true,
@@ -131,10 +137,6 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 			},
 			"last_modified_by": schema.StringAttribute{
 				Description: "The id of the user who last modified this aggregation.",
-				Computed:    true,
-			},
-			"version": schema.Int64Attribute{
-				Description: "The version number:\n- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.\n- **Update:** On successful Update, the version is incremented by 1 in the response.",
 				Computed:    true,
 			},
 		},

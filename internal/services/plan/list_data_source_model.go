@@ -52,7 +52,6 @@ func (m *PlansDataSourceModel) toListParams(_ context.Context) (params m3ter.Pla
 
 type PlansItemsDataSourceModel struct {
 	ID                                types.String      `tfsdk:"id" json:"id,computed"`
-	Version                           types.Int64       `tfsdk:"version" json:"version,computed"`
 	AccountID                         types.String      `tfsdk:"account_id" json:"accountId,computed"`
 	Bespoke                           types.Bool        `tfsdk:"bespoke" json:"bespoke,computed"`
 	Code                              types.String      `tfsdk:"code" json:"code,computed"`
@@ -73,4 +72,5 @@ type PlansItemsDataSourceModel struct {
 	StandingChargeAccountingProductID types.String      `tfsdk:"standing_charge_accounting_product_id" json:"standingChargeAccountingProductId,computed"`
 	StandingChargeBillInAdvance       types.Bool        `tfsdk:"standing_charge_bill_in_advance" json:"standingChargeBillInAdvance,computed"`
 	StandingChargeDescription         types.String      `tfsdk:"standing_charge_description" json:"standingChargeDescription,computed"`
+	Version                           types.Int64       `tfsdk:"version" json:"version,computed"`
 }

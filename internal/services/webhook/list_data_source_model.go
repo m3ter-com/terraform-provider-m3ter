@@ -42,7 +42,6 @@ func (m *WebhooksDataSourceModel) toListParams(_ context.Context) (params m3ter.
 
 type WebhooksItemsDataSourceModel struct {
 	ID             types.String                                                 `tfsdk:"id" json:"id,computed"`
-	Version        types.Int64                                                  `tfsdk:"version" json:"version,computed"`
 	Active         types.Bool                                                   `tfsdk:"active" json:"active,computed"`
 	Code           types.String                                                 `tfsdk:"code" json:"code,computed"`
 	CreatedBy      types.String                                                 `tfsdk:"created_by" json:"createdBy,computed"`
@@ -53,13 +52,13 @@ type WebhooksItemsDataSourceModel struct {
 	LastModifiedBy types.String                                                 `tfsdk:"last_modified_by" json:"lastModifiedBy,computed"`
 	Name           types.String                                                 `tfsdk:"name" json:"name,computed"`
 	URL            types.String                                                 `tfsdk:"url" json:"url,computed"`
+	Version        types.Int64                                                  `tfsdk:"version" json:"version,computed"`
 }
 
 type WebhooksCredentialsDataSourceModel struct {
 	ID             types.String      `tfsdk:"id" json:"id,computed"`
 	Destination    types.String      `tfsdk:"destination" json:"destination,computed"`
 	Type           types.String      `tfsdk:"type" json:"type,computed"`
-	Version        types.Int64       `tfsdk:"version" json:"version,computed"`
 	APIKey         types.String      `tfsdk:"api_key" json:"apiKey,computed"`
 	CreatedBy      types.String      `tfsdk:"created_by" json:"createdBy,computed"`
 	DestinationID  types.String      `tfsdk:"destination_id" json:"destinationId,computed"`
@@ -68,4 +67,5 @@ type WebhooksCredentialsDataSourceModel struct {
 	LastModifiedBy types.String      `tfsdk:"last_modified_by" json:"lastModifiedBy,computed"`
 	Name           types.String      `tfsdk:"name" json:"name,computed"`
 	Secret         types.String      `tfsdk:"secret" json:"secret,computed"`
+	Version        types.Int64       `tfsdk:"version" json:"version,computed"`
 }

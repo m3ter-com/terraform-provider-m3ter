@@ -27,6 +27,7 @@ resource "m3ter_compound_aggregation" "example_compound_aggregation" {
   }
   evaluate_null_aggregations = true
   product_id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+  version = 0
 }
 ```
 
@@ -66,6 +67,9 @@ Available values: "UP", "DOWN", "NEAREST", "NONE".
 - `product_id` (String) Unique identifier (UUID) of the Product the CompoundAggregation belongs to.
 
 **Note:** Omit this parameter if you want to create a *Global* CompoundAggregation.
+- `version` (Number) The version number of the entity:
+- **Create entity:** Not valid for initial insertion of new entity - *do not use for Create*. On initial Create, version is set at 1 and listed in the response.
+- **Update Entity:**  On Update, version is required and must match the existing version because a check is performed to ensure sequential versioning is preserved. Version is incremented by 1 and listed in the response.
 
 ### Read-Only
 
@@ -86,7 +90,7 @@ Enum:
 * **MEAN**. Uses the arithmetic mean of the values. Can be applied to a **Measure**, **Income**, or **Cost** `targetField`.
 
 * **UNIQUE**. Uses unique values and returns a count of the number of unique values. Can be applied to a **Metadata** `targetField`.
-Available values: "SUM", "MIN", "MAX", "COUNT", "LATEST", "MEAN", "UNIQUE".
+Available values: "SUM", "MIN", "MAX", "COUNT", "LATEST", "MEAN", "UNIQUE", "CUSTOM_SQL".
 - `created_by` (String) The unique identifier (UUID) of the user who created this CompoundAggregation.
 - `custom_sql` (String)
 - `default_value` (Number) Aggregation value used when no usage data is available to be aggregated. *(Optional)*.
@@ -108,9 +112,6 @@ String `dataFields` on the target Meter can be segmented. Any string `derivedFie
 
 Contains the values that are to be used as the segments, read from the fields in the meter pointed at by `segmentedFields`.
 - `target_field` (String) `Code` of the target `dataField` or `derivedField` on the Meter used as the basis for the Aggregation.
-- `version` (Number) The version number:
-- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.
-- **Update:** On successful Update, the version is incremented by 1 in the response.
 
 ## Import
 

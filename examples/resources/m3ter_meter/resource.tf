@@ -20,4 +20,5 @@ resource "m3ter_meter" "example_meter" {
   }
   group_id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
   product_id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+  version = 0
 }

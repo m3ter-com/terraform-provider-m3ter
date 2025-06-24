@@ -18,4 +18,5 @@ resource "m3ter_aggregation" "example_aggregation" {
   segments = [{
     foo = "string"
   }]
+  version = 0
 }

@@ -27,4 +27,5 @@ resource "m3ter_account" "example_account" {
   parent_account_id = "parentAccountId"
   purchase_order_number = "purchaseOrderNumber"
   statement_definition_id = "statementDefinitionId"
+  version = 0
 }

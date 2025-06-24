@@ -44,10 +44,6 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Description: "The UUID of the entity.",
 							Computed:    true,
 						},
-						"version": schema.Int64Attribute{
-							Description: "The version number:\n- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.\n- **Update:** On successful Update, the version is incremented by 1 in the response.",
-							Computed:    true,
-						},
 						"active": schema.BoolAttribute{
 							Computed: true,
 						},
@@ -73,10 +69,6 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 								},
 								"type": schema.StringAttribute{
 									Description: "the type of credentials",
-									Computed:    true,
-								},
-								"version": schema.Int64Attribute{
-									Description: "The version number:\n- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.\n- **Update:** On successful Update, the version is incremented by 1 in the response.",
 									Computed:    true,
 								},
 								"api_key": schema.StringAttribute{
@@ -113,6 +105,10 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 									Description: "The secret associated with the API key. This secret is used in conjunction with the API key to generate a signature for secure authentication.",
 									Computed:    true,
 								},
+								"version": schema.Int64Attribute{
+									Description: "The version number:\n- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.\n- **Update:** On successful Update, the version is incremented by 1 in the response.",
+									Computed:    true,
+								},
 							},
 						},
 						"description": schema.StringAttribute{
@@ -137,6 +133,10 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 						},
 						"url": schema.StringAttribute{
 							Description: "The URL to which webhook requests are sent.",
+							Computed:    true,
+						},
+						"version": schema.Int64Attribute{
+							Description: "The version number:\n- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.\n- **Update:** On successful Update, the version is incremented by 1 in the response.",
 							Computed:    true,
 						},
 					},

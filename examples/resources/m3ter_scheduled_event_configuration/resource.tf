@@ -4,4 +4,5 @@ resource "m3ter_scheduled_event_configuration" "example_scheduled_event_configur
   field = "x"
   name = "x"
   offset = 0
+  version = 0
 }

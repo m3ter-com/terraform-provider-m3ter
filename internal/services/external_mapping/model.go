@@ -17,11 +17,11 @@ type ExternalMappingModel struct {
 	M3terEntity         types.String      `tfsdk:"m3ter_entity" json:"m3terEntity,required"`
 	M3terID             types.String      `tfsdk:"m3ter_id" json:"m3terId,required"`
 	IntegrationConfigID types.String      `tfsdk:"integration_config_id" json:"integrationConfigId,optional"`
+	Version             types.Int64       `tfsdk:"version" json:"version,computed_optional"`
 	CreatedBy           types.String      `tfsdk:"created_by" json:"createdBy,computed"`
 	DtCreated           timetypes.RFC3339 `tfsdk:"dt_created" json:"dtCreated,computed" format:"date-time"`
 	DtLastModified      timetypes.RFC3339 `tfsdk:"dt_last_modified" json:"dtLastModified,computed" format:"date-time"`
 	LastModifiedBy      types.String      `tfsdk:"last_modified_by" json:"lastModifiedBy,computed"`
-	Version             types.Int64       `tfsdk:"version" json:"version,computed"`
 }
 
 func (m ExternalMappingModel) MarshalJSON() (data []byte, err error) {

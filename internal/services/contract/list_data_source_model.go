@@ -52,7 +52,6 @@ func (m *ContractsDataSourceModel) toListParams(_ context.Context) (params m3ter
 
 type ContractsItemsDataSourceModel struct {
 	ID                  types.String      `tfsdk:"id" json:"id,computed"`
-	Version             types.Int64       `tfsdk:"version" json:"version,computed"`
 	AccountID           types.String      `tfsdk:"account_id" json:"accountId,computed"`
 	Code                types.String      `tfsdk:"code" json:"code,computed"`
 	CreatedBy           types.String      `tfsdk:"created_by" json:"createdBy,computed"`
@@ -65,4 +64,5 @@ type ContractsItemsDataSourceModel struct {
 	Name                types.String      `tfsdk:"name" json:"name,computed"`
 	PurchaseOrderNumber types.String      `tfsdk:"purchase_order_number" json:"purchaseOrderNumber,computed"`
 	StartDate           timetypes.RFC3339 `tfsdk:"start_date" json:"startDate,computed" format:"date"`
+	Version             types.Int64       `tfsdk:"version" json:"version,computed"`
 }
