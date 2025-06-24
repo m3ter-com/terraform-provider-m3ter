@@ -155,7 +155,7 @@ func (p *M3terProvider) Configure(ctx context.Context, req provider.ConfigureReq
 		return
 	}
 
-	client := m3ter.NewClient(
+	client := m3ter.NewClientWithServiceUserAuth(
 		opts...,
 	)
 
