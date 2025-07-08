@@ -15,7 +15,7 @@ description: |-
 ```terraform
 resource "m3ter_account" "example_account" {
   org_id = "orgId"
-  code = "JS!?Q0]r] ]$]"
+  code = "S?oC\"$]C] ]]]]]5]"
   email_address = "dev@stainless.com"
   name = "x"
   address = {

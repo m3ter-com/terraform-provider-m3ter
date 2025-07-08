@@ -15,7 +15,7 @@ description: |-
 ```terraform
 resource "m3ter_plan" "example_plan" {
   org_id = "orgId"
-  code = "JS!?Q0]r] ]$]"
+  code = "S?oC\"$]C] ]]]]]5]"
   name = "x"
   plan_template_id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
   account_id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"

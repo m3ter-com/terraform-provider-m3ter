@@ -5,7 +5,7 @@ resource "m3ter_balance" "example_balance" {
   end_date = "2019-12-27T18:11:19.117Z"
   start_date = "2019-12-27T18:11:19.117Z"
   balance_draw_down_description = "balanceDrawDownDescription"
-  code = "JS!?Q0]r] ]$]"
+  code = "S?oC\"$]C] ]]]]]5]"
   consumptions_accounting_product_id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
   contract_id = "contractId"
   custom_fields = {
