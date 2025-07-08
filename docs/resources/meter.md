@@ -15,7 +15,7 @@ description: |-
 ```terraform
 resource "m3ter_meter" "example_meter" {
   org_id = "orgId"
-  code = "JS!?Q0]r] ]$]"
+  code = "S?oC\"$]C] ]]]]]5]"
   data_fields = [{
     category = "WHO"
     code = "{1{}}_"

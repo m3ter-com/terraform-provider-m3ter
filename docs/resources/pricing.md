@@ -25,7 +25,7 @@ resource "m3ter_pricing" "example_pricing" {
   start_date = "2019-12-27T18:11:19.117Z"
   accounting_product_id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
   aggregation_id = "aggregationId"
-  code = "JS!?Q0]r] ]$]"
+  code = "S?oC\"$]C] ]]]]]5]"
   compound_aggregation_id = "compoundAggregationId"
   cumulative = true
   description = "description"

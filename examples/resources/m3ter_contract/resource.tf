@@ -4,7 +4,7 @@ resource "m3ter_contract" "example_contract" {
   end_date = "2019-12-27"
   name = "x"
   start_date = "2019-12-27"
-  code = "JS!?Q0]r] ]$]"
+  code = "S?oC\"$]C] ]]]]]5]"
   custom_fields = {
     foo = "string"
   }

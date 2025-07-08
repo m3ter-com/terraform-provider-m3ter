@@ -4,7 +4,7 @@ resource "m3ter_account_plan" "example_account_plan" {
   start_date = "2019-12-27T18:11:19.117Z"
   bill_epoch = "2019-12-27"
   child_billing_mode = "PARENT_SUMMARY"
-  code = "JS!?Q0]r] ]$]"
+  code = "S?oC\"$]C] ]]]]]5]"
   contract_id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
   custom_fields = {
     foo = "string"

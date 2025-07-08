@@ -21,7 +21,7 @@ resource "m3ter_plan_template" "example_plan_template" {
   product_id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
   standing_charge = 0
   bill_frequency_interval = 1
-  code = "JS!?Q0]r] ]$]"
+  code = "S?oC\"$]C] ]]]]]5]"
   custom_fields = {
     foo = "string"
   }
