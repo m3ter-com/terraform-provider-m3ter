@@ -1,5 +1,30 @@
 # Changelog
 
+## 0.1.0-alpha (2025-07-09)
+
+Full Changelog: [v0.1.0-alpha.1...v0.1.0-alpha](https://github.com/m3ter-com/terraform-provider-m3ter/compare/v0.1.0-alpha.1...v0.1.0-alpha)
+
+### Features
+
+* **api:** mark `version` attribute as computed in Terraform ([ed6889c](https://github.com/m3ter-com/terraform-provider-m3ter/commit/ed6889cf6d774c8308a644db52632dc4c16d23af))
+* **api:** Set "version" attribute to "computed_optional" in Terraform ([ab7aeff](https://github.com/m3ter-com/terraform-provider-m3ter/commit/ab7aeff6a2c0b507b3cc492001894e0e7c80ce1a))
+
+
+### Bug Fixes
+
+* **ci:** release-doctor — report correct token name ([f483287](https://github.com/m3ter-com/terraform-provider-m3ter/commit/f4832877b2ac41187aeb25025f62f7cffc58915a))
+* fix attribute definitions for collections of dynamic values ([c14684a](https://github.com/m3ter-com/terraform-provider-m3ter/commit/c14684a911eec8e723f0711aa8deaf649a92816c))
+* null nested attribute decoding ([55aedf4](https://github.com/m3ter-com/terraform-provider-m3ter/commit/55aedf4e6c93ee1973de7ce0ee1fd82af200b7e1))
+
+
+### Chores
+
+* **ci:** only run for pushes and fork pull requests ([6b210fe](https://github.com/m3ter-com/terraform-provider-m3ter/commit/6b210fee51cd2248e94f59ee12cd5d08079023de))
+* **internal:** codegen related update ([3245fe0](https://github.com/m3ter-com/terraform-provider-m3ter/commit/3245fe0387cc50dd36ab3c9d36aa6fdf0b59b907))
+* **internal:** codegen related update ([017ecf1](https://github.com/m3ter-com/terraform-provider-m3ter/commit/017ecf1992be4b33d27c881d5517b87df8b9f44e))
+* **internal:** codegen related update ([20c2d23](https://github.com/m3ter-com/terraform-provider-m3ter/commit/20c2d23fd6f9994323a1b3450df6c98a4d748a14))
+* **internal:** update examples ([edbd61c](https://github.com/m3ter-com/terraform-provider-m3ter/commit/edbd61c381207c06822ed23c6160613e70bfd5b2))
+
 ## 0.1.0-alpha.1 (2025-06-17)
 
 Full Changelog: [v0.0.1-alpha.0...v0.1.0-alpha.1](https://github.com/m3ter-com/terraform-provider-m3ter/compare/v0.0.1-alpha.0...v0.1.0-alpha.1)
