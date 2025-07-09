@@ -31,7 +31,6 @@ terraform {
 provider "m3ter" {
   api_key = "My API Key" # or set M3TER_API_KEY env variable
   api_secret = "My API Secret" # or set M3TER_API_SECRET env variable
-  token = "My Token" # or set M3TER_API_TOKEN env variable
   org_id = "My Org ID" # or set M3TER_ORG_ID env variable
 }
 
