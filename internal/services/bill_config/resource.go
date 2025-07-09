@@ -113,6 +113,7 @@ func (r *BillConfigResource) Update(ctx context.Context, req resource.UpdateRequ
 		return
 	}
 
+	data.Version = state.Version
 	params := m3ter.BillConfigUpdateParams{}
 
 	if !data.ID.IsNull() {

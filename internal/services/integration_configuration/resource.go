@@ -113,6 +113,7 @@ func (r *IntegrationConfigurationResource) Update(ctx context.Context, req resou
 		return
 	}
 
+	data.Version = state.Version
 	params := m3ter.IntegrationConfigurationUpdateParams{}
 
 	if !data.OrgID.IsNull() {

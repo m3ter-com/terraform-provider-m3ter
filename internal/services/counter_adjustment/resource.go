@@ -113,6 +113,7 @@ func (r *CounterAdjustmentResource) Update(ctx context.Context, req resource.Upd
 		return
 	}
 
+	data.Version = state.Version
 	params := m3ter.CounterAdjustmentUpdateParams{}
 
 	if !data.OrgID.IsNull() {

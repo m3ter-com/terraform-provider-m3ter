@@ -113,6 +113,7 @@ func (r *PricingResource) Update(ctx context.Context, req resource.UpdateRequest
 		return
 	}
 
+	data.Version = state.Version
 	params := m3ter.PricingUpdateParams{}
 
 	if !data.OrgID.IsNull() {

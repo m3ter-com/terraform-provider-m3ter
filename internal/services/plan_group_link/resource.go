@@ -113,6 +113,7 @@ func (r *PlanGroupLinkResource) Update(ctx context.Context, req resource.UpdateR
 		return
 	}
 
+	data.Version = state.Version
 	params := m3ter.PlanGroupLinkUpdateParams{}
 
 	if !data.OrgID.IsNull() {
