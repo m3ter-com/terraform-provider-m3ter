@@ -113,6 +113,7 @@ func (r *CommitmentResource) Update(ctx context.Context, req resource.UpdateRequ
 		return
 	}
 
+	data.Version = state.Version
 	params := m3ter.CommitmentUpdateParams{}
 
 	if !data.OrgID.IsNull() {

@@ -113,6 +113,7 @@ func (r *TransactionTypeResource) Update(ctx context.Context, req resource.Updat
 		return
 	}
 
+	data.Version = state.Version
 	params := m3ter.TransactionTypeUpdateParams{}
 
 	if !data.OrgID.IsNull() {

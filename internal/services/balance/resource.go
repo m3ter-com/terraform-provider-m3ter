@@ -113,6 +113,7 @@ func (r *BalanceResource) Update(ctx context.Context, req resource.UpdateRequest
 		return
 	}
 
+	data.Version = state.Version
 	params := m3ter.BalanceUpdateParams{}
 
 	if !data.OrgID.IsNull() {

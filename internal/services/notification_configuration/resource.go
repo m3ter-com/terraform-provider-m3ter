@@ -113,6 +113,7 @@ func (r *NotificationConfigurationResource) Update(ctx context.Context, req reso
 		return
 	}
 
+	data.Version = state.Version
 	params := m3ter.NotificationConfigurationUpdateParams{}
 
 	if !data.OrgID.IsNull() {

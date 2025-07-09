@@ -113,6 +113,7 @@ func (r *CounterPricingResource) Update(ctx context.Context, req resource.Update
 		return
 	}
 
+	data.Version = state.Version
 	params := m3ter.CounterPricingUpdateParams{}
 
 	if !data.OrgID.IsNull() {

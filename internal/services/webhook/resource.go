@@ -110,6 +110,7 @@ func (r *WebhookResource) Update(ctx context.Context, req resource.UpdateRequest
 		return
 	}
 
+	data.Version = state.Version
 	params := m3ter.WebhookUpdateParams{}
 
 	if !data.OrgID.IsNull() {

@@ -513,7 +513,7 @@ func (e *encoder) newStructTypeEncoder(t reflect.Type) encoderFunc {
 				continue
 			}
 			// Computed fields come from the server
-			if ptag.computed {
+			if ptag.computed && ptag.name != "version" {
 				continue
 			}
 

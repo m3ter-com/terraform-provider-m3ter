@@ -113,6 +113,7 @@ func (r *CreditReasonResource) Update(ctx context.Context, req resource.UpdateRe
 		return
 	}
 
+	data.Version = state.Version
 	params := m3ter.CreditReasonUpdateParams{}
 
 	if !data.OrgID.IsNull() {
