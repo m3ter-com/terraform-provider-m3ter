@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.1-alpha (2025-07-09)
+
+Full Changelog: [v0.1.0-alpha...v0.1.1-alpha](https://github.com/m3ter-com/terraform-provider-m3ter/compare/v0.1.0-alpha...v0.1.1-alpha)
+
 ## 0.1.0-alpha (2025-07-09)
 
 Full Changelog: [v0.1.0-alpha.1...v0.1.0-alpha](https://github.com/m3ter-com/terraform-provider-m3ter/compare/v0.1.0-alpha.1...v0.1.0-alpha)
