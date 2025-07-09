@@ -16,7 +16,6 @@ description: |-
 resource "m3ter_bill_config" "example_bill_config" {
   org_id = "orgId"
   bill_lock_date = "2019-12-27"
-  version = 0
 }
 ```
 
@@ -29,9 +28,6 @@ resource "m3ter_bill_config" "example_bill_config" {
 
 For example: `"2024-03-01"`.
 - `org_id` (String, Deprecated)
-- `version` (Number) The version number:
-* Default value when newly created is one.
-* On Update, version is required and must match the existing version because a check is performed to ensure sequential versioning is preserved. Version is incremented by 1 and listed in the response
 
 ### Read-Only
 
@@ -40,6 +36,9 @@ For example: `"2024-03-01"`.
 - `dt_last_modified` (String) The DateTime *(in ISO-8601 format)* when the bill config was last modified.
 - `id` (String) The Organization UUID. The Organization represents your company as a direct customer of the m3ter service.
 - `last_modified_by` (String) The id of the user who last modified this bill config.
+- `version` (Number) The version number:
+* Default value when newly created is one.
+* Incremented by 1 each time it is updated.
 
 ## Import
 

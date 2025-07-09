@@ -31,8 +31,14 @@ data "m3ter_account_plans" "example_account_plans" {
 ### Optional
 
 - `account` (String) The unique identifier (UUID) for the Account whose AccountPlans and AccountPlanGroups you want to retrieve.
-- `contract` (String)
-- `date` (String) The specific date for which you want to retrieve active AccountPlans and AccountPlanGroups.
+
+**NOTE:** Only returns the currently active AccountPlans and AccountPlanGroups for the specified Account. Use in combination with the `includeall` query parameter to return both active and inactive.
+- `contract` (String) The unique identifier (UUID) of the Contract which the AccountPlans you want to retrieve have been linked to.
+
+**NOTE:** Does not return AccountPlanGroups that have been linked to the Contract.
+- `date` (String) The specific date for which you want to retrieve AccountPlans and AccountPlanGroups.
+
+**NOTE:** Returns both active and inactive AccountPlans and AccountPlanGroups for the specified date.
 - `ids` (List of String) A list of unique identifiers (UUIDs) for specific AccountPlans and AccountPlanGroups you want to retrieve.
 - `includeall` (Boolean) A Boolean flag that specifies whether to include both active and inactive AccountPlans and AccountPlanGroups in the list.
 
@@ -40,7 +46,9 @@ data "m3ter_account_plans" "example_account_plans" {
 * **FALSE** - only active AccountPlans and AccountPlanGroups are retrieved in the list.
 - `max_items` (Number) Max items to fetch, default: 1000
 - `org_id` (String, Deprecated)
-- `plan` (String) The unique identifier (UUID) for the Plan or Plan Group whose associated AccountPlans or AccountPlanGroups you want to retrieve.
+- `plan` (String) The unique identifier (UUID) for the Plan whose associated AccountPlans you want to retrieve.
+
+**NOTE:** Does not return AccountPlanGroups if you use a `planGroupId`.
 - `product` (String) The unique identifier (UUID) for the Product whose associated AccountPlans you want to retrieve.
 
 **NOTE:** You cannot use the `product` query parameter as a single filter condition, but must always use it in combination with the `account` query parameter.

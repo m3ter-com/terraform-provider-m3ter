@@ -17,7 +17,6 @@ resource "m3ter_plan_group_link" "example_plan_group_link" {
   org_id = "orgId"
   plan_group_id = "x"
   plan_id = "x"
-  version = 0
 }
 ```
 
@@ -32,9 +31,6 @@ resource "m3ter_plan_group_link" "example_plan_group_link" {
 ### Optional
 
 - `org_id` (String, Deprecated)
-- `version` (Number) The version number of the entity:
-- **Create entity:** Not valid for initial insertion of new entity - *do not use for Create*. On initial Create, version is set at 1 and listed in the response.
-- **Update Entity:**  On Update, version is required and must match the existing version because a check is performed to ensure sequential versioning is preserved. Version is incremented by 1 and listed in the response.
 
 ### Read-Only
 
@@ -43,6 +39,9 @@ resource "m3ter_plan_group_link" "example_plan_group_link" {
 - `dt_last_modified` (String) The DateTime *(in ISO-8601 format)* when the plan group link was last modified.
 - `id` (String) The UUID of the entity.
 - `last_modified_by` (String) The id of the user who last modified this plan group link.
+- `version` (Number) The version number:
+- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.
+- **Update:** On successful Update, the version is incremented by 1 in the response.
 
 ## Import
 

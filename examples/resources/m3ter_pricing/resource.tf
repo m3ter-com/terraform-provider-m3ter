@@ -32,5 +32,4 @@ resource "m3ter_pricing" "example_pricing" {
   }
   tiers_span_plan = true
   type = "DEBIT"
-  version = 0
 }

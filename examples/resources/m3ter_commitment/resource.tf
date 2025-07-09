@@ -30,5 +30,4 @@ resource "m3ter_commitment" "example_commitment" {
   overage_surcharge_percent = 0
   product_ids = ["string"]
   separate_overage_usage = true
-  version = 0
 }

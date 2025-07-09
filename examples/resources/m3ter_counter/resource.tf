@@ -4,5 +4,4 @@ resource "m3ter_counter" "example_counter" {
   unit = "x"
   code = "S?oC\"$]C] ]]]]]5]"
   product_id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-  version = 0
 }

@@ -33,7 +33,6 @@ resource "m3ter_aggregation" "example_aggregation" {
   segments = [{
     foo = "string"
   }]
-  version = 0
 }
 ```
 
@@ -98,9 +97,6 @@ String `dataFields` on the target Meter can be segmented. Any string `derivedFie
 Enter the values that are to be used as the segments, read from the fields in the meter pointed at by `segmentedFields`.
 
 Note that you can use *wildcards* or *defaults* when setting up segment values. For more details on how to do this with an example, see [Using Wildcards - API Calls](https://www.m3ter.com/docs/guides/setting-up-usage-data-meters-and-aggregations/segmented-aggregations#using-wildcards---api-calls) in our main User Docs.
-- `version` (Number) The version number of the entity:
-- **Create entity:** Not valid for initial insertion of new entity - *do not use for Create*. On initial Create, version is set at 1 and listed in the response.
-- **Update Entity:**  On Update, version is required and must match the existing version because a check is performed to ensure sequential versioning is preserved. Version is incremented by 1 and listed in the response.
 
 ### Read-Only
 
@@ -109,6 +105,9 @@ Note that you can use *wildcards* or *defaults* when setting up segment values. 
 - `dt_last_modified` (String) The DateTime when the aggregation was last modified *(in ISO 8601 format)*.
 - `id` (String) The UUID of the entity.
 - `last_modified_by` (String) The id of the user who last modified this aggregation.
+- `version` (Number) The version number:
+- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.
+- **Update:** On successful Update, the version is incremented by 1 in the response.
 
 ## Import
 

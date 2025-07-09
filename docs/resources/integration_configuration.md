@@ -31,7 +31,6 @@ resource "m3ter_integration_configuration" "example_integration_configuration" {
   entity_type = "entityType"
   integration_credentials_id = "integrationCredentialsId"
   name = "name"
-  version = 0
 }
 ```
 
@@ -52,9 +51,6 @@ resource "m3ter_integration_configuration" "example_integration_configuration" {
 ### Optional
 
 - `org_id` (String, Deprecated)
-- `version` (Number) The version number of the entity:
-- **Create entity:** Not valid for initial insertion of new entity - *do not use for Create*. On initial Create, version is set at 1 and listed in the response.
-- **Update Entity:**  On Update, version is required and must match the existing version because a check is performed to ensure sequential versioning is preserved. Version is incremented by 1 and listed in the response.
 
 ### Read-Only
 
@@ -79,6 +75,9 @@ resource "m3ter_integration_configuration" "example_integration_configuration" {
 - `trigger_type` (String, Deprecated) Specifies the type of trigger for the integration.
 Available values: "EVENT", "SCHEDULE".
 - `url` (String) The URL of the entity in the destination system if available.
+- `version` (Number) The version number:
+- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.
+- **Update:** On successful Update, the version is incremented by 1 in the response.
 
 <a id="nestedatt--credentials"></a>
 ### Nested Schema for `credentials`
@@ -96,6 +95,9 @@ Optional:
 * TRUE - empty credentials.
 * FALSE - credential details required.
 - `name` (String) The name of the credentials
+
+Read-Only:
+
 - `version` (Number) The version number of the entity:
 - **Create entity:** Not valid for initial insertion of new entity - *do not use for Create*. On initial Create, version is set at 1 and listed in the response.
 - **Update Entity:**  On Update, version is required and must match the existing version because a check is performed to ensure sequential versioning is preserved. Version is incremented by 1 and listed in the response.

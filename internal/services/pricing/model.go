@@ -29,13 +29,13 @@ type PricingModel struct {
 	Type                      types.String                        `tfsdk:"type" json:"type,optional"`
 	Segment                   *map[string]types.String            `tfsdk:"segment" json:"segment,optional"`
 	OveragePricingBands       *[]*PricingOveragePricingBandsModel `tfsdk:"overage_pricing_bands" json:"overagePricingBands,optional"`
-	Version                   types.Int64                         `tfsdk:"version" json:"version,computed_optional"`
 	AggregationType           types.String                        `tfsdk:"aggregation_type" json:"aggregationType,computed"`
 	CreatedBy                 types.String                        `tfsdk:"created_by" json:"createdBy,computed"`
 	DtCreated                 timetypes.RFC3339                   `tfsdk:"dt_created" json:"dtCreated,computed" format:"date-time"`
 	DtLastModified            timetypes.RFC3339                   `tfsdk:"dt_last_modified" json:"dtLastModified,computed" format:"date-time"`
 	LastModifiedBy            types.String                        `tfsdk:"last_modified_by" json:"lastModifiedBy,computed"`
 	SegmentString             types.String                        `tfsdk:"segment_string" json:"segmentString,computed"`
+	Version                   types.Int64                         `tfsdk:"version" json:"version,computed"`
 }
 
 func (m PricingModel) MarshalJSON() (data []byte, err error) {

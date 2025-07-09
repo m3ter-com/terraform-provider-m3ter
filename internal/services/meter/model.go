@@ -18,11 +18,11 @@ type MeterModel struct {
 	GroupID        types.String                `tfsdk:"group_id" json:"groupId,optional"`
 	ProductID      types.String                `tfsdk:"product_id" json:"productId,optional"`
 	CustomFields   types.Dynamic               `tfsdk:"custom_fields" json:"customFields,optional"`
-	Version        types.Int64                 `tfsdk:"version" json:"version,computed_optional"`
 	CreatedBy      types.String                `tfsdk:"created_by" json:"createdBy,computed"`
 	DtCreated      timetypes.RFC3339           `tfsdk:"dt_created" json:"dtCreated,computed" format:"date-time"`
 	DtLastModified timetypes.RFC3339           `tfsdk:"dt_last_modified" json:"dtLastModified,computed" format:"date-time"`
 	LastModifiedBy types.String                `tfsdk:"last_modified_by" json:"lastModifiedBy,computed"`
+	Version        types.Int64                 `tfsdk:"version" json:"version,computed"`
 }
 
 func (m MeterModel) MarshalJSON() (data []byte, err error) {

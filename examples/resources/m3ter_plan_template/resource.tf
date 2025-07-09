@@ -18,5 +18,4 @@ resource "m3ter_plan_template" "example_plan_template" {
   standing_charge_description = "standingChargeDescription"
   standing_charge_interval = 1
   standing_charge_offset = 0
-  version = 0
 }

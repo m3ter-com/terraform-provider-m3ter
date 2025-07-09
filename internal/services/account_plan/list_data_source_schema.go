@@ -25,14 +25,15 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 				DeprecationMessage: "the org id should be set at the client level instead",
 			},
 			"account": schema.StringAttribute{
-				Description: "The unique identifier (UUID) for the Account whose AccountPlans and AccountPlanGroups you want to retrieve.",
+				Description: "The unique identifier (UUID) for the Account whose AccountPlans and AccountPlanGroups you want to retrieve.\n\n**NOTE:** Only returns the currently active AccountPlans and AccountPlanGroups for the specified Account. Use in combination with the `includeall` query parameter to return both active and inactive.",
 				Optional:    true,
 			},
 			"contract": schema.StringAttribute{
-				Optional: true,
+				Description: "The unique identifier (UUID) of the Contract which the AccountPlans you want to retrieve have been linked to.\n\n**NOTE:** Does not return AccountPlanGroups that have been linked to the Contract.",
+				Optional:    true,
 			},
 			"date": schema.StringAttribute{
-				Description: "The specific date for which you want to retrieve active AccountPlans and AccountPlanGroups.",
+				Description: "The specific date for which you want to retrieve AccountPlans and AccountPlanGroups.\n\n**NOTE:** Returns both active and inactive AccountPlans and AccountPlanGroups for the specified date.",
 				Optional:    true,
 			},
 			"includeall": schema.BoolAttribute{
@@ -40,7 +41,7 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 				Optional:    true,
 			},
 			"plan": schema.StringAttribute{
-				Description: "The unique identifier (UUID) for the Plan or Plan Group whose associated AccountPlans or AccountPlanGroups you want to retrieve.",
+				Description: "The unique identifier (UUID) for the Plan whose associated AccountPlans you want to retrieve.\n\n**NOTE:** Does not return AccountPlanGroups if you use a `planGroupId`.",
 				Optional:    true,
 			},
 			"product": schema.StringAttribute{

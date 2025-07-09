@@ -6,5 +6,4 @@ resource "m3ter_permission_policy" "example_permission_policy" {
     effect = "ALLOW"
     resource = ["string"]
   }]
-  version = 0
 }

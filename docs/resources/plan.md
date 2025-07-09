@@ -32,7 +32,6 @@ resource "m3ter_plan" "example_plan" {
   standing_charge_accounting_product_id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
   standing_charge_bill_in_advance = true
   standing_charge_description = "standingChargeDescription"
-  version = 0
 }
 ```
 
@@ -85,9 +84,6 @@ When FALSE, standing charge is billed at the end of each billing period.
 
 *(Optional)*. Overrides the setting at PlanTemplate level for standing charge billing in arrears/in advance.
 - `standing_charge_description` (String) Standing charge description *(displayed on the bill line item)*.
-- `version` (Number) The version number of the entity:
-- **Create entity:** Not valid for initial insertion of new entity - *do not use for Create*. On initial Create, version is set at 1 and listed in the response.
-- **Update Entity:**  On Update, version is required and must match the existing version because a check is performed to ensure sequential versioning is preserved. Version is incremented by 1 and listed in the response.
 
 ### Read-Only
 
@@ -97,6 +93,9 @@ When FALSE, standing charge is billed at the end of each billing period.
 - `id` (String) The UUID of the entity.
 - `last_modified_by` (String) The id of the user who last modified this plan.
 - `product_id` (String) UUID of the Product the Plan belongs to.
+- `version` (Number) The version number:
+- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.
+- **Update:** On successful Update, the version is incremented by 1 in the response.
 
 ## Import
 
