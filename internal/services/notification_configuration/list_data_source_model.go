@@ -53,7 +53,6 @@ type NotificationConfigurationsItemsDataSourceModel struct {
 	Code            types.String      `tfsdk:"code" json:"code,computed"`
 	Description     types.String      `tfsdk:"description" json:"description,computed"`
 	Name            types.String      `tfsdk:"name" json:"name,computed"`
-	Version         types.Int64       `tfsdk:"version" json:"version,computed"`
 	Active          types.Bool        `tfsdk:"active" json:"active,computed"`
 	AlwaysFireEvent types.Bool        `tfsdk:"always_fire_event" json:"alwaysFireEvent,computed"`
 	Calculation     types.String      `tfsdk:"calculation" json:"calculation,computed"`
@@ -62,4 +61,5 @@ type NotificationConfigurationsItemsDataSourceModel struct {
 	DtLastModified  timetypes.RFC3339 `tfsdk:"dt_last_modified" json:"dtLastModified,computed" format:"date-time"`
 	EventName       types.String      `tfsdk:"event_name" json:"eventName,computed"`
 	LastModifiedBy  types.String      `tfsdk:"last_modified_by" json:"lastModifiedBy,computed"`
+	Version         types.Int64       `tfsdk:"version" json:"version,computed"`
 }

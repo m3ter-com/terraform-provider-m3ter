@@ -66,7 +66,6 @@ func (m *CommitmentsDataSourceModel) toListParams(_ context.Context) (params m3t
 
 type CommitmentsItemsDataSourceModel struct {
 	ID                           types.String                                                     `tfsdk:"id" json:"id,computed"`
-	Version                      types.Int64                                                      `tfsdk:"version" json:"version,computed"`
 	AccountID                    types.String                                                     `tfsdk:"account_id" json:"accountId,computed"`
 	AccountingProductID          types.String                                                     `tfsdk:"accounting_product_id" json:"accountingProductId,computed"`
 	Amount                       types.Float64                                                    `tfsdk:"amount" json:"amount,computed"`
@@ -97,6 +96,7 @@ type CommitmentsItemsDataSourceModel struct {
 	ProductIDs                   customfield.List[types.String]                                   `tfsdk:"product_ids" json:"productIds,computed"`
 	SeparateOverageUsage         types.Bool                                                       `tfsdk:"separate_overage_usage" json:"separateOverageUsage,computed"`
 	StartDate                    timetypes.RFC3339                                                `tfsdk:"start_date" json:"startDate,computed" format:"date"`
+	Version                      types.Int64                                                      `tfsdk:"version" json:"version,computed"`
 }
 
 type CommitmentsFeeDatesDataSourceModel struct {

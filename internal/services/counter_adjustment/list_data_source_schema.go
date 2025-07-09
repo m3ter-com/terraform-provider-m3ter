@@ -69,10 +69,6 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Description: "The UUID of the entity.",
 							Computed:    true,
 						},
-						"version": schema.Int64Attribute{
-							Description: "The version number:\n- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.\n- **Update:** On successful Update, the version is incremented by 1 in the response.",
-							Computed:    true,
-						},
 						"account_id": schema.StringAttribute{
 							Description: "The Account ID the CounterAdjustment was created for.",
 							Computed:    true,
@@ -110,6 +106,10 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 						},
 						"value": schema.Int64Attribute{
 							Description: "Integer Value of the Counter that was used to make the CounterAdjustment.",
+							Computed:    true,
+						},
+						"version": schema.Int64Attribute{
+							Description: "The version number:\n- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.\n- **Update:** On successful Update, the version is incremented by 1 in the response.",
 							Computed:    true,
 						},
 					},

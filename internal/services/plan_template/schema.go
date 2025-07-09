@@ -14,7 +14,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
-	"github.com/hashicorp/terraform-plugin-framework/types"
 )
 
 var _ resource.ResourceWithConfigValidators = (*PlanTemplateResource)(nil)
@@ -120,10 +119,9 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 					int64validator.Between(0, 364),
 				},
 			},
-			"custom_fields": schema.MapAttribute{
+			"custom_fields": schema.DynamicAttribute{
 				Description: "User defined fields enabling you to attach custom data. The value for a custom field can be either a string or a number.\n\nIf `customFields` can also be defined for this entity at the Organizational level, `customField` values defined at individual level override values of `customFields` with the same name defined at Organization level.\n\nSee [Working with Custom Fields](https://www.m3ter.com/docs/guides/creating-and-managing-products/working-with-custom-fields) in the m3ter documentation for more information.",
 				Optional:    true,
-				ElementType: types.DynamicType,
 			},
 			"created_by": schema.StringAttribute{
 				Description: "The unique identifier (UUID) of the user who created this PlanTemplate.",

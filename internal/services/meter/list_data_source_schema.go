@@ -56,10 +56,6 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Description: "The UUID of the entity.",
 							Computed:    true,
 						},
-						"version": schema.Int64Attribute{
-							Description: "The version number:\n- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.\n- **Update:** On successful Update, the version is incremented by 1 in the response.",
-							Computed:    true,
-						},
 						"code": schema.StringAttribute{
 							Description: "Code of the Meter - unique short code used to identify the Meter.",
 							Computed:    true,
@@ -68,11 +64,9 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Description: "The id of the user who created this meter.",
 							Computed:    true,
 						},
-						"custom_fields": schema.MapAttribute{
+						"custom_fields": schema.DynamicAttribute{
 							Description: "User defined fields enabling you to attach custom data. The value for a custom field can be either a string or a number.\n\nIf `customFields` can also be defined for this entity at the Organizational level,`customField` values defined at individual level override values of `customFields` with the same name defined at Organization level.\n\nSee [Working with Custom Fields](https://www.m3ter.com/docs/guides/creating-and-managing-products/working-with-custom-fields) in the m3ter documentation for more information.",
 							Computed:    true,
-							CustomType:  customfield.NewMapType[types.Dynamic](ctx),
-							ElementType: types.DynamicType,
 						},
 						"data_fields": schema.ListNestedAttribute{
 							Description: "Used to submit categorized raw usage data values for ingest into the platform - either numeric quantitative values or non-numeric data values. At least one required per Meter; maximum 15 per Meter.",
@@ -176,6 +170,10 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 						},
 						"product_id": schema.StringAttribute{
 							Description: "UUID of the Product the Meter belongs to. *(Optional)* - if blank, the Meter is global.",
+							Computed:    true,
+						},
+						"version": schema.Int64Attribute{
+							Description: "The version number:\n- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.\n- **Update:** On successful Update, the version is incremented by 1 in the response.",
 							Computed:    true,
 						},
 					},

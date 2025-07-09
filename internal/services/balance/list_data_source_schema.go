@@ -33,11 +33,11 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 				Optional: true,
 			},
 			"end_date_end": schema.StringAttribute{
-				Description: "Only include Balances with end dates earlier than this date.",
+				Description: "Only include Balances with end dates earlier than this date. If a Balance has a rollover amount configured, then the `rolloverEndDate` will be used as the end date.",
 				Optional:    true,
 			},
 			"end_date_start": schema.StringAttribute{
-				Description: "Only include Balances with end dates equal to or later than this date.",
+				Description: "Only include Balances with end dates equal to or later than this date. If a Balance has a rollover amount configured, then the `rolloverEndDate` will be used as the end date.",
 				Optional:    true,
 			},
 			"max_items": schema.Int64Attribute{
@@ -55,10 +55,6 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 					Attributes: map[string]schema.Attribute{
 						"id": schema.StringAttribute{
 							Description: "The UUID of the entity.",
-							Computed:    true,
-						},
-						"version": schema.Int64Attribute{
-							Description: "The version number:\n- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.\n- **Update:** On successful Update, the version is incremented by 1 in the response.",
 							Computed:    true,
 						},
 						"account_id": schema.StringAttribute{
@@ -91,11 +87,9 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Description: "The currency code used for the Balance amount. For example: USD, GBP or EUR.",
 							Computed:    true,
 						},
-						"custom_fields": schema.MapAttribute{
+						"custom_fields": schema.DynamicAttribute{
 							Description: "User defined fields enabling you to attach custom data. The value for a custom field can be either a string or a number.\n\nIf `customFields` can also be defined for this entity at the Organizational level,`customField` values defined at individual level override values of `customFields` with the same name defined at Organization level.\n\nSee [Working with Custom Fields](https://www.m3ter.com/docs/guides/creating-and-managing-products/working-with-custom-fields) in the m3ter documentation for more information.",
 							Computed:    true,
-							CustomType:  customfield.NewMapType[types.Dynamic](ctx),
-							ElementType: types.DynamicType,
 						},
 						"description": schema.StringAttribute{
 							Description: "A description of the Balance.",
@@ -171,6 +165,10 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Description: "The date *(in ISO 8601 format)* when the Balance becomes active.",
 							Computed:    true,
 							CustomType:  timetypes.RFC3339Type{},
+						},
+						"version": schema.Int64Attribute{
+							Description: "The version number:\n- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.\n- **Update:** On successful Update, the version is incremented by 1 in the response.",
+							Computed:    true,
 						},
 					},
 				},

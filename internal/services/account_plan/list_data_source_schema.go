@@ -25,14 +25,15 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 				DeprecationMessage: "the org id should be set at the client level instead",
 			},
 			"account": schema.StringAttribute{
-				Description: "The unique identifier (UUID) for the Account whose AccountPlans and AccountPlanGroups you want to retrieve.",
+				Description: "The unique identifier (UUID) for the Account whose AccountPlans and AccountPlanGroups you want to retrieve.\n\n**NOTE:** Only returns the currently active AccountPlans and AccountPlanGroups for the specified Account. Use in combination with the `includeall` query parameter to return both active and inactive.",
 				Optional:    true,
 			},
 			"contract": schema.StringAttribute{
-				Optional: true,
+				Description: "The unique identifier (UUID) of the Contract which the AccountPlans you want to retrieve have been linked to.\n\n**NOTE:** Does not return AccountPlanGroups that have been linked to the Contract.",
+				Optional:    true,
 			},
 			"date": schema.StringAttribute{
-				Description: "The specific date for which you want to retrieve active AccountPlans and AccountPlanGroups.",
+				Description: "The specific date for which you want to retrieve AccountPlans and AccountPlanGroups.\n\n**NOTE:** Returns both active and inactive AccountPlans and AccountPlanGroups for the specified date.",
 				Optional:    true,
 			},
 			"includeall": schema.BoolAttribute{
@@ -40,7 +41,7 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 				Optional:    true,
 			},
 			"plan": schema.StringAttribute{
-				Description: "The unique identifier (UUID) for the Plan or Plan Group whose associated AccountPlans or AccountPlanGroups you want to retrieve.",
+				Description: "The unique identifier (UUID) for the Plan whose associated AccountPlans you want to retrieve.\n\n**NOTE:** Does not return AccountPlanGroups if you use a `planGroupId`.",
 				Optional:    true,
 			},
 			"product": schema.StringAttribute{
@@ -67,10 +68,6 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 					Attributes: map[string]schema.Attribute{
 						"id": schema.StringAttribute{
 							Description: "The UUID of the entity.",
-							Computed:    true,
-						},
-						"version": schema.Int64Attribute{
-							Description: "The version number:\n- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.\n- **Update:** On successful Update, the version is incremented by 1 in the response.",
 							Computed:    true,
 						},
 						"account_id": schema.StringAttribute{
@@ -105,11 +102,9 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Description: "The unique identifier (UUID) for the user who created the AccountPlan or AccountPlanGroup.",
 							Computed:    true,
 						},
-						"custom_fields": schema.MapAttribute{
+						"custom_fields": schema.DynamicAttribute{
 							Description: "User defined fields enabling you to attach custom data. The value for a custom field can be either a string or a number.\n\nIf `customFields` can also be defined for this entity at the Organizational level,`customField` values defined at individual level override values of `customFields` with the same name defined at Organization level.\n\nSee [Working with Custom Fields](https://www.m3ter.com/docs/guides/creating-and-managing-products/working-with-custom-fields) in the m3ter documentation for more information.",
 							Computed:    true,
-							CustomType:  customfield.NewMapType[types.Dynamic](ctx),
-							ElementType: types.DynamicType,
 						},
 						"dt_created": schema.StringAttribute{
 							Description: "The date and time *(in ISO 8601 format)* when the AccountPlan or AccountPlanGroup was first created.",
@@ -146,6 +141,10 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Description: "The start date *(in ISO-8601 format)* for the when the AccountPlan or AccountPlanGroup starts to be active for the Account.",
 							Computed:    true,
 							CustomType:  timetypes.RFC3339Type{},
+						},
+						"version": schema.Int64Attribute{
+							Description: "The version number:\n- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.\n- **Update:** On successful Update, the version is incremented by 1 in the response.",
+							Computed:    true,
 						},
 					},
 				},

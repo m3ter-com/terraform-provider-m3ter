@@ -54,12 +54,11 @@ func (m *AggregationsDataSourceModel) toListParams(_ context.Context) (params m3
 
 type AggregationsItemsDataSourceModel struct {
 	ID                  types.String                                    `tfsdk:"id" json:"id,computed"`
-	Version             types.Int64                                     `tfsdk:"version" json:"version,computed"`
 	AccountingProductID types.String                                    `tfsdk:"accounting_product_id" json:"accountingProductId,computed"`
 	Aggregation         types.String                                    `tfsdk:"aggregation" json:"aggregation,computed"`
 	Code                types.String                                    `tfsdk:"code" json:"code,computed"`
 	CreatedBy           types.String                                    `tfsdk:"created_by" json:"createdBy,computed"`
-	CustomFields        customfield.Map[types.Dynamic]                  `tfsdk:"custom_fields" json:"customFields,computed"`
+	CustomFields        types.Dynamic                                   `tfsdk:"custom_fields" json:"customFields,computed"`
 	CustomSql           types.String                                    `tfsdk:"custom_sql" json:"customSql,computed"`
 	DefaultValue        types.Float64                                   `tfsdk:"default_value" json:"defaultValue,computed"`
 	DtCreated           timetypes.RFC3339                               `tfsdk:"dt_created" json:"dtCreated,computed" format:"date-time"`
@@ -73,4 +72,5 @@ type AggregationsItemsDataSourceModel struct {
 	Segments            customfield.List[customfield.Map[types.String]] `tfsdk:"segments" json:"segments,computed"`
 	TargetField         types.String                                    `tfsdk:"target_field" json:"targetField,computed"`
 	Unit                types.String                                    `tfsdk:"unit" json:"unit,computed"`
+	Version             types.Int64                                     `tfsdk:"version" json:"version,computed"`
 }

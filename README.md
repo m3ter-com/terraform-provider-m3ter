@@ -22,7 +22,7 @@ terraform {
   required_providers {
     m3ter = {
       source  = "m3ter-com/m3ter"
-      version = "~> 0.1.0-alpha.1"
+      version = "~> 0.1.0-alpha"
     }
   }
 }

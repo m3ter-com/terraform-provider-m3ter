@@ -78,10 +78,6 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 						Description: "the type of credentials",
 						Computed:    true,
 					},
-					"version": schema.Int64Attribute{
-						Description: "The version number:\n- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.\n- **Update:** On successful Update, the version is incremented by 1 in the response.",
-						Computed:    true,
-					},
 					"api_key": schema.StringAttribute{
 						Description: "The API key provided by m3ter. This key is part of the credential set required for signing requests and authenticating with m3ter services.",
 						Computed:    true,
@@ -114,6 +110,10 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 					},
 					"secret": schema.StringAttribute{
 						Description: "The secret associated with the API key. This secret is used in conjunction with the API key to generate a signature for secure authentication.",
+						Computed:    true,
+					},
+					"version": schema.Int64Attribute{
+						Description: "The version number:\n- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.\n- **Update:** On successful Update, the version is incremented by 1 in the response.",
 						Computed:    true,
 					},
 				},

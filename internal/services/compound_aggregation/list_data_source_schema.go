@@ -56,10 +56,6 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Description: "The UUID of the entity.",
 							Computed:    true,
 						},
-						"version": schema.Int64Attribute{
-							Description: "The version number:\n- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.\n- **Update:** On successful Update, the version is incremented by 1 in the response.",
-							Computed:    true,
-						},
 						"accounting_product_id": schema.StringAttribute{
 							Computed: true,
 						},
@@ -75,10 +71,8 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Description: "The unique identifier (UUID) of the user who created this CompoundAggregation.",
 							Computed:    true,
 						},
-						"custom_fields": schema.MapAttribute{
-							Computed:    true,
-							CustomType:  customfield.NewMapType[types.Dynamic](ctx),
-							ElementType: types.DynamicType,
+						"custom_fields": schema.DynamicAttribute{
+							Computed: true,
 						},
 						"dt_created": schema.StringAttribute{
 							Description: "The date and time *(in ISO-8601 format)* when the CompoundAggregation was created.",
@@ -132,6 +126,10 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 						},
 						"unit": schema.StringAttribute{
 							Description: "User defined or following the *Unified Code for Units of Measure* (UCUM). \n\nUsed as the label for billing, indicating to your customers what they are being charged for.",
+							Computed:    true,
+						},
+						"version": schema.Int64Attribute{
+							Description: "The version number:\n- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.\n- **Update:** On successful Update, the version is incremented by 1 in the response.",
 							Computed:    true,
 						},
 					},

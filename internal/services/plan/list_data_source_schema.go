@@ -54,10 +54,6 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Description: "The UUID of the entity.",
 							Computed:    true,
 						},
-						"version": schema.Int64Attribute{
-							Description: "The version number:\n- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.\n- **Update:** On successful Update, the version is incremented by 1 in the response.",
-							Computed:    true,
-						},
 						"account_id": schema.StringAttribute{
 							Description: "*(Optional)*. The Account ID for which this plan was created as custom/bespoke. A custom/bespoke Plan can only be attached to the specified Account.",
 							Computed:    true,
@@ -74,11 +70,9 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Description: "The id of the user who created this plan.",
 							Computed:    true,
 						},
-						"custom_fields": schema.MapAttribute{
+						"custom_fields": schema.DynamicAttribute{
 							Description: "User defined fields enabling you to attach custom data. The value for a custom field can be either a string or a number.\n\nIf `customFields` can also be defined for this entity at the Organizational level,`customField` values defined at individual level override values of `customFields` with the same name defined at Organization level.\n\nSee [Working with Custom Fields](https://www.m3ter.com/docs/guides/creating-and-managing-products/working-with-custom-fields) in the m3ter documentation for more information.",
 							Computed:    true,
-							CustomType:  customfield.NewMapType[types.Dynamic](ctx),
-							ElementType: types.DynamicType,
 						},
 						"dt_created": schema.StringAttribute{
 							Description: "The DateTime *(in ISO-8601 format)* when the plan was created.",
@@ -140,6 +134,10 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 						},
 						"standing_charge_description": schema.StringAttribute{
 							Description: "Standing charge description *(displayed on the bill line item)*.",
+							Computed:    true,
+						},
+						"version": schema.Int64Attribute{
+							Description: "The version number:\n- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.\n- **Update:** On successful Update, the version is incremented by 1 in the response.",
 							Computed:    true,
 						},
 					},

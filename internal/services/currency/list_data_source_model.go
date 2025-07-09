@@ -52,7 +52,6 @@ func (m *CurrenciesDataSourceModel) toListParams(_ context.Context) (params m3te
 
 type CurrenciesItemsDataSourceModel struct {
 	ID               types.String      `tfsdk:"id" json:"id,computed"`
-	Version          types.Int64       `tfsdk:"version" json:"version,computed"`
 	Archived         types.Bool        `tfsdk:"archived" json:"archived,computed"`
 	Code             types.String      `tfsdk:"code" json:"code,computed"`
 	CreatedBy        types.String      `tfsdk:"created_by" json:"createdBy,computed"`
@@ -62,4 +61,5 @@ type CurrenciesItemsDataSourceModel struct {
 	MaxDecimalPlaces types.Int64       `tfsdk:"max_decimal_places" json:"maxDecimalPlaces,computed"`
 	Name             types.String      `tfsdk:"name" json:"name,computed"`
 	RoundingMode     types.String      `tfsdk:"rounding_mode" json:"roundingMode,computed"`
+	Version          types.Int64       `tfsdk:"version" json:"version,computed"`
 }

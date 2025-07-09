@@ -3,7 +3,7 @@ resource "m3ter_plan_group" "example_plan_group" {
   currency = "xxx"
   name = "x"
   account_id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-  code = "JS!?Q0]r] ]$]"
+  code = "S?oC\"$]C] ]]]]]5]"
   custom_fields = {
     foo = "string"
   }

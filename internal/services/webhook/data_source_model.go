@@ -42,7 +42,6 @@ type WebhookCredentialsDataSourceModel struct {
 	ID             types.String      `tfsdk:"id" json:"id,computed"`
 	Destination    types.String      `tfsdk:"destination" json:"destination,computed"`
 	Type           types.String      `tfsdk:"type" json:"type,computed"`
-	Version        types.Int64       `tfsdk:"version" json:"version,computed"`
 	APIKey         types.String      `tfsdk:"api_key" json:"apiKey,computed"`
 	CreatedBy      types.String      `tfsdk:"created_by" json:"createdBy,computed"`
 	DestinationID  types.String      `tfsdk:"destination_id" json:"destinationId,computed"`
@@ -51,4 +50,5 @@ type WebhookCredentialsDataSourceModel struct {
 	LastModifiedBy types.String      `tfsdk:"last_modified_by" json:"lastModifiedBy,computed"`
 	Name           types.String      `tfsdk:"name" json:"name,computed"`
 	Secret         types.String      `tfsdk:"secret" json:"secret,computed"`
+	Version        types.Int64       `tfsdk:"version" json:"version,computed"`
 }

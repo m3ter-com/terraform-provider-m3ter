@@ -115,12 +115,6 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				CustomType:  customfield.NewListType[types.String](ctx),
 				ElementType: types.StringType,
 			},
-			"custom_fields": schema.MapAttribute{
-				Description: "User defined fields enabling you to attach custom data. The value for a custom field can be either a string or a number.\n\nIf `customFields` can also be defined for this entity at the Organizational level,`customField` values defined at individual level override values of `customFields` with the same name defined at Organization level.\n\nSee [Working with Custom Fields](https://www.m3ter.com/docs/guides/creating-and-managing-products/working-with-custom-fields) in the m3ter documentation for more information.",
-				Computed:    true,
-				CustomType:  customfield.NewMapType[types.Dynamic](ctx),
-				ElementType: types.DynamicType,
-			},
 			"address": schema.SingleNestedAttribute{
 				Description: "Contact address.",
 				Computed:    true,
@@ -151,6 +145,10 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 						Computed: true,
 					},
 				},
+			},
+			"custom_fields": schema.DynamicAttribute{
+				Description: "User defined fields enabling you to attach custom data. The value for a custom field can be either a string or a number.\n\nIf `customFields` can also be defined for this entity at the Organizational level,`customField` values defined at individual level override values of `customFields` with the same name defined at Organization level.\n\nSee [Working with Custom Fields](https://www.m3ter.com/docs/guides/creating-and-managing-products/working-with-custom-fields) in the m3ter documentation for more information.",
+				Computed:    true,
 			},
 		},
 	}
