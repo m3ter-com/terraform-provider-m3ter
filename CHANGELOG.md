@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.2.0-alpha (2025-07-09)
+
+Full Changelog: [v0.1.1-alpha...v0.2.0-alpha](https://github.com/m3ter-com/terraform-provider-m3ter/compare/v0.1.1-alpha...v0.2.0-alpha)
+
+### Features
+
+* **api:** Bump Go SDK version in Terraform provider ([a6876cc](https://github.com/m3ter-com/terraform-provider-m3ter/commit/a6876cc42efd4974753a2f2201c0ed77f2ea9169))
+
 ## 0.1.1-alpha (2025-07-09)
 
 Full Changelog: [v0.1.0-alpha...v0.1.1-alpha](https://github.com/m3ter-com/terraform-provider-m3ter/compare/v0.1.0-alpha...v0.1.1-alpha)
