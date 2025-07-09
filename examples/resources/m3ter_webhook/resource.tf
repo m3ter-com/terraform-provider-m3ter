@@ -12,5 +12,4 @@ resource "m3ter_webhook" "example_webhook" {
   url = "x"
   active = true
   code = "code"
-  version = 0
 }

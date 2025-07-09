@@ -169,11 +169,6 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 					},
 				},
 			},
-			"version": schema.Int64Attribute{
-				Description: "The version number of the entity:\n- **Create entity:** Not valid for initial insertion of new entity - *do not use for Create*. On initial Create, version is set at 1 and listed in the response.\n- **Update Entity:**  On Update, version is required and must match the existing version because a check is performed to ensure sequential versioning is preserved. Version is incremented by 1 and listed in the response.",
-				Computed:    true,
-				Optional:    true,
-			},
 			"aggregation_type": schema.StringAttribute{
 				Description: `Available values: "SIMPLE", "COMPOUND".`,
 				Computed:    true,
@@ -201,6 +196,10 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 			},
 			"segment_string": schema.StringAttribute{
 				Computed: true,
+			},
+			"version": schema.Int64Attribute{
+				Description: "The version number:\n- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.\n- **Update:** On successful Update, the version is incremented by 1 in the response.",
+				Computed:    true,
 			},
 		},
 	}

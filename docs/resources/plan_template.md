@@ -33,7 +33,6 @@ resource "m3ter_plan_template" "example_plan_template" {
   standing_charge_description = "standingChargeDescription"
   standing_charge_interval = 1
   standing_charge_offset = 0
-  version = 0
 }
 ```
 
@@ -95,9 +94,6 @@ Overrides the setting at Organizational level for standing charge billing in arr
 For example, if the bill is issued every three months and `standingChargeInterval` is 2, then the standing charge is applied every six months.
 - `standing_charge_offset` (Number) Defines an offset for when the standing charge is first applied. 
 For example, if the bill is issued every three months and the `standingChargeOfset` is 0, then the charge is applied to the first bill *(at three months)*; if 1, it would be applied to the second bill *(at six months)*, and so on.
-- `version` (Number) The version number of the entity:
-- **Create entity:** Not valid for initial insertion of new entity - *do not use for Create*. On initial Create, version is set at 1 and listed in the response.
-- **Update Entity:**  On Update, version is required and must match the existing version because a check is performed to ensure sequential versioning is preserved. Version is incremented by 1 and listed in the response.
 
 ### Read-Only
 
@@ -106,6 +102,9 @@ For example, if the bill is issued every three months and the `standingChargeOfs
 - `dt_last_modified` (String) The date and time *(in ISO-8601 format)* when the PlanTemplate was last modified.
 - `id` (String) The UUID of the entity.
 - `last_modified_by` (String) The unique identifier (UUID) of the user who last modified this PlanTemplate.
+- `version` (Number) The version number:
+- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.
+- **Update:** On successful Update, the version is incremented by 1 in the response.
 
 ## Import
 

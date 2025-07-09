@@ -29,12 +29,12 @@ type BalanceModel struct {
 	LineItemTypes                   *[]types.String   `tfsdk:"line_item_types" json:"lineItemTypes,optional"`
 	ProductIDs                      *[]types.String   `tfsdk:"product_ids" json:"productIds,optional"`
 	CustomFields                    types.Dynamic     `tfsdk:"custom_fields" json:"customFields,optional"`
-	Version                         types.Int64       `tfsdk:"version" json:"version,computed_optional"`
 	Amount                          types.Float64     `tfsdk:"amount" json:"amount,computed"`
 	CreatedBy                       types.String      `tfsdk:"created_by" json:"createdBy,computed"`
 	DtCreated                       timetypes.RFC3339 `tfsdk:"dt_created" json:"dtCreated,computed" format:"date-time"`
 	DtLastModified                  timetypes.RFC3339 `tfsdk:"dt_last_modified" json:"dtLastModified,computed" format:"date-time"`
 	LastModifiedBy                  types.String      `tfsdk:"last_modified_by" json:"lastModifiedBy,computed"`
+	Version                         types.Int64       `tfsdk:"version" json:"version,computed"`
 }
 
 func (m BalanceModel) MarshalJSON() (data []byte, err error) {

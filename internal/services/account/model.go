@@ -26,11 +26,11 @@ type AccountModel struct {
 	CreditApplicationOrder    *[]types.String                  `tfsdk:"credit_application_order" json:"creditApplicationOrder,optional"`
 	Address                   *AccountAddressModel             `tfsdk:"address" json:"address,optional"`
 	CustomFields              types.Dynamic                    `tfsdk:"custom_fields" json:"customFields,optional"`
-	Version                   types.Int64                      `tfsdk:"version" json:"version,computed_optional"`
 	CreatedBy                 types.String                     `tfsdk:"created_by" json:"createdBy,computed"`
 	DtCreated                 timetypes.RFC3339                `tfsdk:"dt_created" json:"dtCreated,computed" format:"date-time"`
 	DtLastModified            timetypes.RFC3339                `tfsdk:"dt_last_modified" json:"dtLastModified,computed" format:"date-time"`
 	LastModifiedBy            types.String                     `tfsdk:"last_modified_by" json:"lastModifiedBy,computed"`
+	Version                   types.Int64                      `tfsdk:"version" json:"version,computed"`
 }
 
 func (m AccountModel) MarshalJSON() (data []byte, err error) {

@@ -20,5 +20,4 @@ resource "m3ter_balance" "example_balance" {
   product_ids = ["string"]
   rollover_amount = 0
   rollover_end_date = "2019-12-27T18:11:19.117Z"
-  version = 0
 }

@@ -34,10 +34,6 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 			"name": schema.StringAttribute{
 				Required: true,
 			},
-			"version": schema.Int64Attribute{
-				Computed: true,
-				Optional: true,
-			},
 			"created_by": schema.StringAttribute{
 				Description: "The unique identifier (UUID) of the user who created this Resource Group.",
 				Computed:    true,
@@ -54,6 +50,10 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 			},
 			"last_modified_by": schema.StringAttribute{
 				Description: "The unique identifier (UUID) of the user who last modified this Resource Group.",
+				Computed:    true,
+			},
+			"version": schema.Int64Attribute{
+				Description: "The version number. Default value when newly created is one.",
 				Computed:    true,
 			},
 		},

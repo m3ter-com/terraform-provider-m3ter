@@ -17,5 +17,4 @@ resource "m3ter_plan" "example_plan" {
   standing_charge_accounting_product_id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
   standing_charge_bill_in_advance = true
   standing_charge_description = "standingChargeDescription"
-  version = 0
 }

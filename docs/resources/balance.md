@@ -35,7 +35,6 @@ resource "m3ter_balance" "example_balance" {
   product_ids = ["string"]
   rollover_amount = 0
   rollover_end_date = "2019-12-27T18:11:19.117Z"
-  version = 0
 }
 ```
 
@@ -88,9 +87,6 @@ See [Working with Custom Fields](https://www.m3ter.com/docs/guides/creating-and-
 - `rollover_end_date` (String) The end date *(in ISO 8601 format)* for the grace period during which unused Balance amounts can be carried over and drawn-down against at billing.
 
 **Note:** Use `rolloverAmount` if you want to specify a maximum amount that can be carried over and made available for draw-down.
-- `version` (Number) The version number of the entity:
-- **Create entity:** Not valid for initial insertion of new entity - *do not use for Create*. On initial Create, version is set at 1 and listed in the response.
-- **Update Entity:**  On Update, version is required and must match the existing version because a check is performed to ensure sequential versioning is preserved. Version is incremented by 1 and listed in the response.
 
 ### Read-Only
 
@@ -100,6 +96,9 @@ See [Working with Custom Fields](https://www.m3ter.com/docs/guides/creating-and-
 - `dt_last_modified` (String) The date and time *(in ISO 8601 format)* when the Balance was last modified.
 - `id` (String) The UUID of the entity.
 - `last_modified_by` (String) The unique identifier (UUID) for the user who last modified the Balance.
+- `version` (Number) The version number:
+- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.
+- **Update:** On successful Update, the version is incremented by 1 in the response.
 
 ## Import
 

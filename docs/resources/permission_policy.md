@@ -21,7 +21,6 @@ resource "m3ter_permission_policy" "example_permission_policy" {
     effect = "ALLOW"
     resource = ["string"]
   }]
-  version = 0
 }
 ```
 
@@ -36,9 +35,6 @@ resource "m3ter_permission_policy" "example_permission_policy" {
 ### Optional
 
 - `org_id` (String, Deprecated)
-- `version` (Number) The version number of the entity:
-* **Create entity:** Not valid for initial insertion of new entity - do not use for Create. On initial Create, version is set at 1 and listed in the response.
-* **Update Entity:** On Update, version is required and must match the existing version because a check is performed to ensure sequential versioning is preserved. Version is incremented by 1 and listed in the response.
 
 ### Read-Only
 
@@ -48,6 +44,7 @@ resource "m3ter_permission_policy" "example_permission_policy" {
 - `id` (String) The unique identifier (UUID) for this Permission Policy.
 - `last_modified_by` (String) The unique identifier (UUID) of the user who last modified this Permission Policy.
 - `managed_policy` (Boolean) Indicates whether this is a system generated Managed Permission Policy.
+- `version` (Number) The version number. Default value when newly created is one.
 
 <a id="nestedatt--permission_policy"></a>
 ### Nested Schema for `permission_policy`
