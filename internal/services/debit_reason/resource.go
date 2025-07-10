@@ -113,7 +113,6 @@ func (r *DebitReasonResource) Update(ctx context.Context, req resource.UpdateReq
 		return
 	}
 
-	data.Version = state.Version
 	params := m3ter.DebitReasonUpdateParams{}
 
 	if !data.OrgID.IsNull() {

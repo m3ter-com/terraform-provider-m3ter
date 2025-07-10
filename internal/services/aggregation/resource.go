@@ -113,7 +113,6 @@ func (r *AggregationResource) Update(ctx context.Context, req resource.UpdateReq
 		return
 	}
 
-	data.Version = state.Version
 	params := m3ter.AggregationUpdateParams{}
 
 	if !data.OrgID.IsNull() {
