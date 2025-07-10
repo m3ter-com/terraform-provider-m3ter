@@ -113,7 +113,6 @@ func (r *ExternalMappingResource) Update(ctx context.Context, req resource.Updat
 		return
 	}
 
-	data.Version = state.Version
 	params := m3ter.ExternalMappingUpdateParams{}
 
 	if !data.OrgID.IsNull() {

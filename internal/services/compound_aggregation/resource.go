@@ -113,7 +113,6 @@ func (r *CompoundAggregationResource) Update(ctx context.Context, req resource.U
 		return
 	}
 
-	data.Version = state.Version
 	params := m3ter.CompoundAggregationUpdateParams{}
 
 	if !data.OrgID.IsNull() {

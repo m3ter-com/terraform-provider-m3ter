@@ -113,7 +113,6 @@ func (r *ScheduledEventConfigurationResource) Update(ctx context.Context, req re
 		return
 	}
 
-	data.Version = state.Version
 	params := m3ter.ScheduledEventConfigurationUpdateParams{}
 
 	if !data.OrgID.IsNull() {

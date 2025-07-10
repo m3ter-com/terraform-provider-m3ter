@@ -113,7 +113,6 @@ func (r *PermissionPolicyResource) Update(ctx context.Context, req resource.Upda
 		return
 	}
 
-	data.Version = state.Version
 	params := m3ter.PermissionPolicyUpdateParams{}
 
 	if !data.OrgID.IsNull() {

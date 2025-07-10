@@ -113,7 +113,6 @@ func (r *ContractResource) Update(ctx context.Context, req resource.UpdateReques
 		return
 	}
 
-	data.Version = state.Version
 	params := m3ter.ContractUpdateParams{}
 
 	if !data.OrgID.IsNull() {
