@@ -52,7 +52,7 @@ type WebhooksItemsDataSourceModel struct {
 	LastModifiedBy types.String                                                 `tfsdk:"last_modified_by" json:"lastModifiedBy,computed"`
 	Name           types.String                                                 `tfsdk:"name" json:"name,computed"`
 	URL            types.String                                                 `tfsdk:"url" json:"url,computed"`
-	Version        types.Int64                                                  `tfsdk:"version" json:"version,computed"`
+	Version        types.Int64                                                  `tfsdk:"version" json:"version,computed,force_encode,encode_state_for_unknown"`
 }
 
 type WebhooksCredentialsDataSourceModel struct {
@@ -67,5 +67,5 @@ type WebhooksCredentialsDataSourceModel struct {
 	LastModifiedBy types.String      `tfsdk:"last_modified_by" json:"lastModifiedBy,computed"`
 	Name           types.String      `tfsdk:"name" json:"name,computed"`
 	Secret         types.String      `tfsdk:"secret" json:"secret,computed"`
-	Version        types.Int64       `tfsdk:"version" json:"version,computed"`
+	Version        types.Int64       `tfsdk:"version" json:"version,computed,force_encode,encode_state_for_unknown"`
 }

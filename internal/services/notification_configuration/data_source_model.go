@@ -25,7 +25,7 @@ type NotificationConfigurationDataSourceModel struct {
 	EventName       types.String      `tfsdk:"event_name" json:"eventName,computed"`
 	LastModifiedBy  types.String      `tfsdk:"last_modified_by" json:"lastModifiedBy,computed"`
 	Name            types.String      `tfsdk:"name" json:"name,computed"`
-	Version         types.Int64       `tfsdk:"version" json:"version,computed"`
+	Version         types.Int64       `tfsdk:"version" json:"version,computed,force_encode,encode_state_for_unknown"`
 }
 
 func (m *NotificationConfigurationDataSourceModel) toReadParams(_ context.Context) (params m3ter.NotificationConfigurationGetParams, diags diag.Diagnostics) {

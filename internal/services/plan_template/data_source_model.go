@@ -33,7 +33,7 @@ type PlanTemplateDataSourceModel struct {
 	StandingChargeDescription   types.String      `tfsdk:"standing_charge_description" json:"standingChargeDescription,computed"`
 	StandingChargeInterval      types.Int64       `tfsdk:"standing_charge_interval" json:"standingChargeInterval,computed"`
 	StandingChargeOffset        types.Int64       `tfsdk:"standing_charge_offset" json:"standingChargeOffset,computed"`
-	Version                     types.Int64       `tfsdk:"version" json:"version,computed"`
+	Version                     types.Int64       `tfsdk:"version" json:"version,computed,force_encode,encode_state_for_unknown"`
 	CustomFields                types.Dynamic     `tfsdk:"custom_fields" json:"customFields,computed"`
 }
 

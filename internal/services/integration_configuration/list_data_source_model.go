@@ -37,7 +37,7 @@ type IntegrationConfigurationsItemsDataSourceModel struct {
 	ID                       types.String                          `tfsdk:"id" json:"id,computed"`
 	Destination              types.String                          `tfsdk:"destination" json:"destination,computed"`
 	EntityType               types.String                          `tfsdk:"entity_type" json:"entityType,computed"`
-	Version                  types.Int64                           `tfsdk:"version" json:"version,computed"`
+	Version                  types.Int64                           `tfsdk:"version" json:"version,computed,force_encode,encode_state_for_unknown"`
 	Authorized               types.Bool                            `tfsdk:"authorized" json:"authorized,computed"`
 	ConfigData               customfield.Map[jsontypes.Normalized] `tfsdk:"config_data" json:"configData,computed"`
 	CreatedBy                types.String                          `tfsdk:"created_by" json:"createdBy,computed"`

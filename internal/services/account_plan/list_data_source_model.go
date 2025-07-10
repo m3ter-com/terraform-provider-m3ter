@@ -81,5 +81,5 @@ type AccountPlansItemsDataSourceModel struct {
 	PlanID           types.String      `tfsdk:"plan_id" json:"planId,computed"`
 	ProductID        types.String      `tfsdk:"product_id" json:"productId,computed"`
 	StartDate        timetypes.RFC3339 `tfsdk:"start_date" json:"startDate,computed" format:"date-time"`
-	Version          types.Int64       `tfsdk:"version" json:"version,computed"`
+	Version          types.Int64       `tfsdk:"version" json:"version,computed,force_encode,encode_state_for_unknown"`
 }

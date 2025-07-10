@@ -22,7 +22,7 @@ type ScheduledEventConfigurationDataSourceModel struct {
 	LastModifiedBy types.String      `tfsdk:"last_modified_by" json:"lastModifiedBy,computed"`
 	Name           types.String      `tfsdk:"name" json:"name,computed"`
 	Offset         types.Int64       `tfsdk:"offset" json:"offset,computed"`
-	Version        types.Int64       `tfsdk:"version" json:"version,computed"`
+	Version        types.Int64       `tfsdk:"version" json:"version,computed,force_encode,encode_state_for_unknown"`
 }
 
 func (m *ScheduledEventConfigurationDataSourceModel) toReadParams(_ context.Context) (params m3ter.ScheduledEventConfigurationGetParams, diags diag.Diagnostics) {
