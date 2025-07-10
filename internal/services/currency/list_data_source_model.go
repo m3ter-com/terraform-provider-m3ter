@@ -61,5 +61,5 @@ type CurrenciesItemsDataSourceModel struct {
 	MaxDecimalPlaces types.Int64       `tfsdk:"max_decimal_places" json:"maxDecimalPlaces,computed"`
 	Name             types.String      `tfsdk:"name" json:"name,computed"`
 	RoundingMode     types.String      `tfsdk:"rounding_mode" json:"roundingMode,computed"`
-	Version          types.Int64       `tfsdk:"version" json:"version,computed"`
+	Version          types.Int64       `tfsdk:"version" json:"version,computed,force_encode,encode_state_for_unknown"`
 }

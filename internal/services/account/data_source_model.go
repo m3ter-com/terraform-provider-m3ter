@@ -30,7 +30,7 @@ type AccountDataSourceModel struct {
 	ParentAccountID           types.String                                            `tfsdk:"parent_account_id" json:"parentAccountId,computed"`
 	PurchaseOrderNumber       types.String                                            `tfsdk:"purchase_order_number" json:"purchaseOrderNumber,computed"`
 	StatementDefinitionID     types.String                                            `tfsdk:"statement_definition_id" json:"statementDefinitionId,computed"`
-	Version                   types.Int64                                             `tfsdk:"version" json:"version,computed"`
+	Version                   types.Int64                                             `tfsdk:"version" json:"version,computed,force_encode,encode_state_for_unknown"`
 	ConfigData                customfield.Map[jsontypes.Normalized]                   `tfsdk:"config_data" json:"configData,computed"`
 	CreditApplicationOrder    customfield.List[types.String]                          `tfsdk:"credit_application_order" json:"creditApplicationOrder,computed"`
 	Address                   customfield.NestedObject[AccountAddressDataSourceModel] `tfsdk:"address" json:"address,computed"`

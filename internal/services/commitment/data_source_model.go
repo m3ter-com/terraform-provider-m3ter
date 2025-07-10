@@ -42,7 +42,7 @@ type CommitmentDataSourceModel struct {
 	OverageSurchargePercent      types.Float64                                                   `tfsdk:"overage_surcharge_percent" json:"overageSurchargePercent,computed"`
 	SeparateOverageUsage         types.Bool                                                      `tfsdk:"separate_overage_usage" json:"separateOverageUsage,computed"`
 	StartDate                    timetypes.RFC3339                                               `tfsdk:"start_date" json:"startDate,computed" format:"date"`
-	Version                      types.Int64                                                     `tfsdk:"version" json:"version,computed"`
+	Version                      types.Int64                                                     `tfsdk:"version" json:"version,computed,force_encode,encode_state_for_unknown"`
 	LineItemTypes                customfield.List[types.String]                                  `tfsdk:"line_item_types" json:"lineItemTypes,computed"`
 	ProductIDs                   customfield.List[types.String]                                  `tfsdk:"product_ids" json:"productIds,computed"`
 	FeeDates                     customfield.NestedObjectList[CommitmentFeeDatesDataSourceModel] `tfsdk:"fee_dates" json:"feeDates,computed"`

@@ -24,7 +24,7 @@ type ExternalMappingDataSourceModel struct {
 	LastModifiedBy      types.String      `tfsdk:"last_modified_by" json:"lastModifiedBy,computed"`
 	M3terEntity         types.String      `tfsdk:"m3ter_entity" json:"m3terEntity,computed"`
 	M3terID             types.String      `tfsdk:"m3ter_id" json:"m3terId,computed"`
-	Version             types.Int64       `tfsdk:"version" json:"version,computed"`
+	Version             types.Int64       `tfsdk:"version" json:"version,computed,force_encode,encode_state_for_unknown"`
 }
 
 func (m *ExternalMappingDataSourceModel) toReadParams(_ context.Context) (params m3ter.ExternalMappingGetParams, diags diag.Diagnostics) {

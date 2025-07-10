@@ -69,5 +69,5 @@ type CompoundAggregationsItemsDataSourceModel struct {
 	Rounding                 types.String                                    `tfsdk:"rounding" json:"rounding,computed"`
 	Segments                 customfield.List[customfield.Map[types.String]] `tfsdk:"segments" json:"segments,computed"`
 	Unit                     types.String                                    `tfsdk:"unit" json:"unit,computed"`
-	Version                  types.Int64                                     `tfsdk:"version" json:"version,computed"`
+	Version                  types.Int64                                     `tfsdk:"version" json:"version,computed,force_encode,encode_state_for_unknown"`
 }

@@ -33,7 +33,7 @@ type IntegrationConfigurationModel struct {
 	Status                   types.String                              `tfsdk:"status" json:"status,computed"`
 	TriggerType              types.String                              `tfsdk:"trigger_type" json:"triggerType,computed,no_refresh"`
 	URL                      types.String                              `tfsdk:"url" json:"url,computed"`
-	Version                  types.Int64                               `tfsdk:"version" json:"version,computed"`
+	Version                  types.Int64                               `tfsdk:"version" json:"version,computed,force_encode,encode_state_for_unknown"`
 }
 
 func (m IntegrationConfigurationModel) MarshalJSON() (data []byte, err error) {
@@ -49,5 +49,5 @@ type IntegrationConfigurationCredentialsModel struct {
 	Destination types.String `tfsdk:"destination" json:"destination,optional"`
 	Empty       types.Bool   `tfsdk:"empty" json:"empty,optional"`
 	Name        types.String `tfsdk:"name" json:"name,optional"`
-	Version     types.Int64  `tfsdk:"version" json:"version,computed"`
+	Version     types.Int64  `tfsdk:"version" json:"version,computed,force_encode,encode_state_for_unknown"`
 }

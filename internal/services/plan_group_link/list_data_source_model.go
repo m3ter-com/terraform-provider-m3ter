@@ -56,5 +56,5 @@ type PlanGroupLinksItemsDataSourceModel struct {
 	LastModifiedBy types.String      `tfsdk:"last_modified_by" json:"lastModifiedBy,computed"`
 	PlanGroupID    types.String      `tfsdk:"plan_group_id" json:"planGroupId,computed"`
 	PlanID         types.String      `tfsdk:"plan_id" json:"planId,computed"`
-	Version        types.Int64       `tfsdk:"version" json:"version,computed"`
+	Version        types.Int64       `tfsdk:"version" json:"version,computed,force_encode,encode_state_for_unknown"`
 }

@@ -72,5 +72,5 @@ type AggregationsItemsDataSourceModel struct {
 	Segments            customfield.List[customfield.Map[types.String]] `tfsdk:"segments" json:"segments,computed"`
 	TargetField         types.String                                    `tfsdk:"target_field" json:"targetField,computed"`
 	Unit                types.String                                    `tfsdk:"unit" json:"unit,computed"`
-	Version             types.Int64                                     `tfsdk:"version" json:"version,computed"`
+	Version             types.Int64                                     `tfsdk:"version" json:"version,computed,force_encode,encode_state_for_unknown"`
 }

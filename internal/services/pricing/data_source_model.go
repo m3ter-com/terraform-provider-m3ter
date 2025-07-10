@@ -36,7 +36,7 @@ type PricingDataSourceModel struct {
 	StartDate                 timetypes.RFC3339                                                       `tfsdk:"start_date" json:"startDate,computed" format:"date-time"`
 	TiersSpanPlan             types.Bool                                                              `tfsdk:"tiers_span_plan" json:"tiersSpanPlan,computed"`
 	Type                      types.String                                                            `tfsdk:"type" json:"type,computed"`
-	Version                   types.Int64                                                             `tfsdk:"version" json:"version,computed"`
+	Version                   types.Int64                                                             `tfsdk:"version" json:"version,computed,force_encode,encode_state_for_unknown"`
 	Segment                   customfield.Map[types.String]                                           `tfsdk:"segment" json:"segment,computed"`
 	OveragePricingBands       customfield.NestedObjectList[PricingOveragePricingBandsDataSourceModel] `tfsdk:"overage_pricing_bands" json:"overagePricingBands,computed"`
 	PricingBands              customfield.NestedObjectList[PricingPricingBandsDataSourceModel]        `tfsdk:"pricing_bands" json:"pricingBands,computed"`

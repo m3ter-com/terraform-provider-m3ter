@@ -32,7 +32,7 @@ type CounterPricingDataSourceModel struct {
 	ProRateRunningTotal       types.Bool                                                              `tfsdk:"pro_rate_running_total" json:"proRateRunningTotal,computed"`
 	RunningTotalBillInAdvance types.Bool                                                              `tfsdk:"running_total_bill_in_advance" json:"runningTotalBillInAdvance,computed"`
 	StartDate                 timetypes.RFC3339                                                       `tfsdk:"start_date" json:"startDate,computed" format:"date-time"`
-	Version                   types.Int64                                                             `tfsdk:"version" json:"version,computed"`
+	Version                   types.Int64                                                             `tfsdk:"version" json:"version,computed,force_encode,encode_state_for_unknown"`
 	PricingBands              customfield.NestedObjectList[CounterPricingPricingBandsDataSourceModel] `tfsdk:"pricing_bands" json:"pricingBands,computed"`
 }
 

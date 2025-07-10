@@ -65,7 +65,7 @@ type MetersItemsDataSourceModel struct {
 	LastModifiedBy types.String                                                     `tfsdk:"last_modified_by" json:"lastModifiedBy,computed"`
 	Name           types.String                                                     `tfsdk:"name" json:"name,computed"`
 	ProductID      types.String                                                     `tfsdk:"product_id" json:"productId,computed"`
-	Version        types.Int64                                                      `tfsdk:"version" json:"version,computed"`
+	Version        types.Int64                                                      `tfsdk:"version" json:"version,computed,force_encode,encode_state_for_unknown"`
 }
 
 type MetersDataFieldsDataSourceModel struct {

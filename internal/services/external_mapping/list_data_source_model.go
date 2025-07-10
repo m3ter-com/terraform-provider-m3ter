@@ -60,5 +60,5 @@ type ExternalMappingsItemsDataSourceModel struct {
 	DtLastModified      timetypes.RFC3339 `tfsdk:"dt_last_modified" json:"dtLastModified,computed" format:"date-time"`
 	IntegrationConfigID types.String      `tfsdk:"integration_config_id" json:"integrationConfigId,computed"`
 	LastModifiedBy      types.String      `tfsdk:"last_modified_by" json:"lastModifiedBy,computed"`
-	Version             types.Int64       `tfsdk:"version" json:"version,computed"`
+	Version             types.Int64       `tfsdk:"version" json:"version,computed,force_encode,encode_state_for_unknown"`
 }

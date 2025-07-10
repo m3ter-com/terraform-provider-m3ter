@@ -31,7 +31,7 @@ type CompoundAggregationModel struct {
 	LastModifiedBy           types.String                                    `tfsdk:"last_modified_by" json:"lastModifiedBy,computed"`
 	MeterID                  types.String                                    `tfsdk:"meter_id" json:"meterId,computed,no_refresh"`
 	TargetField              types.String                                    `tfsdk:"target_field" json:"targetField,computed,no_refresh"`
-	Version                  types.Int64                                     `tfsdk:"version" json:"version,computed"`
+	Version                  types.Int64                                     `tfsdk:"version" json:"version,computed,force_encode,encode_state_for_unknown"`
 	SegmentedFields          customfield.List[types.String]                  `tfsdk:"segmented_fields" json:"segmentedFields,computed,no_refresh"`
 	Segments                 customfield.List[customfield.Map[types.String]] `tfsdk:"segments" json:"segments,computed"`
 }

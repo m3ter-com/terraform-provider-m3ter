@@ -62,5 +62,5 @@ type CountersItemsDataSourceModel struct {
 	Name           types.String      `tfsdk:"name" json:"name,computed"`
 	ProductID      types.String      `tfsdk:"product_id" json:"productId,computed"`
 	Unit           types.String      `tfsdk:"unit" json:"unit,computed"`
-	Version        types.Int64       `tfsdk:"version" json:"version,computed"`
+	Version        types.Int64       `tfsdk:"version" json:"version,computed,force_encode,encode_state_for_unknown"`
 }

@@ -31,7 +31,7 @@ type PlanModel struct {
 	DtLastModified                    timetypes.RFC3339 `tfsdk:"dt_last_modified" json:"dtLastModified,computed" format:"date-time"`
 	LastModifiedBy                    types.String      `tfsdk:"last_modified_by" json:"lastModifiedBy,computed"`
 	ProductID                         types.String      `tfsdk:"product_id" json:"productId,computed"`
-	Version                           types.Int64       `tfsdk:"version" json:"version,computed"`
+	Version                           types.Int64       `tfsdk:"version" json:"version,computed,force_encode,encode_state_for_unknown"`
 }
 
 func (m PlanModel) MarshalJSON() (data []byte, err error) {
