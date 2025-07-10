@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.3.0 (2025-07-10)
+
+Full Changelog: [v0.2.0-alpha...v0.3.0](https://github.com/m3ter-com/terraform-provider-m3ter/compare/v0.2.0-alpha...v0.3.0)
+
+### Features
+
+* **api:** add x-stainless-terraform-always-send=true to version attributes ([3fbaf3a](https://github.com/m3ter-com/terraform-provider-m3ter/commit/3fbaf3a8ea4febca930461c01ef0ac2a4cc6535c))
+* new option to send computed values back to server ([12950a0](https://github.com/m3ter-com/terraform-provider-m3ter/commit/12950a042494c3102723ac4df47f4ae14d04b846))
+
 ## 0.2.0-alpha (2025-07-09)
 
 Full Changelog: [v0.1.1-alpha...v0.2.0-alpha](https://github.com/m3ter-com/terraform-provider-m3ter/compare/v0.1.1-alpha...v0.2.0-alpha)
