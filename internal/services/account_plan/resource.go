@@ -113,7 +113,6 @@ func (r *AccountPlanResource) Update(ctx context.Context, req resource.UpdateReq
 		return
 	}
 
-	data.Version = state.Version
 	params := m3ter.AccountPlanUpdateParams{}
 
 	if !data.OrgID.IsNull() {

@@ -114,7 +114,6 @@ func (r *ResourceGroupResource) Update(ctx context.Context, req resource.UpdateR
 		return
 	}
 
-	data.Version = state.Version
 	params := m3ter.ResourceGroupUpdateParams{}
 
 	if !data.OrgID.IsNull() {

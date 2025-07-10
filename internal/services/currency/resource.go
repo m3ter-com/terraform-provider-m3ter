@@ -113,7 +113,6 @@ func (r *CurrencyResource) Update(ctx context.Context, req resource.UpdateReques
 		return
 	}
 
-	data.Version = state.Version
 	params := m3ter.CurrencyUpdateParams{}
 
 	if !data.OrgID.IsNull() {
