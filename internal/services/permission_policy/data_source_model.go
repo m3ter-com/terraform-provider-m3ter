@@ -21,7 +21,7 @@ type PermissionPolicyDataSourceModel struct {
 	LastModifiedBy   types.String                                                                  `tfsdk:"last_modified_by" json:"lastModifiedBy,computed"`
 	ManagedPolicy    types.Bool                                                                    `tfsdk:"managed_policy" json:"managedPolicy,computed"`
 	Name             types.String                                                                  `tfsdk:"name" json:"name,computed"`
-	Version          types.Int64                                                                   `tfsdk:"version" json:"version,computed"`
+	Version          types.Int64                                                                   `tfsdk:"version" json:"version,computed,force_encode,encode_state_for_unknown"`
 	PermissionPolicy customfield.NestedObjectList[PermissionPolicyPermissionPolicyDataSourceModel] `tfsdk:"permission_policy" json:"permissionPolicy,computed"`
 }
 

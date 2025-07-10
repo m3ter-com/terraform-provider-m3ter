@@ -28,7 +28,7 @@ type CompoundAggregationDataSourceModel struct {
 	QuantityPerUnit          types.Float64                                   `tfsdk:"quantity_per_unit" json:"quantityPerUnit,computed"`
 	Rounding                 types.String                                    `tfsdk:"rounding" json:"rounding,computed"`
 	Unit                     types.String                                    `tfsdk:"unit" json:"unit,computed"`
-	Version                  types.Int64                                     `tfsdk:"version" json:"version,computed"`
+	Version                  types.Int64                                     `tfsdk:"version" json:"version,computed,force_encode,encode_state_for_unknown"`
 	Segments                 customfield.List[customfield.Map[types.String]] `tfsdk:"segments" json:"segments,computed"`
 	CustomFields             types.Dynamic                                   `tfsdk:"custom_fields" json:"customFields,computed"`
 }

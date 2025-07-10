@@ -27,7 +27,7 @@ type IntegrationConfigurationDataSourceModel struct {
 	LastModifiedBy types.String      `tfsdk:"last_modified_by" json:"lastModifiedBy,computed"`
 	Status         types.String      `tfsdk:"status" json:"status,computed"`
 	URL            types.String      `tfsdk:"url" json:"url,computed"`
-	Version        types.Int64       `tfsdk:"version" json:"version,computed"`
+	Version        types.Int64       `tfsdk:"version" json:"version,computed,force_encode,encode_state_for_unknown"`
 }
 
 func (m *IntegrationConfigurationDataSourceModel) toReadParams(_ context.Context) (params m3ter.IntegrationConfigurationGetParams, diags diag.Diagnostics) {

@@ -78,7 +78,7 @@ type PricingsItemsDataSourceModel struct {
 	StartDate                 timetypes.RFC3339                                                        `tfsdk:"start_date" json:"startDate,computed" format:"date-time"`
 	TiersSpanPlan             types.Bool                                                               `tfsdk:"tiers_span_plan" json:"tiersSpanPlan,computed"`
 	Type                      types.String                                                             `tfsdk:"type" json:"type,computed"`
-	Version                   types.Int64                                                              `tfsdk:"version" json:"version,computed"`
+	Version                   types.Int64                                                              `tfsdk:"version" json:"version,computed,force_encode,encode_state_for_unknown"`
 }
 
 type PricingsOveragePricingBandsDataSourceModel struct {

@@ -35,7 +35,7 @@ type PricingModel struct {
 	DtLastModified            timetypes.RFC3339                   `tfsdk:"dt_last_modified" json:"dtLastModified,computed" format:"date-time"`
 	LastModifiedBy            types.String                        `tfsdk:"last_modified_by" json:"lastModifiedBy,computed"`
 	SegmentString             types.String                        `tfsdk:"segment_string" json:"segmentString,computed"`
-	Version                   types.Int64                         `tfsdk:"version" json:"version,computed"`
+	Version                   types.Int64                         `tfsdk:"version" json:"version,computed,force_encode,encode_state_for_unknown"`
 }
 
 func (m PricingModel) MarshalJSON() (data []byte, err error) {

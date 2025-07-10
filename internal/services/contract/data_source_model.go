@@ -25,7 +25,7 @@ type ContractDataSourceModel struct {
 	Name                types.String      `tfsdk:"name" json:"name,computed"`
 	PurchaseOrderNumber types.String      `tfsdk:"purchase_order_number" json:"purchaseOrderNumber,computed"`
 	StartDate           timetypes.RFC3339 `tfsdk:"start_date" json:"startDate,computed" format:"date"`
-	Version             types.Int64       `tfsdk:"version" json:"version,computed"`
+	Version             types.Int64       `tfsdk:"version" json:"version,computed,force_encode,encode_state_for_unknown"`
 	CustomFields        types.Dynamic     `tfsdk:"custom_fields" json:"customFields,computed"`
 }
 

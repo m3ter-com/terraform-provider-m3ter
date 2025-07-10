@@ -72,5 +72,5 @@ type PlansItemsDataSourceModel struct {
 	StandingChargeAccountingProductID types.String      `tfsdk:"standing_charge_accounting_product_id" json:"standingChargeAccountingProductId,computed"`
 	StandingChargeBillInAdvance       types.Bool        `tfsdk:"standing_charge_bill_in_advance" json:"standingChargeBillInAdvance,computed"`
 	StandingChargeDescription         types.String      `tfsdk:"standing_charge_description" json:"standingChargeDescription,computed"`
-	Version                           types.Int64       `tfsdk:"version" json:"version,computed"`
+	Version                           types.Int64       `tfsdk:"version" json:"version,computed,force_encode,encode_state_for_unknown"`
 }

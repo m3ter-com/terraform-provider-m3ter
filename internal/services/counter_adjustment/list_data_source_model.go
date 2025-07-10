@@ -75,5 +75,5 @@ type CounterAdjustmentsItemsDataSourceModel struct {
 	LastModifiedBy      types.String      `tfsdk:"last_modified_by" json:"lastModifiedBy,computed"`
 	PurchaseOrderNumber types.String      `tfsdk:"purchase_order_number" json:"purchaseOrderNumber,computed"`
 	Value               types.Int64       `tfsdk:"value" json:"value,computed"`
-	Version             types.Int64       `tfsdk:"version" json:"version,computed"`
+	Version             types.Int64       `tfsdk:"version" json:"version,computed,force_encode,encode_state_for_unknown"`
 }

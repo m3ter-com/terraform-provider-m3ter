@@ -41,7 +41,7 @@ type PermissionPoliciesItemsDataSourceModel struct {
 	ManagedPolicy    types.Bool                                                                      `tfsdk:"managed_policy" json:"managedPolicy,computed"`
 	Name             types.String                                                                    `tfsdk:"name" json:"name,computed"`
 	PermissionPolicy customfield.NestedObjectList[PermissionPoliciesPermissionPolicyDataSourceModel] `tfsdk:"permission_policy" json:"permissionPolicy,computed"`
-	Version          types.Int64                                                                     `tfsdk:"version" json:"version,computed"`
+	Version          types.Int64                                                                     `tfsdk:"version" json:"version,computed,force_encode,encode_state_for_unknown"`
 }
 
 type PermissionPoliciesPermissionPolicyDataSourceModel struct {
