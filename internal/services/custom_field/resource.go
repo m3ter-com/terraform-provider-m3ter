@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-package webhook
+package custom_field
 
 import (
 	"context"
@@ -18,24 +18,24 @@ import (
 )
 
 // Ensure provider defined types fully satisfy framework interfaces.
-var _ resource.ResourceWithConfigure = (*WebhookResource)(nil)
-var _ resource.ResourceWithModifyPlan = (*WebhookResource)(nil)
-var _ resource.ResourceWithImportState = (*WebhookResource)(nil)
+var _ resource.ResourceWithConfigure = (*CustomFieldResource)(nil)
+var _ resource.ResourceWithModifyPlan = (*CustomFieldResource)(nil)
+var _ resource.ResourceWithImportState = (*CustomFieldResource)(nil)
 
 func NewResource() resource.Resource {
-	return &WebhookResource{}
+	return &CustomFieldResource{}
 }
 
-// WebhookResource defines the resource implementation.
-type WebhookResource struct {
+// CustomFieldResource defines the resource implementation.
+type CustomFieldResource struct {
 	client *m3ter.Client
 }
 
-func (r *WebhookResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_webhook"
+func (r *CustomFieldResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
+	resp.TypeName = req.ProviderTypeName + "_custom_field"
 }
 
-func (r *WebhookResource) Configure(ctx context.Context, req resource.ConfigureRequest, resp *resource.ConfigureResponse) {
+func (r *CustomFieldResource) Configure(ctx context.Context, req resource.ConfigureRequest, resp *resource.ConfigureResponse) {
 	if req.ProviderData == nil {
 		return
 	}
@@ -54,8 +54,8 @@ func (r *WebhookResource) Configure(ctx context.Context, req resource.ConfigureR
 	r.client = client
 }
 
-func (r *WebhookResource) Create(ctx context.Context, req resource.CreateRequest, resp *resource.CreateResponse) {
-	var data *WebhookModel
+func (r *CustomFieldResource) Create(ctx context.Context, req resource.CreateRequest, resp *resource.CreateResponse) {
+	var data *CustomFieldModel
 
 	resp.Diagnostics.Append(req.Plan.Get(ctx, &data)...)
 
@@ -63,7 +63,7 @@ func (r *WebhookResource) Create(ctx context.Context, req resource.CreateRequest
 		return
 	}
 
-	params := m3ter.WebhookNewParams{}
+	params := m3ter.CustomFieldUpdateParams{}
 
 	if !data.OrgID.IsNull() {
 		params.OrgID = m3ter.F(data.OrgID.ValueString())
@@ -75,7 +75,7 @@ func (r *WebhookResource) Create(ctx context.Context, req resource.CreateRequest
 		return
 	}
 	res := new(http.Response)
-	_, err = r.client.Webhooks.New(
+	_, err = r.client.CustomFields.Update(
 		ctx,
 		params,
 		option.WithRequestBody("application/json", dataBytes),
@@ -96,8 +96,8 @@ func (r *WebhookResource) Create(ctx context.Context, req resource.CreateRequest
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
 
-func (r *WebhookResource) Update(ctx context.Context, req resource.UpdateRequest, resp *resource.UpdateResponse) {
-	var data *WebhookModel
+func (r *CustomFieldResource) Update(ctx context.Context, req resource.UpdateRequest, resp *resource.UpdateResponse) {
+	var data *CustomFieldModel
 
 	resp.Diagnostics.Append(req.Plan.Get(ctx, &data)...)
 
@@ -105,7 +105,7 @@ func (r *WebhookResource) Update(ctx context.Context, req resource.UpdateRequest
 		return
 	}
 
-	var state *WebhookModel
+	var state *CustomFieldModel
 
 	resp.Diagnostics.Append(req.State.Get(ctx, &state)...)
 
@@ -113,10 +113,10 @@ func (r *WebhookResource) Update(ctx context.Context, req resource.UpdateRequest
 		return
 	}
 
-	params := m3ter.WebhookUpdateParams{}
+	params := m3ter.CustomFieldUpdateParams{}
 
-	if !data.OrgID.IsNull() {
-		params.OrgID = m3ter.F(data.OrgID.ValueString())
+	if !data.ID.IsNull() {
+		params.OrgID = m3ter.F(data.ID.ValueString())
 	}
 
 	dataBytes, err := data.MarshalJSONForUpdate(*state)
@@ -125,9 +125,8 @@ func (r *WebhookResource) Update(ctx context.Context, req resource.UpdateRequest
 		return
 	}
 	res := new(http.Response)
-	_, err = r.client.Webhooks.Update(
+	_, err = r.client.CustomFields.Update(
 		ctx,
-		data.ID.ValueString(),
 		params,
 		option.WithRequestBody("application/json", dataBytes),
 		option.WithResponseBodyInto(&res),
@@ -147,8 +146,8 @@ func (r *WebhookResource) Update(ctx context.Context, req resource.UpdateRequest
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
 
-func (r *WebhookResource) Read(ctx context.Context, req resource.ReadRequest, resp *resource.ReadResponse) {
-	var data *WebhookModel
+func (r *CustomFieldResource) Read(ctx context.Context, req resource.ReadRequest, resp *resource.ReadResponse) {
+	var data *CustomFieldModel
 
 	resp.Diagnostics.Append(req.State.Get(ctx, &data)...)
 
@@ -156,16 +155,15 @@ func (r *WebhookResource) Read(ctx context.Context, req resource.ReadRequest, re
 		return
 	}
 
-	params := m3ter.WebhookGetParams{}
+	params := m3ter.CustomFieldGetParams{}
 
-	if !data.OrgID.IsNull() {
-		params.OrgID = m3ter.F(data.OrgID.ValueString())
+	if !data.ID.IsNull() {
+		params.OrgID = m3ter.F(data.ID.ValueString())
 	}
 
 	res := new(http.Response)
-	_, err := r.client.Webhooks.Get(
+	_, err := r.client.CustomFields.Get(
 		ctx,
-		data.ID.ValueString(),
 		params,
 		option.WithResponseBodyInto(&res),
 		option.WithMiddleware(logging.Middleware(ctx)),
@@ -189,60 +187,31 @@ func (r *WebhookResource) Read(ctx context.Context, req resource.ReadRequest, re
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
 
-func (r *WebhookResource) Delete(ctx context.Context, req resource.DeleteRequest, resp *resource.DeleteResponse) {
-	var data *WebhookModel
+func (r *CustomFieldResource) Delete(ctx context.Context, req resource.DeleteRequest, resp *resource.DeleteResponse) {
 
-	resp.Diagnostics.Append(req.State.Get(ctx, &data)...)
-
-	if resp.Diagnostics.HasError() {
-		return
-	}
-
-	params := m3ter.WebhookDeleteParams{}
-
-	if !data.OrgID.IsNull() {
-		params.OrgID = m3ter.F(data.OrgID.ValueString())
-	}
-
-	_, err := r.client.Webhooks.Delete(
-		ctx,
-		data.ID.ValueString(),
-		params,
-		option.WithMiddleware(logging.Middleware(ctx)),
-	)
-	if err != nil {
-		resp.Diagnostics.AddError("failed to make http request", err.Error())
-		return
-	}
-
-	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
 
-func (r *WebhookResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	var data *WebhookModel = new(WebhookModel)
+func (r *CustomFieldResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
+	var data *CustomFieldModel = new(CustomFieldModel)
 
-	path_org_id := ""
-	path_id := ""
+	path := ""
 	diags := importpath.ParseImportID(
 		req.ID,
-		"<org_id>/<id>",
-		&path_org_id,
-		&path_id,
+		"<org_id>",
+		&path,
 	)
 	resp.Diagnostics.Append(diags...)
 	if resp.Diagnostics.HasError() {
 		return
 	}
 
-	data.OrgID = types.StringValue(path_org_id)
-	data.ID = types.StringValue(path_id)
+	data.OrgID = types.StringValue(path)
 
 	res := new(http.Response)
-	_, err := r.client.Webhooks.Get(
+	_, err := r.client.CustomFields.Get(
 		ctx,
-		path_id,
-		m3ter.WebhookGetParams{
-			OrgID: m3ter.F(path_org_id),
+		m3ter.CustomFieldGetParams{
+			OrgID: m3ter.F(path),
 		},
 		option.WithResponseBodyInto(&res),
 		option.WithMiddleware(logging.Middleware(ctx)),
@@ -261,6 +230,20 @@ func (r *WebhookResource) ImportState(ctx context.Context, req resource.ImportSt
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
 
-func (r *WebhookResource) ModifyPlan(_ context.Context, _ resource.ModifyPlanRequest, _ *resource.ModifyPlanResponse) {
-
+func (r *CustomFieldResource) ModifyPlan(ctx context.Context, req resource.ModifyPlanRequest, resp *resource.ModifyPlanResponse) {
+	if req.State.Raw.IsNull() {
+		resp.Diagnostics.AddWarning(
+			"Resource Destruction Considerations",
+			"This resource cannot be destroyed from Terraform. If you create this resource, it will be "+
+				"present in the API until manually deleted.",
+		)
+	}
+	if req.Plan.Raw.IsNull() {
+		resp.Diagnostics.AddWarning(
+			"Resource Destruction Considerations",
+			"Applying this resource destruction will remove the resource from the Terraform state "+
+				"but will not change it in the API. If you would like to destroy or reset this resource "+
+				"in the API, refer to the documentation for how to do it manually.",
+		)
+	}
 }
