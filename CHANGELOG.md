@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.3.1 (2025-07-18)
+
+Full Changelog: [v0.3.0...v0.3.1](https://github.com/m3ter-com/terraform-provider-m3ter/compare/v0.3.0...v0.3.1)
+
+### Bug Fixes
+
+* **api:** remove custom fields from Terraform ([20d4324](https://github.com/m3ter-com/terraform-provider-m3ter/commit/20d43240c85c8510dca20b3cb68964e38d7bc098))
+* **api:** use WebhookDestinationResponse in webhook endpoint response schemas ([432a258](https://github.com/m3ter-com/terraform-provider-m3ter/commit/432a2585488c2d84629b9ff542f96dcbe25e6734))
+
 ## 0.3.0 (2025-07-10)
 
 Full Changelog: [v0.2.0-alpha...v0.3.0](https://github.com/m3ter-com/terraform-provider-m3ter/compare/v0.2.0-alpha...v0.3.0)
