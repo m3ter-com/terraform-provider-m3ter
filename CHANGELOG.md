@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.3.2 (2025-07-18)
+
+Full Changelog: [v0.3.1...v0.3.2](https://github.com/m3ter-com/terraform-provider-m3ter/compare/v0.3.1...v0.3.2)
+
+### Chores
+
+* **internal:** version bump ([d92be99](https://github.com/m3ter-com/terraform-provider-m3ter/commit/d92be996ebe1019d41457d1c730c101f43c40290))
+
 ## 0.3.1 (2025-07-18)
 
 Full Changelog: [v0.3.0...v0.3.1](https://github.com/m3ter-com/terraform-provider-m3ter/compare/v0.3.0...v0.3.1)
