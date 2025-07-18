@@ -9,7 +9,7 @@ import (
 )
 
 type WebhookModel struct {
-	ID             types.String             `tfsdk:"id" path:"id,optional"`
+	ID             types.String             `tfsdk:"id" json:"id,computed"`
 	OrgID          types.String             `tfsdk:"org_id" path:"orgId,optional"`
 	Description    types.String             `tfsdk:"description" json:"description,required"`
 	Name           types.String             `tfsdk:"name" json:"name,required"`

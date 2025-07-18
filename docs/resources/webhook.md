@@ -51,7 +51,7 @@ resource "m3ter_webhook" "example_webhook" {
 - `created_by` (String) The ID of the user who created this item.
 - `dt_created` (String) The DateTime when this item was created *(in ISO-8601 format)*.
 - `dt_last_modified` (String) The DateTime when this item was last modified *(in ISO-8601 format)*.
-- `id` (String) The ID of this resource.
+- `id` (String) The UUID of the entity.
 - `last_modified_by` (String) The ID of the user who last modified this item.
 - `version` (Number) The version number:
 - **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.
@@ -79,3 +79,11 @@ Read-Only:
 - `version` (Number) The version number of the entity:
 - **Create entity:** Not valid for initial insertion of new entity - *do not use for Create*. On initial Create, version is set at 1 and listed in the response.
 - **Update Entity:**  On Update, version is required and must match the existing version because a check is performed to ensure sequential versioning is preserved. Version is incremented by 1 and listed in the response.
+
+## Import
+
+Import is supported using the following syntax:
+
+```shell
+$ terraform import m3ter_webhook.example '<org_id>/<id>'
+```

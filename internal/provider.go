@@ -27,6 +27,7 @@ import (
 	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/counter_pricing"
 	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/credit_reason"
 	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/currency"
+	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/custom_field"
 	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/debit_reason"
 	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/external_mapping"
 	"github.com/m3ter-com/terraform-provider-m3ter/internal/services/integration_configuration"
@@ -182,6 +183,7 @@ func (p *M3terProvider) Resources(ctx context.Context) []func() resource.Resourc
 		counter_pricing.NewResource,
 		credit_reason.NewResource,
 		currency.NewResource,
+		custom_field.NewResource,
 		debit_reason.NewResource,
 		external_mapping.NewResource,
 		integration_configuration.NewResource,
@@ -228,6 +230,7 @@ func (p *M3terProvider) DataSources(ctx context.Context) []func() datasource.Dat
 		credit_reason.NewCreditReasonsDataSource,
 		currency.NewCurrencyDataSource,
 		currency.NewCurrenciesDataSource,
+		custom_field.NewCustomFieldDataSource,
 		debit_reason.NewDebitReasonDataSource,
 		debit_reason.NewDebitReasonsDataSource,
 		external_mapping.NewExternalMappingDataSource,
