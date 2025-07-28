@@ -15,6 +15,7 @@ description: |-
 ```terraform
 data "m3ter_pricings" "example_pricings" {
   org_id = "orgId"
+  aggregation_id = "aggregationId"
   date = "date"
   ids = ["string"]
   plan_id = "planId"
@@ -27,6 +28,7 @@ data "m3ter_pricings" "example_pricings" {
 
 ### Optional
 
+- `aggregation_id` (String) UUID of the Aggregation to retrieve pricings for
 - `date` (String) Date on which to retrieve active Pricings.
 - `ids` (List of String) List of Pricing IDs to retrieve.
 - `max_items` (Number) Max items to fetch, default: 1000
