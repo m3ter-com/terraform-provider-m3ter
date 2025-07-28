@@ -39,13 +39,9 @@ Read-Only:
 
 - `active` (Boolean)
 - `code` (String)
-- `created_by` (String) The ID of the user who created this item.
 - `credentials` (Attributes) Response representing a set of credentials used for signing m3ter requests. (see [below for nested schema](#nestedatt--items--credentials))
 - `description` (String)
-- `dt_created` (String) The DateTime when this item was created *(in ISO-8601 format)*.
-- `dt_last_modified` (String) The DateTime when this item was last modified *(in ISO-8601 format)*.
 - `id` (String) The UUID of the entity.
-- `last_modified_by` (String) The ID of the user who last modified this item.
 - `name` (String)
 - `url` (String) The URL to which webhook requests are sent.
 - `version` (Number) The version number:
@@ -58,13 +54,9 @@ Read-Only:
 Read-Only:
 
 - `api_key` (String) The API key provided by m3ter. This key is part of the credential set required for signing requests and authenticating with m3ter services.
-- `created_by` (String) The ID of the user who created this item.
 - `destination` (String) the system the integration is for
 - `destination_id` (String) the destinationId the integration is for
-- `dt_created` (String) The DateTime when this item was created *(in ISO-8601 format)*.
-- `dt_last_modified` (String) The DateTime when this item was last modified *(in ISO-8601 format)*.
 - `id` (String) The UUID of the entity.
-- `last_modified_by` (String) The ID of the user who last modified this item.
 - `name` (String) the name of the credentials
 - `secret` (String) The secret associated with the API key. This secret is used in conjunction with the API key to generate a signature for secure authentication.
 - `type` (String) the type of credentials

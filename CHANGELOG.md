@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.4.0 (2025-07-28)
+
+Full Changelog: [v0.3.2...v0.4.0](https://github.com/m3ter-com/terraform-provider-m3ter/compare/v0.3.2...v0.4.0)
+
+### Features
+
+* **api:** add aggregationId query param to ListPricings ([f69c5d5](https://github.com/m3ter-com/terraform-provider-m3ter/commit/f69c5d59a0e4b1334c9e6ad889eba55d090b1792))
+* **api:** remove audit fields from Terraform provider ([2aea686](https://github.com/m3ter-com/terraform-provider-m3ter/commit/2aea6867cf9b91bbfac0295673763b13df77c173))
+
+
+### Chores
+
+* **internal:** codegen related update ([1cd15bb](https://github.com/m3ter-com/terraform-provider-m3ter/commit/1cd15bb9ba826dbe59c415f26eef93d336a9be05))
+
 ## 0.3.2 (2025-07-18)
 
 Full Changelog: [v0.3.1...v0.3.2](https://github.com/m3ter-com/terraform-provider-m3ter/compare/v0.3.1...v0.3.2)

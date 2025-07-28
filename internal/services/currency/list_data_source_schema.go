@@ -5,7 +5,6 @@ package currency
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
@@ -61,24 +60,6 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 						},
 						"code": schema.StringAttribute{
 							Description: "The short code of the data entity.",
-							Computed:    true,
-						},
-						"created_by": schema.StringAttribute{
-							Description: "The unique identifier (UUID) of the user who created this Currency.",
-							Computed:    true,
-						},
-						"dt_created": schema.StringAttribute{
-							Description: "The date and time *(in ISO-8601 format)* when the Currency was created.",
-							Computed:    true,
-							CustomType:  timetypes.RFC3339Type{},
-						},
-						"dt_last_modified": schema.StringAttribute{
-							Description: "The date and time *(in ISO-8601 format)* when the Currency was last modified.",
-							Computed:    true,
-							CustomType:  timetypes.RFC3339Type{},
-						},
-						"last_modified_by": schema.StringAttribute{
-							Description: "The unique identifier (UUID) of the user who last modified this Currency.",
 							Computed:    true,
 						},
 						"max_decimal_places": schema.Int64Attribute{

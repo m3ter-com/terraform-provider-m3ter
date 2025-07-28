@@ -5,7 +5,6 @@ package meter
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
@@ -29,26 +28,8 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Description: "Code of the Meter - unique short code used to identify the Meter.",
 				Computed:    true,
 			},
-			"created_by": schema.StringAttribute{
-				Description: "The id of the user who created this meter.",
-				Computed:    true,
-			},
-			"dt_created": schema.StringAttribute{
-				Description: "The DateTime when the meter was created *(in ISO-8601 format)*.",
-				Computed:    true,
-				CustomType:  timetypes.RFC3339Type{},
-			},
-			"dt_last_modified": schema.StringAttribute{
-				Description: "The DateTime when the meter was last modified *(in ISO-8601 format)*.",
-				Computed:    true,
-				CustomType:  timetypes.RFC3339Type{},
-			},
 			"group_id": schema.StringAttribute{
 				Description: "UUID of the MeterGroup the Meter belongs to. *(Optional)*.",
-				Computed:    true,
-			},
-			"last_modified_by": schema.StringAttribute{
-				Description: "The id of the user who last modified this meter.",
 				Computed:    true,
 			},
 			"name": schema.StringAttribute{

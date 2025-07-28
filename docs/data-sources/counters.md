@@ -42,11 +42,7 @@ data "m3ter_counters" "example_counters" {
 Read-Only:
 
 - `code` (String) Code of the Counter. A unique short code to identify the Counter.
-- `created_by` (String) The ID of the user who created this item.
-- `dt_created` (String) The DateTime when this item was created *(in ISO-8601 format)*.
-- `dt_last_modified` (String) The DateTime when this item was last modified *(in ISO-8601 format)*.
 - `id` (String) The UUID of the entity.
-- `last_modified_by` (String) The ID of the user who last modified this item.
 - `name` (String) Name of the Counter.
 - `product_id` (String) UUID of the product the Counter belongs to. *(Optional)* - if no `productId` is returned, the Counter is Global. A Global Counter can be used to price Plans or Plan Templates belonging to any Product.
 - `unit` (String) Label for units shown on Bill line items, and indicating to customers what they are being charged for.

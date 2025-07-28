@@ -31,7 +31,6 @@ data "m3ter_counter_pricing" "example_counter_pricing" {
 - `accounting_product_id` (String)
 - `code` (String) Unique short code for the Pricing.
 - `counter_id` (String) UUID of the Counter used to create the pricing.
-- `created_by` (String) The ID of the user who created this item.
 - `cumulative` (Boolean) Controls whether or not charge rates under a set of pricing bands configured for a Pricing are applied according to each separate band or at the highest band reached.
 
 The default value is **TRUE**.
@@ -40,13 +39,10 @@ The default value is **TRUE**.
 
 * When FALSE, at billing charge rates are applied according to highest band reached.
 - `description` (String) Displayed on Bill line items.
-- `dt_created` (String) The DateTime when this item was created *(in ISO-8601 format)*.
-- `dt_last_modified` (String) The DateTime when this item was last modified *(in ISO-8601 format)*.
 - `end_date` (String) The end date *(in ISO-8601 format)* for when the Pricing ceases to be active for the Plan or Plan Template.
 
 If not specified, the Pricing remains active indefinitely.
 - `id` (String) The ID of this resource.
-- `last_modified_by` (String) The ID of the user who last modified this item.
 - `plan_id` (String) UUID of the Plan the Pricing is created for.
 - `plan_template_id` (String) UUID of the Plan Template the Pricing was created for.
 - `pricing_bands` (Attributes List) (see [below for nested schema](#nestedatt--pricing_bands))

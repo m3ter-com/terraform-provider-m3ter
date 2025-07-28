@@ -52,28 +52,10 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Description: "The unique identifier (UUID) for the Contract to which the Plan or Plan Group  attached to the Account has been added.",
 				Computed:    true,
 			},
-			"created_by": schema.StringAttribute{
-				Description: "The unique identifier (UUID) for the user who created the AccountPlan or AccountPlanGroup.",
-				Computed:    true,
-			},
-			"dt_created": schema.StringAttribute{
-				Description: "The date and time *(in ISO 8601 format)* when the AccountPlan or AccountPlanGroup was first created.",
-				Computed:    true,
-				CustomType:  timetypes.RFC3339Type{},
-			},
-			"dt_last_modified": schema.StringAttribute{
-				Description: "The date and time *(in ISO 8601 format)* when the AccountPlan or AccountPlanGroup was last modified.",
-				Computed:    true,
-				CustomType:  timetypes.RFC3339Type{},
-			},
 			"end_date": schema.StringAttribute{
 				Description: "The end date *(in ISO-8601 format)* for when the AccountPlan or AccountPlanGroup ceases to be active for the Account. If not specified, the AccountPlan or AccountPlanGroup remains active indefinitely.",
 				Computed:    true,
 				CustomType:  timetypes.RFC3339Type{},
-			},
-			"last_modified_by": schema.StringAttribute{
-				Description: "The unique identifier (UUID) for the user who last modified the AccountPlan or AccountPlanGroup.",
-				Computed:    true,
 			},
 			"plan_group_id": schema.StringAttribute{
 				Description: "The unique identifier (UUID) of the Plan Group that has been attached to the Account to create the AccountPlanGroup.",

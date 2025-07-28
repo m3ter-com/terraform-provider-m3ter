@@ -6,7 +6,6 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
-	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/m3ter-com/m3ter-sdk-go"
@@ -40,14 +39,10 @@ type IntegrationConfigurationsItemsDataSourceModel struct {
 	Version                  types.Int64                           `tfsdk:"version" json:"version,computed,force_encode,encode_state_for_unknown"`
 	Authorized               types.Bool                            `tfsdk:"authorized" json:"authorized,computed"`
 	ConfigData               customfield.Map[jsontypes.Normalized] `tfsdk:"config_data" json:"configData,computed"`
-	CreatedBy                types.String                          `tfsdk:"created_by" json:"createdBy,computed"`
 	DestinationID            types.String                          `tfsdk:"destination_id" json:"destinationId,computed"`
-	DtCreated                timetypes.RFC3339                     `tfsdk:"dt_created" json:"dtCreated,computed" format:"date-time"`
-	DtLastModified           timetypes.RFC3339                     `tfsdk:"dt_last_modified" json:"dtLastModified,computed" format:"date-time"`
 	Enabled                  types.Bool                            `tfsdk:"enabled" json:"enabled,computed"`
 	EntityID                 types.String                          `tfsdk:"entity_id" json:"entityId,computed"`
 	IntegrationCredentialsID types.String                          `tfsdk:"integration_credentials_id" json:"integrationCredentialsId,computed"`
-	LastModifiedBy           types.String                          `tfsdk:"last_modified_by" json:"lastModifiedBy,computed"`
 	Name                     types.String                          `tfsdk:"name" json:"name,computed"`
 	TriggerType              types.String                          `tfsdk:"trigger_type" json:"triggerType,computed"`
 }

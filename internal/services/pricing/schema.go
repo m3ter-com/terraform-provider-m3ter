@@ -176,24 +176,6 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 					stringvalidator.OneOfCaseInsensitive("SIMPLE", "COMPOUND"),
 				},
 			},
-			"created_by": schema.StringAttribute{
-				Description: "The ID of the user who created this item.",
-				Computed:    true,
-			},
-			"dt_created": schema.StringAttribute{
-				Description: "The DateTime when this item was created *(in ISO-8601 format)*.",
-				Computed:    true,
-				CustomType:  timetypes.RFC3339Type{},
-			},
-			"dt_last_modified": schema.StringAttribute{
-				Description: "The DateTime when this item was last modified *(in ISO-8601 format)*.",
-				Computed:    true,
-				CustomType:  timetypes.RFC3339Type{},
-			},
-			"last_modified_by": schema.StringAttribute{
-				Description: "The ID of the user who last modified this item.",
-				Computed:    true,
-			},
 			"segment_string": schema.StringAttribute{
 				Computed: true,
 			},

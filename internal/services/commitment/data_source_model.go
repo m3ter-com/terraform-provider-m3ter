@@ -30,14 +30,10 @@ type CommitmentDataSourceModel struct {
 	CommitmentFeeDescription     types.String                                                    `tfsdk:"commitment_fee_description" json:"commitmentFeeDescription,computed"`
 	CommitmentUsageDescription   types.String                                                    `tfsdk:"commitment_usage_description" json:"commitmentUsageDescription,computed"`
 	ContractID                   types.String                                                    `tfsdk:"contract_id" json:"contractId,computed"`
-	CreatedBy                    types.String                                                    `tfsdk:"created_by" json:"createdBy,computed"`
 	Currency                     types.String                                                    `tfsdk:"currency" json:"currency,computed"`
 	DrawdownsAccountingProductID types.String                                                    `tfsdk:"drawdowns_accounting_product_id" json:"drawdownsAccountingProductId,computed"`
-	DtCreated                    timetypes.RFC3339                                               `tfsdk:"dt_created" json:"dtCreated,computed" format:"date-time"`
-	DtLastModified               timetypes.RFC3339                                               `tfsdk:"dt_last_modified" json:"dtLastModified,computed" format:"date-time"`
 	EndDate                      timetypes.RFC3339                                               `tfsdk:"end_date" json:"endDate,computed" format:"date"`
 	FeesAccountingProductID      types.String                                                    `tfsdk:"fees_accounting_product_id" json:"feesAccountingProductId,computed"`
-	LastModifiedBy               types.String                                                    `tfsdk:"last_modified_by" json:"lastModifiedBy,computed"`
 	OverageDescription           types.String                                                    `tfsdk:"overage_description" json:"overageDescription,computed"`
 	OverageSurchargePercent      types.Float64                                                   `tfsdk:"overage_surcharge_percent" json:"overageSurchargePercent,computed"`
 	SeparateOverageUsage         types.Bool                                                      `tfsdk:"separate_overage_usage" json:"separateOverageUsage,computed"`

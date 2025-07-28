@@ -70,11 +70,7 @@ See [Working with Custom Fields](https://www.m3ter.com/docs/guides/creating-and-
 
 ### Read-Only
 
-- `created_by` (String) The unique identifier (UUID) for the user who created the AccountPlan or AccountPlanGroup.
-- `dt_created` (String) The date and time *(in ISO 8601 format)* when the AccountPlan or AccountPlanGroup was first created.
-- `dt_last_modified` (String) The date and time *(in ISO 8601 format)* when the AccountPlan or AccountPlanGroup was last modified.
 - `id` (String) The UUID of the entity.
-- `last_modified_by` (String) The unique identifier (UUID) for the user who last modified the AccountPlan or AccountPlanGroup.
 - `product_id` (String) The unique identifier (UUID) for the Product associated with the AccountPlan.
 
 **Note:** Not present in response for AccountPlanGroup - Plan Groups can contain multiple Plans belonging to different Products.

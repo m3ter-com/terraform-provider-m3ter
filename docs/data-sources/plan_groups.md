@@ -41,17 +41,13 @@ Read-Only:
 
 - `account_id` (String) Optional. This PlanGroup was created as bespoke for the associated Account with this Account ID.
 - `code` (String) The short code representing the PlanGroup.
-- `created_by` (String) The unique identifier (UUID) for the user who created the PlanGroup.
 - `currency` (String) Currency code for the PlanGroup (For example, USD).
 - `custom_fields` (Dynamic) User defined fields enabling you to attach custom data. The value for a custom field can be either a string or a number.
 
 If `customFields` can also be defined for this entity at the Organizational level,`customField` values defined at individual level override values of `customFields` with the same name defined at Organization level.
 
 See [Working with Custom Fields](https://www.m3ter.com/docs/guides/creating-and-managing-products/working-with-custom-fields) in the m3ter documentation for more information.
-- `dt_created` (String) The date and time *(in ISO 8601 format)* when the PlanGroup was first created.
-- `dt_last_modified` (String) The date and time *(in ISO 8601 format)* when the PlanGroup was last modified.
 - `id` (String) The UUID of the entity.
-- `last_modified_by` (String) The unique identifier (UUID) for the user who last modified the PlanGroup.
 - `minimum_spend` (Number) The minimum spend amount for the PlanGroup.
 - `minimum_spend_accounting_product_id` (String) Optional. Product ID to attribute the PlanGroup's minimum spend for accounting purposes.
 - `minimum_spend_bill_in_advance` (Boolean) A boolean flag that determines when the minimum spend is billed. This flag overrides the setting at Organizational level for minimum spend billing in arrears/in advance.

@@ -74,11 +74,8 @@ Available values: "PARENT_SUMMARY", "PARENT_BREAKDOWN", "CHILD".
 - `commitment_fee_description` (String) A textual description of the Commitment fee.
 - `commitment_usage_description` (String) A textual description of the Commitment usage.
 - `contract_id` (String) The unique identifier (UUID) for a Contract you've created for the Account and to which the Commitment has been added.
-- `created_by` (String) The unique identifier (UUID) of the user who created this Commitment.
 - `currency` (String) The currency used for the Commitment. For example, 'USD'.
 - `drawdowns_accounting_product_id` (String)
-- `dt_created` (String) The date and time *(in ISO-8601 format)* when the Commitment was created.
-- `dt_last_modified` (String) The date and time *(in ISO-8601 format)* when the Commitment was last modified.
 - `end_date` (String) The end date of the Commitment period in ISO-8601 format.
 - `fee_dates` (Attributes List) Used for billing any outstanding Commitment fees *on a schedule*.
 
@@ -88,7 +85,6 @@ An array defining a series of bill dates and amounts covering specified service 
 - `servicePeriodStartDate` and `servicePeriodEndDate` - defines the service period the bill covers *(in ISO-8601 format)*. (see [below for nested schema](#nestedatt--items--fee_dates))
 - `fees_accounting_product_id` (String)
 - `id` (String) The UUID of the entity.
-- `last_modified_by` (String) The unique identifier (UUID) of the user who last modified this Commitment.
 - `line_item_types` (List of String) Specifies the line item charge types that can draw-down at billing against the Commitment amount. Options are:
 - `MINIMUM_SPEND`
 - `STANDING_CHARGE`

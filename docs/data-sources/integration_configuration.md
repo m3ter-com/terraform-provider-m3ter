@@ -28,11 +28,8 @@ data "m3ter_integration_configuration" "example_integration_configuration" {
 
 ### Read-Only
 
-- `created_by` (String) The ID of the user who created this item.
 - `destination` (String) The destination system for the integration run.
 - `dt_completed` (String) The date and time the integration was completed. *(in ISO-8601 format)*.
-- `dt_created` (String) The DateTime when this item was created *(in ISO-8601 format)*.
-- `dt_last_modified` (String) The DateTime when this item was last modified *(in ISO-8601 format)*.
 - `dt_started` (String) The date and time the integration run was started *(in ISO-8601 format)*.
 - `entity_id` (String) The unique identifier (UUID) of the entity the integration run is for.
 - `entity_type` (String) The type of entity the integration run is for. Two options:
@@ -41,7 +38,6 @@ data "m3ter_integration_configuration" "example_integration_configuration" {
 - `error` (String) Describes any errors encountered during the integration run.
 - `external_id` (String) The external ID in the destination system if available.
 - `id` (String) The ID of this resource.
-- `last_modified_by` (String) The ID of the user who last modified this item.
 - `status` (String) Available values: "WAITING", "STARTED", "COMPLETE", "ERROR", "AWAITING_RETRY", "AUTH_FAILED", "ACCOUNTING_PERIOD_CLOSED", "INVOICE_ALREADY_PAID", "DISABLED", "RATE_LIMIT_RETRY".
 - `url` (String) The URL of the entity in the destination system if available.
 - `version` (Number) The version number:

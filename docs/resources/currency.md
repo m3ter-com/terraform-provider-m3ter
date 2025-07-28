@@ -43,11 +43,7 @@ resource "m3ter_currency" "example_currency" {
 
 ### Read-Only
 
-- `created_by` (String) The unique identifier (UUID) of the user who created this Currency.
-- `dt_created` (String) The date and time *(in ISO-8601 format)* when the Currency was created.
-- `dt_last_modified` (String) The date and time *(in ISO-8601 format)* when the Currency was last modified.
 - `id` (String) The UUID of the entity.
-- `last_modified_by` (String) The unique identifier (UUID) of the user who last modified this Currency.
 - `version` (Number) The version number:
 - **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.
 - **Update:** On successful Update, the version is incremented by 1 in the response.

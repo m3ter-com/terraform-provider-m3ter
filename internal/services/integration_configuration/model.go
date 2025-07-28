@@ -21,15 +21,11 @@ type IntegrationConfigurationModel struct {
 	ConfigData               *map[string]jsontypes.Normalized          `tfsdk:"config_data" json:"configData,required,no_refresh"`
 	Credentials              *IntegrationConfigurationCredentialsModel `tfsdk:"credentials" json:"credentials,required,no_refresh"`
 	Authorized               types.Bool                                `tfsdk:"authorized" json:"authorized,computed,no_refresh"`
-	CreatedBy                types.String                              `tfsdk:"created_by" json:"createdBy,computed"`
 	DtCompleted              timetypes.RFC3339                         `tfsdk:"dt_completed" json:"dtCompleted,computed" format:"date-time"`
-	DtCreated                timetypes.RFC3339                         `tfsdk:"dt_created" json:"dtCreated,computed" format:"date-time"`
-	DtLastModified           timetypes.RFC3339                         `tfsdk:"dt_last_modified" json:"dtLastModified,computed" format:"date-time"`
 	DtStarted                timetypes.RFC3339                         `tfsdk:"dt_started" json:"dtStarted,computed" format:"date-time"`
 	Enabled                  types.Bool                                `tfsdk:"enabled" json:"enabled,computed,no_refresh"`
 	Error                    types.String                              `tfsdk:"error" json:"error,computed"`
 	ExternalID               types.String                              `tfsdk:"external_id" json:"externalId,computed"`
-	LastModifiedBy           types.String                              `tfsdk:"last_modified_by" json:"lastModifiedBy,computed"`
 	Status                   types.String                              `tfsdk:"status" json:"status,computed"`
 	TriggerType              types.String                              `tfsdk:"trigger_type" json:"triggerType,computed,no_refresh"`
 	URL                      types.String                              `tfsdk:"url" json:"url,computed"`

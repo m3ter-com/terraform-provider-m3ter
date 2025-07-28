@@ -18,6 +18,7 @@ type PricingsDataListDataSourceEnvelope struct {
 
 type PricingsDataSourceModel struct {
 	OrgID          types.String                                               `tfsdk:"org_id" path:"orgId,optional"`
+	AggregationID  types.String                                               `tfsdk:"aggregation_id" query:"aggregationId,optional"`
 	Date           types.String                                               `tfsdk:"date" query:"date,optional"`
 	PlanID         types.String                                               `tfsdk:"plan_id" query:"planId,optional"`
 	PlanTemplateID types.String                                               `tfsdk:"plan_template_id" query:"planTemplateId,optional"`
@@ -36,6 +37,9 @@ func (m *PricingsDataSourceModel) toListParams(_ context.Context) (params m3ter.
 		IDs: m3ter.F(mIDs),
 	}
 
+	if !m.AggregationID.IsNull() {
+		params.AggregationID = m3ter.F(m.AggregationID.ValueString())
+	}
 	if !m.Date.IsNull() {
 		params.Date = m3ter.F(m.Date.ValueString())
 	}
@@ -59,13 +63,9 @@ type PricingsItemsDataSourceModel struct {
 	AggregationType           types.String                                                             `tfsdk:"aggregation_type" json:"aggregationType,computed"`
 	Code                      types.String                                                             `tfsdk:"code" json:"code,computed"`
 	CompoundAggregationID     types.String                                                             `tfsdk:"compound_aggregation_id" json:"compoundAggregationId,computed"`
-	CreatedBy                 types.String                                                             `tfsdk:"created_by" json:"createdBy,computed"`
 	Cumulative                types.Bool                                                               `tfsdk:"cumulative" json:"cumulative,computed"`
 	Description               types.String                                                             `tfsdk:"description" json:"description,computed"`
-	DtCreated                 timetypes.RFC3339                                                        `tfsdk:"dt_created" json:"dtCreated,computed" format:"date-time"`
-	DtLastModified            timetypes.RFC3339                                                        `tfsdk:"dt_last_modified" json:"dtLastModified,computed" format:"date-time"`
 	EndDate                   timetypes.RFC3339                                                        `tfsdk:"end_date" json:"endDate,computed" format:"date-time"`
-	LastModifiedBy            types.String                                                             `tfsdk:"last_modified_by" json:"lastModifiedBy,computed"`
 	MinimumSpend              types.Float64                                                            `tfsdk:"minimum_spend" json:"minimumSpend,computed"`
 	MinimumSpendBillInAdvance types.Bool                                                               `tfsdk:"minimum_spend_bill_in_advance" json:"minimumSpendBillInAdvance,computed"`
 	MinimumSpendDescription   types.String                                                             `tfsdk:"minimum_spend_description" json:"minimumSpendDescription,computed"`

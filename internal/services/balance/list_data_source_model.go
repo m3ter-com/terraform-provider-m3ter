@@ -56,15 +56,11 @@ type BalancesItemsDataSourceModel struct {
 	Code                            types.String                   `tfsdk:"code" json:"code,computed"`
 	ConsumptionsAccountingProductID types.String                   `tfsdk:"consumptions_accounting_product_id" json:"consumptionsAccountingProductId,computed"`
 	ContractID                      types.String                   `tfsdk:"contract_id" json:"contractId,computed"`
-	CreatedBy                       types.String                   `tfsdk:"created_by" json:"createdBy,computed"`
 	Currency                        types.String                   `tfsdk:"currency" json:"currency,computed"`
 	CustomFields                    types.Dynamic                  `tfsdk:"custom_fields" json:"customFields,computed"`
 	Description                     types.String                   `tfsdk:"description" json:"description,computed"`
-	DtCreated                       timetypes.RFC3339              `tfsdk:"dt_created" json:"dtCreated,computed" format:"date-time"`
-	DtLastModified                  timetypes.RFC3339              `tfsdk:"dt_last_modified" json:"dtLastModified,computed" format:"date-time"`
 	EndDate                         timetypes.RFC3339              `tfsdk:"end_date" json:"endDate,computed" format:"date-time"`
 	FeesAccountingProductID         types.String                   `tfsdk:"fees_accounting_product_id" json:"feesAccountingProductId,computed"`
-	LastModifiedBy                  types.String                   `tfsdk:"last_modified_by" json:"lastModifiedBy,computed"`
 	LineItemTypes                   customfield.List[types.String] `tfsdk:"line_item_types" json:"lineItemTypes,computed"`
 	Name                            types.String                   `tfsdk:"name" json:"name,computed"`
 	OverageDescription              types.String                   `tfsdk:"overage_description" json:"overageDescription,computed"`

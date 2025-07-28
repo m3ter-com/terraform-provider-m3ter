@@ -40,11 +40,8 @@ Read-Only:
 * TRUE - authorized.
 * FALSE - not authorized.
 - `config_data` (Map of String) Configuration data for the integration
-- `created_by` (String) The ID of the user who created this item.
 - `destination` (String) The type of destination *(e.g. Netsuite, webhooks)*.
 - `destination_id` (String) The unique identifier (UUID) of the entity the integration is for.
-- `dt_created` (String) The DateTime when this item was created *(in ISO-8601 format)*.
-- `dt_last_modified` (String) The DateTime when this item was last modified *(in ISO-8601 format)*.
 - `enabled` (Boolean) A flag indicating whether the integration configuration is currently enabled or disabled.
 
 * TRUE - enabled.
@@ -53,7 +50,6 @@ Read-Only:
 - `entity_type` (String) The type of entity the integration is for *(e.g. Bill)*.
 - `id` (String) The UUID of the entity.
 - `integration_credentials_id` (String) UUID of the credentials to use for this integration
-- `last_modified_by` (String) The ID of the user who last modified this item.
 - `name` (String) The name of the configuration
 - `trigger_type` (String, Deprecated) Specifies the type of trigger for the integration.
 Available values: "EVENT", "SCHEDULE".

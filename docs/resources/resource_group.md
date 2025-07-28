@@ -34,11 +34,7 @@ resource "m3ter_resource_group" "example_resource_group" {
 
 ### Read-Only
 
-- `created_by` (String) The unique identifier (UUID) of the user who created this Resource Group.
-- `dt_created` (String) The date and time *(in ISO-8601 format)* when the Resource Group was created.
-- `dt_last_modified` (String) The date and time *(in ISO-8601 format)* when the Resource Group was last modified.
 - `id` (String) The unique identifier (UUID) of the Resource Group.
-- `last_modified_by` (String) The unique identifier (UUID) of the user who last modified this Resource Group.
 - `version` (Number) The version number. Default value when newly created is one.
 
 ## Import

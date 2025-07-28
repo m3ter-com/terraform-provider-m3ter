@@ -30,11 +30,7 @@ data "m3ter_credit_reason" "example_credit_reason" {
 
 - `archived` (Boolean) TRUE / FALSE flag indicating whether the data entity is archived. An entity can be archived if it is obsolete.
 - `code` (String) The short code of the data entity.
-- `created_by` (String) The id of the user who created this credit reason.
-- `dt_created` (String) The DateTime when the credit reason was created *(in ISO-8601 format)*.
-- `dt_last_modified` (String) The DateTime when the credit reason was last modified *(in ISO-8601 format)*.
 - `id` (String) The ID of this resource.
-- `last_modified_by` (String) The id of the user who last modified this credit reason.
 - `name` (String) The name of the data entity.
 - `version` (Number) The version number:
 - **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.

@@ -110,10 +110,6 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							CustomType:  customfield.NewMapType[jsontypes.Normalized](ctx),
 							ElementType: jsontypes.NormalizedType{},
 						},
-						"created_by": schema.StringAttribute{
-							Description: "The ID of the user who created the account.",
-							Computed:    true,
-						},
 						"credit_application_order": schema.ListAttribute{
 							Description: "The order in which any Prepayment or Balance amounts on the Account are to be drawn-down against for billing. Four options:\n- `\"PREPAYMENT\",\"BALANCE\"`. Draw-down against Prepayment credit before Balance credit.\n- `\"BALANCE\",\"PREPAYMENT\"`. Draw-down against Balance credit before Prepayment credit.\n- `\"PREPAYMENT\"`. Only draw-down against Prepayment credit.\n- `\"BALANCE\"`. Only draw-down against Balance credit.",
 							Computed:    true,
@@ -137,22 +133,8 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Description: "The number of days after the Bill generation date shown on Bills as the due date.",
 							Computed:    true,
 						},
-						"dt_created": schema.StringAttribute{
-							Description: "The DateTime when the Account was created *(in ISO 8601 format)*.",
-							Computed:    true,
-							CustomType:  timetypes.RFC3339Type{},
-						},
-						"dt_last_modified": schema.StringAttribute{
-							Description: "The DateTime when the Account was last modified *(in ISO 8601 format)*.",
-							Computed:    true,
-							CustomType:  timetypes.RFC3339Type{},
-						},
 						"email_address": schema.StringAttribute{
 							Description: "Contact email for the Account.",
-							Computed:    true,
-						},
-						"last_modified_by": schema.StringAttribute{
-							Description: "The ID of the user who last modified the Account.",
 							Computed:    true,
 						},
 						"name": schema.StringAttribute{

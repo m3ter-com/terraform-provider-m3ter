@@ -5,7 +5,6 @@ package permission_policy
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/m3ter-com/m3ter-sdk-go"
@@ -34,10 +33,6 @@ func (m *PermissionPoliciesDataSourceModel) toListParams(_ context.Context) (par
 
 type PermissionPoliciesItemsDataSourceModel struct {
 	ID               types.String                                                                    `tfsdk:"id" json:"id,computed"`
-	CreatedBy        types.String                                                                    `tfsdk:"created_by" json:"createdBy,computed"`
-	DtCreated        timetypes.RFC3339                                                               `tfsdk:"dt_created" json:"dtCreated,computed" format:"date-time"`
-	DtLastModified   timetypes.RFC3339                                                               `tfsdk:"dt_last_modified" json:"dtLastModified,computed" format:"date-time"`
-	LastModifiedBy   types.String                                                                    `tfsdk:"last_modified_by" json:"lastModifiedBy,computed"`
 	ManagedPolicy    types.Bool                                                                      `tfsdk:"managed_policy" json:"managedPolicy,computed"`
 	Name             types.String                                                                    `tfsdk:"name" json:"name,computed"`
 	PermissionPolicy customfield.NestedObjectList[PermissionPoliciesPermissionPolicyDataSourceModel] `tfsdk:"permission_policy" json:"permissionPolicy,computed"`

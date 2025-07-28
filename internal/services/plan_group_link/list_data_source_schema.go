@@ -5,7 +5,6 @@ package plan_group_link
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
@@ -51,24 +50,6 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 					Attributes: map[string]schema.Attribute{
 						"id": schema.StringAttribute{
 							Description: "The UUID of the entity.",
-							Computed:    true,
-						},
-						"created_by": schema.StringAttribute{
-							Description: "The id of the user who created this plan group link.",
-							Computed:    true,
-						},
-						"dt_created": schema.StringAttribute{
-							Description: "The DateTime *(in ISO-8601 format)* when the plan group link was created.",
-							Computed:    true,
-							CustomType:  timetypes.RFC3339Type{},
-						},
-						"dt_last_modified": schema.StringAttribute{
-							Description: "The DateTime *(in ISO-8601 format)* when the plan group link was last modified.",
-							Computed:    true,
-							CustomType:  timetypes.RFC3339Type{},
-						},
-						"last_modified_by": schema.StringAttribute{
-							Description: "The id of the user who last modified this plan group link.",
 							Computed:    true,
 						},
 						"plan_group_id": schema.StringAttribute{

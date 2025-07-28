@@ -44,16 +44,12 @@ Read-Only:
 - `account_id` (String) *(Optional)*. The Account ID for which this plan was created as custom/bespoke. A custom/bespoke Plan can only be attached to the specified Account.
 - `bespoke` (Boolean) TRUE/FALSE flag indicating whether the plan is custom/bespoke for a particular Account.
 - `code` (String) Unique short code reference for the Plan.
-- `created_by` (String) The id of the user who created this plan.
 - `custom_fields` (Dynamic) User defined fields enabling you to attach custom data. The value for a custom field can be either a string or a number.
 
 If `customFields` can also be defined for this entity at the Organizational level,`customField` values defined at individual level override values of `customFields` with the same name defined at Organization level.
 
 See [Working with Custom Fields](https://www.m3ter.com/docs/guides/creating-and-managing-products/working-with-custom-fields) in the m3ter documentation for more information.
-- `dt_created` (String) The DateTime *(in ISO-8601 format)* when the plan was created.
-- `dt_last_modified` (String) The DateTime *(in ISO-8601 format)* when the plan was last modified.
 - `id` (String) The UUID of the entity.
-- `last_modified_by` (String) The id of the user who last modified this plan.
 - `minimum_spend` (Number) The product minimum spend amount per billing cycle for end customer Accounts on a priced Plan.
 
 *(Optional)*. Overrides PlanTemplate value.

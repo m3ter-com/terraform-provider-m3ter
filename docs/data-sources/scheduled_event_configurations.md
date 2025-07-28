@@ -37,13 +37,9 @@ data "m3ter_scheduled_event_configurations" "example_scheduled_event_configurati
 
 Read-Only:
 
-- `created_by` (String) The ID of the user who created this item.
-- `dt_created` (String) The DateTime when this item was created *(in ISO-8601 format)*.
-- `dt_last_modified` (String) The DateTime when this item was last modified *(in ISO-8601 format)*.
 - `entity` (String) The referenced configuration or billing entity for which the desired scheduled Event will trigger.
 - `field` (String) A DateTime field for which the desired scheduled Event will trigger - this must be a DateTime field on the referenced billing or configuration entity.
 - `id` (String) The UUID of the entity.
-- `last_modified_by` (String) The ID of the user who last modified this item.
 - `name` (String) The name of the custom Scheduled Event Configuration.
 - `offset` (Number) The offset in days from the specified DateTime field on the referenced entity when the scheduled Event will trigger.
 - `version` (Number) The version number:

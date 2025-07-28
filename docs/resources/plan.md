@@ -87,11 +87,7 @@ When FALSE, standing charge is billed at the end of each billing period.
 
 ### Read-Only
 
-- `created_by` (String) The id of the user who created this plan.
-- `dt_created` (String) The DateTime *(in ISO-8601 format)* when the plan was created.
-- `dt_last_modified` (String) The DateTime *(in ISO-8601 format)* when the plan was last modified.
 - `id` (String) The UUID of the entity.
-- `last_modified_by` (String) The id of the user who last modified this plan.
 - `product_id` (String) UUID of the Product the Plan belongs to.
 - `version` (Number) The version number:
 - **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.

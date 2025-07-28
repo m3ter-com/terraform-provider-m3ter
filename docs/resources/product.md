@@ -42,11 +42,7 @@ See [Working with Custom Fields](https://www.m3ter.com/docs/guides/creating-and-
 
 ### Read-Only
 
-- `created_by` (String) The unique identifier (UUID) of the user who created this Product.
-- `dt_created` (String) The date and time *(in ISO-8601 format)* when the Product was created.
-- `dt_last_modified` (String) The date and time *(in ISO-8601 format)* when the Product was last modified.
 - `id` (String) The UUID of the entity.
-- `last_modified_by` (String) The unique identifier (UUID) of the user who last modified this Product.
 - `version` (Number) The version number:
 - **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.
 - **Update:** On successful Update, the version is incremented by 1 in the response.

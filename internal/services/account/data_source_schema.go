@@ -48,10 +48,6 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Description: "Code of the Account.\nThis is a unique short code used for the Account.",
 				Computed:    true,
 			},
-			"created_by": schema.StringAttribute{
-				Description: "The ID of the user who created the account.",
-				Computed:    true,
-			},
 			"currency": schema.StringAttribute{
 				Description: "Account level billing currency, such as USD or GBP. Optional attribute:\n- If you define an Account currency, this will be used for bills.\n- If you do not define a currency, the billing currency defined at Organizational will be used.\n\n**Note:** If you've attached a Plan to the Account that uses a different currency to the billing currency, then you must add the relevant currency conversion rate at Organization level to ensure the billing process can convert line items calculated using the Plan currency into the selected billing currency. If you don't add these conversion rates, then bills will fail for the Account.",
 				Computed:    true,
@@ -60,22 +56,8 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Description: "The number of days after the Bill generation date shown on Bills as the due date.",
 				Computed:    true,
 			},
-			"dt_created": schema.StringAttribute{
-				Description: "The DateTime when the Account was created *(in ISO 8601 format)*.",
-				Computed:    true,
-				CustomType:  timetypes.RFC3339Type{},
-			},
-			"dt_last_modified": schema.StringAttribute{
-				Description: "The DateTime when the Account was last modified *(in ISO 8601 format)*.",
-				Computed:    true,
-				CustomType:  timetypes.RFC3339Type{},
-			},
 			"email_address": schema.StringAttribute{
 				Description: "Contact email for the Account.",
-				Computed:    true,
-			},
-			"last_modified_by": schema.StringAttribute{
-				Description: "The ID of the user who last modified the Account.",
 				Computed:    true,
 			},
 			"name": schema.StringAttribute{

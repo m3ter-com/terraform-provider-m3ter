@@ -58,10 +58,7 @@ resource "m3ter_integration_configuration" "example_integration_configuration" {
 
 * TRUE - authorized.
 * FALSE - not authorized.
-- `created_by` (String) The ID of the user who created this item.
 - `dt_completed` (String) The date and time the integration was completed. *(in ISO-8601 format)*.
-- `dt_created` (String) The DateTime when this item was created *(in ISO-8601 format)*.
-- `dt_last_modified` (String) The DateTime when this item was last modified *(in ISO-8601 format)*.
 - `dt_started` (String) The date and time the integration run was started *(in ISO-8601 format)*.
 - `enabled` (Boolean) A flag indicating whether the integration configuration is currently enabled or disabled.
 
@@ -70,7 +67,6 @@ resource "m3ter_integration_configuration" "example_integration_configuration" {
 - `error` (String) Describes any errors encountered during the integration run.
 - `external_id` (String) The external ID in the destination system if available.
 - `id` (String) The UUID of the entity.
-- `last_modified_by` (String) The ID of the user who last modified this item.
 - `status` (String) Available values: "WAITING", "STARTED", "COMPLETE", "ERROR", "AWAITING_RETRY", "AUTH_FAILED", "ACCOUNTING_PERIOD_CLOSED", "INVOICE_ALREADY_PAID", "DISABLED", "RATE_LIMIT_RETRY".
 - `trigger_type` (String, Deprecated) Specifies the type of trigger for the integration.
 Available values: "EVENT", "SCHEDULE".

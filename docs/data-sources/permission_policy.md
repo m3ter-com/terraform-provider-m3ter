@@ -28,11 +28,7 @@ data "m3ter_permission_policy" "example_permission_policy" {
 
 ### Read-Only
 
-- `created_by` (String) The unique identifier (UUID) of the user who created this Permission Policy.
-- `dt_created` (String) The date and time *(in ISO-8601 format)* when the Permission Policy was created.
-- `dt_last_modified` (String) The date and time *(in ISO-8601 format)* when the Permission Policy was last modified.
 - `id` (String) The ID of this resource.
-- `last_modified_by` (String) The unique identifier (UUID) of the user who last modified this Permission Policy.
 - `managed_policy` (Boolean) Indicates whether this is a system generated Managed Permission Policy.
 - `name` (String) The name of the Permission Policy.
 - `permission_policy` (Attributes List) Array containing the Permission Policies information. (see [below for nested schema](#nestedatt--permission_policy))
