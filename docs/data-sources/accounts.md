@@ -53,7 +53,6 @@ Optional attribute - if not defined, then first bill date is determined by the E
 - `code` (String) Code of the Account.
 This is a unique short code used for the Account.
 - `config_data` (Map of String) Configuration data for the Account
-- `created_by` (String) The ID of the user who created the account.
 - `credit_application_order` (List of String) The order in which any Prepayment or Balance amounts on the Account are to be drawn-down against for billing. Four options:
 - `"PREPAYMENT","BALANCE"`. Draw-down against Prepayment credit before Balance credit.
 - `"BALANCE","PREPAYMENT"`. Draw-down against Balance credit before Prepayment credit.
@@ -70,11 +69,8 @@ If `customFields` can also be defined for this entity at the Organizational leve
 
 See [Working with Custom Fields](https://www.m3ter.com/docs/guides/creating-and-managing-products/working-with-custom-fields) in the m3ter documentation for more information.
 - `days_before_bill_due` (Number) The number of days after the Bill generation date shown on Bills as the due date.
-- `dt_created` (String) The DateTime when the Account was created *(in ISO 8601 format)*.
-- `dt_last_modified` (String) The DateTime when the Account was last modified *(in ISO 8601 format)*.
 - `email_address` (String) Contact email for the Account.
 - `id` (String) The UUID of the entity.
-- `last_modified_by` (String) The ID of the user who last modified the Account.
 - `name` (String) Name of the Account.
 - `parent_account_id` (String) Parent Account ID, or null if this account does not have a parent.
 - `purchase_order_number` (String) Purchase Order Number of the Account.

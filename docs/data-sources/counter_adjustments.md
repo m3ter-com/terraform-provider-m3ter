@@ -53,12 +53,8 @@ Read-Only:
 
 - `account_id` (String) The Account ID the CounterAdjustment was created for.
 - `counter_id` (String) The ID of the Counter that was used to make the CounterAdjustment on the Account.
-- `created_by` (String) The ID of the user who created this item.
 - `date` (String) The date the CounterAdjustment was created for the Account *(in ISO-8601 date format)*.
-- `dt_created` (String) The DateTime when this item was created *(in ISO-8601 format)*.
-- `dt_last_modified` (String) The DateTime when this item was last modified *(in ISO-8601 format)*.
 - `id` (String) The UUID of the entity.
-- `last_modified_by` (String) The ID of the user who last modified this item.
 - `purchase_order_number` (String) Purchase Order Number for the Counter Adjustment. *(Optional)*
 - `value` (Number) Integer Value of the Counter that was used to make the CounterAdjustment.
 - `version` (Number) The version number:

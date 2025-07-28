@@ -44,15 +44,11 @@ Read-Only:
 - `accounting_product_id` (String)
 - `calculation` (String) This field is a string that represents the formula for the calculation. This formula determines how the CompoundAggregation is calculated from the underlying usage data.
 - `code` (String) Code of the Aggregation. A unique short code to identify the Aggregation.
-- `created_by` (String) The unique identifier (UUID) of the user who created this CompoundAggregation.
 - `custom_fields` (Dynamic)
-- `dt_created` (String) The date and time *(in ISO-8601 format)* when the CompoundAggregation was created.
-- `dt_last_modified` (String) The date and time *(in ISO-8601 format)* when the CompoundAggregation was last modified.
 - `evaluate_null_aggregations` (Boolean) This is a boolean True / False flag. 
 
 If set to TRUE, the calculation will be evaluated even if the referenced aggregation has no usage data.
 - `id` (String) The UUID of the entity.
-- `last_modified_by` (String) The unique identifier (UUID) of the user who last modified this CompoundAggregation.
 - `name` (String) Descriptive name for the Aggregation.
 - `product_id` (String) This field represents the unique identifier (UUID) of the Product that is associated with the CompoundAggregation.
 - `quantity_per_unit` (Number) Defines how much of a quantity equates to 1 unit. Used when setting the price per unit for billing purposes - if charging for kilobytes per second (KiBy/s) at rate of $0.25 per 500 KiBy/s, then set quantityPerUnit to 500 and price Plan at $0.25 per unit.

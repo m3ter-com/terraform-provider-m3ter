@@ -30,32 +30,14 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Description: "The short code of the Contract.",
 				Computed:    true,
 			},
-			"created_by": schema.StringAttribute{
-				Description: "The unique identifier (UUID) of the user who created this Contract.",
-				Computed:    true,
-			},
 			"description": schema.StringAttribute{
 				Description: "The description of the Contract, which provides context and information.",
 				Computed:    true,
-			},
-			"dt_created": schema.StringAttribute{
-				Description: "The date and time *(in ISO-8601 format)* when the Contract was created.",
-				Computed:    true,
-				CustomType:  timetypes.RFC3339Type{},
-			},
-			"dt_last_modified": schema.StringAttribute{
-				Description: "The date and time *(in ISO-8601 format)* when the Contract was last modified.",
-				Computed:    true,
-				CustomType:  timetypes.RFC3339Type{},
 			},
 			"end_date": schema.StringAttribute{
 				Description: "The exclusive end date of the Contract *(in ISO-8601 format)*. This means the Contract is active until midnight on the day ***before*** this date.",
 				Computed:    true,
 				CustomType:  timetypes.RFC3339Type{},
-			},
-			"last_modified_by": schema.StringAttribute{
-				Description: "The unique identifier (UUID) of the user who last modified this Contract.",
-				Computed:    true,
 			},
 			"name": schema.StringAttribute{
 				Description: "The name of the Contract.",

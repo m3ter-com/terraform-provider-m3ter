@@ -98,32 +98,14 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Description: "The unique identifier (UUID) for the Contract to which the Plan or Plan Group  attached to the Account has been added.",
 							Computed:    true,
 						},
-						"created_by": schema.StringAttribute{
-							Description: "The unique identifier (UUID) for the user who created the AccountPlan or AccountPlanGroup.",
-							Computed:    true,
-						},
 						"custom_fields": schema.DynamicAttribute{
 							Description: "User defined fields enabling you to attach custom data. The value for a custom field can be either a string or a number.\n\nIf `customFields` can also be defined for this entity at the Organizational level,`customField` values defined at individual level override values of `customFields` with the same name defined at Organization level.\n\nSee [Working with Custom Fields](https://www.m3ter.com/docs/guides/creating-and-managing-products/working-with-custom-fields) in the m3ter documentation for more information.",
 							Computed:    true,
-						},
-						"dt_created": schema.StringAttribute{
-							Description: "The date and time *(in ISO 8601 format)* when the AccountPlan or AccountPlanGroup was first created.",
-							Computed:    true,
-							CustomType:  timetypes.RFC3339Type{},
-						},
-						"dt_last_modified": schema.StringAttribute{
-							Description: "The date and time *(in ISO 8601 format)* when the AccountPlan or AccountPlanGroup was last modified.",
-							Computed:    true,
-							CustomType:  timetypes.RFC3339Type{},
 						},
 						"end_date": schema.StringAttribute{
 							Description: "The end date *(in ISO-8601 format)* for when the AccountPlan or AccountPlanGroup ceases to be active for the Account. If not specified, the AccountPlan or AccountPlanGroup remains active indefinitely.",
 							Computed:    true,
 							CustomType:  timetypes.RFC3339Type{},
-						},
-						"last_modified_by": schema.StringAttribute{
-							Description: "The unique identifier (UUID) for the user who last modified the AccountPlan or AccountPlanGroup.",
-							Computed:    true,
 						},
 						"plan_group_id": schema.StringAttribute{
 							Description: "The unique identifier (UUID) of the Plan Group that has been attached to the Account to create the AccountPlanGroup.",

@@ -5,7 +5,6 @@ package plan_template
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
@@ -46,26 +45,8 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Description: "A unique, short code reference for the PlanTemplate. This code should not contain control characters or spaces.",
 				Computed:    true,
 			},
-			"created_by": schema.StringAttribute{
-				Description: "The unique identifier (UUID) of the user who created this PlanTemplate.",
-				Computed:    true,
-			},
 			"currency": schema.StringAttribute{
 				Description: "The ISO currency code for the pricing currency used by Plans based on the Plan Template to define charge rates for Product consumption - for example USD, GBP, EUR.",
-				Computed:    true,
-			},
-			"dt_created": schema.StringAttribute{
-				Description: "The date and time *(in ISO-8601 format)* when the PlanTemplate was created.",
-				Computed:    true,
-				CustomType:  timetypes.RFC3339Type{},
-			},
-			"dt_last_modified": schema.StringAttribute{
-				Description: "The date and time *(in ISO-8601 format)* when the PlanTemplate was last modified.",
-				Computed:    true,
-				CustomType:  timetypes.RFC3339Type{},
-			},
-			"last_modified_by": schema.StringAttribute{
-				Description: "The unique identifier (UUID) of the user who last modified this PlanTemplate.",
 				Computed:    true,
 			},
 			"minimum_spend": schema.Float64Attribute{

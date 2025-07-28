@@ -5,7 +5,6 @@ package scheduled_event_configuration
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
@@ -59,24 +58,6 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 						},
 						"offset": schema.Int64Attribute{
 							Description: "The offset in days from the specified DateTime field on the referenced entity when the scheduled Event will trigger.",
-							Computed:    true,
-						},
-						"created_by": schema.StringAttribute{
-							Description: "The ID of the user who created this item.",
-							Computed:    true,
-						},
-						"dt_created": schema.StringAttribute{
-							Description: "The DateTime when this item was created *(in ISO-8601 format)*.",
-							Computed:    true,
-							CustomType:  timetypes.RFC3339Type{},
-						},
-						"dt_last_modified": schema.StringAttribute{
-							Description: "The DateTime when this item was last modified *(in ISO-8601 format)*.",
-							Computed:    true,
-							CustomType:  timetypes.RFC3339Type{},
-						},
-						"last_modified_by": schema.StringAttribute{
-							Description: "The ID of the user who last modified this item.",
 							Computed:    true,
 						},
 						"version": schema.Int64Attribute{

@@ -117,22 +117,8 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				Description: "A flag indicating whether the integration configuration is authorized. \n\n* TRUE - authorized.\n* FALSE - not authorized.",
 				Computed:    true,
 			},
-			"created_by": schema.StringAttribute{
-				Description: "The ID of the user who created this item.",
-				Computed:    true,
-			},
 			"dt_completed": schema.StringAttribute{
 				Description: "The date and time the integration was completed. *(in ISO-8601 format)*.",
-				Computed:    true,
-				CustomType:  timetypes.RFC3339Type{},
-			},
-			"dt_created": schema.StringAttribute{
-				Description: "The DateTime when this item was created *(in ISO-8601 format)*.",
-				Computed:    true,
-				CustomType:  timetypes.RFC3339Type{},
-			},
-			"dt_last_modified": schema.StringAttribute{
-				Description: "The DateTime when this item was last modified *(in ISO-8601 format)*.",
 				Computed:    true,
 				CustomType:  timetypes.RFC3339Type{},
 			},
@@ -151,10 +137,6 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 			},
 			"external_id": schema.StringAttribute{
 				Description: "The external ID in the destination system if available.",
-				Computed:    true,
-			},
-			"last_modified_by": schema.StringAttribute{
-				Description: "The ID of the user who last modified this item.",
 				Computed:    true,
 			},
 			"status": schema.StringAttribute{

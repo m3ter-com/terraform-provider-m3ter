@@ -113,24 +113,6 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				Description: "The default value is **TRUE**.\n\n* When TRUE, running totals are billed at the start of each billing period.\n\n* When FALSE, running totals are billed at the end of each billing period.\n\n*(Optional)*.",
 				Optional:    true,
 			},
-			"created_by": schema.StringAttribute{
-				Description: "The ID of the user who created this item.",
-				Computed:    true,
-			},
-			"dt_created": schema.StringAttribute{
-				Description: "The DateTime when this item was created *(in ISO-8601 format)*.",
-				Computed:    true,
-				CustomType:  timetypes.RFC3339Type{},
-			},
-			"dt_last_modified": schema.StringAttribute{
-				Description: "The DateTime when this item was last modified *(in ISO-8601 format)*.",
-				Computed:    true,
-				CustomType:  timetypes.RFC3339Type{},
-			},
-			"last_modified_by": schema.StringAttribute{
-				Description: "The ID of the user who last modified this item.",
-				Computed:    true,
-			},
 			"version": schema.Int64Attribute{
 				Description: "The version number:\n- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.\n- **Update:** On successful Update, the version is incremented by 1 in the response.",
 				Computed:    true,

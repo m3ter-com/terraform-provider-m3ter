@@ -5,7 +5,6 @@ package webhook
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
@@ -50,10 +49,6 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 						"code": schema.StringAttribute{
 							Computed: true,
 						},
-						"created_by": schema.StringAttribute{
-							Description: "The ID of the user who created this item.",
-							Computed:    true,
-						},
 						"credentials": schema.SingleNestedAttribute{
 							Description: "Response representing a set of credentials used for signing m3ter requests.",
 							Computed:    true,
@@ -75,26 +70,8 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 									Description: "The API key provided by m3ter. This key is part of the credential set required for signing requests and authenticating with m3ter services.",
 									Computed:    true,
 								},
-								"created_by": schema.StringAttribute{
-									Description: "The ID of the user who created this item.",
-									Computed:    true,
-								},
 								"destination_id": schema.StringAttribute{
 									Description: "the destinationId the integration is for",
-									Computed:    true,
-								},
-								"dt_created": schema.StringAttribute{
-									Description: "The DateTime when this item was created *(in ISO-8601 format)*.",
-									Computed:    true,
-									CustomType:  timetypes.RFC3339Type{},
-								},
-								"dt_last_modified": schema.StringAttribute{
-									Description: "The DateTime when this item was last modified *(in ISO-8601 format)*.",
-									Computed:    true,
-									CustomType:  timetypes.RFC3339Type{},
-								},
-								"last_modified_by": schema.StringAttribute{
-									Description: "The ID of the user who last modified this item.",
 									Computed:    true,
 								},
 								"name": schema.StringAttribute{
@@ -113,20 +90,6 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 						},
 						"description": schema.StringAttribute{
 							Computed: true,
-						},
-						"dt_created": schema.StringAttribute{
-							Description: "The DateTime when this item was created *(in ISO-8601 format)*.",
-							Computed:    true,
-							CustomType:  timetypes.RFC3339Type{},
-						},
-						"dt_last_modified": schema.StringAttribute{
-							Description: "The DateTime when this item was last modified *(in ISO-8601 format)*.",
-							Computed:    true,
-							CustomType:  timetypes.RFC3339Type{},
-						},
-						"last_modified_by": schema.StringAttribute{
-							Description: "The ID of the user who last modified this item.",
-							Computed:    true,
 						},
 						"name": schema.StringAttribute{
 							Computed: true,

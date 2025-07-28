@@ -5,7 +5,6 @@ package plan
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 )
@@ -32,24 +31,6 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 			},
 			"code": schema.StringAttribute{
 				Description: "Unique short code reference for the Plan.",
-				Computed:    true,
-			},
-			"created_by": schema.StringAttribute{
-				Description: "The id of the user who created this plan.",
-				Computed:    true,
-			},
-			"dt_created": schema.StringAttribute{
-				Description: "The DateTime *(in ISO-8601 format)* when the plan was created.",
-				Computed:    true,
-				CustomType:  timetypes.RFC3339Type{},
-			},
-			"dt_last_modified": schema.StringAttribute{
-				Description: "The DateTime *(in ISO-8601 format)* when the plan was last modified.",
-				Computed:    true,
-				CustomType:  timetypes.RFC3339Type{},
-			},
-			"last_modified_by": schema.StringAttribute{
-				Description: "The id of the user who last modified this plan.",
 				Computed:    true,
 			},
 			"minimum_spend": schema.Float64Attribute{

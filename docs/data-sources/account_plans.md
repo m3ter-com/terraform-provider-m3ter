@@ -74,17 +74,13 @@ Read-Only:
 Available values: "PARENT_SUMMARY", "PARENT_BREAKDOWN", "CHILD".
 - `code` (String) The unique short code of the AccountPlan or AccountPlanGroup.
 - `contract_id` (String) The unique identifier (UUID) for the Contract to which the Plan or Plan Group  attached to the Account has been added.
-- `created_by` (String) The unique identifier (UUID) for the user who created the AccountPlan or AccountPlanGroup.
 - `custom_fields` (Dynamic) User defined fields enabling you to attach custom data. The value for a custom field can be either a string or a number.
 
 If `customFields` can also be defined for this entity at the Organizational level,`customField` values defined at individual level override values of `customFields` with the same name defined at Organization level.
 
 See [Working with Custom Fields](https://www.m3ter.com/docs/guides/creating-and-managing-products/working-with-custom-fields) in the m3ter documentation for more information.
-- `dt_created` (String) The date and time *(in ISO 8601 format)* when the AccountPlan or AccountPlanGroup was first created.
-- `dt_last_modified` (String) The date and time *(in ISO 8601 format)* when the AccountPlan or AccountPlanGroup was last modified.
 - `end_date` (String) The end date *(in ISO-8601 format)* for when the AccountPlan or AccountPlanGroup ceases to be active for the Account. If not specified, the AccountPlan or AccountPlanGroup remains active indefinitely.
 - `id` (String) The UUID of the entity.
-- `last_modified_by` (String) The unique identifier (UUID) for the user who last modified the AccountPlan or AccountPlanGroup.
 - `plan_group_id` (String) The unique identifier (UUID) of the Plan Group that has been attached to the Account to create the AccountPlanGroup.
 - `plan_id` (String) The unique identifier (UUID) of the Plan that has been attached to the Account to create the AccountPlan.
 - `product_id` (String) The unique identifier (UUID) for the Product associated with the AccountPlan.

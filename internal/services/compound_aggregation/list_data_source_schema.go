@@ -5,7 +5,6 @@ package compound_aggregation
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
@@ -67,29 +66,11 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Description: "Code of the Aggregation. A unique short code to identify the Aggregation.",
 							Computed:    true,
 						},
-						"created_by": schema.StringAttribute{
-							Description: "The unique identifier (UUID) of the user who created this CompoundAggregation.",
-							Computed:    true,
-						},
 						"custom_fields": schema.DynamicAttribute{
 							Computed: true,
 						},
-						"dt_created": schema.StringAttribute{
-							Description: "The date and time *(in ISO-8601 format)* when the CompoundAggregation was created.",
-							Computed:    true,
-							CustomType:  timetypes.RFC3339Type{},
-						},
-						"dt_last_modified": schema.StringAttribute{
-							Description: "The date and time *(in ISO-8601 format)* when the CompoundAggregation was last modified.",
-							Computed:    true,
-							CustomType:  timetypes.RFC3339Type{},
-						},
 						"evaluate_null_aggregations": schema.BoolAttribute{
 							Description: "This is a boolean True / False flag. \n\nIf set to TRUE, the calculation will be evaluated even if the referenced aggregation has no usage data.",
-							Computed:    true,
-						},
-						"last_modified_by": schema.StringAttribute{
-							Description: "The unique identifier (UUID) of the user who last modified this CompoundAggregation.",
 							Computed:    true,
 						},
 						"name": schema.StringAttribute{

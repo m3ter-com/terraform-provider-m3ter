@@ -69,10 +69,6 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Description: "UUID of the Counter used to create the pricing.",
 							Computed:    true,
 						},
-						"created_by": schema.StringAttribute{
-							Description: "The ID of the user who created this item.",
-							Computed:    true,
-						},
 						"cumulative": schema.BoolAttribute{
 							Description: "Controls whether or not charge rates under a set of pricing bands configured for a Pricing are applied according to each separate band or at the highest band reached.\n\nThe default value is **TRUE**.\n\n* When TRUE, at billing charge rates are applied according to each separate band.\n\n* When FALSE, at billing charge rates are applied according to highest band reached.",
 							Computed:    true,
@@ -81,24 +77,10 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Description: "Displayed on Bill line items.",
 							Computed:    true,
 						},
-						"dt_created": schema.StringAttribute{
-							Description: "The DateTime when this item was created *(in ISO-8601 format)*.",
-							Computed:    true,
-							CustomType:  timetypes.RFC3339Type{},
-						},
-						"dt_last_modified": schema.StringAttribute{
-							Description: "The DateTime when this item was last modified *(in ISO-8601 format)*.",
-							Computed:    true,
-							CustomType:  timetypes.RFC3339Type{},
-						},
 						"end_date": schema.StringAttribute{
 							Description: "The end date *(in ISO-8601 format)* for when the Pricing ceases to be active for the Plan or Plan Template.\n\nIf not specified, the Pricing remains active indefinitely.",
 							Computed:    true,
 							CustomType:  timetypes.RFC3339Type{},
-						},
-						"last_modified_by": schema.StringAttribute{
-							Description: "The ID of the user who last modified this item.",
-							Computed:    true,
 						},
 						"plan_id": schema.StringAttribute{
 							Description: "UUID of the Plan the Pricing is created for.",

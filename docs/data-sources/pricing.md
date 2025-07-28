@@ -33,7 +33,6 @@ data "m3ter_pricing" "example_pricing" {
 - `aggregation_type` (String) Available values: "SIMPLE", "COMPOUND".
 - `code` (String) Unique short code for the Pricing.
 - `compound_aggregation_id` (String) UUID of the Compound Aggregation used to create the Pricing.
-- `created_by` (String) The ID of the user who created this item.
 - `cumulative` (Boolean) Controls whether or not charge rates under a set of pricing bands configured for a Pricing are applied according to each separate band or at the highest band reached.
 
 The default value is **TRUE**.
@@ -42,13 +41,10 @@ The default value is **TRUE**.
 
 * When FALSE, at billing charge rates are applied according to highest band reached.
 - `description` (String) Displayed on Bill line items.
-- `dt_created` (String) The DateTime when this item was created *(in ISO-8601 format)*.
-- `dt_last_modified` (String) The DateTime when this item was last modified *(in ISO-8601 format)*.
 - `end_date` (String) The end date *(in ISO-8601 format)* for when the Pricing ceases to be active for the Plan or Plan Template.
 
 If not specified, the Pricing remains active indefinitely.
 - `id` (String) The ID of this resource.
-- `last_modified_by` (String) The ID of the user who last modified this item.
 - `minimum_spend` (Number) The minimum spend amount per billing cycle for end customer Accounts on a Plan to which the Pricing is applied.
 - `minimum_spend_bill_in_advance` (Boolean) The default value is **FALSE**.
 
