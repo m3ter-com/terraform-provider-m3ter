@@ -5,7 +5,6 @@ package plan
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
@@ -66,26 +65,8 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Description: "Unique short code reference for the Plan.",
 							Computed:    true,
 						},
-						"created_by": schema.StringAttribute{
-							Description: "The id of the user who created this plan.",
-							Computed:    true,
-						},
 						"custom_fields": schema.DynamicAttribute{
 							Description: "User defined fields enabling you to attach custom data. The value for a custom field can be either a string or a number.\n\nIf `customFields` can also be defined for this entity at the Organizational level,`customField` values defined at individual level override values of `customFields` with the same name defined at Organization level.\n\nSee [Working with Custom Fields](https://www.m3ter.com/docs/guides/creating-and-managing-products/working-with-custom-fields) in the m3ter documentation for more information.",
-							Computed:    true,
-						},
-						"dt_created": schema.StringAttribute{
-							Description: "The DateTime *(in ISO-8601 format)* when the plan was created.",
-							Computed:    true,
-							CustomType:  timetypes.RFC3339Type{},
-						},
-						"dt_last_modified": schema.StringAttribute{
-							Description: "The DateTime *(in ISO-8601 format)* when the plan was last modified.",
-							Computed:    true,
-							CustomType:  timetypes.RFC3339Type{},
-						},
-						"last_modified_by": schema.StringAttribute{
-							Description: "The id of the user who last modified this plan.",
 							Computed:    true,
 						},
 						"minimum_spend": schema.Float64Attribute{

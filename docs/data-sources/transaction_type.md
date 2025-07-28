@@ -30,11 +30,7 @@ data "m3ter_transaction_type" "example_transaction_type" {
 
 - `archived` (Boolean) TRUE / FALSE flag indicating whether the data entity is archived. An entity can be archived if it is obsolete.
 - `code` (String) The short code of the data entity.
-- `created_by` (String) The unique identifier (UUID) of the user who created this TransactionType.
-- `dt_created` (String) The date and time *(in ISO-8601 format)* when the TransactionType was created.
-- `dt_last_modified` (String) The date and time *(in ISO-8601 format)* when the TransactionType was last modified.
 - `id` (String) The ID of this resource.
-- `last_modified_by` (String) The unique identifier (UUID) of the user who last modified this TransactionType.
 - `name` (String) The name of the data entity.
 - `version` (Number) The version number:
 - **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.

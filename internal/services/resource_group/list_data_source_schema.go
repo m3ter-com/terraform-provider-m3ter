@@ -5,7 +5,6 @@ package resource_group
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
@@ -40,24 +39,6 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 					Attributes: map[string]schema.Attribute{
 						"id": schema.StringAttribute{
 							Description: "The unique identifier (UUID) of the Resource Group.",
-							Computed:    true,
-						},
-						"created_by": schema.StringAttribute{
-							Description: "The unique identifier (UUID) of the user who created this Resource Group.",
-							Computed:    true,
-						},
-						"dt_created": schema.StringAttribute{
-							Description: "The date and time *(in ISO-8601 format)* when the Resource Group was created.",
-							Computed:    true,
-							CustomType:  timetypes.RFC3339Type{},
-						},
-						"dt_last_modified": schema.StringAttribute{
-							Description: "The date and time *(in ISO-8601 format)* when the Resource Group was last modified.",
-							Computed:    true,
-							CustomType:  timetypes.RFC3339Type{},
-						},
-						"last_modified_by": schema.StringAttribute{
-							Description: "The unique identifier (UUID) of the user who last modified this Resource Group.",
 							Computed:    true,
 						},
 						"name": schema.StringAttribute{

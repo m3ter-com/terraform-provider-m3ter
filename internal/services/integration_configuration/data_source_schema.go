@@ -24,26 +24,12 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Required:           true,
 				DeprecationMessage: "the org id should be set at the client level instead",
 			},
-			"created_by": schema.StringAttribute{
-				Description: "The ID of the user who created this item.",
-				Computed:    true,
-			},
 			"destination": schema.StringAttribute{
 				Description: "The destination system for the integration run.",
 				Computed:    true,
 			},
 			"dt_completed": schema.StringAttribute{
 				Description: "The date and time the integration was completed. *(in ISO-8601 format)*.",
-				Computed:    true,
-				CustomType:  timetypes.RFC3339Type{},
-			},
-			"dt_created": schema.StringAttribute{
-				Description: "The DateTime when this item was created *(in ISO-8601 format)*.",
-				Computed:    true,
-				CustomType:  timetypes.RFC3339Type{},
-			},
-			"dt_last_modified": schema.StringAttribute{
-				Description: "The DateTime when this item was last modified *(in ISO-8601 format)*.",
 				Computed:    true,
 				CustomType:  timetypes.RFC3339Type{},
 			},
@@ -66,10 +52,6 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 			},
 			"external_id": schema.StringAttribute{
 				Description: "The external ID in the destination system if available.",
-				Computed:    true,
-			},
-			"last_modified_by": schema.StringAttribute{
-				Description: "The ID of the user who last modified this item.",
 				Computed:    true,
 			},
 			"status": schema.StringAttribute{

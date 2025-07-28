@@ -5,7 +5,6 @@ package resource_group
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
@@ -33,24 +32,6 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 			},
 			"name": schema.StringAttribute{
 				Required: true,
-			},
-			"created_by": schema.StringAttribute{
-				Description: "The unique identifier (UUID) of the user who created this Resource Group.",
-				Computed:    true,
-			},
-			"dt_created": schema.StringAttribute{
-				Description: "The date and time *(in ISO-8601 format)* when the Resource Group was created.",
-				Computed:    true,
-				CustomType:  timetypes.RFC3339Type{},
-			},
-			"dt_last_modified": schema.StringAttribute{
-				Description: "The date and time *(in ISO-8601 format)* when the Resource Group was last modified.",
-				Computed:    true,
-				CustomType:  timetypes.RFC3339Type{},
-			},
-			"last_modified_by": schema.StringAttribute{
-				Description: "The unique identifier (UUID) of the user who last modified this Resource Group.",
-				Computed:    true,
 			},
 			"version": schema.Int64Attribute{
 				Description: "The version number. Default value when newly created is one.",

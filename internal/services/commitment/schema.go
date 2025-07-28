@@ -197,24 +197,6 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				Description: "The total amount of the Commitment that the customer has spent so far.",
 				Computed:    true,
 			},
-			"created_by": schema.StringAttribute{
-				Description: "The unique identifier (UUID) of the user who created this Commitment.",
-				Computed:    true,
-			},
-			"dt_created": schema.StringAttribute{
-				Description: "The date and time *(in ISO-8601 format)* when the Commitment was created.",
-				Computed:    true,
-				CustomType:  timetypes.RFC3339Type{},
-			},
-			"dt_last_modified": schema.StringAttribute{
-				Description: "The date and time *(in ISO-8601 format)* when the Commitment was last modified.",
-				Computed:    true,
-				CustomType:  timetypes.RFC3339Type{},
-			},
-			"last_modified_by": schema.StringAttribute{
-				Description: "The unique identifier (UUID) of the user who last modified this Commitment.",
-				Computed:    true,
-			},
 			"version": schema.Int64Attribute{
 				Description: "The version number:\n- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.\n- **Update:** On successful Update, the version is incremented by 1 in the response.",
 				Computed:    true,

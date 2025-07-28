@@ -39,11 +39,7 @@ resource "m3ter_credit_reason" "example_credit_reason" {
 
 ### Read-Only
 
-- `created_by` (String) The id of the user who created this credit reason.
-- `dt_created` (String) The DateTime when the credit reason was created *(in ISO-8601 format)*.
-- `dt_last_modified` (String) The DateTime when the credit reason was last modified *(in ISO-8601 format)*.
 - `id` (String) The UUID of the entity.
-- `last_modified_by` (String) The id of the user who last modified this credit reason.
 - `version` (Number) The version number:
 - **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.
 - **Update:** On successful Update, the version is incremented by 1 in the response.

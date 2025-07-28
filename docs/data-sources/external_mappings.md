@@ -45,15 +45,11 @@ For example, if you want to list only those external mappings created for your O
 
 Read-Only:
 
-- `created_by` (String) The ID of the user who created this item.
-- `dt_created` (String) The DateTime when this item was created *(in ISO-8601 format)*.
-- `dt_last_modified` (String) The DateTime when this item was last modified *(in ISO-8601 format)*.
 - `external_id` (String) The unique identifier (UUID) of the entity in the external system.
 - `external_system` (String) The name of the external system where the entity you are mapping resides.
 - `external_table` (String) The name of the table in the external system where the entity resides.
 - `id` (String) The UUID of the entity.
 - `integration_config_id` (String) UUID of the configuration this mapping is for
-- `last_modified_by` (String) The ID of the user who last modified this item.
 - `m3ter_entity` (String) The name of the m3ter entity that is part of the External Mapping. For example, this could be "Account".
 - `m3ter_id` (String) The unique identifier (UUID) of the m3ter entity.
 - `version` (Number) The version number:

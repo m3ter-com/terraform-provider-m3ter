@@ -49,10 +49,6 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 			"contract_id": schema.StringAttribute{
 				Computed: true,
 			},
-			"created_by": schema.StringAttribute{
-				Description: "The unique identifier (UUID) for the user who created the Balance.",
-				Computed:    true,
-			},
 			"currency": schema.StringAttribute{
 				Description: "The currency code used for the Balance amount. For example: USD, GBP or EUR.",
 				Computed:    true,
@@ -61,16 +57,6 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Description: "A description of the Balance.",
 				Computed:    true,
 			},
-			"dt_created": schema.StringAttribute{
-				Description: "The date and time *(in ISO 8601 format)* when the Balance was first created.",
-				Computed:    true,
-				CustomType:  timetypes.RFC3339Type{},
-			},
-			"dt_last_modified": schema.StringAttribute{
-				Description: "The date and time *(in ISO 8601 format)* when the Balance was last modified.",
-				Computed:    true,
-				CustomType:  timetypes.RFC3339Type{},
-			},
 			"end_date": schema.StringAttribute{
 				Description: "The date *(in ISO 8601 format)* after which the Balance will no longer be active.",
 				Computed:    true,
@@ -78,10 +64,6 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 			},
 			"fees_accounting_product_id": schema.StringAttribute{
 				Computed: true,
-			},
-			"last_modified_by": schema.StringAttribute{
-				Description: "The unique identifier (UUID) for the user who last modified the Balance.",
-				Computed:    true,
 			},
 			"name": schema.StringAttribute{
 				Description: "The official name of the Balance.",

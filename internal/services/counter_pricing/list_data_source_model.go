@@ -57,13 +57,9 @@ type CounterPricingsItemsDataSourceModel struct {
 	AccountingProductID       types.String                                                             `tfsdk:"accounting_product_id" json:"accountingProductId,computed"`
 	Code                      types.String                                                             `tfsdk:"code" json:"code,computed"`
 	CounterID                 types.String                                                             `tfsdk:"counter_id" json:"counterId,computed"`
-	CreatedBy                 types.String                                                             `tfsdk:"created_by" json:"createdBy,computed"`
 	Cumulative                types.Bool                                                               `tfsdk:"cumulative" json:"cumulative,computed"`
 	Description               types.String                                                             `tfsdk:"description" json:"description,computed"`
-	DtCreated                 timetypes.RFC3339                                                        `tfsdk:"dt_created" json:"dtCreated,computed" format:"date-time"`
-	DtLastModified            timetypes.RFC3339                                                        `tfsdk:"dt_last_modified" json:"dtLastModified,computed" format:"date-time"`
 	EndDate                   timetypes.RFC3339                                                        `tfsdk:"end_date" json:"endDate,computed" format:"date-time"`
-	LastModifiedBy            types.String                                                             `tfsdk:"last_modified_by" json:"lastModifiedBy,computed"`
 	PlanID                    types.String                                                             `tfsdk:"plan_id" json:"planId,computed"`
 	PlanTemplateID            types.String                                                             `tfsdk:"plan_template_id" json:"planTemplateId,computed"`
 	PricingBands              customfield.NestedObjectList[CounterPricingsPricingBandsDataSourceModel] `tfsdk:"pricing_bands" json:"pricingBands,computed"`

@@ -42,7 +42,6 @@ data "m3ter_meters" "example_meters" {
 Read-Only:
 
 - `code` (String) Code of the Meter - unique short code used to identify the Meter.
-- `created_by` (String) The id of the user who created this meter.
 - `custom_fields` (Dynamic) User defined fields enabling you to attach custom data. The value for a custom field can be either a string or a number.
 
 If `customFields` can also be defined for this entity at the Organizational level,`customField` values defined at individual level override values of `customFields` with the same name defined at Organization level.
@@ -50,11 +49,8 @@ If `customFields` can also be defined for this entity at the Organizational leve
 See [Working with Custom Fields](https://www.m3ter.com/docs/guides/creating-and-managing-products/working-with-custom-fields) in the m3ter documentation for more information.
 - `data_fields` (Attributes List) Used to submit categorized raw usage data values for ingest into the platform - either numeric quantitative values or non-numeric data values. At least one required per Meter; maximum 15 per Meter. (see [below for nested schema](#nestedatt--items--data_fields))
 - `derived_fields` (Attributes List) Used to submit usage data values for ingest into the platform that are the result of a calculation performed on `dataFields`, `customFields`, or system `Timestamp` fields. Raw usage data is not submitted using `derivedFields`. Maximum 15 per Meter. *(Optional)*. (see [below for nested schema](#nestedatt--items--derived_fields))
-- `dt_created` (String) The DateTime when the meter was created *(in ISO-8601 format)*.
-- `dt_last_modified` (String) The DateTime when the meter was last modified *(in ISO-8601 format)*.
 - `group_id` (String) UUID of the MeterGroup the Meter belongs to. *(Optional)*.
 - `id` (String) The UUID of the entity.
-- `last_modified_by` (String) The id of the user who last modified this meter.
 - `name` (String) Descriptive name for the Meter.
 - `product_id` (String) UUID of the Product the Meter belongs to. *(Optional)* - if blank, the Meter is global.
 - `version` (Number) The version number:

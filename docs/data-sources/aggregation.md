@@ -46,18 +46,14 @@ Enum:
 * **MEAN**. Uses the arithmetic mean of the values. Can be applied to a **Measure**, **Income**, or **Cost** `targetField`.
 
 * **UNIQUE**. Uses unique values and returns a count of the number of unique values. Can be applied to a **Metadata** `targetField`.
-Available values: "SUM", "MIN", "MAX", "COUNT", "LATEST", "MEAN", "UNIQUE", "CUSTOM_SQL".
+Available values: "SUM", "MIN", "MAX", "COUNT", "LATEST", "MEAN", "UNIQUE".
 - `code` (String) Code of the Aggregation. A unique short code to identify the Aggregation.
-- `created_by` (String) The id of the user who created this aggregation.
 - `custom_fields` (Dynamic)
 - `custom_sql` (String)
 - `default_value` (Number) Aggregation value used when no usage data is available to be aggregated. *(Optional)*.
 
 **Note:** Set to 0, if you expect to reference the Aggregation in a Compound Aggregation. This ensures that any null values are passed in correctly to the Compound Aggregation calculation with a value = 0.
-- `dt_created` (String) The DateTime when the aggregation was created *(in ISO 8601 format)*.
-- `dt_last_modified` (String) The DateTime when the aggregation was last modified *(in ISO 8601 format)*.
 - `id` (String) The ID of this resource.
-- `last_modified_by` (String) The id of the user who last modified this aggregation.
 - `meter_id` (String) The UUID of the Meter used as the source of usage data for the Aggregation.
 
 Each Aggregation is a child of a Meter, so the Meter must be selected.

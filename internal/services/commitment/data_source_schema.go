@@ -96,26 +96,12 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Description: "The unique identifier (UUID) for a Contract you've created for the Account and to which the Commitment has been added.",
 				Computed:    true,
 			},
-			"created_by": schema.StringAttribute{
-				Description: "The unique identifier (UUID) of the user who created this Commitment.",
-				Computed:    true,
-			},
 			"currency": schema.StringAttribute{
 				Description: "The currency used for the Commitment. For example, 'USD'.",
 				Computed:    true,
 			},
 			"drawdowns_accounting_product_id": schema.StringAttribute{
 				Computed: true,
-			},
-			"dt_created": schema.StringAttribute{
-				Description: "The date and time *(in ISO-8601 format)* when the Commitment was created.",
-				Computed:    true,
-				CustomType:  timetypes.RFC3339Type{},
-			},
-			"dt_last_modified": schema.StringAttribute{
-				Description: "The date and time *(in ISO-8601 format)* when the Commitment was last modified.",
-				Computed:    true,
-				CustomType:  timetypes.RFC3339Type{},
 			},
 			"end_date": schema.StringAttribute{
 				Description: "The end date of the Commitment period in ISO-8601 format.",
@@ -124,10 +110,6 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 			},
 			"fees_accounting_product_id": schema.StringAttribute{
 				Computed: true,
-			},
-			"last_modified_by": schema.StringAttribute{
-				Description: "The unique identifier (UUID) of the user who last modified this Commitment.",
-				Computed:    true,
 			},
 			"overage_description": schema.StringAttribute{
 				Description: "A textual description of the overage charges.",

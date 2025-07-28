@@ -49,7 +49,6 @@ Read-Only:
 - `code` (String) A unique short code assigned to the Balance.
 - `consumptions_accounting_product_id` (String)
 - `contract_id` (String)
-- `created_by` (String) The unique identifier (UUID) for the user who created the Balance.
 - `currency` (String) The currency code used for the Balance amount. For example: USD, GBP or EUR.
 - `custom_fields` (Dynamic) User defined fields enabling you to attach custom data. The value for a custom field can be either a string or a number.
 
@@ -57,12 +56,9 @@ If `customFields` can also be defined for this entity at the Organizational leve
 
 See [Working with Custom Fields](https://www.m3ter.com/docs/guides/creating-and-managing-products/working-with-custom-fields) in the m3ter documentation for more information.
 - `description` (String) A description of the Balance.
-- `dt_created` (String) The date and time *(in ISO 8601 format)* when the Balance was first created.
-- `dt_last_modified` (String) The date and time *(in ISO 8601 format)* when the Balance was last modified.
 - `end_date` (String) The date *(in ISO 8601 format)* after which the Balance will no longer be active.
 - `fees_accounting_product_id` (String)
 - `id` (String) The UUID of the entity.
-- `last_modified_by` (String) The unique identifier (UUID) for the user who last modified the Balance.
 - `line_item_types` (List of String) A list of line item charge types that can draw-down against the Balance amount at billing.
 - `name` (String) The official name of the Balance.
 - `overage_description` (String) A description for overage charges.

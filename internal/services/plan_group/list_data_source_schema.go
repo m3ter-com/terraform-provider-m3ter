@@ -5,7 +5,6 @@ package plan_group
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
@@ -58,30 +57,12 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Description: "The short code representing the PlanGroup.",
 							Computed:    true,
 						},
-						"created_by": schema.StringAttribute{
-							Description: "The unique identifier (UUID) for the user who created the PlanGroup.",
-							Computed:    true,
-						},
 						"currency": schema.StringAttribute{
 							Description: "Currency code for the PlanGroup (For example, USD).",
 							Computed:    true,
 						},
 						"custom_fields": schema.DynamicAttribute{
 							Description: "User defined fields enabling you to attach custom data. The value for a custom field can be either a string or a number.\n\nIf `customFields` can also be defined for this entity at the Organizational level,`customField` values defined at individual level override values of `customFields` with the same name defined at Organization level.\n\nSee [Working with Custom Fields](https://www.m3ter.com/docs/guides/creating-and-managing-products/working-with-custom-fields) in the m3ter documentation for more information.",
-							Computed:    true,
-						},
-						"dt_created": schema.StringAttribute{
-							Description: "The date and time *(in ISO 8601 format)* when the PlanGroup was first created.",
-							Computed:    true,
-							CustomType:  timetypes.RFC3339Type{},
-						},
-						"dt_last_modified": schema.StringAttribute{
-							Description: "The date and time *(in ISO 8601 format)* when the PlanGroup was last modified.",
-							Computed:    true,
-							CustomType:  timetypes.RFC3339Type{},
-						},
-						"last_modified_by": schema.StringAttribute{
-							Description: "The unique identifier (UUID) for the user who last modified the PlanGroup.",
 							Computed:    true,
 						},
 						"minimum_spend": schema.Float64Attribute{

@@ -126,24 +126,6 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				Description: "The financial value that the Balance holds.",
 				Computed:    true,
 			},
-			"created_by": schema.StringAttribute{
-				Description: "The unique identifier (UUID) for the user who created the Balance.",
-				Computed:    true,
-			},
-			"dt_created": schema.StringAttribute{
-				Description: "The date and time *(in ISO 8601 format)* when the Balance was first created.",
-				Computed:    true,
-				CustomType:  timetypes.RFC3339Type{},
-			},
-			"dt_last_modified": schema.StringAttribute{
-				Description: "The date and time *(in ISO 8601 format)* when the Balance was last modified.",
-				Computed:    true,
-				CustomType:  timetypes.RFC3339Type{},
-			},
-			"last_modified_by": schema.StringAttribute{
-				Description: "The unique identifier (UUID) for the user who last modified the Balance.",
-				Computed:    true,
-			},
 			"version": schema.Int64Attribute{
 				Description: "The version number:\n- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.\n- **Update:** On successful Update, the version is incremented by 1 in the response.",
 				Computed:    true,

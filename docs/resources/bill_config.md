@@ -31,11 +31,7 @@ For example: `"2024-03-01"`.
 
 ### Read-Only
 
-- `created_by` (String) The id of the user who created this bill config.
-- `dt_created` (String) The DateTime *(in ISO-8601 format)* when the bill config was first created.
-- `dt_last_modified` (String) The DateTime *(in ISO-8601 format)* when the bill config was last modified.
 - `id` (String) The Organization UUID. The Organization represents your company as a direct customer of the m3ter service.
-- `last_modified_by` (String) The id of the user who last modified this bill config.
 - `version` (Number) The version number:
 * Default value when newly created is one.
 * Incremented by 1 each time it is updated.

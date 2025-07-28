@@ -6,7 +6,6 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
-	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
@@ -63,23 +62,9 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							CustomType:  customfield.NewMapType[jsontypes.Normalized](ctx),
 							ElementType: jsontypes.NormalizedType{},
 						},
-						"created_by": schema.StringAttribute{
-							Description: "The ID of the user who created this item.",
-							Computed:    true,
-						},
 						"destination_id": schema.StringAttribute{
 							Description: "The unique identifier (UUID) of the entity the integration is for.",
 							Computed:    true,
-						},
-						"dt_created": schema.StringAttribute{
-							Description: "The DateTime when this item was created *(in ISO-8601 format)*.",
-							Computed:    true,
-							CustomType:  timetypes.RFC3339Type{},
-						},
-						"dt_last_modified": schema.StringAttribute{
-							Description: "The DateTime when this item was last modified *(in ISO-8601 format)*.",
-							Computed:    true,
-							CustomType:  timetypes.RFC3339Type{},
 						},
 						"enabled": schema.BoolAttribute{
 							Description: "A flag indicating whether the integration configuration is currently enabled or disabled.\n\n* TRUE - enabled.\n* FALSE - disabled.",
@@ -91,10 +76,6 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 						},
 						"integration_credentials_id": schema.StringAttribute{
 							Description: "UUID of the credentials to use for this integration",
-							Computed:    true,
-						},
-						"last_modified_by": schema.StringAttribute{
-							Description: "The ID of the user who last modified this item.",
 							Computed:    true,
 						},
 						"name": schema.StringAttribute{

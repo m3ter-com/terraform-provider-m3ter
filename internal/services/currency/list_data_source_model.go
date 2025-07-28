@@ -5,7 +5,6 @@ package currency
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/m3ter-com/m3ter-sdk-go"
@@ -51,15 +50,11 @@ func (m *CurrenciesDataSourceModel) toListParams(_ context.Context) (params m3te
 }
 
 type CurrenciesItemsDataSourceModel struct {
-	ID               types.String      `tfsdk:"id" json:"id,computed"`
-	Archived         types.Bool        `tfsdk:"archived" json:"archived,computed"`
-	Code             types.String      `tfsdk:"code" json:"code,computed"`
-	CreatedBy        types.String      `tfsdk:"created_by" json:"createdBy,computed"`
-	DtCreated        timetypes.RFC3339 `tfsdk:"dt_created" json:"dtCreated,computed" format:"date-time"`
-	DtLastModified   timetypes.RFC3339 `tfsdk:"dt_last_modified" json:"dtLastModified,computed" format:"date-time"`
-	LastModifiedBy   types.String      `tfsdk:"last_modified_by" json:"lastModifiedBy,computed"`
-	MaxDecimalPlaces types.Int64       `tfsdk:"max_decimal_places" json:"maxDecimalPlaces,computed"`
-	Name             types.String      `tfsdk:"name" json:"name,computed"`
-	RoundingMode     types.String      `tfsdk:"rounding_mode" json:"roundingMode,computed"`
-	Version          types.Int64       `tfsdk:"version" json:"version,computed,force_encode,encode_state_for_unknown"`
+	ID               types.String `tfsdk:"id" json:"id,computed"`
+	Archived         types.Bool   `tfsdk:"archived" json:"archived,computed"`
+	Code             types.String `tfsdk:"code" json:"code,computed"`
+	MaxDecimalPlaces types.Int64  `tfsdk:"max_decimal_places" json:"maxDecimalPlaces,computed"`
+	Name             types.String `tfsdk:"name" json:"name,computed"`
+	RoundingMode     types.String `tfsdk:"rounding_mode" json:"roundingMode,computed"`
+	Version          types.Int64  `tfsdk:"version" json:"version,computed,force_encode,encode_state_for_unknown"`
 }

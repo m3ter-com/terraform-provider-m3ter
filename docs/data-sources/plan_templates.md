@@ -52,17 +52,13 @@ Available values: "DAILY", "WEEKLY", "MONTHLY", "ANNUALLY", "AD_HOC", "MIXED".
 - `bill_frequency_interval` (Number) How often bills are issued. 
 For example, if `billFrequency` is Monthly and `billFrequencyInterval` is 3, bills are issued every three months.
 - `code` (String) A unique, short code reference for the PlanTemplate. This code should not contain control characters or spaces.
-- `created_by` (String) The unique identifier (UUID) of the user who created this PlanTemplate.
 - `currency` (String) The ISO currency code for the pricing currency used by Plans based on the Plan Template to define charge rates for Product consumption - for example USD, GBP, EUR.
 - `custom_fields` (Dynamic) User defined fields enabling you to attach custom data. The value for a custom field can be either a string or a number.
 
 If `customFields` can also be defined for this entity at the Organizational level,`customField` values defined at individual level override values of `customFields` with the same name defined at Organization level.
 
 See [Working with Custom Fields](https://www.m3ter.com/docs/guides/creating-and-managing-products/working-with-custom-fields) in the m3ter documentation for more information.
-- `dt_created` (String) The date and time *(in ISO-8601 format)* when the PlanTemplate was created.
-- `dt_last_modified` (String) The date and time *(in ISO-8601 format)* when the PlanTemplate was last modified.
 - `id` (String) The UUID of the entity.
-- `last_modified_by` (String) The unique identifier (UUID) of the user who last modified this PlanTemplate.
 - `minimum_spend` (Number) The Product minimum spend amount per billing cycle for end customer Accounts on a pricing Plan based on the PlanTemplate. This must be a non-negative number.
 - `minimum_spend_bill_in_advance` (Boolean) A boolean that determines when the minimum spend is billed.
 

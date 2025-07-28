@@ -55,11 +55,7 @@ See [Creating Calculations](https://www.m3ter.com/docs/guides/utilizing-events-a
 
 ### Read-Only
 
-- `created_by` (String) The ID of the user who created this item.
-- `dt_created` (String) The DateTime when this item was created *(in ISO-8601 format)*.
-- `dt_last_modified` (String) The DateTime when this item was last modified *(in ISO-8601 format)*.
 - `id` (String) The UUID of the entity.
-- `last_modified_by` (String) The ID of the user who last modified this item.
 - `version` (Number) The version number:
 - **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.
 - **Update:** On successful Update, the version is incremented by 1 in the response.

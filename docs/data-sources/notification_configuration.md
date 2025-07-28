@@ -41,15 +41,11 @@ Calculations can reference numeric, string, and boolean Event fields.
 
 See [Creating Calculations](https://www.m3ter.com/docs/guides/utilizing-events-and-notifications/key-concepts-and-relationships#creating-calculations) in the m3ter documentation for more information.
 - `code` (String) The short code for the Notification.
-- `created_by` (String) The ID of the user who created this item.
 - `description` (String) The description for the Notification providing a brief overview of its purpose and functionality.
-- `dt_created` (String) The DateTime when this item was created *(in ISO-8601 format)*.
-- `dt_last_modified` (String) The DateTime when this item was last modified *(in ISO-8601 format)*.
 - `event_name` (String) The name of the Event that the Notification is based on. When this Event occurs and the calculation evaluates to `True`, the Notification is triggered.
 
 **Note:** If the Notification is set to always fire, then the Notification will always be sent when the Event it is based on occurs, and without any other conditions defined by a calculation having to be met.
 - `id` (String) The ID of this resource.
-- `last_modified_by` (String) The ID of the user who last modified this item.
 - `name` (String) The name of the Notification.
 - `version` (Number) The version number:
 - **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.

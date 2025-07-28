@@ -24,26 +24,8 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Computed:    true,
 				CustomType:  timetypes.RFC3339Type{},
 			},
-			"created_by": schema.StringAttribute{
-				Description: "The id of the user who created this bill config.",
-				Computed:    true,
-			},
-			"dt_created": schema.StringAttribute{
-				Description: "The DateTime *(in ISO-8601 format)* when the bill config was first created.",
-				Computed:    true,
-				CustomType:  timetypes.RFC3339Type{},
-			},
-			"dt_last_modified": schema.StringAttribute{
-				Description: "The DateTime *(in ISO-8601 format)* when the bill config was last modified.",
-				Computed:    true,
-				CustomType:  timetypes.RFC3339Type{},
-			},
 			"id": schema.StringAttribute{
 				Description: "The Organization UUID. The Organization represents your company as a direct customer of the m3ter service.",
-				Computed:    true,
-			},
-			"last_modified_by": schema.StringAttribute{
-				Description: "The id of the user who last modified this bill config.",
 				Computed:    true,
 			},
 			"version": schema.Int64Attribute{

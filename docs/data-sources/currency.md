@@ -30,11 +30,7 @@ data "m3ter_currency" "example_currency" {
 
 - `archived` (Boolean) TRUE / FALSE flag indicating whether the data entity is archived. An entity can be archived if it is obsolete.
 - `code` (String) The short code of the data entity.
-- `created_by` (String) The unique identifier (UUID) of the user who created this Currency.
-- `dt_created` (String) The date and time *(in ISO-8601 format)* when the Currency was created.
-- `dt_last_modified` (String) The date and time *(in ISO-8601 format)* when the Currency was last modified.
 - `id` (String) The ID of this resource.
-- `last_modified_by` (String) The unique identifier (UUID) of the user who last modified this Currency.
 - `max_decimal_places` (Number) This indicates the maximum number of decimal places to use for this Currency.
 - `name` (String) The name of the data entity.
 - `rounding_mode` (String) Available values: "UP", "DOWN", "CEILING", "FLOOR", "HALF_UP", "HALF_DOWN", "HALF_EVEN", "UNNECESSARY".

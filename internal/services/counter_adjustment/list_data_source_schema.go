@@ -77,28 +77,10 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Description: "The ID of the Counter that was used to make the CounterAdjustment on the Account.",
 							Computed:    true,
 						},
-						"created_by": schema.StringAttribute{
-							Description: "The ID of the user who created this item.",
-							Computed:    true,
-						},
 						"date": schema.StringAttribute{
 							Description: "The date the CounterAdjustment was created for the Account *(in ISO-8601 date format)*.",
 							Computed:    true,
 							CustomType:  timetypes.RFC3339Type{},
-						},
-						"dt_created": schema.StringAttribute{
-							Description: "The DateTime when this item was created *(in ISO-8601 format)*.",
-							Computed:    true,
-							CustomType:  timetypes.RFC3339Type{},
-						},
-						"dt_last_modified": schema.StringAttribute{
-							Description: "The DateTime when this item was last modified *(in ISO-8601 format)*.",
-							Computed:    true,
-							CustomType:  timetypes.RFC3339Type{},
-						},
-						"last_modified_by": schema.StringAttribute{
-							Description: "The ID of the user who last modified this item.",
-							Computed:    true,
 						},
 						"purchase_order_number": schema.StringAttribute{
 							Description: "Purchase Order Number for the Counter Adjustment. *(Optional)*",

@@ -28,11 +28,7 @@ data "m3ter_plan_group_link" "example_plan_group_link" {
 
 ### Read-Only
 
-- `created_by` (String) The id of the user who created this plan group link.
-- `dt_created` (String) The DateTime *(in ISO-8601 format)* when the plan group link was created.
-- `dt_last_modified` (String) The DateTime *(in ISO-8601 format)* when the plan group link was last modified.
 - `id` (String) The ID of this resource.
-- `last_modified_by` (String) The id of the user who last modified this plan group link.
 - `plan_group_id` (String) ID of the linked PlanGroup
 - `plan_id` (String) ID of the linked Plan
 - `version` (Number) The version number:

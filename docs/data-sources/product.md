@@ -29,16 +29,12 @@ data "m3ter_product" "example_product" {
 ### Read-Only
 
 - `code` (String) A unique short code to identify the Product. It should not contain control chracters or spaces.
-- `created_by` (String) The unique identifier (UUID) of the user who created this Product.
 - `custom_fields` (Dynamic) User defined fields enabling you to attach custom data. The value for a custom field can be either a string or a number.
 
 If `customFields` can also be defined for this entity at the Organizational level,`customField` values defined at individual level override values of `customFields` with the same name defined at Organization level.
 
 See [Working with Custom Fields](https://www.m3ter.com/docs/guides/creating-and-managing-products/working-with-custom-fields) in the m3ter documentation for more information.
-- `dt_created` (String) The date and time *(in ISO-8601 format)* when the Product was created.
-- `dt_last_modified` (String) The date and time *(in ISO-8601 format)* when the Product was last modified.
 - `id` (String) The ID of this resource.
-- `last_modified_by` (String) The unique identifier (UUID) of the user who last modified this Product.
 - `name` (String) Descriptive name for the Product providing context and information.
 - `version` (Number) The version number:
 - **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.

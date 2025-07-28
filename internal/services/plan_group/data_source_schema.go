@@ -5,7 +5,6 @@ package plan_group
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 )
@@ -30,26 +29,8 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Description: "The short code representing the PlanGroup.",
 				Computed:    true,
 			},
-			"created_by": schema.StringAttribute{
-				Description: "The unique identifier (UUID) for the user who created the PlanGroup.",
-				Computed:    true,
-			},
 			"currency": schema.StringAttribute{
 				Description: "Currency code for the PlanGroup (For example, USD).",
-				Computed:    true,
-			},
-			"dt_created": schema.StringAttribute{
-				Description: "The date and time *(in ISO 8601 format)* when the PlanGroup was first created.",
-				Computed:    true,
-				CustomType:  timetypes.RFC3339Type{},
-			},
-			"dt_last_modified": schema.StringAttribute{
-				Description: "The date and time *(in ISO 8601 format)* when the PlanGroup was last modified.",
-				Computed:    true,
-				CustomType:  timetypes.RFC3339Type{},
-			},
-			"last_modified_by": schema.StringAttribute{
-				Description: "The unique identifier (UUID) for the user who last modified the PlanGroup.",
 				Computed:    true,
 			},
 			"minimum_spend": schema.Float64Attribute{

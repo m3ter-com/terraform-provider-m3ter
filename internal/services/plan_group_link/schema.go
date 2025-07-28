@@ -5,7 +5,6 @@ package plan_group_link
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
@@ -32,24 +31,6 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 			},
 			"plan_id": schema.StringAttribute{
 				Required: true,
-			},
-			"created_by": schema.StringAttribute{
-				Description: "The id of the user who created this plan group link.",
-				Computed:    true,
-			},
-			"dt_created": schema.StringAttribute{
-				Description: "The DateTime *(in ISO-8601 format)* when the plan group link was created.",
-				Computed:    true,
-				CustomType:  timetypes.RFC3339Type{},
-			},
-			"dt_last_modified": schema.StringAttribute{
-				Description: "The DateTime *(in ISO-8601 format)* when the plan group link was last modified.",
-				Computed:    true,
-				CustomType:  timetypes.RFC3339Type{},
-			},
-			"last_modified_by": schema.StringAttribute{
-				Description: "The id of the user who last modified this plan group link.",
-				Computed:    true,
 			},
 			"version": schema.Int64Attribute{
 				Description: "The version number:\n- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.\n- **Update:** On successful Update, the version is incremented by 1 in the response.",
