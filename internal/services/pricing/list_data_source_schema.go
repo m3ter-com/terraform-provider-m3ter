@@ -25,6 +25,10 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 				Optional:           true,
 				DeprecationMessage: "the org id should be set at the client level instead",
 			},
+			"aggregation_id": schema.StringAttribute{
+				Description: "UUID of the Aggregation to retrieve pricings for",
+				Optional:    true,
+			},
 			"date": schema.StringAttribute{
 				Description: "Date on which to retrieve active Pricings.",
 				Optional:    true,
