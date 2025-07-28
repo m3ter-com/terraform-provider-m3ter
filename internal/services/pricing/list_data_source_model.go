@@ -18,6 +18,7 @@ type PricingsDataListDataSourceEnvelope struct {
 
 type PricingsDataSourceModel struct {
 	OrgID          types.String                                               `tfsdk:"org_id" path:"orgId,optional"`
+	AggregationID  types.String                                               `tfsdk:"aggregation_id" query:"aggregationId,optional"`
 	Date           types.String                                               `tfsdk:"date" query:"date,optional"`
 	PlanID         types.String                                               `tfsdk:"plan_id" query:"planId,optional"`
 	PlanTemplateID types.String                                               `tfsdk:"plan_template_id" query:"planTemplateId,optional"`
@@ -36,6 +37,9 @@ func (m *PricingsDataSourceModel) toListParams(_ context.Context) (params m3ter.
 		IDs: m3ter.F(mIDs),
 	}
 
+	if !m.AggregationID.IsNull() {
+		params.AggregationID = m3ter.F(m.AggregationID.ValueString())
+	}
 	if !m.Date.IsNull() {
 		params.Date = m3ter.F(m.Date.ValueString())
 	}
