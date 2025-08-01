@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.4.1 (2025-08-01)
+
+Full Changelog: [v0.4.0...v0.4.1](https://github.com/m3ter-com/terraform-provider-m3ter/compare/v0.4.0...v0.4.1)
+
+### Chores
+
+* **internal:** codegen related update ([bf68f01](https://github.com/m3ter-com/terraform-provider-m3ter/commit/bf68f01f3d8b4c8eaf8e966f5428e3efeadff9fc))
+
 ## 0.4.0 (2025-07-28)
 
 Full Changelog: [v0.3.2...v0.4.0](https://github.com/m3ter-com/terraform-provider-m3ter/compare/v0.3.2...v0.4.0)
