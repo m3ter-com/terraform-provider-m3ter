@@ -54,7 +54,7 @@ func (m *MetersDataSourceModel) toListParams(_ context.Context) (params m3ter.Me
 type MetersItemsDataSourceModel struct {
 	ID            types.String                                                     `tfsdk:"id" json:"id,computed"`
 	Code          types.String                                                     `tfsdk:"code" json:"code,computed"`
-	CustomFields  types.Dynamic                                                    `tfsdk:"custom_fields" json:"customFields,computed"`
+	CustomFields  customfield.NormalizedDynamicValue                               `tfsdk:"custom_fields" json:"customFields,computed"`
 	DataFields    customfield.NestedObjectList[MetersDataFieldsDataSourceModel]    `tfsdk:"data_fields" json:"dataFields,computed"`
 	DerivedFields customfield.NestedObjectList[MetersDerivedFieldsDataSourceModel] `tfsdk:"derived_fields" json:"derivedFields,computed"`
 	GroupID       types.String                                                     `tfsdk:"group_id" json:"groupId,computed"`

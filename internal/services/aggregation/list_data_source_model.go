@@ -56,7 +56,7 @@ type AggregationsItemsDataSourceModel struct {
 	AccountingProductID types.String                                    `tfsdk:"accounting_product_id" json:"accountingProductId,computed"`
 	Aggregation         types.String                                    `tfsdk:"aggregation" json:"aggregation,computed"`
 	Code                types.String                                    `tfsdk:"code" json:"code,computed"`
-	CustomFields        types.Dynamic                                   `tfsdk:"custom_fields" json:"customFields,computed"`
+	CustomFields        customfield.NormalizedDynamicValue              `tfsdk:"custom_fields" json:"customFields,computed"`
 	CustomSql           types.String                                    `tfsdk:"custom_sql" json:"customSql,computed"`
 	DefaultValue        types.Float64                                   `tfsdk:"default_value" json:"defaultValue,computed"`
 	MeterID             types.String                                    `tfsdk:"meter_id" json:"meterId,computed"`

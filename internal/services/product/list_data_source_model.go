@@ -40,9 +40,9 @@ func (m *ProductsDataSourceModel) toListParams(_ context.Context) (params m3ter.
 }
 
 type ProductsItemsDataSourceModel struct {
-	ID           types.String  `tfsdk:"id" json:"id,computed"`
-	Code         types.String  `tfsdk:"code" json:"code,computed"`
-	CustomFields types.Dynamic `tfsdk:"custom_fields" json:"customFields,computed"`
-	Name         types.String  `tfsdk:"name" json:"name,computed"`
-	Version      types.Int64   `tfsdk:"version" json:"version,computed,force_encode,encode_state_for_unknown"`
+	ID           types.String                       `tfsdk:"id" json:"id,computed"`
+	Code         types.String                       `tfsdk:"code" json:"code,computed"`
+	CustomFields customfield.NormalizedDynamicValue `tfsdk:"custom_fields" json:"customFields,computed"`
+	Name         types.String                       `tfsdk:"name" json:"name,computed"`
+	Version      types.Int64                        `tfsdk:"version" json:"version,computed,force_encode,encode_state_for_unknown"`
 }

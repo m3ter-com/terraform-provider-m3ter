@@ -13,6 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
+	"github.com/m3ter-com/terraform-provider-m3ter/internal/customfield"
 )
 
 var _ resource.ResourceWithConfigValidators = (*AggregationResource)(nil)
@@ -112,7 +113,9 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				},
 			},
 			"custom_fields": schema.DynamicAttribute{
-				Optional: true,
+				Optional:      true,
+				CustomType:    customfield.NormalizedDynamicType{},
+				PlanModifiers: []planmodifier.Dynamic{customfield.NormalizeDynamicPlanModifier()},
 			},
 			"version": schema.Int64Attribute{
 				Description: "The version number:\n- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.\n- **Update:** On successful Update, the version is incremented by 1 in the response.",

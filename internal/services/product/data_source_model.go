@@ -8,15 +8,16 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/m3ter-com/m3ter-sdk-go"
+	"github.com/m3ter-com/terraform-provider-m3ter/internal/customfield"
 )
 
 type ProductDataSourceModel struct {
-	ID           types.String  `tfsdk:"id" path:"id,required"`
-	OrgID        types.String  `tfsdk:"org_id" path:"orgId,required"`
-	Code         types.String  `tfsdk:"code" json:"code,computed"`
-	Name         types.String  `tfsdk:"name" json:"name,computed"`
-	Version      types.Int64   `tfsdk:"version" json:"version,computed,force_encode,encode_state_for_unknown"`
-	CustomFields types.Dynamic `tfsdk:"custom_fields" json:"customFields,computed"`
+	ID           types.String                       `tfsdk:"id" path:"id,required"`
+	OrgID        types.String                       `tfsdk:"org_id" path:"orgId,required"`
+	Code         types.String                       `tfsdk:"code" json:"code,computed"`
+	Name         types.String                       `tfsdk:"name" json:"name,computed"`
+	Version      types.Int64                        `tfsdk:"version" json:"version,computed,force_encode,encode_state_for_unknown"`
+	CustomFields customfield.NormalizedDynamicValue `tfsdk:"custom_fields" json:"customFields,computed"`
 }
 
 func (m *ProductDataSourceModel) toReadParams(_ context.Context) (params m3ter.ProductGetParams, diags diag.Diagnostics) {

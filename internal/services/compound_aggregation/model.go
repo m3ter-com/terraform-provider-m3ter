@@ -20,7 +20,7 @@ type CompoundAggregationModel struct {
 	Code                     types.String                                    `tfsdk:"code" json:"code,optional"`
 	EvaluateNullAggregations types.Bool                                      `tfsdk:"evaluate_null_aggregations" json:"evaluateNullAggregations,optional"`
 	ProductID                types.String                                    `tfsdk:"product_id" json:"productId,optional"`
-	CustomFields             types.Dynamic                                   `tfsdk:"custom_fields" json:"customFields,optional"`
+	CustomFields             customfield.NormalizedDynamicValue              `tfsdk:"custom_fields" json:"customFields,optional"`
 	Aggregation              types.String                                    `tfsdk:"aggregation" json:"aggregation,computed,no_refresh"`
 	CustomSql                types.String                                    `tfsdk:"custom_sql" json:"customSql,computed,no_refresh"`
 	DefaultValue             types.Float64                                   `tfsdk:"default_value" json:"defaultValue,computed,no_refresh"`

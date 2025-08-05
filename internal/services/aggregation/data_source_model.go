@@ -28,7 +28,7 @@ type AggregationDataSourceModel struct {
 	Version             types.Int64                                     `tfsdk:"version" json:"version,computed,force_encode,encode_state_for_unknown"`
 	SegmentedFields     customfield.List[types.String]                  `tfsdk:"segmented_fields" json:"segmentedFields,computed"`
 	Segments            customfield.List[customfield.Map[types.String]] `tfsdk:"segments" json:"segments,computed"`
-	CustomFields        types.Dynamic                                   `tfsdk:"custom_fields" json:"customFields,computed"`
+	CustomFields        customfield.NormalizedDynamicValue              `tfsdk:"custom_fields" json:"customFields,computed"`
 }
 
 func (m *AggregationDataSourceModel) toReadParams(_ context.Context) (params m3ter.AggregationGetParams, diags diag.Diagnostics) {

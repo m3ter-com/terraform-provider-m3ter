@@ -30,7 +30,7 @@ type AccountDataSourceModel struct {
 	ConfigData                customfield.Map[jsontypes.Normalized]                   `tfsdk:"config_data" json:"configData,computed"`
 	CreditApplicationOrder    customfield.List[types.String]                          `tfsdk:"credit_application_order" json:"creditApplicationOrder,computed"`
 	Address                   customfield.NestedObject[AccountAddressDataSourceModel] `tfsdk:"address" json:"address,computed"`
-	CustomFields              types.Dynamic                                           `tfsdk:"custom_fields" json:"customFields,computed"`
+	CustomFields              customfield.NormalizedDynamicValue                      `tfsdk:"custom_fields" json:"customFields,computed"`
 }
 
 func (m *AccountDataSourceModel) toReadParams(_ context.Context) (params m3ter.AccountGetParams, diags diag.Diagnostics) {
