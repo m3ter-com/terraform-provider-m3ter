@@ -56,7 +56,7 @@ type CompoundAggregationsItemsDataSourceModel struct {
 	AccountingProductID      types.String                                    `tfsdk:"accounting_product_id" json:"accountingProductId,computed"`
 	Calculation              types.String                                    `tfsdk:"calculation" json:"calculation,computed"`
 	Code                     types.String                                    `tfsdk:"code" json:"code,computed"`
-	CustomFields             types.Dynamic                                   `tfsdk:"custom_fields" json:"customFields,computed"`
+	CustomFields             customfield.NormalizedDynamicValue              `tfsdk:"custom_fields" json:"customFields,computed"`
 	EvaluateNullAggregations types.Bool                                      `tfsdk:"evaluate_null_aggregations" json:"evaluateNullAggregations,computed"`
 	Name                     types.String                                    `tfsdk:"name" json:"name,computed"`
 	ProductID                types.String                                    `tfsdk:"product_id" json:"productId,computed"`

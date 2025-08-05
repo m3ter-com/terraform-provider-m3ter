@@ -25,7 +25,7 @@ type CompoundAggregationDataSourceModel struct {
 	Unit                     types.String                                    `tfsdk:"unit" json:"unit,computed"`
 	Version                  types.Int64                                     `tfsdk:"version" json:"version,computed,force_encode,encode_state_for_unknown"`
 	Segments                 customfield.List[customfield.Map[types.String]] `tfsdk:"segments" json:"segments,computed"`
-	CustomFields             types.Dynamic                                   `tfsdk:"custom_fields" json:"customFields,computed"`
+	CustomFields             customfield.NormalizedDynamicValue              `tfsdk:"custom_fields" json:"customFields,computed"`
 }
 
 func (m *CompoundAggregationDataSourceModel) toReadParams(_ context.Context) (params m3ter.CompoundAggregationGetParams, diags diag.Diagnostics) {

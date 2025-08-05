@@ -67,7 +67,8 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Computed:    true,
 						},
 						"custom_fields": schema.DynamicAttribute{
-							Computed: true,
+							Computed:   true,
+							CustomType: customfield.NormalizedDynamicType{},
 						},
 						"evaluate_null_aggregations": schema.BoolAttribute{
 							Description: "This is a boolean True / False flag. \n\nIf set to TRUE, the calculation will be evaluated even if the referenced aggregation has no usage data.",

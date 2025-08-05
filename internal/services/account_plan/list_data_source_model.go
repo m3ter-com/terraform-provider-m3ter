@@ -65,17 +65,17 @@ func (m *AccountPlansDataSourceModel) toListParams(_ context.Context) (params m3
 }
 
 type AccountPlansItemsDataSourceModel struct {
-	ID               types.String      `tfsdk:"id" json:"id,computed"`
-	AccountID        types.String      `tfsdk:"account_id" json:"accountId,computed"`
-	BillEpoch        timetypes.RFC3339 `tfsdk:"bill_epoch" json:"billEpoch,computed" format:"date"`
-	ChildBillingMode types.String      `tfsdk:"child_billing_mode" json:"childBillingMode,computed"`
-	Code             types.String      `tfsdk:"code" json:"code,computed"`
-	ContractID       types.String      `tfsdk:"contract_id" json:"contractId,computed"`
-	CustomFields     types.Dynamic     `tfsdk:"custom_fields" json:"customFields,computed"`
-	EndDate          timetypes.RFC3339 `tfsdk:"end_date" json:"endDate,computed" format:"date-time"`
-	PlanGroupID      types.String      `tfsdk:"plan_group_id" json:"planGroupId,computed"`
-	PlanID           types.String      `tfsdk:"plan_id" json:"planId,computed"`
-	ProductID        types.String      `tfsdk:"product_id" json:"productId,computed"`
-	StartDate        timetypes.RFC3339 `tfsdk:"start_date" json:"startDate,computed" format:"date-time"`
-	Version          types.Int64       `tfsdk:"version" json:"version,computed,force_encode,encode_state_for_unknown"`
+	ID               types.String                       `tfsdk:"id" json:"id,computed"`
+	AccountID        types.String                       `tfsdk:"account_id" json:"accountId,computed"`
+	BillEpoch        timetypes.RFC3339                  `tfsdk:"bill_epoch" json:"billEpoch,computed" format:"date"`
+	ChildBillingMode types.String                       `tfsdk:"child_billing_mode" json:"childBillingMode,computed"`
+	Code             types.String                       `tfsdk:"code" json:"code,computed"`
+	ContractID       types.String                       `tfsdk:"contract_id" json:"contractId,computed"`
+	CustomFields     customfield.NormalizedDynamicValue `tfsdk:"custom_fields" json:"customFields,computed"`
+	EndDate          timetypes.RFC3339                  `tfsdk:"end_date" json:"endDate,computed" format:"date-time"`
+	PlanGroupID      types.String                       `tfsdk:"plan_group_id" json:"planGroupId,computed"`
+	PlanID           types.String                       `tfsdk:"plan_id" json:"planId,computed"`
+	ProductID        types.String                       `tfsdk:"product_id" json:"productId,computed"`
+	StartDate        timetypes.RFC3339                  `tfsdk:"start_date" json:"startDate,computed" format:"date-time"`
+	Version          types.Int64                        `tfsdk:"version" json:"version,computed,force_encode,encode_state_for_unknown"`
 }

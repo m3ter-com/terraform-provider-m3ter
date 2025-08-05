@@ -21,7 +21,7 @@ type MeterDataSourceModel struct {
 	Version       types.Int64                                                     `tfsdk:"version" json:"version,computed,force_encode,encode_state_for_unknown"`
 	DataFields    customfield.NestedObjectList[MeterDataFieldsDataSourceModel]    `tfsdk:"data_fields" json:"dataFields,computed"`
 	DerivedFields customfield.NestedObjectList[MeterDerivedFieldsDataSourceModel] `tfsdk:"derived_fields" json:"derivedFields,computed"`
-	CustomFields  types.Dynamic                                                   `tfsdk:"custom_fields" json:"customFields,computed"`
+	CustomFields  customfield.NormalizedDynamicValue                              `tfsdk:"custom_fields" json:"customFields,computed"`
 }
 
 func (m *MeterDataSourceModel) toReadParams(_ context.Context) (params m3ter.MeterGetParams, diags diag.Diagnostics) {
