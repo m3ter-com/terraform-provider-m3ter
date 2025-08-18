@@ -26,8 +26,10 @@ type ExternalMappingsDataSourceModel struct {
 
 func (m *ExternalMappingsDataSourceModel) toListParams(_ context.Context) (params m3ter.ExternalMappingListParams, diags diag.Diagnostics) {
 	mM3terIDs := []string{}
-	for _, item := range *m.M3terIDs {
-		mM3terIDs = append(mM3terIDs, item.ValueString())
+	if m.M3terIDs != nil {
+		for _, item := range *m.M3terIDs {
+			mM3terIDs = append(mM3terIDs, item.ValueString())
+		}
 	}
 
 	params = m3ter.ExternalMappingListParams{

@@ -26,12 +26,16 @@ type PlansDataSourceModel struct {
 
 func (m *PlansDataSourceModel) toListParams(_ context.Context) (params m3ter.PlanListParams, diags diag.Diagnostics) {
 	mAccountID := []string{}
-	for _, item := range *m.AccountID {
-		mAccountID = append(mAccountID, item.ValueString())
+	if m.AccountID != nil {
+		for _, item := range *m.AccountID {
+			mAccountID = append(mAccountID, item.ValueString())
+		}
 	}
 	mIDs := []string{}
-	for _, item := range *m.IDs {
-		mIDs = append(mIDs, item.ValueString())
+	if m.IDs != nil {
+		for _, item := range *m.IDs {
+			mIDs = append(mIDs, item.ValueString())
+		}
 	}
 
 	params = m3ter.PlanListParams{
