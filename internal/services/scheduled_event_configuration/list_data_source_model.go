@@ -24,8 +24,10 @@ type ScheduledEventConfigurationsDataSourceModel struct {
 
 func (m *ScheduledEventConfigurationsDataSourceModel) toListParams(_ context.Context) (params m3ter.ScheduledEventConfigurationListParams, diags diag.Diagnostics) {
 	mIDs := []string{}
-	for _, item := range *m.IDs {
-		mIDs = append(mIDs, item.ValueString())
+	if m.IDs != nil {
+		for _, item := range *m.IDs {
+			mIDs = append(mIDs, item.ValueString())
+		}
 	}
 
 	params = m3ter.ScheduledEventConfigurationListParams{

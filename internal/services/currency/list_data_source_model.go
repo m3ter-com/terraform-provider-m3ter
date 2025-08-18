@@ -26,12 +26,16 @@ type CurrenciesDataSourceModel struct {
 
 func (m *CurrenciesDataSourceModel) toListParams(_ context.Context) (params m3ter.CurrencyListParams, diags diag.Diagnostics) {
 	mCodes := []string{}
-	for _, item := range *m.Codes {
-		mCodes = append(mCodes, item.ValueString())
+	if m.Codes != nil {
+		for _, item := range *m.Codes {
+			mCodes = append(mCodes, item.ValueString())
+		}
 	}
 	mIDs := []string{}
-	for _, item := range *m.IDs {
-		mIDs = append(mIDs, item.ValueString())
+	if m.IDs != nil {
+		for _, item := range *m.IDs {
+			mIDs = append(mIDs, item.ValueString())
+		}
 	}
 
 	params = m3ter.CurrencyListParams{
