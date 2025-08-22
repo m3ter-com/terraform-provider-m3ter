@@ -1,5 +1,28 @@
 # Changelog
 
+## 0.5.0 (2025-08-22)
+
+Full Changelog: [v0.4.0...v0.5.0](https://github.com/m3ter-com/terraform-provider-m3ter/compare/v0.4.0...v0.5.0)
+
+### Features
+
+* ensure `internal/apiform` encoder can handle "force_encode" serialization tag ([ba959f0](https://github.com/m3ter-com/terraform-provider-m3ter/commit/ba959f025041884fb1d80171571a03fae122ae19))
+
+
+### Bug Fixes
+
+* **api:** handle mismatched dynamic array types in state and plan during serialization ([da59eff](https://github.com/m3ter-com/terraform-provider-m3ter/commit/da59eff5ad857f0f48f98718093670aaf87814d5))
+* check before de-referencing potentially null ptrs ([a0216da](https://github.com/m3ter-com/terraform-provider-m3ter/commit/a0216da8b0e0b36cdad2ec40e2331af1448882ed))
+* dynamic type validators should handle int and floats correctly ([c29d0ff](https://github.com/m3ter-com/terraform-provider-m3ter/commit/c29d0ff1172defda4443517800452cf64b2ff88a))
+* encoder crash for nested nils in dynamic types ([2d4c2d0](https://github.com/m3ter-com/terraform-provider-m3ter/commit/2d4c2d001842a110ae8bb4e52c361f55e0e42d64))
+
+
+### Chores
+
+* **internal:** codegen related update ([bf68f01](https://github.com/m3ter-com/terraform-provider-m3ter/commit/bf68f01f3d8b4c8eaf8e966f5428e3efeadff9fc))
+* **internal:** upgrade cloudflare/circl ([e13b6c1](https://github.com/m3ter-com/terraform-provider-m3ter/commit/e13b6c18ed41efbd8086908b8f9eb25f95c3ddba))
+* update @stainless-api/prism-cli to v5.15.0 ([d8a5781](https://github.com/m3ter-com/terraform-provider-m3ter/commit/d8a5781869f725ceb109c319dedf13b688399791))
+
 ## 0.4.0 (2025-07-28)
 
 Full Changelog: [v0.3.2...v0.4.0](https://github.com/m3ter-com/terraform-provider-m3ter/compare/v0.3.2...v0.4.0)
