@@ -15,6 +15,8 @@ description: |-
 ```terraform
 resource "m3ter_integration_configuration" "example_integration_configuration" {
   org_id = "orgId"
+  destination = "Stripe"
+  entity_type = "Bill"
   config_data = {
     foo = "bar"
   }
@@ -22,15 +24,13 @@ resource "m3ter_integration_configuration" "example_integration_configuration" {
     type = "HTTP_BASIC"
     destination = "WEBHOOK"
     empty = true
-    name = "name"
+    name = "Integration Credentials"
     version = 0
   }
-  destination = "destination"
-  destination_id = "destinationId"
-  entity_id = "entityId"
-  entity_type = "entityType"
-  integration_credentials_id = "integrationCredentialsId"
-  name = "name"
+  destination_id = "00000000-0000-0000-0000-000000000000"
+  entity_id = "00000000-0000-0000-0000-000000000000"
+  integration_credentials_id = "00000000-0000-0000-0000-000000000000"
+  name = "My Integration"
 }
 ```
 
@@ -39,17 +39,17 @@ resource "m3ter_integration_configuration" "example_integration_configuration" {
 
 ### Required
 
-- `config_data` (Map of String) A flexible object to include any additional configuration data specific to the integration.
-- `credentials` (Attributes) Base model for defining integration credentials across different types of integrations. (see [below for nested schema](#nestedatt--credentials))
 - `destination` (String) Denotes the integration destination. This field identifies the target platform or service for the integration.
-- `destination_id` (String) The unique identifier (UUID) for the integration destination.
-- `entity_id` (String) The unique identifier (UUID) of the entity. This field is used to specify which entity's integration configuration you're updating.
 - `entity_type` (String) Specifies the type of entity for which the integration configuration is being updated. Must be a valid alphanumeric string.
-- `integration_credentials_id` (String)
-- `name` (String)
 
 ### Optional
 
+- `config_data` (Map of String) A flexible object to include any additional configuration data specific to the integration.
+- `credentials` (Attributes) Base model for defining integration credentials across different types of integrations. (see [below for nested schema](#nestedatt--credentials))
+- `destination_id` (String) The unique identifier (UUID) for the integration destination.
+- `entity_id` (String) The unique identifier (UUID) of the entity. This field is used to specify which entity's integration configuration you're updating.
+- `integration_credentials_id` (String)
+- `name` (String)
 - `org_id` (String, Deprecated)
 
 ### Read-Only
@@ -67,7 +67,7 @@ resource "m3ter_integration_configuration" "example_integration_configuration" {
 - `error` (String) Describes any errors encountered during the integration run.
 - `external_id` (String) The external ID in the destination system if available.
 - `id` (String) The UUID of the entity.
-- `status` (String) Available values: "WAITING", "STARTED", "COMPLETE", "ERROR", "AWAITING_RETRY", "AUTH_FAILED", "ACCOUNTING_PERIOD_CLOSED", "INVOICE_ALREADY_PAID", "DISABLED", "RATE_LIMIT_RETRY".
+- `status` (String) Available values: "WAITING", "STARTED", "COMPLETE", "ERROR", "AWAITING_RETRY", "AUTH_FAILED", "ACCOUNTING_PERIOD_CLOSED", "INVOICE_ALREADY_PAID", "DISABLED", "TIMEOUT_LIMIT_EXCEEDED", "RATE_LIMIT_RETRY".
 - `trigger_type` (String, Deprecated) Specifies the type of trigger for the integration.
 Available values: "EVENT", "SCHEDULE".
 - `url` (String) The URL of the entity in the destination system if available.
@@ -81,7 +81,7 @@ Available values: "EVENT", "SCHEDULE".
 Required:
 
 - `type` (String) Specifies the type of authorization required for the integration.
-Available values: "HTTP_BASIC", "OAUTH_CLIENT_CREDENTIALS", "M3TER_SIGNED_REQUEST", "AWS_INTEGRATION", "PADDLE_AUTH", "NETSUITE_AUTH", "CHARGEBEE_AUTH", "M3TER_SERVICE_USER", "STRIPE_SIGNED_REQUEST".
+Available values: "HTTP_BASIC", "OAUTH_CLIENT_CREDENTIALS", "M3TER_SIGNED_REQUEST", "AWS_INTEGRATION", "PADDLE_AUTH", "NETSUITE_AUTH", "CHARGEBEE_AUTH", "M3TER_SERVICE_USER", "STRIPE_SIGNED_REQUEST", "HUBSPOT_ACCESS_TOKEN", "HUBSPOT_CLIENT_SECRET", "OPSGENIE_KEY", "SAP_BYD".
 
 Optional:
 

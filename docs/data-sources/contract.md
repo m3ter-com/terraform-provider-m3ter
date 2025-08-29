@@ -29,6 +29,7 @@ data "m3ter_contract" "example_contract" {
 ### Read-Only
 
 - `account_id` (String) The unique identifier (UUID) of the Account associated with this Contract.
+- `bill_grouping_key` (String)
 - `code` (String) The short code of the Contract.
 - `custom_fields` (Dynamic) User defined fields enabling you to attach custom data. The value for a custom field can be either a string or a number.
 

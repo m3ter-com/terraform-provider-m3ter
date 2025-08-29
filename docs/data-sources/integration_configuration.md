@@ -38,7 +38,7 @@ data "m3ter_integration_configuration" "example_integration_configuration" {
 - `error` (String) Describes any errors encountered during the integration run.
 - `external_id` (String) The external ID in the destination system if available.
 - `id` (String) The ID of this resource.
-- `status` (String) Available values: "WAITING", "STARTED", "COMPLETE", "ERROR", "AWAITING_RETRY", "AUTH_FAILED", "ACCOUNTING_PERIOD_CLOSED", "INVOICE_ALREADY_PAID", "DISABLED", "RATE_LIMIT_RETRY".
+- `status` (String) Available values: "WAITING", "STARTED", "COMPLETE", "ERROR", "AWAITING_RETRY", "AUTH_FAILED", "ACCOUNTING_PERIOD_CLOSED", "INVOICE_ALREADY_PAID", "DISABLED", "TIMEOUT_LIMIT_EXCEEDED", "RATE_LIMIT_RETRY".
 - `url` (String) The URL of the entity in the destination system if available.
 - `version` (Number) The version number:
 - **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.
