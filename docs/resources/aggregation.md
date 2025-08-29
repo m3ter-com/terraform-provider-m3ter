@@ -58,7 +58,7 @@ Enum:
 * **MEAN**. Uses the arithmetic mean of the values. Can be applied to a **Measure**, **Income**, or **Cost** `targetField`.
 
 * **UNIQUE**. Uses unique values and returns a count of the number of unique values. Can be applied to a **Metadata** `targetField`.
-Available values: "SUM", "MIN", "MAX", "COUNT", "LATEST", "MEAN", "UNIQUE".
+Available values: "SUM", "MIN", "MAX", "COUNT", "LATEST", "MEAN", "UNIQUE", "CUSTOM_SQL".
 - `meter_id` (String) The UUID of the Meter used as the source of usage data for the Aggregation.
 
 Each Aggregation is a child of a Meter, so the Meter must be selected.

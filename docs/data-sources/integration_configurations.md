@@ -15,6 +15,7 @@ description: |-
 ```terraform
 data "m3ter_integration_configurations" "example_integration_configurations" {
   org_id = "orgId"
+  destination_id = "destinationId"
 }
 ```
 
@@ -23,6 +24,7 @@ data "m3ter_integration_configurations" "example_integration_configurations" {
 
 ### Optional
 
+- `destination_id` (String) optional filter for a specific destination
 - `max_items` (Number) Max items to fetch, default: 1000
 - `org_id` (String, Deprecated)
 
