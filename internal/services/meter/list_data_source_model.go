@@ -26,16 +26,22 @@ type MetersDataSourceModel struct {
 
 func (m *MetersDataSourceModel) toListParams(_ context.Context) (params m3ter.MeterListParams, diags diag.Diagnostics) {
 	mCodes := []string{}
-	for _, item := range *m.Codes {
-		mCodes = append(mCodes, item.ValueString())
+	if m.Codes != nil {
+		for _, item := range *m.Codes {
+			mCodes = append(mCodes, item.ValueString())
+		}
 	}
 	mIDs := []string{}
-	for _, item := range *m.IDs {
-		mIDs = append(mIDs, item.ValueString())
+	if m.IDs != nil {
+		for _, item := range *m.IDs {
+			mIDs = append(mIDs, item.ValueString())
+		}
 	}
 	mProductID := []string{}
-	for _, item := range *m.ProductID {
-		mProductID = append(mProductID, item.ValueString())
+	if m.ProductID != nil {
+		for _, item := range *m.ProductID {
+			mProductID = append(mProductID, item.ValueString())
+		}
 	}
 
 	params = m3ter.MeterListParams{
@@ -54,7 +60,7 @@ func (m *MetersDataSourceModel) toListParams(_ context.Context) (params m3ter.Me
 type MetersItemsDataSourceModel struct {
 	ID            types.String                                                     `tfsdk:"id" json:"id,computed"`
 	Code          types.String                                                     `tfsdk:"code" json:"code,computed"`
-	CustomFields  types.Dynamic                                                    `tfsdk:"custom_fields" json:"customFields,computed"`
+	CustomFields  customfield.NormalizedDynamicValue                               `tfsdk:"custom_fields" json:"customFields,computed"`
 	DataFields    customfield.NestedObjectList[MetersDataFieldsDataSourceModel]    `tfsdk:"data_fields" json:"dataFields,computed"`
 	DerivedFields customfield.NestedObjectList[MetersDerivedFieldsDataSourceModel] `tfsdk:"derived_fields" json:"derivedFields,computed"`
 	GroupID       types.String                                                     `tfsdk:"group_id" json:"groupId,computed"`

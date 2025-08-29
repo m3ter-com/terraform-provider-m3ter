@@ -52,6 +52,7 @@ See [Working with Custom Fields](https://www.m3ter.com/docs/guides/creating-and-
 
 ### Read-Only
 
+- `bill_grouping_key` (String)
 - `id` (String) The UUID of the entity.
 - `version` (Number) The version number:
 - **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.

@@ -128,6 +128,7 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 						"custom_fields": schema.DynamicAttribute{
 							Description: "User defined fields enabling you to attach custom data. The value for a custom field can be either a string or a number.\n\nIf `customFields` can also be defined for this entity at the Organizational level,`customField` values defined at individual level override values of `customFields` with the same name defined at Organization level.\n\nSee [Working with Custom Fields](https://www.m3ter.com/docs/guides/creating-and-managing-products/working-with-custom-fields) in the m3ter documentation for more information.",
 							Computed:    true,
+							CustomType:  customfield.NormalizedDynamicType{},
 						},
 						"days_before_bill_due": schema.Int64Attribute{
 							Description: "The number of days after the Bill generation date shown on Bills as the due date.",

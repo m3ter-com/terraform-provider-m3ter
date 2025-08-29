@@ -26,12 +26,16 @@ type PlansDataSourceModel struct {
 
 func (m *PlansDataSourceModel) toListParams(_ context.Context) (params m3ter.PlanListParams, diags diag.Diagnostics) {
 	mAccountID := []string{}
-	for _, item := range *m.AccountID {
-		mAccountID = append(mAccountID, item.ValueString())
+	if m.AccountID != nil {
+		for _, item := range *m.AccountID {
+			mAccountID = append(mAccountID, item.ValueString())
+		}
 	}
 	mIDs := []string{}
-	for _, item := range *m.IDs {
-		mIDs = append(mIDs, item.ValueString())
+	if m.IDs != nil {
+		for _, item := range *m.IDs {
+			mIDs = append(mIDs, item.ValueString())
+		}
 	}
 
 	params = m3ter.PlanListParams{
@@ -50,22 +54,22 @@ func (m *PlansDataSourceModel) toListParams(_ context.Context) (params m3ter.Pla
 }
 
 type PlansItemsDataSourceModel struct {
-	ID                                types.String  `tfsdk:"id" json:"id,computed"`
-	AccountID                         types.String  `tfsdk:"account_id" json:"accountId,computed"`
-	Bespoke                           types.Bool    `tfsdk:"bespoke" json:"bespoke,computed"`
-	Code                              types.String  `tfsdk:"code" json:"code,computed"`
-	CustomFields                      types.Dynamic `tfsdk:"custom_fields" json:"customFields,computed"`
-	MinimumSpend                      types.Float64 `tfsdk:"minimum_spend" json:"minimumSpend,computed"`
-	MinimumSpendAccountingProductID   types.String  `tfsdk:"minimum_spend_accounting_product_id" json:"minimumSpendAccountingProductId,computed"`
-	MinimumSpendBillInAdvance         types.Bool    `tfsdk:"minimum_spend_bill_in_advance" json:"minimumSpendBillInAdvance,computed"`
-	MinimumSpendDescription           types.String  `tfsdk:"minimum_spend_description" json:"minimumSpendDescription,computed"`
-	Name                              types.String  `tfsdk:"name" json:"name,computed"`
-	Ordinal                           types.Int64   `tfsdk:"ordinal" json:"ordinal,computed"`
-	PlanTemplateID                    types.String  `tfsdk:"plan_template_id" json:"planTemplateId,computed"`
-	ProductID                         types.String  `tfsdk:"product_id" json:"productId,computed"`
-	StandingCharge                    types.Float64 `tfsdk:"standing_charge" json:"standingCharge,computed"`
-	StandingChargeAccountingProductID types.String  `tfsdk:"standing_charge_accounting_product_id" json:"standingChargeAccountingProductId,computed"`
-	StandingChargeBillInAdvance       types.Bool    `tfsdk:"standing_charge_bill_in_advance" json:"standingChargeBillInAdvance,computed"`
-	StandingChargeDescription         types.String  `tfsdk:"standing_charge_description" json:"standingChargeDescription,computed"`
-	Version                           types.Int64   `tfsdk:"version" json:"version,computed,force_encode,encode_state_for_unknown"`
+	ID                                types.String                       `tfsdk:"id" json:"id,computed"`
+	AccountID                         types.String                       `tfsdk:"account_id" json:"accountId,computed"`
+	Bespoke                           types.Bool                         `tfsdk:"bespoke" json:"bespoke,computed"`
+	Code                              types.String                       `tfsdk:"code" json:"code,computed"`
+	CustomFields                      customfield.NormalizedDynamicValue `tfsdk:"custom_fields" json:"customFields,computed"`
+	MinimumSpend                      types.Float64                      `tfsdk:"minimum_spend" json:"minimumSpend,computed"`
+	MinimumSpendAccountingProductID   types.String                       `tfsdk:"minimum_spend_accounting_product_id" json:"minimumSpendAccountingProductId,computed"`
+	MinimumSpendBillInAdvance         types.Bool                         `tfsdk:"minimum_spend_bill_in_advance" json:"minimumSpendBillInAdvance,computed"`
+	MinimumSpendDescription           types.String                       `tfsdk:"minimum_spend_description" json:"minimumSpendDescription,computed"`
+	Name                              types.String                       `tfsdk:"name" json:"name,computed"`
+	Ordinal                           types.Int64                        `tfsdk:"ordinal" json:"ordinal,computed"`
+	PlanTemplateID                    types.String                       `tfsdk:"plan_template_id" json:"planTemplateId,computed"`
+	ProductID                         types.String                       `tfsdk:"product_id" json:"productId,computed"`
+	StandingCharge                    types.Float64                      `tfsdk:"standing_charge" json:"standingCharge,computed"`
+	StandingChargeAccountingProductID types.String                       `tfsdk:"standing_charge_accounting_product_id" json:"standingChargeAccountingProductId,computed"`
+	StandingChargeBillInAdvance       types.Bool                         `tfsdk:"standing_charge_bill_in_advance" json:"standingChargeBillInAdvance,computed"`
+	StandingChargeDescription         types.String                       `tfsdk:"standing_charge_description" json:"standingChargeDescription,computed"`
+	Version                           types.Int64                        `tfsdk:"version" json:"version,computed,force_encode,encode_state_for_unknown"`
 }

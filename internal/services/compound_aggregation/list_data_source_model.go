@@ -26,16 +26,22 @@ type CompoundAggregationsDataSourceModel struct {
 
 func (m *CompoundAggregationsDataSourceModel) toListParams(_ context.Context) (params m3ter.CompoundAggregationListParams, diags diag.Diagnostics) {
 	mCodes := []string{}
-	for _, item := range *m.Codes {
-		mCodes = append(mCodes, item.ValueString())
+	if m.Codes != nil {
+		for _, item := range *m.Codes {
+			mCodes = append(mCodes, item.ValueString())
+		}
 	}
 	mIDs := []string{}
-	for _, item := range *m.IDs {
-		mIDs = append(mIDs, item.ValueString())
+	if m.IDs != nil {
+		for _, item := range *m.IDs {
+			mIDs = append(mIDs, item.ValueString())
+		}
 	}
 	mProductID := []string{}
-	for _, item := range *m.ProductID {
-		mProductID = append(mProductID, item.ValueString())
+	if m.ProductID != nil {
+		for _, item := range *m.ProductID {
+			mProductID = append(mProductID, item.ValueString())
+		}
 	}
 
 	params = m3ter.CompoundAggregationListParams{
@@ -56,7 +62,7 @@ type CompoundAggregationsItemsDataSourceModel struct {
 	AccountingProductID      types.String                                    `tfsdk:"accounting_product_id" json:"accountingProductId,computed"`
 	Calculation              types.String                                    `tfsdk:"calculation" json:"calculation,computed"`
 	Code                     types.String                                    `tfsdk:"code" json:"code,computed"`
-	CustomFields             types.Dynamic                                   `tfsdk:"custom_fields" json:"customFields,computed"`
+	CustomFields             customfield.NormalizedDynamicValue              `tfsdk:"custom_fields" json:"customFields,computed"`
 	EvaluateNullAggregations types.Bool                                      `tfsdk:"evaluate_null_aggregations" json:"evaluateNullAggregations,computed"`
 	Name                     types.String                                    `tfsdk:"name" json:"name,computed"`
 	ProductID                types.String                                    `tfsdk:"product_id" json:"productId,computed"`

@@ -59,7 +59,7 @@ Enum:
 * **MEAN**. Uses the arithmetic mean of the values. Can be applied to a **Measure**, **Income**, or **Cost** `targetField`.
 
 * **UNIQUE**. Uses unique values and returns a count of the number of unique values. Can be applied to a **Metadata** `targetField`.
-Available values: "SUM", "MIN", "MAX", "COUNT", "LATEST", "MEAN", "UNIQUE".
+Available values: "SUM", "MIN", "MAX", "COUNT", "LATEST", "MEAN", "UNIQUE", "CUSTOM_SQL".
 - `code` (String) Code of the Aggregation. A unique short code to identify the Aggregation.
 - `custom_fields` (Dynamic)
 - `custom_sql` (String)

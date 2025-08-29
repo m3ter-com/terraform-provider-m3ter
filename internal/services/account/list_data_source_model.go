@@ -27,12 +27,16 @@ type AccountsDataSourceModel struct {
 
 func (m *AccountsDataSourceModel) toListParams(_ context.Context) (params m3ter.AccountListParams, diags diag.Diagnostics) {
 	mCodes := []string{}
-	for _, item := range *m.Codes {
-		mCodes = append(mCodes, item.ValueString())
+	if m.Codes != nil {
+		for _, item := range *m.Codes {
+			mCodes = append(mCodes, item.ValueString())
+		}
 	}
 	mIDs := []string{}
-	for _, item := range *m.IDs {
-		mIDs = append(mIDs, item.ValueString())
+	if m.IDs != nil {
+		for _, item := range *m.IDs {
+			mIDs = append(mIDs, item.ValueString())
+		}
 	}
 
 	params = m3ter.AccountListParams{
@@ -56,7 +60,7 @@ type AccountsItemsDataSourceModel struct {
 	ConfigData                customfield.Map[jsontypes.Normalized]                    `tfsdk:"config_data" json:"configData,computed"`
 	CreditApplicationOrder    customfield.List[types.String]                           `tfsdk:"credit_application_order" json:"creditApplicationOrder,computed"`
 	Currency                  types.String                                             `tfsdk:"currency" json:"currency,computed"`
-	CustomFields              types.Dynamic                                            `tfsdk:"custom_fields" json:"customFields,computed"`
+	CustomFields              customfield.NormalizedDynamicValue                       `tfsdk:"custom_fields" json:"customFields,computed"`
 	DaysBeforeBillDue         types.Int64                                              `tfsdk:"days_before_bill_due" json:"daysBeforeBillDue,computed"`
 	EmailAddress              types.String                                             `tfsdk:"email_address" json:"emailAddress,computed"`
 	Name                      types.String                                             `tfsdk:"name" json:"name,computed"`

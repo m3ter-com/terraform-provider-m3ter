@@ -81,7 +81,8 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				},
 			},
 			"custom_fields": schema.DynamicAttribute{
-				Computed: true,
+				Computed:   true,
+				CustomType: customfield.NormalizedDynamicType{},
 			},
 		},
 	}
