@@ -20,6 +20,7 @@ type ContractModel struct {
 	Description         types.String                       `tfsdk:"description" json:"description,optional"`
 	PurchaseOrderNumber types.String                       `tfsdk:"purchase_order_number" json:"purchaseOrderNumber,optional"`
 	CustomFields        customfield.NormalizedDynamicValue `tfsdk:"custom_fields" json:"customFields,optional"`
+	BillGroupingKey     types.String                       `tfsdk:"bill_grouping_key" json:"billGroupingKey,computed"`
 	Version             types.Int64                        `tfsdk:"version" json:"version,computed,force_encode,encode_state_for_unknown"`
 }
 

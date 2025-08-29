@@ -106,6 +106,7 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 							"MINIMUM_SPEND",
 							"COUNTER_RUNNING_TOTAL_CHARGE",
 							"COUNTER_ADJUSTMENT_DEBIT",
+							"AD_HOC",
 						),
 					),
 				},

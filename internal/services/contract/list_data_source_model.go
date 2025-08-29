@@ -57,6 +57,7 @@ func (m *ContractsDataSourceModel) toListParams(_ context.Context) (params m3ter
 type ContractsItemsDataSourceModel struct {
 	ID                  types.String                       `tfsdk:"id" json:"id,computed"`
 	AccountID           types.String                       `tfsdk:"account_id" json:"accountId,computed"`
+	BillGroupingKey     types.String                       `tfsdk:"bill_grouping_key" json:"billGroupingKey,computed"`
 	Code                types.String                       `tfsdk:"code" json:"code,computed"`
 	CustomFields        customfield.NormalizedDynamicValue `tfsdk:"custom_fields" json:"customFields,computed"`
 	Description         types.String                       `tfsdk:"description" json:"description,computed"`

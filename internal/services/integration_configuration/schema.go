@@ -13,6 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
+	"github.com/m3ter-com/terraform-provider-m3ter/internal/customfield"
 )
 
 var _ resource.ResourceWithConfigValidators = (*IntegrationConfigurationResource)(nil)
@@ -34,35 +35,39 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				Description: "Denotes the integration destination. This field identifies the target platform or service for the integration.",
 				Required:    true,
 			},
-			"destination_id": schema.StringAttribute{
-				Description: "The unique identifier (UUID) for the integration destination.",
-				Required:    true,
-			},
-			"entity_id": schema.StringAttribute{
-				Description: "The unique identifier (UUID) of the entity. This field is used to specify which entity's integration configuration you're updating.",
-				Required:    true,
-			},
 			"entity_type": schema.StringAttribute{
 				Description: "Specifies the type of entity for which the integration configuration is being updated. Must be a valid alphanumeric string.",
 				Required:    true,
 			},
+			"destination_id": schema.StringAttribute{
+				Description: "The unique identifier (UUID) for the integration destination.",
+				Optional:    true,
+			},
+			"entity_id": schema.StringAttribute{
+				Description: "The unique identifier (UUID) of the entity. This field is used to specify which entity's integration configuration you're updating.",
+				Optional:    true,
+			},
 			"integration_credentials_id": schema.StringAttribute{
-				Required: true,
+				Optional: true,
 			},
 			"name": schema.StringAttribute{
-				Required: true,
+				Optional: true,
 			},
 			"config_data": schema.MapAttribute{
 				Description: "A flexible object to include any additional configuration data specific to the integration.",
-				Required:    true,
+				Computed:    true,
+				Optional:    true,
+				CustomType:  customfield.NewMapType[jsontypes.Normalized](ctx),
 				ElementType: jsontypes.NormalizedType{},
 			},
 			"credentials": schema.SingleNestedAttribute{
 				Description: "Base model for defining integration credentials across different types of integrations.",
-				Required:    true,
+				Computed:    true,
+				Optional:    true,
+				CustomType:  customfield.NewNestedObjectType[IntegrationConfigurationCredentialsModel](ctx),
 				Attributes: map[string]schema.Attribute{
 					"type": schema.StringAttribute{
-						Description: "Specifies the type of authorization required for the integration.\nAvailable values: \"HTTP_BASIC\", \"OAUTH_CLIENT_CREDENTIALS\", \"M3TER_SIGNED_REQUEST\", \"AWS_INTEGRATION\", \"PADDLE_AUTH\", \"NETSUITE_AUTH\", \"CHARGEBEE_AUTH\", \"M3TER_SERVICE_USER\", \"STRIPE_SIGNED_REQUEST\".",
+						Description: "Specifies the type of authorization required for the integration.\nAvailable values: \"HTTP_BASIC\", \"OAUTH_CLIENT_CREDENTIALS\", \"M3TER_SIGNED_REQUEST\", \"AWS_INTEGRATION\", \"PADDLE_AUTH\", \"NETSUITE_AUTH\", \"CHARGEBEE_AUTH\", \"M3TER_SERVICE_USER\", \"STRIPE_SIGNED_REQUEST\", \"HUBSPOT_ACCESS_TOKEN\", \"HUBSPOT_CLIENT_SECRET\", \"OPSGENIE_KEY\", \"SAP_BYD\".",
 						Required:    true,
 						Validators: []validator.String{
 							stringvalidator.OneOfCaseInsensitive(
@@ -75,6 +80,10 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 								"CHARGEBEE_AUTH",
 								"M3TER_SERVICE_USER",
 								"STRIPE_SIGNED_REQUEST",
+								"HUBSPOT_ACCESS_TOKEN",
+								"HUBSPOT_CLIENT_SECRET",
+								"OPSGENIE_KEY",
+								"SAP_BYD",
 							),
 						},
 					},
@@ -140,7 +149,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				Computed:    true,
 			},
 			"status": schema.StringAttribute{
-				Description: `Available values: "WAITING", "STARTED", "COMPLETE", "ERROR", "AWAITING_RETRY", "AUTH_FAILED", "ACCOUNTING_PERIOD_CLOSED", "INVOICE_ALREADY_PAID", "DISABLED", "RATE_LIMIT_RETRY".`,
+				Description: `Available values: "WAITING", "STARTED", "COMPLETE", "ERROR", "AWAITING_RETRY", "AUTH_FAILED", "ACCOUNTING_PERIOD_CLOSED", "INVOICE_ALREADY_PAID", "DISABLED", "TIMEOUT_LIMIT_EXCEEDED", "RATE_LIMIT_RETRY".`,
 				Computed:    true,
 				Validators: []validator.String{
 					stringvalidator.OneOfCaseInsensitive(
@@ -153,6 +162,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 						"ACCOUNTING_PERIOD_CLOSED",
 						"INVOICE_ALREADY_PAID",
 						"DISABLED",
+						"TIMEOUT_LIMIT_EXCEEDED",
 						"RATE_LIMIT_RETRY",
 					),
 				},

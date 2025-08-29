@@ -16,6 +16,7 @@ type ContractDataSourceModel struct {
 	ID                  types.String                       `tfsdk:"id" path:"id,required"`
 	OrgID               types.String                       `tfsdk:"org_id" path:"orgId,required"`
 	AccountID           types.String                       `tfsdk:"account_id" json:"accountId,computed"`
+	BillGroupingKey     types.String                       `tfsdk:"bill_grouping_key" json:"billGroupingKey,computed"`
 	Code                types.String                       `tfsdk:"code" json:"code,computed"`
 	Description         types.String                       `tfsdk:"description" json:"description,computed"`
 	EndDate             timetypes.RFC3339                  `tfsdk:"end_date" json:"endDate,computed" format:"date"`
