@@ -23,6 +23,10 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 				Optional:           true,
 				DeprecationMessage: "the org id should be set at the client level instead",
 			},
+			"destination_id": schema.StringAttribute{
+				Description: "optional filter for a specific destination",
+				Optional:    true,
+			},
 			"max_items": schema.Int64Attribute{
 				Description: "Max items to fetch, default: 1000",
 				Optional:    true,
@@ -46,10 +50,6 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 						},
 						"entity_type": schema.StringAttribute{
 							Description: "The type of entity the integration is for *(e.g. Bill)*.",
-							Computed:    true,
-						},
-						"version": schema.Int64Attribute{
-							Description: "The version number:\n- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.\n- **Update:** On successful Update, the version is incremented by 1 in the response.",
 							Computed:    true,
 						},
 						"authorized": schema.BoolAttribute{
@@ -89,6 +89,10 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Validators: []validator.String{
 								stringvalidator.OneOfCaseInsensitive("EVENT", "SCHEDULE"),
 							},
+						},
+						"version": schema.Int64Attribute{
+							Description: "The version number:\n- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.\n- **Update:** On successful Update, the version is incremented by 1 in the response.",
+							Computed:    true,
 						},
 					},
 				},

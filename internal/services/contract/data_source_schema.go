@@ -27,6 +27,9 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Description: "The unique identifier (UUID) of the Account associated with this Contract.",
 				Computed:    true,
 			},
+			"bill_grouping_key": schema.StringAttribute{
+				Computed: true,
+			},
 			"code": schema.StringAttribute{
 				Description: "The short code of the Contract.",
 				Computed:    true,

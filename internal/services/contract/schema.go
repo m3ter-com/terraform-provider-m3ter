@@ -64,6 +64,9 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				CustomType:    customfield.NormalizedDynamicType{},
 				PlanModifiers: []planmodifier.Dynamic{customfield.NormalizeDynamicPlanModifier()},
 			},
+			"bill_grouping_key": schema.StringAttribute{
+				Computed: true,
+			},
 			"version": schema.Int64Attribute{
 				Description: "The version number:\n- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.\n- **Update:** On successful Update, the version is incremented by 1 in the response.",
 				Computed:    true,
