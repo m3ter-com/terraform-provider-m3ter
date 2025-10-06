@@ -26,6 +26,10 @@ data "m3ter_scheduled_event_configuration" "example_scheduled_event_configuratio
 
 - `org_id` (String, Deprecated)
 
+### Optional
+
+- `find_one_by` (Attributes) (see [below for nested schema](#nestedatt--find_one_by))
+
 ### Read-Only
 
 - `entity` (String) The referenced configuration or billing entity for which the desired scheduled Event will trigger.
@@ -36,3 +40,10 @@ data "m3ter_scheduled_event_configuration" "example_scheduled_event_configuratio
 - `version` (Number) The version number:
 - **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.
 - **Update:** On successful Update, the version is incremented by 1 in the response.
+
+<a id="nestedatt--find_one_by"></a>
+### Nested Schema for `find_one_by`
+
+Optional:
+
+- `ids` (List of String) list of UUIDs to retrieve

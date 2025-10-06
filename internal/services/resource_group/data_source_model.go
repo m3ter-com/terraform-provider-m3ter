@@ -11,7 +11,7 @@ import (
 )
 
 type ResourceGroupDataSourceModel struct {
-	ID      types.String `tfsdk:"id" path:"id,required"`
+	ID      types.String `tfsdk:"id" path:"id,computed_optional"`
 	OrgID   types.String `tfsdk:"org_id" path:"orgId,required"`
 	Type    types.String `tfsdk:"type" path:"type,required"`
 	Name    types.String `tfsdk:"name" json:"name,computed"`

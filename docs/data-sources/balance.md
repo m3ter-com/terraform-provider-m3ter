@@ -26,6 +26,10 @@ data "m3ter_balance" "example_balance" {
 
 - `org_id` (String, Deprecated)
 
+### Optional
+
+- `find_one_by` (Attributes) (see [below for nested schema](#nestedatt--find_one_by))
+
 ### Read-Only
 
 - `account_id` (String) The unique identifier (UUID) for the end customer Account the Balance belongs to.
@@ -55,3 +59,13 @@ See [Working with Custom Fields](https://www.m3ter.com/docs/guides/creating-and-
 - `version` (Number) The version number:
 - **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.
 - **Update:** On successful Update, the version is incremented by 1 in the response.
+
+<a id="nestedatt--find_one_by"></a>
+### Nested Schema for `find_one_by`
+
+Optional:
+
+- `account_id` (String) The unique identifier (UUID) for the end customer's account.
+- `contract` (String)
+- `end_date_end` (String) Only include Balances with end dates earlier than this date. If a Balance has a rollover amount configured, then the `rolloverEndDate` will be used as the end date.
+- `end_date_start` (String) Only include Balances with end dates equal to or later than this date. If a Balance has a rollover amount configured, then the `rolloverEndDate` will be used as the end date.

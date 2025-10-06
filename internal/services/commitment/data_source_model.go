@@ -13,7 +13,7 @@ import (
 )
 
 type CommitmentDataSourceModel struct {
-	ID                           types.String                                                    `tfsdk:"id" path:"id,required"`
+	ID                           types.String                                                    `tfsdk:"id" path:"id,computed_optional"`
 	OrgID                        types.String                                                    `tfsdk:"org_id" path:"orgId,required"`
 	AccountID                    types.String                                                    `tfsdk:"account_id" json:"accountId,computed"`
 	AccountingProductID          types.String                                                    `tfsdk:"accounting_product_id" json:"accountingProductId,computed"`
@@ -42,6 +42,7 @@ type CommitmentDataSourceModel struct {
 	LineItemTypes                customfield.List[types.String]                                  `tfsdk:"line_item_types" json:"lineItemTypes,computed"`
 	ProductIDs                   customfield.List[types.String]                                  `tfsdk:"product_ids" json:"productIds,computed"`
 	FeeDates                     customfield.NestedObjectList[CommitmentFeeDatesDataSourceModel] `tfsdk:"fee_dates" json:"feeDates,computed"`
+	FindOneBy                    *CommitmentFindOneByDataSourceModel                             `tfsdk:"find_one_by"`
 }
 
 func (m *CommitmentDataSourceModel) toReadParams(_ context.Context) (params m3ter.CommitmentGetParams, diags diag.Diagnostics) {
@@ -54,9 +55,53 @@ func (m *CommitmentDataSourceModel) toReadParams(_ context.Context) (params m3te
 	return
 }
 
+func (m *CommitmentDataSourceModel) toListParams(_ context.Context) (params m3ter.CommitmentListParams, diags diag.Diagnostics) {
+	mFindOneByIDs := []string{}
+	if m.FindOneBy.IDs != nil {
+		for _, item := range *m.FindOneBy.IDs {
+			mFindOneByIDs = append(mFindOneByIDs, item.ValueString())
+		}
+	}
+
+	params = m3ter.CommitmentListParams{
+		IDs: m3ter.F(mFindOneByIDs),
+	}
+
+	if !m.FindOneBy.AccountID.IsNull() {
+		params.AccountID = m3ter.F(m.FindOneBy.AccountID.ValueString())
+	}
+	if !m.FindOneBy.ContractID.IsNull() {
+		params.ContractID = m3ter.F(m.FindOneBy.ContractID.ValueString())
+	}
+	if !m.FindOneBy.Date.IsNull() {
+		params.Date = m3ter.F(m.FindOneBy.Date.ValueString())
+	}
+	if !m.FindOneBy.EndDateEnd.IsNull() {
+		params.EndDateEnd = m3ter.F(m.FindOneBy.EndDateEnd.ValueString())
+	}
+	if !m.FindOneBy.EndDateStart.IsNull() {
+		params.EndDateStart = m3ter.F(m.FindOneBy.EndDateStart.ValueString())
+	}
+	if !m.FindOneBy.ProductID.IsNull() {
+		params.ProductID = m3ter.F(m.FindOneBy.ProductID.ValueString())
+	}
+
+	return
+}
+
 type CommitmentFeeDatesDataSourceModel struct {
 	Amount                 types.Float64     `tfsdk:"amount" json:"amount,computed"`
 	Date                   timetypes.RFC3339 `tfsdk:"date" json:"date,computed" format:"date"`
 	ServicePeriodEndDate   timetypes.RFC3339 `tfsdk:"service_period_end_date" json:"servicePeriodEndDate,computed" format:"date-time"`
 	ServicePeriodStartDate timetypes.RFC3339 `tfsdk:"service_period_start_date" json:"servicePeriodStartDate,computed" format:"date-time"`
+}
+
+type CommitmentFindOneByDataSourceModel struct {
+	AccountID    types.String    `tfsdk:"account_id" query:"accountId,optional"`
+	ContractID   types.String    `tfsdk:"contract_id" query:"contractId,optional"`
+	Date         types.String    `tfsdk:"date" query:"date,optional"`
+	EndDateEnd   types.String    `tfsdk:"end_date_end" query:"endDateEnd,optional"`
+	EndDateStart types.String    `tfsdk:"end_date_start" query:"endDateStart,optional"`
+	IDs          *[]types.String `tfsdk:"ids" query:"ids,optional"`
+	ProductID    types.String    `tfsdk:"product_id" query:"productId,optional"`
 }

@@ -26,6 +26,10 @@ data "m3ter_counter_adjustment" "example_counter_adjustment" {
 
 - `org_id` (String, Deprecated)
 
+### Optional
+
+- `find_one_by` (Attributes) (see [below for nested schema](#nestedatt--find_one_by))
+
 ### Read-Only
 
 - `account_id` (String) The Account ID the CounterAdjustment was created for.
@@ -37,3 +41,17 @@ data "m3ter_counter_adjustment" "example_counter_adjustment" {
 - `version` (Number) The version number:
 - **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.
 - **Update:** On successful Update, the version is incremented by 1 in the response.
+
+<a id="nestedatt--find_one_by"></a>
+### Nested Schema for `find_one_by`
+
+Optional:
+
+- `account_id` (String) List CounterAdjustment items for the Account UUID.
+- `counter_id` (String) List CounterAdjustment items for the Counter UUID.
+- `date` (String) List CounterAdjustment items for the given date.
+- `date_end` (String)
+- `date_start` (String)
+- `end_date_end` (String) Only include CounterAdjustments with end dates earlier than this date.
+- `end_date_start` (String) Only include CounterAdjustments with end dates equal to or later than this date.
+- `sort_order` (String) Sort order for the results

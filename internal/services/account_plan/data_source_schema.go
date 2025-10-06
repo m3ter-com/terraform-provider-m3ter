@@ -6,10 +6,13 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
+	"github.com/hashicorp/terraform-plugin-framework-validators/datasourcevalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/m3ter-com/terraform-provider-m3ter/internal/customfield"
 )
 
@@ -19,7 +22,8 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 	return schema.Schema{
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
-				Required: true,
+				Computed: true,
+				Optional: true,
 			},
 			"org_id": schema.StringAttribute{
 				Required:           true,
@@ -84,6 +88,40 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Computed:    true,
 				CustomType:  customfield.NormalizedDynamicType{},
 			},
+			"find_one_by": schema.SingleNestedAttribute{
+				Optional: true,
+				Attributes: map[string]schema.Attribute{
+					"account": schema.StringAttribute{
+						Description: "The unique identifier (UUID) for the Account whose AccountPlans and AccountPlanGroups you want to retrieve.\n\n**NOTE:** Only returns the currently active AccountPlans and AccountPlanGroups for the specified Account. Use in combination with the `includeall` query parameter to return both active and inactive.",
+						Optional:    true,
+					},
+					"contract": schema.StringAttribute{
+						Description: "The unique identifier (UUID) of the Contract which the AccountPlans you want to retrieve have been linked to.\n\n**NOTE:** Does not return AccountPlanGroups that have been linked to the Contract.",
+						Optional:    true,
+					},
+					"date": schema.StringAttribute{
+						Description: "The specific date for which you want to retrieve AccountPlans and AccountPlanGroups.\n\n**NOTE:** Returns both active and inactive AccountPlans and AccountPlanGroups for the specified date.",
+						Optional:    true,
+					},
+					"ids": schema.ListAttribute{
+						Description: "A list of unique identifiers (UUIDs) for specific AccountPlans and AccountPlanGroups you want to retrieve.",
+						Optional:    true,
+						ElementType: types.StringType,
+					},
+					"includeall": schema.BoolAttribute{
+						Description: "A Boolean flag that specifies whether to include both active and inactive AccountPlans and AccountPlanGroups in the list.\n\n* **TRUE** - both active and inactive AccountPlans and AccountPlanGroups are included in the list.\n* **FALSE** - only active AccountPlans and AccountPlanGroups are retrieved in the list.",
+						Optional:    true,
+					},
+					"plan": schema.StringAttribute{
+						Description: "The unique identifier (UUID) for the Plan whose associated AccountPlans you want to retrieve.\n\n**NOTE:** Does not return AccountPlanGroups if you use a `planGroupId`.",
+						Optional:    true,
+					},
+					"product": schema.StringAttribute{
+						Description: "The unique identifier (UUID) for the Product whose associated AccountPlans you want to retrieve.\n\n**NOTE:** You cannot use the `product` query parameter as a single filter condition, but must always use it in combination with the `account` query parameter.",
+						Optional:    true,
+					},
+				},
+			},
 		},
 	}
 }
@@ -93,5 +131,7 @@ func (d *AccountPlanDataSource) Schema(ctx context.Context, req datasource.Schem
 }
 
 func (d *AccountPlanDataSource) ConfigValidators(_ context.Context) []datasource.ConfigValidator {
-	return []datasource.ConfigValidator{}
+	return []datasource.ConfigValidator{
+		datasourcevalidator.ExactlyOneOf(path.MatchRoot("id"), path.MatchRoot("find_one_by")),
+	}
 }

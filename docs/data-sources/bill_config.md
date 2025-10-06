@@ -30,7 +30,7 @@ data "m3ter_bill_config" "example_bill_config" {
 - `bill_lock_date` (String) The global lock date *(in ISO 8601 format)* when all Bills will be locked.
 
 For example: `"2024-03-01"`.
-- `id` (String) The Organization UUID. The Organization represents your company as a direct customer of the m3ter service.
+- `id` (String, Deprecated) The ID of this resource.
 - `version` (Number) The version number:
 * Default value when newly created is one.
 * Incremented by 1 each time it is updated.

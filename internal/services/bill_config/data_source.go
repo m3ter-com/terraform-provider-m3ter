@@ -80,6 +80,7 @@ func (d *BillConfigDataSource) Read(ctx context.Context, req datasource.ReadRequ
 		resp.Diagnostics.AddError("failed to deserialize http request", err.Error())
 		return
 	}
+	data.ID = data.OrgID
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }

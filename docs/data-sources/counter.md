@@ -26,6 +26,10 @@ data "m3ter_counter" "example_counter" {
 
 - `org_id` (String, Deprecated)
 
+### Optional
+
+- `find_one_by` (Attributes) (see [below for nested schema](#nestedatt--find_one_by))
+
 ### Read-Only
 
 - `code` (String) Code of the Counter. A unique short code to identify the Counter.
@@ -36,3 +40,12 @@ data "m3ter_counter" "example_counter" {
 - `version` (Number) The version number:
 - **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.
 - **Update:** On successful Update, the version is incremented by 1 in the response.
+
+<a id="nestedatt--find_one_by"></a>
+### Nested Schema for `find_one_by`
+
+Optional:
+
+- `codes` (List of String) List of Counter codes to retrieve. These are unique short codes to identify each Counter.
+- `ids` (List of String) List of Counter IDs to retrieve.
+- `product_id` (List of String) List of Products UUIDs to retrieve Counters for.

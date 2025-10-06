@@ -12,12 +12,13 @@ import (
 )
 
 type ProductDataSourceModel struct {
-	ID           types.String                       `tfsdk:"id" path:"id,required"`
+	ID           types.String                       `tfsdk:"id" path:"id,computed_optional"`
 	OrgID        types.String                       `tfsdk:"org_id" path:"orgId,required"`
 	Code         types.String                       `tfsdk:"code" json:"code,computed"`
 	Name         types.String                       `tfsdk:"name" json:"name,computed"`
 	Version      types.Int64                        `tfsdk:"version" json:"version,computed,force_encode,encode_state_for_unknown"`
 	CustomFields customfield.NormalizedDynamicValue `tfsdk:"custom_fields" json:"customFields,computed"`
+	FindOneBy    *ProductFindOneByDataSourceModel   `tfsdk:"find_one_by"`
 }
 
 func (m *ProductDataSourceModel) toReadParams(_ context.Context) (params m3ter.ProductGetParams, diags diag.Diagnostics) {
@@ -28,4 +29,23 @@ func (m *ProductDataSourceModel) toReadParams(_ context.Context) (params m3ter.P
 	}
 
 	return
+}
+
+func (m *ProductDataSourceModel) toListParams(_ context.Context) (params m3ter.ProductListParams, diags diag.Diagnostics) {
+	mFindOneByIDs := []string{}
+	if m.FindOneBy.IDs != nil {
+		for _, item := range *m.FindOneBy.IDs {
+			mFindOneByIDs = append(mFindOneByIDs, item.ValueString())
+		}
+	}
+
+	params = m3ter.ProductListParams{
+		IDs: m3ter.F(mFindOneByIDs),
+	}
+
+	return
+}
+
+type ProductFindOneByDataSourceModel struct {
+	IDs *[]types.String `tfsdk:"ids" query:"ids,optional"`
 }

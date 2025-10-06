@@ -26,6 +26,10 @@ data "m3ter_pricing" "example_pricing" {
 
 - `org_id` (String, Deprecated)
 
+### Optional
+
+- `find_one_by` (Attributes) (see [below for nested schema](#nestedatt--find_one_by))
+
 ### Read-Only
 
 - `accounting_product_id` (String)
@@ -77,6 +81,18 @@ Available values: "DEBIT", "PRODUCT_CREDIT", "GLOBAL_CREDIT".
 - `version` (Number) The version number:
 - **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.
 - **Update:** On successful Update, the version is incremented by 1 in the response.
+
+<a id="nestedatt--find_one_by"></a>
+### Nested Schema for `find_one_by`
+
+Optional:
+
+- `aggregation_id` (String) UUID of the Aggregation to retrieve pricings for
+- `date` (String) Date on which to retrieve active Pricings.
+- `ids` (List of String) List of Pricing IDs to retrieve.
+- `plan_id` (String) UUID of the Plan to retrieve Pricings for.
+- `plan_template_id` (String) UUID of the PlanTemplate to retrieve Pricings for.
+
 
 <a id="nestedatt--overage_pricing_bands"></a>
 ### Nested Schema for `overage_pricing_bands`

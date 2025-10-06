@@ -26,6 +26,10 @@ data "m3ter_transaction_type" "example_transaction_type" {
 
 - `org_id` (String, Deprecated)
 
+### Optional
+
+- `find_one_by` (Attributes) (see [below for nested schema](#nestedatt--find_one_by))
+
 ### Read-Only
 
 - `archived` (Boolean) TRUE / FALSE flag indicating whether the data entity is archived. An entity can be archived if it is obsolete.
@@ -35,3 +39,15 @@ data "m3ter_transaction_type" "example_transaction_type" {
 - `version` (Number) The version number:
 - **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.
 - **Update:** On successful Update, the version is incremented by 1 in the response.
+
+<a id="nestedatt--find_one_by"></a>
+### Nested Schema for `find_one_by`
+
+Optional:
+
+- `archived` (Boolean) Filter with this Boolean flag whether to include TransactionTypes that are archived. 
+
+* TRUE - include archived TransactionTypes in the list.
+* FALSE - exclude archived TransactionTypes.
+- `codes` (List of String) A list of TransactionType short codes to retrieve.
+- `ids` (List of String) A list of TransactionType unique identifiers (UUIDs) to retrieve.

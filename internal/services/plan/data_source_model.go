@@ -12,7 +12,7 @@ import (
 )
 
 type PlanDataSourceModel struct {
-	ID                                types.String                       `tfsdk:"id" path:"id,required"`
+	ID                                types.String                       `tfsdk:"id" path:"id,computed_optional"`
 	OrgID                             types.String                       `tfsdk:"org_id" path:"orgId,required"`
 	AccountID                         types.String                       `tfsdk:"account_id" json:"accountId,computed"`
 	Bespoke                           types.Bool                         `tfsdk:"bespoke" json:"bespoke,computed"`
@@ -31,6 +31,7 @@ type PlanDataSourceModel struct {
 	StandingChargeDescription         types.String                       `tfsdk:"standing_charge_description" json:"standingChargeDescription,computed"`
 	Version                           types.Int64                        `tfsdk:"version" json:"version,computed,force_encode,encode_state_for_unknown"`
 	CustomFields                      customfield.NormalizedDynamicValue `tfsdk:"custom_fields" json:"customFields,computed"`
+	FindOneBy                         *PlanFindOneByDataSourceModel      `tfsdk:"find_one_by"`
 }
 
 func (m *PlanDataSourceModel) toReadParams(_ context.Context) (params m3ter.PlanGetParams, diags diag.Diagnostics) {
@@ -41,4 +42,36 @@ func (m *PlanDataSourceModel) toReadParams(_ context.Context) (params m3ter.Plan
 	}
 
 	return
+}
+
+func (m *PlanDataSourceModel) toListParams(_ context.Context) (params m3ter.PlanListParams, diags diag.Diagnostics) {
+	mFindOneByAccountID := []string{}
+	if m.FindOneBy.AccountID != nil {
+		for _, item := range *m.FindOneBy.AccountID {
+			mFindOneByAccountID = append(mFindOneByAccountID, item.ValueString())
+		}
+	}
+	mFindOneByIDs := []string{}
+	if m.FindOneBy.IDs != nil {
+		for _, item := range *m.FindOneBy.IDs {
+			mFindOneByIDs = append(mFindOneByIDs, item.ValueString())
+		}
+	}
+
+	params = m3ter.PlanListParams{
+		AccountID: m3ter.F(mFindOneByAccountID),
+		IDs:       m3ter.F(mFindOneByIDs),
+	}
+
+	if !m.FindOneBy.ProductID.IsNull() {
+		params.ProductID = m3ter.F(m.FindOneBy.ProductID.ValueString())
+	}
+
+	return
+}
+
+type PlanFindOneByDataSourceModel struct {
+	AccountID *[]types.String `tfsdk:"account_id" query:"accountId,optional"`
+	IDs       *[]types.String `tfsdk:"ids" query:"ids,optional"`
+	ProductID types.String    `tfsdk:"product_id" query:"productId,optional"`
 }
