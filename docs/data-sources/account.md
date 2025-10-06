@@ -26,6 +26,10 @@ data "m3ter_account" "example_account" {
 
 - `org_id` (String, Deprecated)
 
+### Optional
+
+- `find_one_by` (Attributes) (see [below for nested schema](#nestedatt--find_one_by))
+
 ### Read-Only
 
 - `address` (Attributes) Contact address. (see [below for nested schema](#nestedatt--address))
@@ -72,6 +76,16 @@ See [Working with Bill Statements](https://www.m3ter.com/docs/guides/running-vie
 - `version` (Number) The version number:
 - **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.
 - **Update:** On successful Update, the version is incremented by 1 in the response.
+
+<a id="nestedatt--find_one_by"></a>
+### Nested Schema for `find_one_by`
+
+Optional:
+
+- `codes` (List of String) List of Account Codes to retrieve. 
+These are unique short codes for each Account.
+- `ids` (List of String) List of Account IDs to retrieve.
+
 
 <a id="nestedatt--address"></a>
 ### Nested Schema for `address`

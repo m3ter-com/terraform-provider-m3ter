@@ -26,6 +26,10 @@ data "m3ter_account_plan" "example_account_plan" {
 
 - `org_id` (String, Deprecated)
 
+### Optional
+
+- `find_one_by` (Attributes) (see [below for nested schema](#nestedatt--find_one_by))
+
 ### Read-Only
 
 - `account_id` (String) The unique identifier (UUID) for the Account to which the AccountPlan or AccounPlanGroup is attached.
@@ -56,3 +60,29 @@ See [Working with Custom Fields](https://www.m3ter.com/docs/guides/creating-and-
 - `version` (Number) The version number:
 - **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.
 - **Update:** On successful Update, the version is incremented by 1 in the response.
+
+<a id="nestedatt--find_one_by"></a>
+### Nested Schema for `find_one_by`
+
+Optional:
+
+- `account` (String) The unique identifier (UUID) for the Account whose AccountPlans and AccountPlanGroups you want to retrieve.
+
+**NOTE:** Only returns the currently active AccountPlans and AccountPlanGroups for the specified Account. Use in combination with the `includeall` query parameter to return both active and inactive.
+- `contract` (String) The unique identifier (UUID) of the Contract which the AccountPlans you want to retrieve have been linked to.
+
+**NOTE:** Does not return AccountPlanGroups that have been linked to the Contract.
+- `date` (String) The specific date for which you want to retrieve AccountPlans and AccountPlanGroups.
+
+**NOTE:** Returns both active and inactive AccountPlans and AccountPlanGroups for the specified date.
+- `ids` (List of String) A list of unique identifiers (UUIDs) for specific AccountPlans and AccountPlanGroups you want to retrieve.
+- `includeall` (Boolean) A Boolean flag that specifies whether to include both active and inactive AccountPlans and AccountPlanGroups in the list.
+
+* **TRUE** - both active and inactive AccountPlans and AccountPlanGroups are included in the list.
+* **FALSE** - only active AccountPlans and AccountPlanGroups are retrieved in the list.
+- `plan` (String) The unique identifier (UUID) for the Plan whose associated AccountPlans you want to retrieve.
+
+**NOTE:** Does not return AccountPlanGroups if you use a `planGroupId`.
+- `product` (String) The unique identifier (UUID) for the Product whose associated AccountPlans you want to retrieve.
+
+**NOTE:** You cannot use the `product` query parameter as a single filter condition, but must always use it in combination with the `account` query parameter.

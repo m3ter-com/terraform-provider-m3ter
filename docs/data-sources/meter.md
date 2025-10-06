@@ -26,6 +26,10 @@ data "m3ter_meter" "example_meter" {
 
 - `org_id` (String, Deprecated)
 
+### Optional
+
+- `find_one_by` (Attributes) (see [below for nested schema](#nestedatt--find_one_by))
+
 ### Read-Only
 
 - `code` (String) Code of the Meter - unique short code used to identify the Meter.
@@ -43,6 +47,16 @@ See [Working with Custom Fields](https://www.m3ter.com/docs/guides/creating-and-
 - `version` (Number) The version number:
 - **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.
 - **Update:** On successful Update, the version is incremented by 1 in the response.
+
+<a id="nestedatt--find_one_by"></a>
+### Nested Schema for `find_one_by`
+
+Optional:
+
+- `codes` (List of String) List of Meter codes to retrieve. These are the unique short codes that identify each Meter.
+- `ids` (List of String) List of Meter IDs to retrieve.
+- `product_id` (List of String) The UUIDs of the Products to retrieve Meters for.
+
 
 <a id="nestedatt--data_fields"></a>
 ### Nested Schema for `data_fields`

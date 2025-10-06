@@ -13,7 +13,7 @@ import (
 )
 
 type PricingDataSourceModel struct {
-	ID                        types.String                                                            `tfsdk:"id" path:"id,required"`
+	ID                        types.String                                                            `tfsdk:"id" path:"id,computed_optional"`
 	OrgID                     types.String                                                            `tfsdk:"org_id" path:"orgId,required"`
 	AccountingProductID       types.String                                                            `tfsdk:"accounting_product_id" json:"accountingProductId,computed"`
 	AggregationID             types.String                                                            `tfsdk:"aggregation_id" json:"aggregationId,computed"`
@@ -36,6 +36,7 @@ type PricingDataSourceModel struct {
 	Segment                   customfield.Map[types.String]                                           `tfsdk:"segment" json:"segment,computed"`
 	OveragePricingBands       customfield.NestedObjectList[PricingOveragePricingBandsDataSourceModel] `tfsdk:"overage_pricing_bands" json:"overagePricingBands,computed"`
 	PricingBands              customfield.NestedObjectList[PricingPricingBandsDataSourceModel]        `tfsdk:"pricing_bands" json:"pricingBands,computed"`
+	FindOneBy                 *PricingFindOneByDataSourceModel                                        `tfsdk:"find_one_by"`
 }
 
 func (m *PricingDataSourceModel) toReadParams(_ context.Context) (params m3ter.PricingGetParams, diags diag.Diagnostics) {
@@ -43,6 +44,34 @@ func (m *PricingDataSourceModel) toReadParams(_ context.Context) (params m3ter.P
 
 	if !m.OrgID.IsNull() {
 		params.OrgID = m3ter.F(m.OrgID.ValueString())
+	}
+
+	return
+}
+
+func (m *PricingDataSourceModel) toListParams(_ context.Context) (params m3ter.PricingListParams, diags diag.Diagnostics) {
+	mFindOneByIDs := []string{}
+	if m.FindOneBy.IDs != nil {
+		for _, item := range *m.FindOneBy.IDs {
+			mFindOneByIDs = append(mFindOneByIDs, item.ValueString())
+		}
+	}
+
+	params = m3ter.PricingListParams{
+		IDs: m3ter.F(mFindOneByIDs),
+	}
+
+	if !m.FindOneBy.AggregationID.IsNull() {
+		params.AggregationID = m3ter.F(m.FindOneBy.AggregationID.ValueString())
+	}
+	if !m.FindOneBy.Date.IsNull() {
+		params.Date = m3ter.F(m.FindOneBy.Date.ValueString())
+	}
+	if !m.FindOneBy.PlanID.IsNull() {
+		params.PlanID = m3ter.F(m.FindOneBy.PlanID.ValueString())
+	}
+	if !m.FindOneBy.PlanTemplateID.IsNull() {
+		params.PlanTemplateID = m3ter.F(m.FindOneBy.PlanTemplateID.ValueString())
 	}
 
 	return
@@ -62,4 +91,12 @@ type PricingPricingBandsDataSourceModel struct {
 	UnitPrice    types.Float64 `tfsdk:"unit_price" json:"unitPrice,computed"`
 	ID           types.String  `tfsdk:"id" json:"id,computed"`
 	CreditTypeID types.String  `tfsdk:"credit_type_id" json:"creditTypeId,computed"`
+}
+
+type PricingFindOneByDataSourceModel struct {
+	AggregationID  types.String    `tfsdk:"aggregation_id" query:"aggregationId,optional"`
+	Date           types.String    `tfsdk:"date" query:"date,optional"`
+	IDs            *[]types.String `tfsdk:"ids" query:"ids,optional"`
+	PlanID         types.String    `tfsdk:"plan_id" query:"planId,optional"`
+	PlanTemplateID types.String    `tfsdk:"plan_template_id" query:"planTemplateId,optional"`
 }

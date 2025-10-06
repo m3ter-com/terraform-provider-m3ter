@@ -26,6 +26,10 @@ data "m3ter_commitment" "example_commitment" {
 
 - `org_id` (String, Deprecated)
 
+### Optional
+
+- `find_one_by` (Attributes) (see [below for nested schema](#nestedatt--find_one_by))
+
 ### Read-Only
 
 - `account_id` (String) The unique identifier (UUID) for the end customer Account the Commitment is added to.
@@ -83,6 +87,20 @@ An array defining a series of bill dates and amounts covering specified service 
 - `version` (Number) The version number:
 - **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.
 - **Update:** On successful Update, the version is incremented by 1 in the response.
+
+<a id="nestedatt--find_one_by"></a>
+### Nested Schema for `find_one_by`
+
+Optional:
+
+- `account_id` (String) The unique identifier (UUID) for the Account. This parameter helps filter the Commitments related to a specific end-customer Account.
+- `contract_id` (String)
+- `date` (String) A date *(in ISO-8601 format)* to filter Commitments which are active on this specific date.
+- `end_date_end` (String) A date *(in ISO-8601 format)* used to filter Commitments. Only Commitments with end dates before this date will be included.
+- `end_date_start` (String) A date *(in ISO-8601 format)* used to filter Commitments. Only Commitments with end dates on or after this date will be included.
+- `ids` (List of String) A list of unique identifiers (UUIDs) for the Commitments to retrieve. Use this to fetch specific Commitments in a single request.
+- `product_id` (String) The unique identifier (UUID) for the Product. This parameter helps filter the Commitments related to a specific Product.
+
 
 <a id="nestedatt--fee_dates"></a>
 ### Nested Schema for `fee_dates`

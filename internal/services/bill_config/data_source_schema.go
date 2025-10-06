@@ -15,6 +15,10 @@ var _ datasource.DataSourceWithConfigValidators = (*BillConfigDataSource)(nil)
 func DataSourceSchema(ctx context.Context) schema.Schema {
 	return schema.Schema{
 		Attributes: map[string]schema.Attribute{
+			"id": schema.StringAttribute{
+				Computed:           true,
+				DeprecationMessage: "the org id should be set at the client level instead",
+			},
 			"org_id": schema.StringAttribute{
 				Required:           true,
 				DeprecationMessage: "the org id should be set at the client level instead",
@@ -23,10 +27,6 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Description: "The global lock date *(in ISO 8601 format)* when all Bills will be locked.\n\nFor example: `\"2024-03-01\"`.",
 				Computed:    true,
 				CustomType:  timetypes.RFC3339Type{},
-			},
-			"id": schema.StringAttribute{
-				Description: "The Organization UUID. The Organization represents your company as a direct customer of the m3ter service.",
-				Computed:    true,
 			},
 			"version": schema.Int64Attribute{
 				Description: "The version number:\n* Default value when newly created is one.\n* Incremented by 1 each time it is updated.",

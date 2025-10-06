@@ -26,6 +26,10 @@ data "m3ter_webhook" "example_webhook" {
 
 - `org_id` (String, Deprecated)
 
+### Optional
+
+- `find_one_by` (Attributes) (see [below for nested schema](#nestedatt--find_one_by))
+
 ### Read-Only
 
 - `active` (Boolean)
@@ -38,6 +42,14 @@ data "m3ter_webhook" "example_webhook" {
 - `version` (Number) The version number:
 - **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.
 - **Update:** On successful Update, the version is incremented by 1 in the response.
+
+<a id="nestedatt--find_one_by"></a>
+### Nested Schema for `find_one_by`
+
+Optional:
+
+- `ids` (List of String)
+
 
 <a id="nestedatt--credentials"></a>
 ### Nested Schema for `credentials`

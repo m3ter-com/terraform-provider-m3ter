@@ -14,7 +14,7 @@ import (
 )
 
 type AccountDataSourceModel struct {
-	ID                        types.String                                            `tfsdk:"id" path:"id,required"`
+	ID                        types.String                                            `tfsdk:"id" path:"id,computed_optional"`
 	OrgID                     types.String                                            `tfsdk:"org_id" path:"orgId,required"`
 	AutoGenerateStatementMode types.String                                            `tfsdk:"auto_generate_statement_mode" json:"autoGenerateStatementMode,computed"`
 	BillEpoch                 timetypes.RFC3339                                       `tfsdk:"bill_epoch" json:"billEpoch,computed" format:"date"`
@@ -31,6 +31,7 @@ type AccountDataSourceModel struct {
 	CreditApplicationOrder    customfield.List[types.String]                          `tfsdk:"credit_application_order" json:"creditApplicationOrder,computed"`
 	Address                   customfield.NestedObject[AccountAddressDataSourceModel] `tfsdk:"address" json:"address,computed"`
 	CustomFields              customfield.NormalizedDynamicValue                      `tfsdk:"custom_fields" json:"customFields,computed"`
+	FindOneBy                 *AccountFindOneByDataSourceModel                        `tfsdk:"find_one_by"`
 }
 
 func (m *AccountDataSourceModel) toReadParams(_ context.Context) (params m3ter.AccountGetParams, diags diag.Diagnostics) {
@@ -38,6 +39,28 @@ func (m *AccountDataSourceModel) toReadParams(_ context.Context) (params m3ter.A
 
 	if !m.OrgID.IsNull() {
 		params.OrgID = m3ter.F(m.OrgID.ValueString())
+	}
+
+	return
+}
+
+func (m *AccountDataSourceModel) toListParams(_ context.Context) (params m3ter.AccountListParams, diags diag.Diagnostics) {
+	mFindOneByCodes := []string{}
+	if m.FindOneBy.Codes != nil {
+		for _, item := range *m.FindOneBy.Codes {
+			mFindOneByCodes = append(mFindOneByCodes, item.ValueString())
+		}
+	}
+	mFindOneByIDs := []string{}
+	if m.FindOneBy.IDs != nil {
+		for _, item := range *m.FindOneBy.IDs {
+			mFindOneByIDs = append(mFindOneByIDs, item.ValueString())
+		}
+	}
+
+	params = m3ter.AccountListParams{
+		Codes: m3ter.F(mFindOneByCodes),
+		IDs:   m3ter.F(mFindOneByIDs),
 	}
 
 	return
@@ -52,4 +75,9 @@ type AccountAddressDataSourceModel struct {
 	Locality     types.String `tfsdk:"locality" json:"locality,computed"`
 	PostCode     types.String `tfsdk:"post_code" json:"postCode,computed"`
 	Region       types.String `tfsdk:"region" json:"region,computed"`
+}
+
+type AccountFindOneByDataSourceModel struct {
+	Codes *[]types.String `tfsdk:"codes" query:"codes,optional"`
+	IDs   *[]types.String `tfsdk:"ids" query:"ids,optional"`
 }

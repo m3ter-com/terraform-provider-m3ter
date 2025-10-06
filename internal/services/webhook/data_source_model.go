@@ -12,7 +12,7 @@ import (
 )
 
 type WebhookDataSourceModel struct {
-	ID          types.String                                                `tfsdk:"id" path:"id,required"`
+	ID          types.String                                                `tfsdk:"id" path:"id,computed_optional"`
 	OrgID       types.String                                                `tfsdk:"org_id" path:"orgId,required"`
 	Active      types.Bool                                                  `tfsdk:"active" json:"active,computed"`
 	Code        types.String                                                `tfsdk:"code" json:"code,computed"`
@@ -21,6 +21,7 @@ type WebhookDataSourceModel struct {
 	URL         types.String                                                `tfsdk:"url" json:"url,computed"`
 	Version     types.Int64                                                 `tfsdk:"version" json:"version,computed,force_encode,encode_state_for_unknown"`
 	Credentials customfield.NestedObject[WebhookCredentialsDataSourceModel] `tfsdk:"credentials" json:"credentials,computed"`
+	FindOneBy   *WebhookFindOneByDataSourceModel                            `tfsdk:"find_one_by"`
 }
 
 func (m *WebhookDataSourceModel) toReadParams(_ context.Context) (params m3ter.WebhookGetParams, diags diag.Diagnostics) {
@@ -28,6 +29,21 @@ func (m *WebhookDataSourceModel) toReadParams(_ context.Context) (params m3ter.W
 
 	if !m.OrgID.IsNull() {
 		params.OrgID = m3ter.F(m.OrgID.ValueString())
+	}
+
+	return
+}
+
+func (m *WebhookDataSourceModel) toListParams(_ context.Context) (params m3ter.WebhookListParams, diags diag.Diagnostics) {
+	mFindOneByIDs := []string{}
+	if m.FindOneBy.IDs != nil {
+		for _, item := range *m.FindOneBy.IDs {
+			mFindOneByIDs = append(mFindOneByIDs, item.ValueString())
+		}
+	}
+
+	params = m3ter.WebhookListParams{
+		IDs: m3ter.F(mFindOneByIDs),
 	}
 
 	return
@@ -42,4 +58,8 @@ type WebhookCredentialsDataSourceModel struct {
 	Name          types.String `tfsdk:"name" json:"name,computed"`
 	Secret        types.String `tfsdk:"secret" json:"secret,computed"`
 	Version       types.Int64  `tfsdk:"version" json:"version,computed,force_encode,encode_state_for_unknown"`
+}
+
+type WebhookFindOneByDataSourceModel struct {
+	IDs *[]types.String `tfsdk:"ids" query:"ids,optional"`
 }

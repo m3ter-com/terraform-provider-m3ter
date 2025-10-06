@@ -5,10 +5,13 @@ package plan_template
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/datasourcevalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/m3ter-com/terraform-provider-m3ter/internal/customfield"
 )
 
@@ -18,7 +21,8 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 	return schema.Schema{
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
-				Required: true,
+				Computed: true,
+				Optional: true,
 			},
 			"org_id": schema.StringAttribute{
 				Required:           true,
@@ -103,6 +107,20 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Computed:    true,
 				CustomType:  customfield.NormalizedDynamicType{},
 			},
+			"find_one_by": schema.SingleNestedAttribute{
+				Optional: true,
+				Attributes: map[string]schema.Attribute{
+					"ids": schema.ListAttribute{
+						Description: "List of specific PlanTemplate UUIDs to retrieve.",
+						Optional:    true,
+						ElementType: types.StringType,
+					},
+					"product_id": schema.StringAttribute{
+						Description: "The unique identifiers (UUIDs) of the Products to retrieve associated PlanTemplates.",
+						Optional:    true,
+					},
+				},
+			},
 		},
 	}
 }
@@ -112,5 +130,7 @@ func (d *PlanTemplateDataSource) Schema(ctx context.Context, req datasource.Sche
 }
 
 func (d *PlanTemplateDataSource) ConfigValidators(_ context.Context) []datasource.ConfigValidator {
-	return []datasource.ConfigValidator{}
+	return []datasource.ConfigValidator{
+		datasourcevalidator.ExactlyOneOf(path.MatchRoot("id"), path.MatchRoot("find_one_by")),
+	}
 }

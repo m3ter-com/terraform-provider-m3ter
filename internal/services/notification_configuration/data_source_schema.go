@@ -5,8 +5,11 @@ package notification_configuration
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/datasourcevalidator"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/path"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 )
 
 var _ datasource.DataSourceWithConfigValidators = (*NotificationConfigurationDataSource)(nil)
@@ -15,7 +18,8 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 	return schema.Schema{
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
-				Required: true,
+				Computed: true,
+				Optional: true,
 			},
 			"org_id": schema.StringAttribute{
 				Required:           true,
@@ -53,6 +57,24 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Description: "The version number:\n- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.\n- **Update:** On successful Update, the version is incremented by 1 in the response.",
 				Computed:    true,
 			},
+			"find_one_by": schema.SingleNestedAttribute{
+				Optional: true,
+				Attributes: map[string]schema.Attribute{
+					"active": schema.BoolAttribute{
+						Description: "A Boolean flag indicating whether to retrieve only active or only inactive Notifications.\n\n* **TRUE** - only active Notifications are returned. \n* **FALSE** - only inactive Notifications are returned.",
+						Optional:    true,
+					},
+					"event_name": schema.StringAttribute{
+						Description: "Use this to filter the Notifications returned - only those Notifications that are based on the *Event type* specified by `eventName` are returned.",
+						Optional:    true,
+					},
+					"ids": schema.ListAttribute{
+						Description: "A list of specific Notification UUIDs to retrieve.",
+						Optional:    true,
+						ElementType: types.StringType,
+					},
+				},
+			},
 		},
 	}
 }
@@ -62,5 +84,7 @@ func (d *NotificationConfigurationDataSource) Schema(ctx context.Context, req da
 }
 
 func (d *NotificationConfigurationDataSource) ConfigValidators(_ context.Context) []datasource.ConfigValidator {
-	return []datasource.ConfigValidator{}
+	return []datasource.ConfigValidator{
+		datasourcevalidator.ExactlyOneOf(path.MatchRoot("id"), path.MatchRoot("find_one_by")),
+	}
 }

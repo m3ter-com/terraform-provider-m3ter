@@ -12,7 +12,7 @@ import (
 )
 
 type PermissionPolicyDataSourceModel struct {
-	ID               types.String                                                                  `tfsdk:"id" path:"id,required"`
+	ID               types.String                                                                  `tfsdk:"id" path:"id,computed_optional"`
 	OrgID            types.String                                                                  `tfsdk:"org_id" path:"orgId,required"`
 	ManagedPolicy    types.Bool                                                                    `tfsdk:"managed_policy" json:"managedPolicy,computed"`
 	Name             types.String                                                                  `tfsdk:"name" json:"name,computed"`

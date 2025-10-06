@@ -26,6 +26,10 @@ data "m3ter_contract" "example_contract" {
 
 - `org_id` (String, Deprecated)
 
+### Optional
+
+- `find_one_by` (Attributes) (see [below for nested schema](#nestedatt--find_one_by))
+
 ### Read-Only
 
 - `account_id` (String) The unique identifier (UUID) of the Account associated with this Contract.
@@ -45,3 +49,12 @@ See [Working with Custom Fields](https://www.m3ter.com/docs/guides/creating-and-
 - `version` (Number) The version number:
 - **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.
 - **Update:** On successful Update, the version is incremented by 1 in the response.
+
+<a id="nestedatt--find_one_by"></a>
+### Nested Schema for `find_one_by`
+
+Optional:
+
+- `account_id` (String)
+- `codes` (List of String) An optional parameter to retrieve specific Contracts based on their short codes.
+- `ids` (List of String) An optional parameter to filter the list based on specific Contract unique identifiers (UUIDs).

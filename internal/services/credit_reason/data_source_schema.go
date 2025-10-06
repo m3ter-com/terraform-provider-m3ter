@@ -5,8 +5,11 @@ package credit_reason
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/datasourcevalidator"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/path"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 )
 
 var _ datasource.DataSourceWithConfigValidators = (*CreditReasonDataSource)(nil)
@@ -15,7 +18,8 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 	return schema.Schema{
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
-				Required: true,
+				Computed: true,
+				Optional: true,
 			},
 			"org_id": schema.StringAttribute{
 				Required:           true,
@@ -37,6 +41,25 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Description: "The version number:\n- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.\n- **Update:** On successful Update, the version is incremented by 1 in the response.",
 				Computed:    true,
 			},
+			"find_one_by": schema.SingleNestedAttribute{
+				Optional: true,
+				Attributes: map[string]schema.Attribute{
+					"archived": schema.BoolAttribute{
+						Description: "TRUE / FALSE archived flag to filter the list. CreditReasons can be archived once they are obsolete.\n\n* TRUE includes archived CreditReasons.\n* FALSE excludes CreditReasons that are archived.",
+						Optional:    true,
+					},
+					"codes": schema.ListAttribute{
+						Description: "List of Credit Reason short codes to retrieve.",
+						Optional:    true,
+						ElementType: types.StringType,
+					},
+					"ids": schema.ListAttribute{
+						Description: "List of Credit Reason IDs to retrieve.",
+						Optional:    true,
+						ElementType: types.StringType,
+					},
+				},
+			},
 		},
 	}
 }
@@ -46,5 +69,7 @@ func (d *CreditReasonDataSource) Schema(ctx context.Context, req datasource.Sche
 }
 
 func (d *CreditReasonDataSource) ConfigValidators(_ context.Context) []datasource.ConfigValidator {
-	return []datasource.ConfigValidator{}
+	return []datasource.ConfigValidator{
+		datasourcevalidator.ExactlyOneOf(path.MatchRoot("id"), path.MatchRoot("find_one_by")),
+	}
 }

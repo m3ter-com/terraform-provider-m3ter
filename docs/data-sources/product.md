@@ -26,6 +26,10 @@ data "m3ter_product" "example_product" {
 
 - `org_id` (String, Deprecated)
 
+### Optional
+
+- `find_one_by` (Attributes) (see [below for nested schema](#nestedatt--find_one_by))
+
 ### Read-Only
 
 - `code` (String) A unique short code to identify the Product. It should not contain control chracters or spaces.
@@ -39,3 +43,10 @@ See [Working with Custom Fields](https://www.m3ter.com/docs/guides/creating-and-
 - `version` (Number) The version number:
 - **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.
 - **Update:** On successful Update, the version is incremented by 1 in the response.
+
+<a id="nestedatt--find_one_by"></a>
+### Nested Schema for `find_one_by`
+
+Optional:
+
+- `ids` (List of String) List of specific Product UUIDs to retrieve.

@@ -26,6 +26,10 @@ data "m3ter_currency" "example_currency" {
 
 - `org_id` (String, Deprecated)
 
+### Optional
+
+- `find_one_by` (Attributes) (see [below for nested schema](#nestedatt--find_one_by))
+
 ### Read-Only
 
 - `archived` (Boolean) TRUE / FALSE flag indicating whether the data entity is archived. An entity can be archived if it is obsolete.
@@ -37,3 +41,15 @@ data "m3ter_currency" "example_currency" {
 - `version` (Number) The version number:
 - **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.
 - **Update:** On successful Update, the version is incremented by 1 in the response.
+
+<a id="nestedatt--find_one_by"></a>
+### Nested Schema for `find_one_by`
+
+Optional:
+
+- `archived` (Boolean) Filter by archived flag. A True / False flag indicating whether to return Currencies that are archived *(obsolete)*.
+
+* TRUE - return archived Currencies.
+* FALSE - archived Currencies are not returned.
+- `codes` (List of String) An optional parameter to retrieve specific Currencies based on their short codes.
+- `ids` (List of String) An optional parameter to filter the list based on specific Currency unique identifiers (UUIDs).

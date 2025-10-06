@@ -13,7 +13,7 @@ import (
 )
 
 type ContractDataSourceModel struct {
-	ID                  types.String                       `tfsdk:"id" path:"id,required"`
+	ID                  types.String                       `tfsdk:"id" path:"id,computed_optional"`
 	OrgID               types.String                       `tfsdk:"org_id" path:"orgId,required"`
 	AccountID           types.String                       `tfsdk:"account_id" json:"accountId,computed"`
 	BillGroupingKey     types.String                       `tfsdk:"bill_grouping_key" json:"billGroupingKey,computed"`
@@ -25,6 +25,7 @@ type ContractDataSourceModel struct {
 	StartDate           timetypes.RFC3339                  `tfsdk:"start_date" json:"startDate,computed" format:"date"`
 	Version             types.Int64                        `tfsdk:"version" json:"version,computed,force_encode,encode_state_for_unknown"`
 	CustomFields        customfield.NormalizedDynamicValue `tfsdk:"custom_fields" json:"customFields,computed"`
+	FindOneBy           *ContractFindOneByDataSourceModel  `tfsdk:"find_one_by"`
 }
 
 func (m *ContractDataSourceModel) toReadParams(_ context.Context) (params m3ter.ContractGetParams, diags diag.Diagnostics) {
@@ -35,4 +36,36 @@ func (m *ContractDataSourceModel) toReadParams(_ context.Context) (params m3ter.
 	}
 
 	return
+}
+
+func (m *ContractDataSourceModel) toListParams(_ context.Context) (params m3ter.ContractListParams, diags diag.Diagnostics) {
+	mFindOneByCodes := []string{}
+	if m.FindOneBy.Codes != nil {
+		for _, item := range *m.FindOneBy.Codes {
+			mFindOneByCodes = append(mFindOneByCodes, item.ValueString())
+		}
+	}
+	mFindOneByIDs := []string{}
+	if m.FindOneBy.IDs != nil {
+		for _, item := range *m.FindOneBy.IDs {
+			mFindOneByIDs = append(mFindOneByIDs, item.ValueString())
+		}
+	}
+
+	params = m3ter.ContractListParams{
+		Codes: m3ter.F(mFindOneByCodes),
+		IDs:   m3ter.F(mFindOneByIDs),
+	}
+
+	if !m.FindOneBy.AccountID.IsNull() {
+		params.AccountID = m3ter.F(m.FindOneBy.AccountID.ValueString())
+	}
+
+	return
+}
+
+type ContractFindOneByDataSourceModel struct {
+	AccountID types.String    `tfsdk:"account_id" query:"accountId,optional"`
+	Codes     *[]types.String `tfsdk:"codes" query:"codes,optional"`
+	IDs       *[]types.String `tfsdk:"ids" query:"ids,optional"`
 }

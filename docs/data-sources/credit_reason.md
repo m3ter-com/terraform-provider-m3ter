@@ -26,6 +26,10 @@ data "m3ter_credit_reason" "example_credit_reason" {
 
 - `org_id` (String, Deprecated)
 
+### Optional
+
+- `find_one_by` (Attributes) (see [below for nested schema](#nestedatt--find_one_by))
+
 ### Read-Only
 
 - `archived` (Boolean) TRUE / FALSE flag indicating whether the data entity is archived. An entity can be archived if it is obsolete.
@@ -35,3 +39,15 @@ data "m3ter_credit_reason" "example_credit_reason" {
 - `version` (Number) The version number:
 - **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.
 - **Update:** On successful Update, the version is incremented by 1 in the response.
+
+<a id="nestedatt--find_one_by"></a>
+### Nested Schema for `find_one_by`
+
+Optional:
+
+- `archived` (Boolean) TRUE / FALSE archived flag to filter the list. CreditReasons can be archived once they are obsolete.
+
+* TRUE includes archived CreditReasons.
+* FALSE excludes CreditReasons that are archived.
+- `codes` (List of String) List of Credit Reason short codes to retrieve.
+- `ids` (List of String) List of Credit Reason IDs to retrieve.

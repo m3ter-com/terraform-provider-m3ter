@@ -26,6 +26,10 @@ data "m3ter_external_mapping" "example_external_mapping" {
 
 - `org_id` (String, Deprecated)
 
+### Optional
+
+- `find_one_by` (Attributes) (see [below for nested schema](#nestedatt--find_one_by))
+
 ### Read-Only
 
 - `external_id` (String) The unique identifier (UUID) of the entity in the external system.
@@ -38,3 +42,16 @@ data "m3ter_external_mapping" "example_external_mapping" {
 - `version` (Number) The version number:
 - **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.
 - **Update:** On successful Update, the version is incremented by 1 in the response.
+
+<a id="nestedatt--find_one_by"></a>
+### Nested Schema for `find_one_by`
+
+Optional:
+
+- `external_system_id` (String) The name of the external system to use as a filter.
+
+For example, if you want to list only those external mappings created for your Organization for the Salesforce external system, use:
+
+`?externalSystemId=Salesforce`
+- `integration_config_id` (String) ID of the integration config
+- `m3ter_ids` (List of String) IDs for m3ter entities
