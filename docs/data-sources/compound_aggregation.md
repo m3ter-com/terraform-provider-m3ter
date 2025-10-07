@@ -26,6 +26,10 @@ data "m3ter_compound_aggregation" "example_compound_aggregation" {
 
 - `org_id` (String, Deprecated)
 
+### Optional
+
+- `find_one_by` (Attributes) (see [below for nested schema](#nestedatt--find_one_by))
+
 ### Read-Only
 
 - `accounting_product_id` (String)
@@ -58,3 +62,12 @@ Used as the label for billing, indicating to your customers what they are being 
 - `version` (Number) The version number:
 - **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.
 - **Update:** On successful Update, the version is incremented by 1 in the response.
+
+<a id="nestedatt--find_one_by"></a>
+### Nested Schema for `find_one_by`
+
+Optional:
+
+- `codes` (List of String) An optional parameter to retrieve specific CompoundAggregations based on their short codes.
+- `ids` (List of String) An optional parameter to retrieve specific CompoundAggregations based on their unique identifiers (UUIDs).
+- `product_id` (List of String) An optional parameter to filter the CompoundAggregations based on specific Product unique identifiers (UUIDs).

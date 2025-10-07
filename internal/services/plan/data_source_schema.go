@@ -5,8 +5,11 @@ package plan
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/datasourcevalidator"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/path"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/m3ter-com/terraform-provider-m3ter/internal/customfield"
 )
 
@@ -16,7 +19,8 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 	return schema.Schema{
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
-				Required: true,
+				Computed: true,
+				Optional: true,
 			},
 			"org_id": schema.StringAttribute{
 				Required:           true,
@@ -91,6 +95,25 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Computed:    true,
 				CustomType:  customfield.NormalizedDynamicType{},
 			},
+			"find_one_by": schema.SingleNestedAttribute{
+				Optional: true,
+				Attributes: map[string]schema.Attribute{
+					"account_id": schema.ListAttribute{
+						Description: "List of Account IDs the Plan belongs to.",
+						Optional:    true,
+						ElementType: types.StringType,
+					},
+					"ids": schema.ListAttribute{
+						Description: "List of Plan IDs to retrieve.",
+						Optional:    true,
+						ElementType: types.StringType,
+					},
+					"product_id": schema.StringAttribute{
+						Description: "UUID of the Product to retrieve Plans for.",
+						Optional:    true,
+					},
+				},
+			},
 		},
 	}
 }
@@ -100,5 +123,7 @@ func (d *PlanDataSource) Schema(ctx context.Context, req datasource.SchemaReques
 }
 
 func (d *PlanDataSource) ConfigValidators(_ context.Context) []datasource.ConfigValidator {
-	return []datasource.ConfigValidator{}
+	return []datasource.ConfigValidator{
+		datasourcevalidator.ExactlyOneOf(path.MatchRoot("id"), path.MatchRoot("find_one_by")),
+	}
 }

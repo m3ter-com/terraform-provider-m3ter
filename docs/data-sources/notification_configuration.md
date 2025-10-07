@@ -26,6 +26,10 @@ data "m3ter_notification_configuration" "example_notification_configuration" {
 
 - `org_id` (String, Deprecated)
 
+### Optional
+
+- `find_one_by` (Attributes) (see [below for nested schema](#nestedatt--find_one_by))
+
 ### Read-Only
 
 - `active` (Boolean) A Boolean flag indicating whether or not the Notification is active.
@@ -50,3 +54,15 @@ See [Creating Calculations](https://www.m3ter.com/docs/guides/utilizing-events-a
 - `version` (Number) The version number:
 - **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.
 - **Update:** On successful Update, the version is incremented by 1 in the response.
+
+<a id="nestedatt--find_one_by"></a>
+### Nested Schema for `find_one_by`
+
+Optional:
+
+- `active` (Boolean) A Boolean flag indicating whether to retrieve only active or only inactive Notifications.
+
+* **TRUE** - only active Notifications are returned. 
+* **FALSE** - only inactive Notifications are returned.
+- `event_name` (String) Use this to filter the Notifications returned - only those Notifications that are based on the *Event type* specified by `eventName` are returned.
+- `ids` (List of String) A list of specific Notification UUIDs to retrieve.

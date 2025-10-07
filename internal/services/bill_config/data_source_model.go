@@ -12,9 +12,9 @@ import (
 )
 
 type BillConfigDataSourceModel struct {
+	ID           types.String      `tfsdk:"id" path:"orgId,computed"`
 	OrgID        types.String      `tfsdk:"org_id" path:"orgId,required"`
 	BillLockDate timetypes.RFC3339 `tfsdk:"bill_lock_date" json:"billLockDate,computed" format:"date"`
-	ID           types.String      `tfsdk:"id" json:"id,computed"`
 	Version      types.Int64       `tfsdk:"version" json:"version,computed,force_encode,encode_state_for_unknown"`
 }
 

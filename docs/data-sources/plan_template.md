@@ -26,6 +26,10 @@ data "m3ter_plan_template" "example_plan_template" {
 
 - `org_id` (String, Deprecated)
 
+### Optional
+
+- `find_one_by` (Attributes) (see [below for nested schema](#nestedatt--find_one_by))
+
 ### Read-Only
 
 - `bill_frequency` (String) Determines the frequency at which bills are generated.
@@ -76,3 +80,11 @@ For example, if the bill is issued every three months and the `standingChargeOfs
 - `version` (Number) The version number:
 - **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.
 - **Update:** On successful Update, the version is incremented by 1 in the response.
+
+<a id="nestedatt--find_one_by"></a>
+### Nested Schema for `find_one_by`
+
+Optional:
+
+- `ids` (List of String) List of specific PlanTemplate UUIDs to retrieve.
+- `product_id` (String) The unique identifiers (UUIDs) of the Products to retrieve associated PlanTemplates.

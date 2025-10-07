@@ -26,6 +26,10 @@ data "m3ter_plan" "example_plan" {
 
 - `org_id` (String, Deprecated)
 
+### Optional
+
+- `find_one_by` (Attributes) (see [below for nested schema](#nestedatt--find_one_by))
+
 ### Read-Only
 
 - `account_id` (String) *(Optional)*. The Account ID for which this plan was created as custom/bespoke. A custom/bespoke Plan can only be attached to the specified Account.
@@ -68,3 +72,12 @@ When FALSE, standing charge is billed at the end of each billing period.
 - `version` (Number) The version number:
 - **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.
 - **Update:** On successful Update, the version is incremented by 1 in the response.
+
+<a id="nestedatt--find_one_by"></a>
+### Nested Schema for `find_one_by`
+
+Optional:
+
+- `account_id` (List of String) List of Account IDs the Plan belongs to.
+- `ids` (List of String) List of Plan IDs to retrieve.
+- `product_id` (String) UUID of the Product to retrieve Plans for.

@@ -6,11 +6,13 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
+	"github.com/hashicorp/terraform-plugin-framework-validators/datasourcevalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/float64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/m3ter-com/terraform-provider-m3ter/internal/customfield"
@@ -22,7 +24,8 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 	return schema.Schema{
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
-				Required: true,
+				Computed: true,
+				Optional: true,
 			},
 			"org_id": schema.StringAttribute{
 				Required:           true,
@@ -182,6 +185,39 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 					},
 				},
 			},
+			"find_one_by": schema.SingleNestedAttribute{
+				Optional: true,
+				Attributes: map[string]schema.Attribute{
+					"account_id": schema.StringAttribute{
+						Description: "The unique identifier (UUID) for the Account. This parameter helps filter the Commitments related to a specific end-customer Account.",
+						Optional:    true,
+					},
+					"contract_id": schema.StringAttribute{
+						Optional: true,
+					},
+					"date": schema.StringAttribute{
+						Description: "A date *(in ISO-8601 format)* to filter Commitments which are active on this specific date.",
+						Optional:    true,
+					},
+					"end_date_end": schema.StringAttribute{
+						Description: "A date *(in ISO-8601 format)* used to filter Commitments. Only Commitments with end dates before this date will be included.",
+						Optional:    true,
+					},
+					"end_date_start": schema.StringAttribute{
+						Description: "A date *(in ISO-8601 format)* used to filter Commitments. Only Commitments with end dates on or after this date will be included.",
+						Optional:    true,
+					},
+					"ids": schema.ListAttribute{
+						Description: "A list of unique identifiers (UUIDs) for the Commitments to retrieve. Use this to fetch specific Commitments in a single request.",
+						Optional:    true,
+						ElementType: types.StringType,
+					},
+					"product_id": schema.StringAttribute{
+						Description: "The unique identifier (UUID) for the Product. This parameter helps filter the Commitments related to a specific Product.",
+						Optional:    true,
+					},
+				},
+			},
 		},
 	}
 }
@@ -191,5 +227,7 @@ func (d *CommitmentDataSource) Schema(ctx context.Context, req datasource.Schema
 }
 
 func (d *CommitmentDataSource) ConfigValidators(_ context.Context) []datasource.ConfigValidator {
-	return []datasource.ConfigValidator{}
+	return []datasource.ConfigValidator{
+		datasourcevalidator.ExactlyOneOf(path.MatchRoot("id"), path.MatchRoot("find_one_by")),
+	}
 }

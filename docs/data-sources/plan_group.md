@@ -26,6 +26,10 @@ data "m3ter_plan_group" "example_plan_group" {
 
 - `org_id` (String, Deprecated)
 
+### Optional
+
+- `find_one_by` (Attributes) (see [below for nested schema](#nestedatt--find_one_by))
+
 ### Read-Only
 
 - `account_id` (String) Optional. This PlanGroup was created as bespoke for the associated Account with this Account ID.
@@ -55,3 +59,11 @@ See [Working with Custom Fields](https://www.m3ter.com/docs/guides/creating-and-
 - `version` (Number) The version number:
 - **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.
 - **Update:** On successful Update, the version is incremented by 1 in the response.
+
+<a id="nestedatt--find_one_by"></a>
+### Nested Schema for `find_one_by`
+
+Optional:
+
+- `account_id` (List of String) Optional filter. The list of Account IDs to which the PlanGroups belong.
+- `ids` (List of String) Optional filter. The list of PlanGroup IDs to retrieve.

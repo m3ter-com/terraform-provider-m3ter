@@ -26,6 +26,10 @@ data "m3ter_plan_group_link" "example_plan_group_link" {
 
 - `org_id` (String, Deprecated)
 
+### Optional
+
+- `find_one_by` (Attributes) (see [below for nested schema](#nestedatt--find_one_by))
+
 ### Read-Only
 
 - `id` (String) The ID of this resource.
@@ -34,3 +38,12 @@ data "m3ter_plan_group_link" "example_plan_group_link" {
 - `version` (Number) The version number:
 - **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.
 - **Update:** On successful Update, the version is incremented by 1 in the response.
+
+<a id="nestedatt--find_one_by"></a>
+### Nested Schema for `find_one_by`
+
+Optional:
+
+- `ids` (List of String) list of IDs to retrieve
+- `plan` (String) UUID of the Plan to retrieve PlanGroupLinks for
+- `plan_group` (String) UUID of the PlanGroup to retrieve PlanGroupLinks for

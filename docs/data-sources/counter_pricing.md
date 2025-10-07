@@ -26,6 +26,10 @@ data "m3ter_counter_pricing" "example_counter_pricing" {
 
 - `org_id` (String, Deprecated)
 
+### Optional
+
+- `find_one_by` (Attributes) (see [below for nested schema](#nestedatt--find_one_by))
+
 ### Read-Only
 
 - `accounting_product_id` (String)
@@ -70,6 +74,17 @@ If not specified, the Pricing remains active indefinitely.
 - `version` (Number) The version number:
 - **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.
 - **Update:** On successful Update, the version is incremented by 1 in the response.
+
+<a id="nestedatt--find_one_by"></a>
+### Nested Schema for `find_one_by`
+
+Optional:
+
+- `date` (String) Date on which to retrieve active CounterPricings.
+- `ids` (List of String) List of CounterPricing IDs to retrieve.
+- `plan_id` (String) UUID of the Plan to retrieve CounterPricings for.
+- `plan_template_id` (String) UUID of the Plan Template to retrieve CounterPricings for.
+
 
 <a id="nestedatt--pricing_bands"></a>
 ### Nested Schema for `pricing_bands`

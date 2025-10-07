@@ -26,6 +26,10 @@ data "m3ter_aggregation" "example_aggregation" {
 
 - `org_id` (String, Deprecated)
 
+### Optional
+
+- `find_one_by` (Attributes) (see [below for nested schema](#nestedatt--find_one_by))
+
 ### Read-Only
 
 - `accounting_product_id` (String)
@@ -84,3 +88,12 @@ Used as the label for billing, indicating to your customers what they are being 
 - `version` (Number) The version number:
 - **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.
 - **Update:** On successful Update, the version is incremented by 1 in the response.
+
+<a id="nestedatt--find_one_by"></a>
+### Nested Schema for `find_one_by`
+
+Optional:
+
+- `codes` (List of String) List of Aggregation codes to retrieve. These are unique short codes to identify each Aggregation.
+- `ids` (List of String) List of Aggregation IDs to retrieve.
+- `product_id` (List of String) The UUIDs of the Products to retrieve Aggregations for.
