@@ -1,5 +1,28 @@
 # Changelog
 
+## 0.6.0 (2025-10-07)
+
+Full Changelog: [v0.5.0...v0.6.0](https://github.com/m3ter-com/terraform-provider-m3ter/compare/v0.5.0...v0.6.0)
+
+### Features
+
+* added capability for `dynamicvalidator` to do arbitrary semantic equivalence check ([ecc974d](https://github.com/m3ter-com/terraform-provider-m3ter/commit/ecc974dff52ac8a8860c33331522d055ea6a5644))
+* **internal:** support CustomMarshaler interface for encoding types ([a853a5e](https://github.com/m3ter-com/terraform-provider-m3ter/commit/a853a5e92e55adfd84060bd8fdf257a77269a342))
+* **sdk:** Support singleton resources in Terraform ([1aeb866](https://github.com/m3ter-com/terraform-provider-m3ter/commit/1aeb8665eac44a151f4a985cfe55355b1e5af218))
+
+
+### Bug Fixes
+
+* bugfix for setting JSON keys with special characters ([6cdc552](https://github.com/m3ter-com/terraform-provider-m3ter/commit/6cdc552966d54e95a6b831563991296565d584c2))
+* correctly detect more ID attributes for data sources ([44fbd84](https://github.com/m3ter-com/terraform-provider-m3ter/commit/44fbd84d43b69e01cb01afb778daa28e10b1e109))
+* read by id data sources should have required IDs ([8a09d26](https://github.com/m3ter-com/terraform-provider-m3ter/commit/8a09d26cbc8d6de0b5fef0262d2f16d87617099b))
+
+
+### Chores
+
+* do not install brew dependencies in ./scripts/bootstrap by default ([bbd3397](https://github.com/m3ter-com/terraform-provider-m3ter/commit/bbd33972f7406008feb30f975200e53f8abd4210))
+* ensure `tfplugindocs` always use `/var/tmp` for compilation on linux ([4855dcc](https://github.com/m3ter-com/terraform-provider-m3ter/commit/4855dcc9a89d41ba7336f28ec760e9c624a96f31))
+
 ## 0.5.0 (2025-08-29)
 
 Full Changelog: [v0.4.0...v0.5.0](https://github.com/m3ter-com/terraform-provider-m3ter/compare/v0.4.0...v0.5.0)
