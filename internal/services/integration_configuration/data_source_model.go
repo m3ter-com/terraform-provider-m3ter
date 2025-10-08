@@ -13,7 +13,7 @@ import (
 
 type IntegrationConfigurationDataSourceModel struct {
 	ID          types.String                                      `tfsdk:"id" path:"id,computed_optional"`
-	OrgID       types.String                                      `tfsdk:"org_id" path:"orgId,required"`
+	OrgID       types.String                                      `tfsdk:"org_id" path:"orgId,optional"`
 	Destination types.String                                      `tfsdk:"destination" json:"destination,computed"`
 	DtCompleted timetypes.RFC3339                                 `tfsdk:"dt_completed" json:"dtCompleted,computed" format:"date-time"`
 	DtStarted   timetypes.RFC3339                                 `tfsdk:"dt_started" json:"dtStarted,computed" format:"date-time"`
@@ -40,6 +40,9 @@ func (m *IntegrationConfigurationDataSourceModel) toReadParams(_ context.Context
 func (m *IntegrationConfigurationDataSourceModel) toListParams(_ context.Context) (params m3ter.IntegrationConfigurationListParams, diags diag.Diagnostics) {
 	params = m3ter.IntegrationConfigurationListParams{}
 
+	if !m.OrgID.IsNull() {
+		params.OrgID = m3ter.F(m.OrgID.ValueString())
+	}
 	if !m.FindOneBy.DestinationID.IsNull() {
 		params.DestinationID = m3ter.F(m.FindOneBy.DestinationID.ValueString())
 	}

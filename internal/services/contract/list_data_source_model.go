@@ -44,11 +44,11 @@ func (m *ContractsDataSourceModel) toListParams(_ context.Context) (params m3ter
 		IDs:   m3ter.F(mIDs),
 	}
 
-	if !m.AccountID.IsNull() {
-		params.AccountID = m3ter.F(m.AccountID.ValueString())
-	}
 	if !m.OrgID.IsNull() {
 		params.OrgID = m3ter.F(m.OrgID.ValueString())
+	}
+	if !m.AccountID.IsNull() {
+		params.AccountID = m3ter.F(m.AccountID.ValueString())
 	}
 
 	return
