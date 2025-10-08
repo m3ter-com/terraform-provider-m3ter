@@ -33,6 +33,9 @@ type CounterAdjustmentsDataSourceModel struct {
 func (m *CounterAdjustmentsDataSourceModel) toListParams(_ context.Context) (params m3ter.CounterAdjustmentListParams, diags diag.Diagnostics) {
 	params = m3ter.CounterAdjustmentListParams{}
 
+	if !m.OrgID.IsNull() {
+		params.OrgID = m3ter.F(m.OrgID.ValueString())
+	}
 	if !m.AccountID.IsNull() {
 		params.AccountID = m3ter.F(m.AccountID.ValueString())
 	}
@@ -56,9 +59,6 @@ func (m *CounterAdjustmentsDataSourceModel) toListParams(_ context.Context) (par
 	}
 	if !m.SortOrder.IsNull() {
 		params.SortOrder = m3ter.F(m.SortOrder.ValueString())
-	}
-	if !m.OrgID.IsNull() {
-		params.OrgID = m3ter.F(m.OrgID.ValueString())
 	}
 
 	return

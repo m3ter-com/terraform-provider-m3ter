@@ -43,11 +43,11 @@ func (m *CreditReasonsDataSourceModel) toListParams(_ context.Context) (params m
 		IDs:   m3ter.F(mIDs),
 	}
 
-	if !m.Archived.IsNull() {
-		params.Archived = m3ter.F(m.Archived.ValueBool())
-	}
 	if !m.OrgID.IsNull() {
 		params.OrgID = m3ter.F(m.OrgID.ValueString())
+	}
+	if !m.Archived.IsNull() {
+		params.Archived = m3ter.F(m.Archived.ValueBool())
 	}
 
 	return

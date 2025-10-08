@@ -20,7 +20,7 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				DeprecationMessage: "the org id should be set at the client level instead",
 			},
 			"org_id": schema.StringAttribute{
-				Required:           true,
+				Optional:           true,
 				DeprecationMessage: "the org id should be set at the client level instead",
 			},
 			"version": schema.Int64Attribute{

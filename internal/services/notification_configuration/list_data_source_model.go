@@ -36,14 +36,14 @@ func (m *NotificationConfigurationsDataSourceModel) toListParams(_ context.Conte
 		IDs: m3ter.F(mIDs),
 	}
 
+	if !m.OrgID.IsNull() {
+		params.OrgID = m3ter.F(m.OrgID.ValueString())
+	}
 	if !m.Active.IsNull() {
 		params.Active = m3ter.F(m.Active.ValueBool())
 	}
 	if !m.EventName.IsNull() {
 		params.EventName = m3ter.F(m.EventName.ValueString())
-	}
-	if !m.OrgID.IsNull() {
-		params.OrgID = m3ter.F(m.OrgID.ValueString())
 	}
 
 	return

@@ -14,7 +14,7 @@ import (
 
 type PricingDataSourceModel struct {
 	ID                        types.String                                                            `tfsdk:"id" path:"id,computed_optional"`
-	OrgID                     types.String                                                            `tfsdk:"org_id" path:"orgId,required"`
+	OrgID                     types.String                                                            `tfsdk:"org_id" path:"orgId,optional"`
 	AccountingProductID       types.String                                                            `tfsdk:"accounting_product_id" json:"accountingProductId,computed"`
 	AggregationID             types.String                                                            `tfsdk:"aggregation_id" json:"aggregationId,computed"`
 	AggregationType           types.String                                                            `tfsdk:"aggregation_type" json:"aggregationType,computed"`
@@ -61,6 +61,9 @@ func (m *PricingDataSourceModel) toListParams(_ context.Context) (params m3ter.P
 		IDs: m3ter.F(mFindOneByIDs),
 	}
 
+	if !m.OrgID.IsNull() {
+		params.OrgID = m3ter.F(m.OrgID.ValueString())
+	}
 	if !m.FindOneBy.AggregationID.IsNull() {
 		params.AggregationID = m3ter.F(m.FindOneBy.AggregationID.ValueString())
 	}

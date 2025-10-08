@@ -25,8 +25,11 @@ data "m3ter_resource_group" "example_resource_group" {
 
 ### Required
 
-- `org_id` (String, Deprecated)
 - `type` (String)
+
+### Optional
+
+- `org_id` (String, Deprecated)
 
 ### Read-Only
 
