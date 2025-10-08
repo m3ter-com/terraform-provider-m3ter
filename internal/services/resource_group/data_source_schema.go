@@ -17,12 +17,12 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 			"id": schema.StringAttribute{
 				Required: true,
 			},
-			"org_id": schema.StringAttribute{
-				Required:           true,
-				DeprecationMessage: "the org id should be set at the client level instead",
-			},
 			"type": schema.StringAttribute{
 				Required: true,
+			},
+			"org_id": schema.StringAttribute{
+				Optional:           true,
+				DeprecationMessage: "the org id should be set at the client level instead",
 			},
 			"name": schema.StringAttribute{
 				Description: "The name of the Resource Group.",

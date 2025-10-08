@@ -14,7 +14,7 @@ import (
 
 type CounterPricingDataSourceModel struct {
 	ID                        types.String                                                            `tfsdk:"id" path:"id,computed_optional"`
-	OrgID                     types.String                                                            `tfsdk:"org_id" path:"orgId,required"`
+	OrgID                     types.String                                                            `tfsdk:"org_id" path:"orgId,optional"`
 	AccountingProductID       types.String                                                            `tfsdk:"accounting_product_id" json:"accountingProductId,computed"`
 	Code                      types.String                                                            `tfsdk:"code" json:"code,computed"`
 	CounterID                 types.String                                                            `tfsdk:"counter_id" json:"counterId,computed"`
@@ -55,6 +55,9 @@ func (m *CounterPricingDataSourceModel) toListParams(_ context.Context) (params 
 		IDs: m3ter.F(mFindOneByIDs),
 	}
 
+	if !m.OrgID.IsNull() {
+		params.OrgID = m3ter.F(m.OrgID.ValueString())
+	}
 	if !m.FindOneBy.Date.IsNull() {
 		params.Date = m3ter.F(m.FindOneBy.Date.ValueString())
 	}

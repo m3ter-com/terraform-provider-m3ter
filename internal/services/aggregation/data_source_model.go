@@ -13,7 +13,7 @@ import (
 
 type AggregationDataSourceModel struct {
 	ID                  types.String                                    `tfsdk:"id" path:"id,computed_optional"`
-	OrgID               types.String                                    `tfsdk:"org_id" path:"orgId,required"`
+	OrgID               types.String                                    `tfsdk:"org_id" path:"orgId,optional"`
 	AccountingProductID types.String                                    `tfsdk:"accounting_product_id" json:"accountingProductId,computed"`
 	Aggregation         types.String                                    `tfsdk:"aggregation" json:"aggregation,computed"`
 	Code                types.String                                    `tfsdk:"code" json:"code,computed"`
@@ -66,6 +66,10 @@ func (m *AggregationDataSourceModel) toListParams(_ context.Context) (params m3t
 		Codes:     m3ter.F(mFindOneByCodes),
 		IDs:       m3ter.F(mFindOneByIDs),
 		ProductID: m3ter.F(mFindOneByProductID),
+	}
+
+	if !m.OrgID.IsNull() {
+		params.OrgID = m3ter.F(m.OrgID.ValueString())
 	}
 
 	return

@@ -24,7 +24,7 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Optional: true,
 			},
 			"org_id": schema.StringAttribute{
-				Required:           true,
+				Optional:           true,
 				DeprecationMessage: "the org id should be set at the client level instead",
 			},
 			"archived": schema.BoolAttribute{

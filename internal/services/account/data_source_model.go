@@ -15,7 +15,7 @@ import (
 
 type AccountDataSourceModel struct {
 	ID                        types.String                                            `tfsdk:"id" path:"id,computed_optional"`
-	OrgID                     types.String                                            `tfsdk:"org_id" path:"orgId,required"`
+	OrgID                     types.String                                            `tfsdk:"org_id" path:"orgId,optional"`
 	AutoGenerateStatementMode types.String                                            `tfsdk:"auto_generate_statement_mode" json:"autoGenerateStatementMode,computed"`
 	BillEpoch                 timetypes.RFC3339                                       `tfsdk:"bill_epoch" json:"billEpoch,computed" format:"date"`
 	Code                      types.String                                            `tfsdk:"code" json:"code,computed"`
@@ -61,6 +61,10 @@ func (m *AccountDataSourceModel) toListParams(_ context.Context) (params m3ter.A
 	params = m3ter.AccountListParams{
 		Codes: m3ter.F(mFindOneByCodes),
 		IDs:   m3ter.F(mFindOneByIDs),
+	}
+
+	if !m.OrgID.IsNull() {
+		params.OrgID = m3ter.F(m.OrgID.ValueString())
 	}
 
 	return

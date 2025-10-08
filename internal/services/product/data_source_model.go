@@ -13,7 +13,7 @@ import (
 
 type ProductDataSourceModel struct {
 	ID           types.String                       `tfsdk:"id" path:"id,computed_optional"`
-	OrgID        types.String                       `tfsdk:"org_id" path:"orgId,required"`
+	OrgID        types.String                       `tfsdk:"org_id" path:"orgId,optional"`
 	Code         types.String                       `tfsdk:"code" json:"code,computed"`
 	Name         types.String                       `tfsdk:"name" json:"name,computed"`
 	Version      types.Int64                        `tfsdk:"version" json:"version,computed,force_encode,encode_state_for_unknown"`
@@ -41,6 +41,10 @@ func (m *ProductDataSourceModel) toListParams(_ context.Context) (params m3ter.P
 
 	params = m3ter.ProductListParams{
 		IDs: m3ter.F(mFindOneByIDs),
+	}
+
+	if !m.OrgID.IsNull() {
+		params.OrgID = m3ter.F(m.OrgID.ValueString())
 	}
 
 	return

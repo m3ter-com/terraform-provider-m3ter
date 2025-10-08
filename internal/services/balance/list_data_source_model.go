@@ -29,6 +29,9 @@ type BalancesDataSourceModel struct {
 func (m *BalancesDataSourceModel) toListParams(_ context.Context) (params m3ter.BalanceListParams, diags diag.Diagnostics) {
 	params = m3ter.BalanceListParams{}
 
+	if !m.OrgID.IsNull() {
+		params.OrgID = m3ter.F(m.OrgID.ValueString())
+	}
 	if !m.AccountID.IsNull() {
 		params.AccountID = m3ter.F(m.AccountID.ValueString())
 	}
@@ -40,9 +43,6 @@ func (m *BalancesDataSourceModel) toListParams(_ context.Context) (params m3ter.
 	}
 	if !m.EndDateStart.IsNull() {
 		params.EndDateStart = m3ter.F(m.EndDateStart.ValueString())
-	}
-	if !m.OrgID.IsNull() {
-		params.OrgID = m3ter.F(m.OrgID.ValueString())
 	}
 
 	return
