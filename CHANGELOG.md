@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.6.2 (2025-10-08)
+
+Full Changelog: [v0.6.1...v0.6.2](https://github.com/m3ter-com/terraform-provider-m3ter/compare/v0.6.1...v0.6.2)
+
+### Bug Fixes
+
+* data sources should handle optional parameters specified by the provider ([bd60bb7](https://github.com/m3ter-com/terraform-provider-m3ter/commit/bd60bb7fb3cf6310639dc3b473ded66622df090f))
+
 ## 0.6.1 (2025-10-08)
 
 Full Changelog: [v0.6.0...v0.6.1](https://github.com/m3ter-com/terraform-provider-m3ter/compare/v0.6.0...v0.6.1)
