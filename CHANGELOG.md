@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.6.1 (2025-10-08)
+
+Full Changelog: [v0.6.0...v0.6.1](https://github.com/m3ter-com/terraform-provider-m3ter/compare/v0.6.0...v0.6.1)
+
+### Features
+
+* **docs:** Update examples for singleton resources ([3c5540a](https://github.com/m3ter-com/terraform-provider-m3ter/commit/3c5540a7c96ba56b59a0f621b306d50386621142))
+
 ## 0.6.0 (2025-10-07)
 
 Full Changelog: [v0.5.0...v0.6.0](https://github.com/m3ter-com/terraform-provider-m3ter/compare/v0.5.0...v0.6.0)
