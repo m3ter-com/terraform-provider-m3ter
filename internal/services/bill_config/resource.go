@@ -192,7 +192,7 @@ func (r *BillConfigResource) Delete(ctx context.Context, req resource.DeleteRequ
 }
 
 func (r *BillConfigResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	var data *BillConfigModel = new(BillConfigModel)
+	var data = new(BillConfigModel)
 
 	path := ""
 	diags := importpath.ParseImportID(

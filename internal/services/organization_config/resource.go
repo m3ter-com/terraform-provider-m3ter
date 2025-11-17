@@ -192,7 +192,7 @@ func (r *OrganizationConfigResource) Delete(ctx context.Context, req resource.De
 }
 
 func (r *OrganizationConfigResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	var data *OrganizationConfigModel = new(OrganizationConfigModel)
+	var data = new(OrganizationConfigModel)
 
 	path := ""
 	diags := importpath.ParseImportID(

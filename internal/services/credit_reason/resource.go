@@ -219,7 +219,7 @@ func (r *CreditReasonResource) Delete(ctx context.Context, req resource.DeleteRe
 }
 
 func (r *CreditReasonResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	var data *CreditReasonModel = new(CreditReasonModel)
+	var data = new(CreditReasonModel)
 
 	path_org_id := ""
 	path_id := ""

@@ -219,7 +219,7 @@ func (r *BalanceResource) Delete(ctx context.Context, req resource.DeleteRequest
 }
 
 func (r *BalanceResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	var data *BalanceModel = new(BalanceModel)
+	var data = new(BalanceModel)
 
 	path_org_id := ""
 	path_id := ""

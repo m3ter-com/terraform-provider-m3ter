@@ -219,7 +219,7 @@ func (r *PermissionPolicyResource) Delete(ctx context.Context, req resource.Dele
 }
 
 func (r *PermissionPolicyResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	var data *PermissionPolicyModel = new(PermissionPolicyModel)
+	var data = new(PermissionPolicyModel)
 
 	path_org_id := ""
 	path_id := ""

@@ -219,7 +219,7 @@ func (r *TransactionTypeResource) Delete(ctx context.Context, req resource.Delet
 }
 
 func (r *TransactionTypeResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	var data *TransactionTypeModel = new(TransactionTypeModel)
+	var data = new(TransactionTypeModel)
 
 	path_org_id := ""
 	path_id := ""

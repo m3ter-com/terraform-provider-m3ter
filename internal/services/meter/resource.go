@@ -219,7 +219,7 @@ func (r *MeterResource) Delete(ctx context.Context, req resource.DeleteRequest, 
 }
 
 func (r *MeterResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	var data *MeterModel = new(MeterModel)
+	var data = new(MeterModel)
 
 	path_org_id := ""
 	path_id := ""
