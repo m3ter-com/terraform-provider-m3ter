@@ -219,7 +219,7 @@ func (r *ExternalMappingResource) Delete(ctx context.Context, req resource.Delet
 }
 
 func (r *ExternalMappingResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	var data *ExternalMappingModel = new(ExternalMappingModel)
+	var data = new(ExternalMappingModel)
 
 	path_org_id := ""
 	path_id := ""

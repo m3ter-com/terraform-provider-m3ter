@@ -219,7 +219,7 @@ func (r *NotificationConfigurationResource) Delete(ctx context.Context, req reso
 }
 
 func (r *NotificationConfigurationResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	var data *NotificationConfigurationModel = new(NotificationConfigurationModel)
+	var data = new(NotificationConfigurationModel)
 
 	path_org_id := ""
 	path_id := ""

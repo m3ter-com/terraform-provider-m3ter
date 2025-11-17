@@ -219,7 +219,7 @@ func (r *IntegrationConfigurationResource) Delete(ctx context.Context, req resou
 }
 
 func (r *IntegrationConfigurationResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	var data *IntegrationConfigurationModel = new(IntegrationConfigurationModel)
+	var data = new(IntegrationConfigurationModel)
 
 	path_org_id := ""
 	path_id := ""

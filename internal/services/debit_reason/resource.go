@@ -219,7 +219,7 @@ func (r *DebitReasonResource) Delete(ctx context.Context, req resource.DeleteReq
 }
 
 func (r *DebitReasonResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	var data *DebitReasonModel = new(DebitReasonModel)
+	var data = new(DebitReasonModel)
 
 	path_org_id := ""
 	path_id := ""

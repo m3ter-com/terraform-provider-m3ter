@@ -219,7 +219,7 @@ func (r *CurrencyResource) Delete(ctx context.Context, req resource.DeleteReques
 }
 
 func (r *CurrencyResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	var data *CurrencyModel = new(CurrencyModel)
+	var data = new(CurrencyModel)
 
 	path_org_id := ""
 	path_id := ""

@@ -219,7 +219,7 @@ func (r *ScheduledEventConfigurationResource) Delete(ctx context.Context, req re
 }
 
 func (r *ScheduledEventConfigurationResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	var data *ScheduledEventConfigurationModel = new(ScheduledEventConfigurationModel)
+	var data = new(ScheduledEventConfigurationModel)
 
 	path_org_id := ""
 	path_id := ""

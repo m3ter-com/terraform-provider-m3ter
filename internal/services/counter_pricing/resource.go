@@ -219,7 +219,7 @@ func (r *CounterPricingResource) Delete(ctx context.Context, req resource.Delete
 }
 
 func (r *CounterPricingResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	var data *CounterPricingModel = new(CounterPricingModel)
+	var data = new(CounterPricingModel)
 
 	path_org_id := ""
 	path_id := ""

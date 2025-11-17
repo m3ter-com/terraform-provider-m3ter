@@ -219,7 +219,7 @@ func (r *CounterAdjustmentResource) Delete(ctx context.Context, req resource.Del
 }
 
 func (r *CounterAdjustmentResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	var data *CounterAdjustmentModel = new(CounterAdjustmentModel)
+	var data = new(CounterAdjustmentModel)
 
 	path_org_id := ""
 	path_id := ""

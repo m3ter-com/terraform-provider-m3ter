@@ -219,7 +219,7 @@ func (r *ContractResource) Delete(ctx context.Context, req resource.DeleteReques
 }
 
 func (r *ContractResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	var data *ContractModel = new(ContractModel)
+	var data = new(ContractModel)
 
 	path_org_id := ""
 	path_id := ""
