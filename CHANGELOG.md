@@ -1,5 +1,31 @@
 # Changelog
 
+## 0.7.0 (2025-12-03)
+
+Full Changelog: [v0.6.1...v0.7.0](https://github.com/m3ter-com/terraform-provider-m3ter/compare/v0.6.1...v0.7.0)
+
+### Features
+
+* **api:** spec update ([7ddb4c1](https://github.com/m3ter-com/terraform-provider-m3ter/commit/7ddb4c1aa22e96d19a3469779004ddebf7eb35b1))
+
+
+### Bug Fixes
+
+* **client:** correctly encode map patches ([01b0927](https://github.com/m3ter-com/terraform-provider-m3ter/commit/01b0927ae5c35aef1cfe6d7d2205bb3e5ccfe7fd))
+* **client:** correctly patch `null` -&gt; zero value ([fc9ac4a](https://github.com/m3ter-com/terraform-provider-m3ter/commit/fc9ac4a357f5b9cf934c419f55d251da8a925212))
+* data sources should handle optional parameters specified by the provider ([bd60bb7](https://github.com/m3ter-com/terraform-provider-m3ter/commit/bd60bb7fb3cf6310639dc3b473ded66622df090f))
+* ensure dynamic values always yield valid container inner values ([e69b26a](https://github.com/m3ter-com/terraform-provider-m3ter/commit/e69b26a36b53a555e4ae639770ccd328567b914d))
+* list style data sources should always have id value populated ([904c404](https://github.com/m3ter-com/terraform-provider-m3ter/commit/904c404f5474c21fda2c946d541f40dc4014f05e))
+
+
+### Chores
+
+* ensure tests build as part of lint step ([9b67030](https://github.com/m3ter-com/terraform-provider-m3ter/commit/9b67030836e1a53fb821f7a1d87b6eaf391d784b))
+* **internal:** address linter warnings ([98388fe](https://github.com/m3ter-com/terraform-provider-m3ter/commit/98388fe7f9f836e6aef33e001b75ce3d5fd40810))
+* **internal:** codegen related update ([2efb329](https://github.com/m3ter-com/terraform-provider-m3ter/commit/2efb329b0d2adad97af0a81ec1a095b13f2999f2))
+* **internal:** refactor the apijson encoder ([ede372b](https://github.com/m3ter-com/terraform-provider-m3ter/commit/ede372be65e79475dc6ef58557c39f783001cb4b))
+* **internal:** update `interface{}` to `any` ([ac25487](https://github.com/m3ter-com/terraform-provider-m3ter/commit/ac25487aa2ab1cd0bc6835cbbd4e35fa61ad74f2))
+
 ## 0.6.1 (2025-10-08)
 
 Full Changelog: [v0.6.0...v0.6.1](https://github.com/m3ter-com/terraform-provider-m3ter/compare/v0.6.0...v0.6.1)
