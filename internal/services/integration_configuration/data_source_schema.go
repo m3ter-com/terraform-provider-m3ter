@@ -31,6 +31,10 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Description: "The destination system for the integration run.",
 				Computed:    true,
 			},
+			"destination_id": schema.StringAttribute{
+				Description: "Identifier of the destination",
+				Computed:    true,
+			},
 			"dt_completed": schema.StringAttribute{
 				Description: "The date and time the integration was completed. *(in ISO-8601 format)*.",
 				Computed:    true,
@@ -55,6 +59,10 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 			},
 			"external_id": schema.StringAttribute{
 				Description: "The external ID in the destination system if available.",
+				Computed:    true,
+			},
+			"parent_integration_run_id": schema.StringAttribute{
+				Description: "ID of the parent integration run, or null if this is a parent integration run",
 				Computed:    true,
 			},
 			"status": schema.StringAttribute{

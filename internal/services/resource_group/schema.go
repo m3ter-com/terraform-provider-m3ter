@@ -17,7 +17,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 	return schema.Schema{
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
-				Description:   "The unique identifier (UUID) of the Resource Group.",
+				Description:   "The UUID of the entity.",
 				Computed:      true,
 				PlanModifiers: []planmodifier.String{stringplanmodifier.UseStateForUnknown()},
 			},
@@ -34,7 +34,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				Required: true,
 			},
 			"version": schema.Int64Attribute{
-				Description: "The version number. Default value when newly created is one.",
+				Description: "The version number:\n- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.\n- **Update:** On successful Update, the version is incremented by 1 in the response.",
 				Computed:    true,
 			},
 		},

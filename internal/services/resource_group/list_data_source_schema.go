@@ -38,7 +38,7 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
 						"id": schema.StringAttribute{
-							Description: "The unique identifier (UUID) of the Resource Group.",
+							Description: "The UUID of the entity.",
 							Computed:    true,
 						},
 						"name": schema.StringAttribute{
@@ -46,7 +46,7 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Computed:    true,
 						},
 						"version": schema.Int64Attribute{
-							Description: "The version number. Default value when newly created is one.",
+							Description: "The version number:\n- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.\n- **Update:** On successful Update, the version is incremented by 1 in the response.",
 							Computed:    true,
 						},
 					},

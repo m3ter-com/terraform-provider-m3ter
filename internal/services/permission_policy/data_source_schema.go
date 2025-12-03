@@ -35,7 +35,7 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Computed:    true,
 			},
 			"version": schema.Int64Attribute{
-				Description: "The version number. Default value when newly created is one.",
+				Description: "The version number:\n- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.\n- **Update:** On successful Update, the version is incremented by 1 in the response.",
 				Computed:    true,
 			},
 			"permission_policy": schema.ListNestedAttribute{
@@ -67,6 +67,7 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 										"EXPORTS_DOWNLOAD",
 										"MARKETPLACE_USAGE_CREATE",
 										"MARKETPLACE_USAGE_RETRIEVE",
+										"AUDIT_RETRIEVE",
 									),
 								),
 							},

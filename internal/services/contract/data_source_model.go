@@ -13,19 +13,21 @@ import (
 )
 
 type ContractDataSourceModel struct {
-	ID                  types.String                       `tfsdk:"id" path:"id,computed_optional"`
-	OrgID               types.String                       `tfsdk:"org_id" path:"orgId,optional"`
-	AccountID           types.String                       `tfsdk:"account_id" json:"accountId,computed"`
-	BillGroupingKey     types.String                       `tfsdk:"bill_grouping_key" json:"billGroupingKey,computed"`
-	Code                types.String                       `tfsdk:"code" json:"code,computed"`
-	Description         types.String                       `tfsdk:"description" json:"description,computed"`
-	EndDate             timetypes.RFC3339                  `tfsdk:"end_date" json:"endDate,computed" format:"date"`
-	Name                types.String                       `tfsdk:"name" json:"name,computed"`
-	PurchaseOrderNumber types.String                       `tfsdk:"purchase_order_number" json:"purchaseOrderNumber,computed"`
-	StartDate           timetypes.RFC3339                  `tfsdk:"start_date" json:"startDate,computed" format:"date"`
-	Version             types.Int64                        `tfsdk:"version" json:"version,computed,force_encode,encode_state_for_unknown"`
-	CustomFields        customfield.NormalizedDynamicValue `tfsdk:"custom_fields" json:"customFields,computed"`
-	FindOneBy           *ContractFindOneByDataSourceModel  `tfsdk:"find_one_by"`
+	ID                        types.String                                                      `tfsdk:"id" path:"id,computed_optional"`
+	OrgID                     types.String                                                      `tfsdk:"org_id" path:"orgId,optional"`
+	AccountID                 types.String                                                      `tfsdk:"account_id" json:"accountId,computed"`
+	ApplyContractPeriodLimits types.Bool                                                        `tfsdk:"apply_contract_period_limits" json:"applyContractPeriodLimits,computed"`
+	BillGroupingKeyID         types.String                                                      `tfsdk:"bill_grouping_key_id" json:"billGroupingKeyId,computed"`
+	Code                      types.String                                                      `tfsdk:"code" json:"code,computed"`
+	Description               types.String                                                      `tfsdk:"description" json:"description,computed"`
+	EndDate                   timetypes.RFC3339                                                 `tfsdk:"end_date" json:"endDate,computed" format:"date"`
+	Name                      types.String                                                      `tfsdk:"name" json:"name,computed"`
+	PurchaseOrderNumber       types.String                                                      `tfsdk:"purchase_order_number" json:"purchaseOrderNumber,computed"`
+	StartDate                 timetypes.RFC3339                                                 `tfsdk:"start_date" json:"startDate,computed" format:"date"`
+	Version                   types.Int64                                                       `tfsdk:"version" json:"version,computed,force_encode,encode_state_for_unknown"`
+	UsageFilters              customfield.NestedObjectList[ContractUsageFiltersDataSourceModel] `tfsdk:"usage_filters" json:"usageFilters,computed"`
+	CustomFields              customfield.NormalizedDynamicValue                                `tfsdk:"custom_fields" json:"customFields,computed"`
+	FindOneBy                 *ContractFindOneByDataSourceModel                                 `tfsdk:"find_one_by"`
 }
 
 func (m *ContractDataSourceModel) toReadParams(_ context.Context) (params m3ter.ContractGetParams, diags diag.Diagnostics) {
@@ -65,6 +67,12 @@ func (m *ContractDataSourceModel) toListParams(_ context.Context) (params m3ter.
 	}
 
 	return
+}
+
+type ContractUsageFiltersDataSourceModel struct {
+	DimensionCode types.String `tfsdk:"dimension_code" json:"dimensionCode,computed"`
+	Mode          types.String `tfsdk:"mode" json:"mode,computed"`
+	Value         types.String `tfsdk:"value" json:"value,computed"`
 }
 
 type ContractFindOneByDataSourceModel struct {
