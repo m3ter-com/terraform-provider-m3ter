@@ -24,11 +24,15 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Optional: true,
 			},
 			"org_id": schema.StringAttribute{
-				Required:           true,
+				Optional:           true,
 				DeprecationMessage: "the org id should be set at the client level instead",
 			},
 			"destination": schema.StringAttribute{
 				Description: "The destination system for the integration run.",
+				Computed:    true,
+			},
+			"destination_id": schema.StringAttribute{
+				Description: "Identifier of the destination",
 				Computed:    true,
 			},
 			"dt_completed": schema.StringAttribute{
@@ -55,6 +59,10 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 			},
 			"external_id": schema.StringAttribute{
 				Description: "The external ID in the destination system if available.",
+				Computed:    true,
+			},
+			"parent_integration_run_id": schema.StringAttribute{
+				Description: "ID of the parent integration run, or null if this is a parent integration run",
 				Computed:    true,
 			},
 			"status": schema.StringAttribute{

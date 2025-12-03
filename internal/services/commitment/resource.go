@@ -219,7 +219,7 @@ func (r *CommitmentResource) Delete(ctx context.Context, req resource.DeleteRequ
 }
 
 func (r *CommitmentResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	var data *CommitmentModel = new(CommitmentModel)
+	var data = new(CommitmentModel)
 
 	path_org_id := ""
 	path_id := ""

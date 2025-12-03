@@ -223,7 +223,7 @@ func (r *ResourceGroupResource) Delete(ctx context.Context, req resource.DeleteR
 }
 
 func (r *ResourceGroupResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	var data *ResourceGroupModel = new(ResourceGroupModel)
+	var data = new(ResourceGroupModel)
 
 	path_org_id := ""
 	path_type := ""

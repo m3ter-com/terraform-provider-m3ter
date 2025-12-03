@@ -37,6 +37,10 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				Description: "The unique identifier (UUID) for the end customer Account.",
 				Required:    true,
 			},
+			"code": schema.StringAttribute{
+				Description: "Unique short code for the Balance.",
+				Required:    true,
+			},
 			"currency": schema.StringAttribute{
 				Description: "The currency code used for the Balance amount. For example: USD, GBP or EUR.",
 				Required:    true,
@@ -45,6 +49,10 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				Description: "The date *(in ISO 8601 format)* after which the Balance will no longer be active for the Account.\n\n**Note:** You can use the `rolloverEndDate` request parameter to define an extended grace period for continued draw-down against the Balance if any amount remains when the specified `endDate` is reached.",
 				Required:    true,
 				CustomType:  timetypes.RFC3339Type{},
+			},
+			"name": schema.StringAttribute{
+				Description: "The official name for the Balance.",
+				Required:    true,
 			},
 			"start_date": schema.StringAttribute{
 				Description: "The date *(in ISO 8601 format)* when the Balance becomes active.",
@@ -55,27 +63,20 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				Description: "A description for the bill line items for draw-down charges against the Balance. *(Optional).*",
 				Optional:    true,
 			},
-			"code": schema.StringAttribute{
-				Description: "Unique short code for the Balance.",
-				Optional:    true,
-			},
 			"consumptions_accounting_product_id": schema.StringAttribute{
-				Description: "Optional Product ID this Balance Consumptions should be attributed to for accounting purposes",
+				Description: "Product ID that any Balance Consumed line items will be attributed to for accounting purposes.(*Optional*)",
 				Optional:    true,
 			},
 			"contract_id": schema.StringAttribute{
-				Optional: true,
+				Description: "The unique identifier (UUID) of a Contract on the Account that the Balance will be added to.",
+				Optional:    true,
 			},
 			"description": schema.StringAttribute{
 				Description: "A description of the Balance.",
 				Optional:    true,
 			},
 			"fees_accounting_product_id": schema.StringAttribute{
-				Description: "Optional Product ID this Balance Fees should be attributed to for accounting purposes",
-				Optional:    true,
-			},
-			"name": schema.StringAttribute{
-				Description: "The official name for the Balance.",
+				Description: "Product ID that any Balance Fees line items will be attributed to for accounting purposes.(*Optional*)",
 				Optional:    true,
 			},
 			"overage_description": schema.StringAttribute{
@@ -99,7 +100,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				CustomType:  timetypes.RFC3339Type{},
 			},
 			"line_item_types": schema.ListAttribute{
-				Description: "Specify the line item charge types that can draw-down at billing against the  Balance amount. Options are:\n- `\"MINIMUM_SPEND\"`\n- `\"STANDING_CHARGE\"`\n- `\"USAGE\"`\n- `\"COUNTER_RUNNING_TOTAL_CHARGE\"`\n- `\"COUNTER_ADJUSTMENT_DEBIT\"`\n\n**NOTE:** If no charge types are specified, by default *all types* can draw-down against the Balance amount at billing.",
+				Description: "Specify the line item charge types that can draw-down at billing against the  Balance amount. Options are:\n- `\"MINIMUM_SPEND\"`\n- `\"STANDING_CHARGE\"`\n- `\"USAGE\"`\n- `\"COUNTER_RUNNING_TOTAL_CHARGE\"`\n- `\"COUNTER_ADJUSTMENT_DEBIT\"`\n- `AD_HOC`\n\n**NOTE:** If no charge types are specified, by default *all types* can draw-down against the Balance amount at billing.",
 				Optional:    true,
 				Validators: []validator.List{
 					listvalidator.ValueStringsAre(

@@ -19,12 +19,19 @@ resource "m3ter_contract" "example_contract" {
   end_date = "2019-12-27"
   name = "x"
   start_date = "2019-12-27"
+  apply_contract_period_limits = true
+  bill_grouping_key_id = "billGroupingKeyId"
   code = "S?oC\"$]C] ]]]]]5]"
   custom_fields = {
     foo = "string"
   }
   description = "description"
   purchase_order_number = "purchaseOrderNumber"
+  usage_filters = [{
+    dimension_code = "x"
+    mode = "INCLUDE"
+    value = "x"
+  }]
 }
 ```
 
@@ -40,6 +47,8 @@ resource "m3ter_contract" "example_contract" {
 
 ### Optional
 
+- `apply_contract_period_limits` (Boolean)
+- `bill_grouping_key_id` (String)
 - `code` (String) The short code of the Contract.
 - `custom_fields` (Dynamic) User defined fields enabling you to attach custom data. The value for a custom field can be either a string or a number.
 
@@ -49,14 +58,23 @@ See [Working with Custom Fields](https://www.m3ter.com/docs/guides/creating-and-
 - `description` (String) The description of the Contract, which provides context and information.
 - `org_id` (String, Deprecated)
 - `purchase_order_number` (String) The Purchase Order Number associated with the Contract.
+- `usage_filters` (Attributes List) (see [below for nested schema](#nestedatt--usage_filters))
 
 ### Read-Only
 
-- `bill_grouping_key` (String)
 - `id` (String) The UUID of the entity.
 - `version` (Number) The version number:
 - **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.
 - **Update:** On successful Update, the version is incremented by 1 in the response.
+
+<a id="nestedatt--usage_filters"></a>
+### Nested Schema for `usage_filters`
+
+Required:
+
+- `dimension_code` (String)
+- `mode` (String) Available values: "INCLUDE", "EXCLUDE".
+- `value` (String)
 
 ## Import
 

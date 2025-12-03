@@ -192,7 +192,7 @@ func (r *CustomFieldResource) Delete(ctx context.Context, req resource.DeleteReq
 }
 
 func (r *CustomFieldResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	var data *CustomFieldModel = new(CustomFieldModel)
+	var data = new(CustomFieldModel)
 
 	path := ""
 	diags := importpath.ParseImportID(

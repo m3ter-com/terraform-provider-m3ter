@@ -44,26 +44,34 @@ func (m *ContractsDataSourceModel) toListParams(_ context.Context) (params m3ter
 		IDs:   m3ter.F(mIDs),
 	}
 
-	if !m.AccountID.IsNull() {
-		params.AccountID = m3ter.F(m.AccountID.ValueString())
-	}
 	if !m.OrgID.IsNull() {
 		params.OrgID = m3ter.F(m.OrgID.ValueString())
+	}
+	if !m.AccountID.IsNull() {
+		params.AccountID = m3ter.F(m.AccountID.ValueString())
 	}
 
 	return
 }
 
 type ContractsItemsDataSourceModel struct {
-	ID                  types.String                       `tfsdk:"id" json:"id,computed"`
-	AccountID           types.String                       `tfsdk:"account_id" json:"accountId,computed"`
-	BillGroupingKey     types.String                       `tfsdk:"bill_grouping_key" json:"billGroupingKey,computed"`
-	Code                types.String                       `tfsdk:"code" json:"code,computed"`
-	CustomFields        customfield.NormalizedDynamicValue `tfsdk:"custom_fields" json:"customFields,computed"`
-	Description         types.String                       `tfsdk:"description" json:"description,computed"`
-	EndDate             timetypes.RFC3339                  `tfsdk:"end_date" json:"endDate,computed" format:"date"`
-	Name                types.String                       `tfsdk:"name" json:"name,computed"`
-	PurchaseOrderNumber types.String                       `tfsdk:"purchase_order_number" json:"purchaseOrderNumber,computed"`
-	StartDate           timetypes.RFC3339                  `tfsdk:"start_date" json:"startDate,computed" format:"date"`
-	Version             types.Int64                        `tfsdk:"version" json:"version,computed,force_encode,encode_state_for_unknown"`
+	ID                        types.String                                                       `tfsdk:"id" json:"id,computed"`
+	AccountID                 types.String                                                       `tfsdk:"account_id" json:"accountId,computed"`
+	ApplyContractPeriodLimits types.Bool                                                         `tfsdk:"apply_contract_period_limits" json:"applyContractPeriodLimits,computed"`
+	BillGroupingKeyID         types.String                                                       `tfsdk:"bill_grouping_key_id" json:"billGroupingKeyId,computed"`
+	Code                      types.String                                                       `tfsdk:"code" json:"code,computed"`
+	CustomFields              customfield.NormalizedDynamicValue                                 `tfsdk:"custom_fields" json:"customFields,computed"`
+	Description               types.String                                                       `tfsdk:"description" json:"description,computed"`
+	EndDate                   timetypes.RFC3339                                                  `tfsdk:"end_date" json:"endDate,computed" format:"date"`
+	Name                      types.String                                                       `tfsdk:"name" json:"name,computed"`
+	PurchaseOrderNumber       types.String                                                       `tfsdk:"purchase_order_number" json:"purchaseOrderNumber,computed"`
+	StartDate                 timetypes.RFC3339                                                  `tfsdk:"start_date" json:"startDate,computed" format:"date"`
+	UsageFilters              customfield.NestedObjectList[ContractsUsageFiltersDataSourceModel] `tfsdk:"usage_filters" json:"usageFilters,computed"`
+	Version                   types.Int64                                                        `tfsdk:"version" json:"version,computed,force_encode,encode_state_for_unknown"`
+}
+
+type ContractsUsageFiltersDataSourceModel struct {
+	DimensionCode types.String `tfsdk:"dimension_code" json:"dimensionCode,computed"`
+	Mode          types.String `tfsdk:"mode" json:"mode,computed"`
+	Value         types.String `tfsdk:"value" json:"value,computed"`
 }

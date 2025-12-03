@@ -13,7 +13,7 @@ import (
 
 type CounterAdjustmentDataSourceModel struct {
 	ID                  types.String                               `tfsdk:"id" path:"id,computed_optional"`
-	OrgID               types.String                               `tfsdk:"org_id" path:"orgId,required"`
+	OrgID               types.String                               `tfsdk:"org_id" path:"orgId,optional"`
 	AccountID           types.String                               `tfsdk:"account_id" json:"accountId,computed"`
 	CounterID           types.String                               `tfsdk:"counter_id" json:"counterId,computed"`
 	Date                timetypes.RFC3339                          `tfsdk:"date" json:"date,computed" format:"date"`
@@ -36,6 +36,9 @@ func (m *CounterAdjustmentDataSourceModel) toReadParams(_ context.Context) (para
 func (m *CounterAdjustmentDataSourceModel) toListParams(_ context.Context) (params m3ter.CounterAdjustmentListParams, diags diag.Diagnostics) {
 	params = m3ter.CounterAdjustmentListParams{}
 
+	if !m.OrgID.IsNull() {
+		params.OrgID = m3ter.F(m.OrgID.ValueString())
+	}
 	if !m.FindOneBy.AccountID.IsNull() {
 		params.AccountID = m3ter.F(m.FindOneBy.AccountID.ValueString())
 	}

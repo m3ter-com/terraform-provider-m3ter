@@ -40,6 +40,14 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 					int64validator.AtLeast(0),
 				},
 			},
+			"allow_negative_balances": schema.BoolAttribute{
+				Description: "Allow balance amounts to fall below zero. This feature is enabled on request. Please get in touch with m3ter Support or your m3ter contact if you would like it enabling for your organization(s).",
+				Optional:    true,
+			},
+			"allow_overlapping_plans": schema.BoolAttribute{
+				Description: "Allows plans to overlap time periods for different contracts.",
+				Optional:    true,
+			},
 			"auto_approve_bills_grace_period": schema.Int64Attribute{
 				Description: "Grace period before bills are auto-approved. Used in combination with `autoApproveBillsGracePeriodUnit` parameter.\n\n**Note:** When used in combination with `autoApproveBillsGracePeriodUnit` enables auto-approval of Bills for Organization, which occurs when the specified time period has elapsed after Bill generation.",
 				Optional:    true,

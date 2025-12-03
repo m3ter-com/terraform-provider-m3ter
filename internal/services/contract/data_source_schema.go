@@ -7,9 +7,11 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/datasourcevalidator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/path"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/m3ter-com/terraform-provider-m3ter/internal/customfield"
 )
@@ -24,14 +26,17 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Optional: true,
 			},
 			"org_id": schema.StringAttribute{
-				Required:           true,
+				Optional:           true,
 				DeprecationMessage: "the org id should be set at the client level instead",
 			},
 			"account_id": schema.StringAttribute{
 				Description: "The unique identifier (UUID) of the Account associated with this Contract.",
 				Computed:    true,
 			},
-			"bill_grouping_key": schema.StringAttribute{
+			"apply_contract_period_limits": schema.BoolAttribute{
+				Computed: true,
+			},
+			"bill_grouping_key_id": schema.StringAttribute{
 				Computed: true,
 			},
 			"code": schema.StringAttribute{
@@ -63,6 +68,27 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 			"version": schema.Int64Attribute{
 				Description: "The version number:\n- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.\n- **Update:** On successful Update, the version is incremented by 1 in the response.",
 				Computed:    true,
+			},
+			"usage_filters": schema.ListNestedAttribute{
+				Computed:   true,
+				CustomType: customfield.NewNestedObjectListType[ContractUsageFiltersDataSourceModel](ctx),
+				NestedObject: schema.NestedAttributeObject{
+					Attributes: map[string]schema.Attribute{
+						"dimension_code": schema.StringAttribute{
+							Computed: true,
+						},
+						"mode": schema.StringAttribute{
+							Description: `Available values: "INCLUDE", "EXCLUDE".`,
+							Computed:    true,
+							Validators: []validator.String{
+								stringvalidator.OneOfCaseInsensitive("INCLUDE", "EXCLUDE"),
+							},
+						},
+						"value": schema.StringAttribute{
+							Computed: true,
+						},
+					},
+				},
 			},
 			"custom_fields": schema.DynamicAttribute{
 				Description: "User defined fields enabling you to attach custom data. The value for a custom field can be either a string or a number.\n\nIf `customFields` can also be defined for this entity at the Organizational level,`customField` values defined at individual level override values of `customFields` with the same name defined at Organization level.\n\nSee [Working with Custom Fields](https://www.m3ter.com/docs/guides/creating-and-managing-products/working-with-custom-fields) in the m3ter documentation for more information.",

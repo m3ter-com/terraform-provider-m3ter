@@ -13,7 +13,7 @@ import (
 
 type PlanTemplateDataSourceModel struct {
 	ID                          types.String                          `tfsdk:"id" path:"id,computed_optional"`
-	OrgID                       types.String                          `tfsdk:"org_id" path:"orgId,required"`
+	OrgID                       types.String                          `tfsdk:"org_id" path:"orgId,optional"`
 	BillFrequency               types.String                          `tfsdk:"bill_frequency" json:"billFrequency,computed"`
 	BillFrequencyInterval       types.Int64                           `tfsdk:"bill_frequency_interval" json:"billFrequencyInterval,computed"`
 	Code                        types.String                          `tfsdk:"code" json:"code,computed"`
@@ -56,6 +56,9 @@ func (m *PlanTemplateDataSourceModel) toListParams(_ context.Context) (params m3
 		IDs: m3ter.F(mFindOneByIDs),
 	}
 
+	if !m.OrgID.IsNull() {
+		params.OrgID = m3ter.F(m.OrgID.ValueString())
+	}
 	if !m.FindOneBy.ProductID.IsNull() {
 		params.ProductID = m3ter.F(m.FindOneBy.ProductID.ValueString())
 	}

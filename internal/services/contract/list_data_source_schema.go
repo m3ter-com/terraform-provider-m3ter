@@ -7,6 +7,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
@@ -57,7 +58,10 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Description: "The unique identifier (UUID) of the Account associated with this Contract.",
 							Computed:    true,
 						},
-						"bill_grouping_key": schema.StringAttribute{
+						"apply_contract_period_limits": schema.BoolAttribute{
+							Computed: true,
+						},
+						"bill_grouping_key_id": schema.StringAttribute{
 							Computed: true,
 						},
 						"code": schema.StringAttribute{
@@ -90,6 +94,27 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Description: "The start date for the Contract *(in ISO-8601 format)*. This date is inclusive, meaning the Contract is active from this date onward.",
 							Computed:    true,
 							CustomType:  timetypes.RFC3339Type{},
+						},
+						"usage_filters": schema.ListNestedAttribute{
+							Computed:   true,
+							CustomType: customfield.NewNestedObjectListType[ContractsUsageFiltersDataSourceModel](ctx),
+							NestedObject: schema.NestedAttributeObject{
+								Attributes: map[string]schema.Attribute{
+									"dimension_code": schema.StringAttribute{
+										Computed: true,
+									},
+									"mode": schema.StringAttribute{
+										Description: `Available values: "INCLUDE", "EXCLUDE".`,
+										Computed:    true,
+										Validators: []validator.String{
+											stringvalidator.OneOfCaseInsensitive("INCLUDE", "EXCLUDE"),
+										},
+									},
+									"value": schema.StringAttribute{
+										Computed: true,
+									},
+								},
+							},
 						},
 						"version": schema.Int64Attribute{
 							Description: "The version number:\n- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.\n- **Update:** On successful Update, the version is incremented by 1 in the response.",

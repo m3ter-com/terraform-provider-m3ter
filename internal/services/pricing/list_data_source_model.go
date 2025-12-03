@@ -39,6 +39,9 @@ func (m *PricingsDataSourceModel) toListParams(_ context.Context) (params m3ter.
 		IDs: m3ter.F(mIDs),
 	}
 
+	if !m.OrgID.IsNull() {
+		params.OrgID = m3ter.F(m.OrgID.ValueString())
+	}
 	if !m.AggregationID.IsNull() {
 		params.AggregationID = m3ter.F(m.AggregationID.ValueString())
 	}
@@ -50,9 +53,6 @@ func (m *PricingsDataSourceModel) toListParams(_ context.Context) (params m3ter.
 	}
 	if !m.PlanTemplateID.IsNull() {
 		params.PlanTemplateID = m3ter.F(m.PlanTemplateID.ValueString())
-	}
-	if !m.OrgID.IsNull() {
-		params.OrgID = m3ter.F(m.OrgID.ValueString())
 	}
 
 	return

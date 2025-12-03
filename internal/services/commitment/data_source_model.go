@@ -14,7 +14,7 @@ import (
 
 type CommitmentDataSourceModel struct {
 	ID                           types.String                                                    `tfsdk:"id" path:"id,computed_optional"`
-	OrgID                        types.String                                                    `tfsdk:"org_id" path:"orgId,required"`
+	OrgID                        types.String                                                    `tfsdk:"org_id" path:"orgId,optional"`
 	AccountID                    types.String                                                    `tfsdk:"account_id" json:"accountId,computed"`
 	AccountingProductID          types.String                                                    `tfsdk:"accounting_product_id" json:"accountingProductId,computed"`
 	Amount                       types.Float64                                                   `tfsdk:"amount" json:"amount,computed"`
@@ -67,6 +67,9 @@ func (m *CommitmentDataSourceModel) toListParams(_ context.Context) (params m3te
 		IDs: m3ter.F(mFindOneByIDs),
 	}
 
+	if !m.OrgID.IsNull() {
+		params.OrgID = m3ter.F(m.OrgID.ValueString())
+	}
 	if !m.FindOneBy.AccountID.IsNull() {
 		params.AccountID = m3ter.F(m.FindOneBy.AccountID.ValueString())
 	}

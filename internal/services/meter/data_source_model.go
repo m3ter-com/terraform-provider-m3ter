@@ -13,7 +13,7 @@ import (
 
 type MeterDataSourceModel struct {
 	ID            types.String                                                    `tfsdk:"id" path:"id,computed_optional"`
-	OrgID         types.String                                                    `tfsdk:"org_id" path:"orgId,required"`
+	OrgID         types.String                                                    `tfsdk:"org_id" path:"orgId,optional"`
 	Code          types.String                                                    `tfsdk:"code" json:"code,computed"`
 	GroupID       types.String                                                    `tfsdk:"group_id" json:"groupId,computed"`
 	Name          types.String                                                    `tfsdk:"name" json:"name,computed"`
@@ -59,6 +59,10 @@ func (m *MeterDataSourceModel) toListParams(_ context.Context) (params m3ter.Met
 		Codes:     m3ter.F(mFindOneByCodes),
 		IDs:       m3ter.F(mFindOneByIDs),
 		ProductID: m3ter.F(mFindOneByProductID),
+	}
+
+	if !m.OrgID.IsNull() {
+		params.OrgID = m3ter.F(m.OrgID.ValueString())
 	}
 
 	return

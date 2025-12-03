@@ -32,6 +32,10 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 			"contract": schema.StringAttribute{
 				Optional: true,
 			},
+			"contract_id": schema.StringAttribute{
+				Description: "Filter Balances by contract id. Use '' with accountId to fetch unlinked balances.",
+				Optional:    true,
+			},
 			"end_date_end": schema.StringAttribute{
 				Description: "Only include Balances with end dates earlier than this date. If a Balance has a rollover amount configured, then the `rolloverEndDate` will be used as the end date.",
 				Optional:    true,
@@ -39,6 +43,11 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 			"end_date_start": schema.StringAttribute{
 				Description: "Only include Balances with end dates equal to or later than this date. If a Balance has a rollover amount configured, then the `rolloverEndDate` will be used as the end date.",
 				Optional:    true,
+			},
+			"ids": schema.ListAttribute{
+				Description: "A list of unique identifiers (UUIDs) for specific Balances to retrieve.",
+				Optional:    true,
+				ElementType: types.StringType,
 			},
 			"max_items": schema.Int64Attribute{
 				Description: "Max items to fetch, default: 1000",
@@ -74,10 +83,12 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Computed:    true,
 						},
 						"consumptions_accounting_product_id": schema.StringAttribute{
-							Computed: true,
+							Description: "Product ID that any Balance Consumed line items will be attributed to for accounting purposes.(*Optional*)",
+							Computed:    true,
 						},
 						"contract_id": schema.StringAttribute{
-							Computed: true,
+							Description: "The unique identifier (UUID) for a Contract on the Account the Balance has been added to.",
+							Computed:    true,
 						},
 						"currency": schema.StringAttribute{
 							Description: "The currency code used for the Balance amount. For example: USD, GBP or EUR.",
@@ -98,7 +109,8 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							CustomType:  timetypes.RFC3339Type{},
 						},
 						"fees_accounting_product_id": schema.StringAttribute{
-							Computed: true,
+							Description: "Product ID that any Balance Fees line items will be attributed to for accounting purposes.(*Optional*)",
+							Computed:    true,
 						},
 						"line_item_types": schema.ListAttribute{
 							Description: "A list of line item charge types that can draw-down against the Balance amount at billing.",

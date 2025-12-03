@@ -36,14 +36,14 @@ func (m *PlanGroupLinksDataSourceModel) toListParams(_ context.Context) (params 
 		IDs: m3ter.F(mIDs),
 	}
 
+	if !m.OrgID.IsNull() {
+		params.OrgID = m3ter.F(m.OrgID.ValueString())
+	}
 	if !m.Plan.IsNull() {
 		params.Plan = m3ter.F(m.Plan.ValueString())
 	}
 	if !m.PlanGroup.IsNull() {
 		params.PlanGroup = m3ter.F(m.PlanGroup.ValueString())
-	}
-	if !m.OrgID.IsNull() {
-		params.OrgID = m3ter.F(m.OrgID.ValueString())
 	}
 
 	return

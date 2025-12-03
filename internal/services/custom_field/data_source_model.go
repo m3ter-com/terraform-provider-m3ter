@@ -13,7 +13,7 @@ import (
 
 type CustomFieldDataSourceModel struct {
 	ID                  types.String                       `tfsdk:"id" path:"orgId,computed"`
-	OrgID               types.String                       `tfsdk:"org_id" path:"orgId,required"`
+	OrgID               types.String                       `tfsdk:"org_id" path:"orgId,optional"`
 	Version             types.Int64                        `tfsdk:"version" json:"version,computed,force_encode,encode_state_for_unknown"`
 	Account             customfield.NormalizedDynamicValue `tfsdk:"account" json:"account,computed"`
 	AccountPlan         customfield.NormalizedDynamicValue `tfsdk:"account_plan" json:"accountPlan,computed"`

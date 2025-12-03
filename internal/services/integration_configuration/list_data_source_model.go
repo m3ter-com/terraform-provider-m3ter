@@ -26,11 +26,11 @@ type IntegrationConfigurationsDataSourceModel struct {
 func (m *IntegrationConfigurationsDataSourceModel) toListParams(_ context.Context) (params m3ter.IntegrationConfigurationListParams, diags diag.Diagnostics) {
 	params = m3ter.IntegrationConfigurationListParams{}
 
-	if !m.DestinationID.IsNull() {
-		params.DestinationID = m3ter.F(m.DestinationID.ValueString())
-	}
 	if !m.OrgID.IsNull() {
 		params.OrgID = m3ter.F(m.OrgID.ValueString())
+	}
+	if !m.DestinationID.IsNull() {
+		params.DestinationID = m3ter.F(m.DestinationID.ValueString())
 	}
 
 	return

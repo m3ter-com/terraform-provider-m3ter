@@ -219,7 +219,7 @@ func (r *WebhookResource) Delete(ctx context.Context, req resource.DeleteRequest
 }
 
 func (r *WebhookResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	var data *WebhookModel = new(WebhookModel)
+	var data = new(WebhookModel)
 
 	path_org_id := ""
 	path_id := ""

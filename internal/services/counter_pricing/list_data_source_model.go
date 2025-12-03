@@ -38,6 +38,9 @@ func (m *CounterPricingsDataSourceModel) toListParams(_ context.Context) (params
 		IDs: m3ter.F(mIDs),
 	}
 
+	if !m.OrgID.IsNull() {
+		params.OrgID = m3ter.F(m.OrgID.ValueString())
+	}
 	if !m.Date.IsNull() {
 		params.Date = m3ter.F(m.Date.ValueString())
 	}
@@ -46,9 +49,6 @@ func (m *CounterPricingsDataSourceModel) toListParams(_ context.Context) (params
 	}
 	if !m.PlanTemplateID.IsNull() {
 		params.PlanTemplateID = m3ter.F(m.PlanTemplateID.ValueString())
-	}
-	if !m.OrgID.IsNull() {
-		params.OrgID = m3ter.F(m.OrgID.ValueString())
 	}
 
 	return

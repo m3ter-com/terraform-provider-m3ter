@@ -11,6 +11,8 @@ type OrganizationConfigModel struct {
 	ID                              types.String                                   `tfsdk:"id" json:"id,computed"`
 	OrgID                           types.String                                   `tfsdk:"org_id" path:"orgId,optional"`
 	DaysBeforeBillDue               types.Int64                                    `tfsdk:"days_before_bill_due" json:"daysBeforeBillDue,required"`
+	AllowNegativeBalances           types.Bool                                     `tfsdk:"allow_negative_balances" json:"allowNegativeBalances,optional"`
+	AllowOverlappingPlans           types.Bool                                     `tfsdk:"allow_overlapping_plans" json:"allowOverlappingPlans,optional"`
 	AutoApproveBillsGracePeriod     types.Int64                                    `tfsdk:"auto_approve_bills_grace_period" json:"autoApproveBillsGracePeriod,optional"`
 	AutoApproveBillsGracePeriodUnit types.String                                   `tfsdk:"auto_approve_bills_grace_period_unit" json:"autoApproveBillsGracePeriodUnit,optional"`
 	AutoGenerateStatementMode       types.String                                   `tfsdk:"auto_generate_statement_mode" json:"autoGenerateStatementMode,optional"`

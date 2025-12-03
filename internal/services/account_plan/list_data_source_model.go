@@ -41,6 +41,9 @@ func (m *AccountPlansDataSourceModel) toListParams(_ context.Context) (params m3
 		IDs: m3ter.F(mIDs),
 	}
 
+	if !m.OrgID.IsNull() {
+		params.OrgID = m3ter.F(m.OrgID.ValueString())
+	}
 	if !m.Account.IsNull() {
 		params.Account = m3ter.F(m.Account.ValueString())
 	}
@@ -58,9 +61,6 @@ func (m *AccountPlansDataSourceModel) toListParams(_ context.Context) (params m3
 	}
 	if !m.Product.IsNull() {
 		params.Product = m3ter.F(m.Product.ValueString())
-	}
-	if !m.OrgID.IsNull() {
-		params.OrgID = m3ter.F(m.OrgID.ValueString())
 	}
 
 	return

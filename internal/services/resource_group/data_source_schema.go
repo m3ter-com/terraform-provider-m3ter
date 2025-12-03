@@ -17,19 +17,19 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 			"id": schema.StringAttribute{
 				Required: true,
 			},
-			"org_id": schema.StringAttribute{
-				Required:           true,
-				DeprecationMessage: "the org id should be set at the client level instead",
-			},
 			"type": schema.StringAttribute{
 				Required: true,
+			},
+			"org_id": schema.StringAttribute{
+				Optional:           true,
+				DeprecationMessage: "the org id should be set at the client level instead",
 			},
 			"name": schema.StringAttribute{
 				Description: "The name of the Resource Group.",
 				Computed:    true,
 			},
 			"version": schema.Int64Attribute{
-				Description: "The version number. Default value when newly created is one.",
+				Description: "The version number:\n- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.\n- **Update:** On successful Update, the version is incremented by 1 in the response.",
 				Computed:    true,
 			},
 		},

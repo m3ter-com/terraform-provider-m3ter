@@ -12,7 +12,7 @@ import (
 
 type NotificationConfigurationDataSourceModel struct {
 	ID              types.String                                       `tfsdk:"id" path:"id,computed_optional"`
-	OrgID           types.String                                       `tfsdk:"org_id" path:"orgId,required"`
+	OrgID           types.String                                       `tfsdk:"org_id" path:"orgId,optional"`
 	Active          types.Bool                                         `tfsdk:"active" json:"active,computed"`
 	AlwaysFireEvent types.Bool                                         `tfsdk:"always_fire_event" json:"alwaysFireEvent,computed"`
 	Calculation     types.String                                       `tfsdk:"calculation" json:"calculation,computed"`
@@ -46,6 +46,9 @@ func (m *NotificationConfigurationDataSourceModel) toListParams(_ context.Contex
 		IDs: m3ter.F(mFindOneByIDs),
 	}
 
+	if !m.OrgID.IsNull() {
+		params.OrgID = m3ter.F(m.OrgID.ValueString())
+	}
 	if !m.FindOneBy.Active.IsNull() {
 		params.Active = m3ter.F(m.FindOneBy.Active.ValueBool())
 	}

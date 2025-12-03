@@ -12,7 +12,7 @@ import (
 
 type ExternalMappingDataSourceModel struct {
 	ID                  types.String                             `tfsdk:"id" path:"id,computed_optional"`
-	OrgID               types.String                             `tfsdk:"org_id" path:"orgId,required"`
+	OrgID               types.String                             `tfsdk:"org_id" path:"orgId,optional"`
 	ExternalID          types.String                             `tfsdk:"external_id" json:"externalId,computed"`
 	ExternalSystem      types.String                             `tfsdk:"external_system" json:"externalSystem,computed"`
 	ExternalTable       types.String                             `tfsdk:"external_table" json:"externalTable,computed"`
@@ -45,6 +45,9 @@ func (m *ExternalMappingDataSourceModel) toListParams(_ context.Context) (params
 		M3terIDs: m3ter.F(mFindOneByM3terIDs),
 	}
 
+	if !m.OrgID.IsNull() {
+		params.OrgID = m3ter.F(m.OrgID.ValueString())
+	}
 	if !m.FindOneBy.ExternalSystemID.IsNull() {
 		params.ExternalSystemID = m3ter.F(m.FindOneBy.ExternalSystemID.ValueString())
 	}

@@ -12,7 +12,7 @@ import (
 
 type TransactionTypeDataSourceModel struct {
 	ID        types.String                             `tfsdk:"id" path:"id,computed_optional"`
-	OrgID     types.String                             `tfsdk:"org_id" path:"orgId,required"`
+	OrgID     types.String                             `tfsdk:"org_id" path:"orgId,optional"`
 	Archived  types.Bool                               `tfsdk:"archived" json:"archived,computed"`
 	Code      types.String                             `tfsdk:"code" json:"code,computed"`
 	Name      types.String                             `tfsdk:"name" json:"name,computed"`
@@ -49,6 +49,9 @@ func (m *TransactionTypeDataSourceModel) toListParams(_ context.Context) (params
 		IDs:   m3ter.F(mFindOneByIDs),
 	}
 
+	if !m.OrgID.IsNull() {
+		params.OrgID = m3ter.F(m.OrgID.ValueString())
+	}
 	if !m.FindOneBy.Archived.IsNull() {
 		params.Archived = m3ter.F(m.FindOneBy.Archived.ValueBool())
 	}

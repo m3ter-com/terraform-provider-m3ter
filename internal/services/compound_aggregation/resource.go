@@ -219,7 +219,7 @@ func (r *CompoundAggregationResource) Delete(ctx context.Context, req resource.D
 }
 
 func (r *CompoundAggregationResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	var data *CompoundAggregationModel = new(CompoundAggregationModel)
+	var data = new(CompoundAggregationModel)
 
 	path_org_id := ""
 	path_id := ""

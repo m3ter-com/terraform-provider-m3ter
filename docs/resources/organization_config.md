@@ -22,6 +22,8 @@ resource "m3ter_organization_config" "example_organization_config" {
   timezone = "UTC"
   week_epoch = "2022-01-04"
   year_epoch = "2022-01-01"
+  allow_negative_balances = false
+  allow_overlapping_plans = false
   auto_approve_bills_grace_period = 2
   auto_approve_bills_grace_period_unit = "DAYS"
   auto_generate_statement_mode = "NONE"
@@ -55,6 +57,8 @@ resource "m3ter_organization_config" "example_organization_config" {
 
 ### Optional
 
+- `allow_negative_balances` (Boolean) Allow balance amounts to fall below zero. This feature is enabled on request. Please get in touch with m3ter Support or your m3ter contact if you would like it enabling for your organization(s).
+- `allow_overlapping_plans` (Boolean) Allows plans to overlap time periods for different contracts.
 - `auto_approve_bills_grace_period` (Number) Grace period before bills are auto-approved. Used in combination with `autoApproveBillsGracePeriodUnit` parameter.
 
 **Note:** When used in combination with `autoApproveBillsGracePeriodUnit` enables auto-approval of Bills for Organization, which occurs when the specified time period has elapsed after Bill generation.

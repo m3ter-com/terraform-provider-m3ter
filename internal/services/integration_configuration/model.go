@@ -15,7 +15,7 @@ type IntegrationConfigurationModel struct {
 	OrgID                    types.String                                                       `tfsdk:"org_id" path:"orgId,optional"`
 	Destination              types.String                                                       `tfsdk:"destination" json:"destination,required"`
 	EntityType               types.String                                                       `tfsdk:"entity_type" json:"entityType,required"`
-	DestinationID            types.String                                                       `tfsdk:"destination_id" json:"destinationId,optional,no_refresh"`
+	DestinationID            types.String                                                       `tfsdk:"destination_id" json:"destinationId,optional"`
 	EntityID                 types.String                                                       `tfsdk:"entity_id" json:"entityId,optional"`
 	IntegrationCredentialsID types.String                                                       `tfsdk:"integration_credentials_id" json:"integrationCredentialsId,optional,no_refresh"`
 	Name                     types.String                                                       `tfsdk:"name" json:"name,optional,no_refresh"`
@@ -27,6 +27,7 @@ type IntegrationConfigurationModel struct {
 	Enabled                  types.Bool                                                         `tfsdk:"enabled" json:"enabled,computed,no_refresh"`
 	Error                    types.String                                                       `tfsdk:"error" json:"error,computed"`
 	ExternalID               types.String                                                       `tfsdk:"external_id" json:"externalId,computed"`
+	ParentIntegrationRunID   types.String                                                       `tfsdk:"parent_integration_run_id" json:"parentIntegrationRunId,computed"`
 	Status                   types.String                                                       `tfsdk:"status" json:"status,computed"`
 	TriggerType              types.String                                                       `tfsdk:"trigger_type" json:"triggerType,computed,no_refresh"`
 	URL                      types.String                                                       `tfsdk:"url" json:"url,computed"`

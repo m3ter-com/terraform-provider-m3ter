@@ -14,7 +14,7 @@ import (
 
 type AccountPlanDataSourceModel struct {
 	ID               types.String                         `tfsdk:"id" path:"id,computed_optional"`
-	OrgID            types.String                         `tfsdk:"org_id" path:"orgId,required"`
+	OrgID            types.String                         `tfsdk:"org_id" path:"orgId,optional"`
 	AccountID        types.String                         `tfsdk:"account_id" json:"accountId,computed"`
 	BillEpoch        timetypes.RFC3339                    `tfsdk:"bill_epoch" json:"billEpoch,computed" format:"date"`
 	ChildBillingMode types.String                         `tfsdk:"child_billing_mode" json:"childBillingMode,computed"`
@@ -52,6 +52,9 @@ func (m *AccountPlanDataSourceModel) toListParams(_ context.Context) (params m3t
 		IDs: m3ter.F(mFindOneByIDs),
 	}
 
+	if !m.OrgID.IsNull() {
+		params.OrgID = m3ter.F(m.OrgID.ValueString())
+	}
 	if !m.FindOneBy.Account.IsNull() {
 		params.Account = m3ter.F(m.FindOneBy.Account.ValueString())
 	}

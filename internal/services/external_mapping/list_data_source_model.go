@@ -36,14 +36,14 @@ func (m *ExternalMappingsDataSourceModel) toListParams(_ context.Context) (param
 		M3terIDs: m3ter.F(mM3terIDs),
 	}
 
+	if !m.OrgID.IsNull() {
+		params.OrgID = m3ter.F(m.OrgID.ValueString())
+	}
 	if !m.ExternalSystemID.IsNull() {
 		params.ExternalSystemID = m3ter.F(m.ExternalSystemID.ValueString())
 	}
 	if !m.IntegrationConfigID.IsNull() {
 		params.IntegrationConfigID = m3ter.F(m.IntegrationConfigID.ValueString())
-	}
-	if !m.OrgID.IsNull() {
-		params.OrgID = m3ter.F(m.OrgID.ValueString())
 	}
 
 	return

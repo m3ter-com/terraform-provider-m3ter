@@ -219,7 +219,7 @@ func (r *AccountPlanResource) Delete(ctx context.Context, req resource.DeleteReq
 }
 
 func (r *AccountPlanResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	var data *AccountPlanModel = new(AccountPlanModel)
+	var data = new(AccountPlanModel)
 
 	path_org_id := ""
 	path_id := ""

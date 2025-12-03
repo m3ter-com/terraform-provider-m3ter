@@ -12,7 +12,7 @@ import (
 
 type ScheduledEventConfigurationDataSourceModel struct {
 	ID        types.String                                         `tfsdk:"id" path:"id,computed_optional"`
-	OrgID     types.String                                         `tfsdk:"org_id" path:"orgId,required"`
+	OrgID     types.String                                         `tfsdk:"org_id" path:"orgId,optional"`
 	Entity    types.String                                         `tfsdk:"entity" json:"entity,computed"`
 	Field     types.String                                         `tfsdk:"field" json:"field,computed"`
 	Name      types.String                                         `tfsdk:"name" json:"name,computed"`
@@ -41,6 +41,10 @@ func (m *ScheduledEventConfigurationDataSourceModel) toListParams(_ context.Cont
 
 	params = m3ter.ScheduledEventConfigurationListParams{
 		IDs: m3ter.F(mFindOneByIDs),
+	}
+
+	if !m.OrgID.IsNull() {
+		params.OrgID = m3ter.F(m.OrgID.ValueString())
 	}
 
 	return

@@ -13,7 +13,9 @@ import (
 
 type OrganizationConfigDataSourceModel struct {
 	ID                              types.String                                                                       `tfsdk:"id" path:"orgId,computed"`
-	OrgID                           types.String                                                                       `tfsdk:"org_id" path:"orgId,required"`
+	OrgID                           types.String                                                                       `tfsdk:"org_id" path:"orgId,optional"`
+	AllowNegativeBalances           types.Bool                                                                         `tfsdk:"allow_negative_balances" json:"allowNegativeBalances,computed"`
+	AllowOverlappingPlans           types.Bool                                                                         `tfsdk:"allow_overlapping_plans" json:"allowOverlappingPlans,computed"`
 	AutoApproveBillsGracePeriod     types.Int64                                                                        `tfsdk:"auto_approve_bills_grace_period" json:"autoApproveBillsGracePeriod,computed"`
 	AutoApproveBillsGracePeriodUnit types.String                                                                       `tfsdk:"auto_approve_bills_grace_period_unit" json:"autoApproveBillsGracePeriodUnit,computed"`
 	AutoGenerateStatementMode       types.String                                                                       `tfsdk:"auto_generate_statement_mode" json:"autoGenerateStatementMode,computed"`

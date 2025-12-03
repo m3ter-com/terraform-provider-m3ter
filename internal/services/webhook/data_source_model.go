@@ -13,7 +13,7 @@ import (
 
 type WebhookDataSourceModel struct {
 	ID          types.String                                                `tfsdk:"id" path:"id,computed_optional"`
-	OrgID       types.String                                                `tfsdk:"org_id" path:"orgId,required"`
+	OrgID       types.String                                                `tfsdk:"org_id" path:"orgId,optional"`
 	Active      types.Bool                                                  `tfsdk:"active" json:"active,computed"`
 	Code        types.String                                                `tfsdk:"code" json:"code,computed"`
 	Description types.String                                                `tfsdk:"description" json:"description,computed"`
@@ -44,6 +44,10 @@ func (m *WebhookDataSourceModel) toListParams(_ context.Context) (params m3ter.W
 
 	params = m3ter.WebhookListParams{
 		IDs: m3ter.F(mFindOneByIDs),
+	}
+
+	if !m.OrgID.IsNull() {
+		params.OrgID = m3ter.F(m.OrgID.ValueString())
 	}
 
 	return

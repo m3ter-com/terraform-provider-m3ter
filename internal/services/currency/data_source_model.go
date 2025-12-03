@@ -12,7 +12,7 @@ import (
 
 type CurrencyDataSourceModel struct {
 	ID               types.String                      `tfsdk:"id" path:"id,computed_optional"`
-	OrgID            types.String                      `tfsdk:"org_id" path:"orgId,required"`
+	OrgID            types.String                      `tfsdk:"org_id" path:"orgId,optional"`
 	Archived         types.Bool                        `tfsdk:"archived" json:"archived,computed"`
 	Code             types.String                      `tfsdk:"code" json:"code,computed"`
 	MaxDecimalPlaces types.Int64                       `tfsdk:"max_decimal_places" json:"maxDecimalPlaces,computed"`
@@ -51,6 +51,9 @@ func (m *CurrencyDataSourceModel) toListParams(_ context.Context) (params m3ter.
 		IDs:   m3ter.F(mFindOneByIDs),
 	}
 
+	if !m.OrgID.IsNull() {
+		params.OrgID = m3ter.F(m.OrgID.ValueString())
+	}
 	if !m.FindOneBy.Archived.IsNull() {
 		params.Archived = m3ter.F(m.FindOneBy.Archived.ValueBool())
 	}

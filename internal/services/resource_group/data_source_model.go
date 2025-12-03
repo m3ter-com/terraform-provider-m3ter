@@ -12,8 +12,8 @@ import (
 
 type ResourceGroupDataSourceModel struct {
 	ID      types.String `tfsdk:"id" path:"id,required"`
-	OrgID   types.String `tfsdk:"org_id" path:"orgId,required"`
 	Type    types.String `tfsdk:"type" path:"type,required"`
+	OrgID   types.String `tfsdk:"org_id" path:"orgId,optional"`
 	Name    types.String `tfsdk:"name" json:"name,computed"`
 	Version types.Int64  `tfsdk:"version" json:"version,computed,force_encode,encode_state_for_unknown"`
 }

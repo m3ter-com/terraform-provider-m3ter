@@ -14,7 +14,7 @@ import (
 
 type BalanceDataSourceModel struct {
 	ID                              types.String                       `tfsdk:"id" path:"id,computed_optional"`
-	OrgID                           types.String                       `tfsdk:"org_id" path:"orgId,required"`
+	OrgID                           types.String                       `tfsdk:"org_id" path:"orgId,optional"`
 	AccountID                       types.String                       `tfsdk:"account_id" json:"accountId,computed"`
 	Amount                          types.Float64                      `tfsdk:"amount" json:"amount,computed"`
 	BalanceDrawDownDescription      types.String                       `tfsdk:"balance_draw_down_description" json:"balanceDrawDownDescription,computed"`
@@ -49,13 +49,28 @@ func (m *BalanceDataSourceModel) toReadParams(_ context.Context) (params m3ter.B
 }
 
 func (m *BalanceDataSourceModel) toListParams(_ context.Context) (params m3ter.BalanceListParams, diags diag.Diagnostics) {
-	params = m3ter.BalanceListParams{}
+	mFindOneByIDs := []string{}
+	if m.FindOneBy.IDs != nil {
+		for _, item := range *m.FindOneBy.IDs {
+			mFindOneByIDs = append(mFindOneByIDs, item.ValueString())
+		}
+	}
 
+	params = m3ter.BalanceListParams{
+		IDs: m3ter.F(mFindOneByIDs),
+	}
+
+	if !m.OrgID.IsNull() {
+		params.OrgID = m3ter.F(m.OrgID.ValueString())
+	}
 	if !m.FindOneBy.AccountID.IsNull() {
 		params.AccountID = m3ter.F(m.FindOneBy.AccountID.ValueString())
 	}
 	if !m.FindOneBy.Contract.IsNull() {
 		params.Contract = m3ter.F(m.FindOneBy.Contract.ValueString())
+	}
+	if !m.FindOneBy.ContractID.IsNull() {
+		params.ContractID = m3ter.F(m.FindOneBy.ContractID.ValueString())
 	}
 	if !m.FindOneBy.EndDateEnd.IsNull() {
 		params.EndDateEnd = m3ter.F(m.FindOneBy.EndDateEnd.ValueString())
@@ -68,8 +83,10 @@ func (m *BalanceDataSourceModel) toListParams(_ context.Context) (params m3ter.B
 }
 
 type BalanceFindOneByDataSourceModel struct {
-	AccountID    types.String `tfsdk:"account_id" query:"accountId,optional"`
-	Contract     types.String `tfsdk:"contract" query:"contract,optional"`
-	EndDateEnd   types.String `tfsdk:"end_date_end" query:"endDateEnd,optional"`
-	EndDateStart types.String `tfsdk:"end_date_start" query:"endDateStart,optional"`
+	AccountID    types.String    `tfsdk:"account_id" query:"accountId,optional"`
+	Contract     types.String    `tfsdk:"contract" query:"contract,optional"`
+	ContractID   types.String    `tfsdk:"contract_id" query:"contractId,optional"`
+	EndDateEnd   types.String    `tfsdk:"end_date_end" query:"endDateEnd,optional"`
+	EndDateStart types.String    `tfsdk:"end_date_start" query:"endDateStart,optional"`
+	IDs          *[]types.String `tfsdk:"ids" query:"ids,optional"`
 }

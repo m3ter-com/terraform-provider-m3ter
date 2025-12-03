@@ -25,11 +25,16 @@ data "m3ter_resource_group" "example_resource_group" {
 
 ### Required
 
-- `org_id` (String, Deprecated)
 - `type` (String)
+
+### Optional
+
+- `org_id` (String, Deprecated)
 
 ### Read-Only
 
 - `id` (String) The ID of this resource.
 - `name` (String) The name of the Resource Group.
-- `version` (Number) The version number. Default value when newly created is one.
+- `version` (Number) The version number:
+- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.
+- **Update:** On successful Update, the version is incremented by 1 in the response.

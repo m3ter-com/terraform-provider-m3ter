@@ -13,7 +13,7 @@ import (
 
 type PlanGroupDataSourceModel struct {
 	ID                                types.String                       `tfsdk:"id" path:"id,computed_optional"`
-	OrgID                             types.String                       `tfsdk:"org_id" path:"orgId,required"`
+	OrgID                             types.String                       `tfsdk:"org_id" path:"orgId,optional"`
 	AccountID                         types.String                       `tfsdk:"account_id" json:"accountId,computed"`
 	Code                              types.String                       `tfsdk:"code" json:"code,computed"`
 	Currency                          types.String                       `tfsdk:"currency" json:"currency,computed"`
@@ -58,6 +58,10 @@ func (m *PlanGroupDataSourceModel) toListParams(_ context.Context) (params m3ter
 	params = m3ter.PlanGroupListParams{
 		AccountID: m3ter.F(mFindOneByAccountID),
 		IDs:       m3ter.F(mFindOneByIDs),
+	}
+
+	if !m.OrgID.IsNull() {
+		params.OrgID = m3ter.F(m.OrgID.ValueString())
 	}
 
 	return
