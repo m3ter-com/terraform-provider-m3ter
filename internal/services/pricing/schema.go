@@ -139,7 +139,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				ElementType: types.StringType,
 			},
 			"overage_pricing_bands": schema.ListNestedAttribute{
-				Description: "Specify Prepayment/Balance overage pricing in pricing bands for the case of a **Tiered** pricing structure.",
+				Description: "Specify Prepayment/Balance overage pricing in pricing bands for the case of a **Tiered** pricing structure. The overage pricing rates will be used to charge for usage if the Account has a Commitment/Prepayment or Balance applied to it and the entire Commitment/Prepayment or Balance amount has been consumed.\n\n**Constraints:**\n* Can only be used for a **Tiered** pricing structure. If cumulative is **FALSE** and you defined `overagePricingBands`, then you'll receive an error.\n* If `tiersSpanPlan` is set to **TRUE** for usage accumulates over entire contract period, then cannot be used.\n* If the Commitment/Prepayement or Balance has an `overageSurchargePercent` defined, then  this will override any `overagePricingBands` you've defined for the pricing.",
 				Optional:    true,
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{

@@ -38,7 +38,7 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
 						"id": schema.StringAttribute{
-							Description: "The unique identifier (UUID) for this Permission Policy.",
+							Description: "The UUID of the entity.",
 							Computed:    true,
 						},
 						"managed_policy": schema.BoolAttribute{
@@ -78,6 +78,7 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 													"EXPORTS_DOWNLOAD",
 													"MARKETPLACE_USAGE_CREATE",
 													"MARKETPLACE_USAGE_RETRIEVE",
+													"AUDIT_RETRIEVE",
 												),
 											),
 										},
@@ -101,7 +102,7 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							},
 						},
 						"version": schema.Int64Attribute{
-							Description: "The version number. Default value when newly created is one.",
+							Description: "The version number:\n- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.\n- **Update:** On successful Update, the version is incremented by 1 in the response.",
 							Computed:    true,
 						},
 					},

@@ -28,6 +28,14 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Optional:           true,
 				DeprecationMessage: "the org id should be set at the client level instead",
 			},
+			"allow_negative_balances": schema.BoolAttribute{
+				Description: "Allow balance amounts to fall below zero. This feature is enabled on request. Please get in touch with m3ter Support or your m3ter contact if you would like it enabling for your organization(s).",
+				Computed:    true,
+			},
+			"allow_overlapping_plans": schema.BoolAttribute{
+				Description: "Allows plans to overlap time periods for different contracts.",
+				Computed:    true,
+			},
 			"auto_approve_bills_grace_period": schema.Int64Attribute{
 				Description: "Grace period before bills are auto-approved. Used in combination with the field `autoApproveBillsGracePeriodUnit`.",
 				Computed:    true,

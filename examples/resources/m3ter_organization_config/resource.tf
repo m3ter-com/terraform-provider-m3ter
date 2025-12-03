@@ -7,6 +7,8 @@ resource "m3ter_organization_config" "example_organization_config" {
   timezone = "UTC"
   week_epoch = "2022-01-04"
   year_epoch = "2022-01-01"
+  allow_negative_balances = false
+  allow_overlapping_plans = false
   auto_approve_bills_grace_period = 2
   auto_approve_bills_grace_period_unit = "DAYS"
   auto_generate_statement_mode = "NONE"

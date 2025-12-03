@@ -67,7 +67,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				CustomType:  customfield.NewNestedObjectType[IntegrationConfigurationCredentialsModel](ctx),
 				Attributes: map[string]schema.Attribute{
 					"type": schema.StringAttribute{
-						Description: "Specifies the type of authorization required for the integration.\nAvailable values: \"HTTP_BASIC\", \"OAUTH_CLIENT_CREDENTIALS\", \"M3TER_SIGNED_REQUEST\", \"AWS_INTEGRATION\", \"PADDLE_AUTH\", \"NETSUITE_AUTH\", \"CHARGEBEE_AUTH\", \"M3TER_SERVICE_USER\", \"STRIPE_SIGNED_REQUEST\", \"HUBSPOT_ACCESS_TOKEN\", \"HUBSPOT_CLIENT_SECRET\", \"OPSGENIE_KEY\", \"SAP_BYD\".",
+						Description: "Specifies the type of authorization required for the integration.\nAvailable values: \"HTTP_BASIC\", \"OAUTH_CLIENT_CREDENTIALS\", \"M3TER_SIGNED_REQUEST\", \"AWS_INTEGRATION\", \"PADDLE_AUTH\", \"NETSUITE_AUTH\", \"CHARGEBEE_AUTH\", \"M3TER_APP_SIGNATURE\", \"M3TER_SERVICE_USER\", \"STRIPE_SIGNED_REQUEST\", \"HUBSPOT_ACCESS_TOKEN\", \"HUBSPOT_CLIENT_SECRET\", \"OPSGENIE_KEY\", \"SAP_BYD\", \"SLACK_WEBHOOK\", \"SAGE_INTACCT_CLIENT_CREDENTIALS\".",
 						Required:    true,
 						Validators: []validator.String{
 							stringvalidator.OneOfCaseInsensitive(
@@ -78,12 +78,15 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 								"PADDLE_AUTH",
 								"NETSUITE_AUTH",
 								"CHARGEBEE_AUTH",
+								"M3TER_APP_SIGNATURE",
 								"M3TER_SERVICE_USER",
 								"STRIPE_SIGNED_REQUEST",
 								"HUBSPOT_ACCESS_TOKEN",
 								"HUBSPOT_CLIENT_SECRET",
 								"OPSGENIE_KEY",
 								"SAP_BYD",
+								"SLACK_WEBHOOK",
+								"SAGE_INTACCT_CLIENT_CREDENTIALS",
 							),
 						},
 					},
@@ -146,6 +149,10 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 			},
 			"external_id": schema.StringAttribute{
 				Description: "The external ID in the destination system if available.",
+				Computed:    true,
+			},
+			"parent_integration_run_id": schema.StringAttribute{
+				Description: "ID of the parent integration run, or null if this is a parent integration run",
 				Computed:    true,
 			},
 			"status": schema.StringAttribute{
