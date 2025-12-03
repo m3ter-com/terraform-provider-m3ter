@@ -38,9 +38,11 @@ resource "m3ter_permission_policy" "example_permission_policy" {
 
 ### Read-Only
 
-- `id` (String) The unique identifier (UUID) for this Permission Policy.
+- `id` (String) The UUID of the entity.
 - `managed_policy` (Boolean) Indicates whether this is a system generated Managed Permission Policy.
-- `version` (Number) The version number. Default value when newly created is one.
+- `version` (Number) The version number:
+- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.
+- **Update:** On successful Update, the version is incremented by 1 in the response.
 
 <a id="nestedatt--permission_policy"></a>
 ### Nested Schema for `permission_policy`

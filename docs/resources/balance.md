@@ -16,11 +16,12 @@ description: |-
 resource "m3ter_balance" "example_balance" {
   org_id = "orgId"
   account_id = "x"
+  code = "S?oC\"$]C] ]]]]]5]"
   currency = "x"
   end_date = "2019-12-27T18:11:19.117Z"
+  name = "x"
   start_date = "2019-12-27T18:11:19.117Z"
   balance_draw_down_description = "balanceDrawDownDescription"
-  code = "S?oC\"$]C] ]]]]]5]"
   consumptions_accounting_product_id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
   contract_id = "contractId"
   custom_fields = {
@@ -29,7 +30,6 @@ resource "m3ter_balance" "example_balance" {
   description = "description"
   fees_accounting_product_id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
   line_item_types = ["STANDING_CHARGE"]
-  name = "name"
   overage_description = "overageDescription"
   overage_surcharge_percent = 0
   product_ids = ["string"]
@@ -44,34 +44,35 @@ resource "m3ter_balance" "example_balance" {
 ### Required
 
 - `account_id` (String) The unique identifier (UUID) for the end customer Account.
+- `code` (String) Unique short code for the Balance.
 - `currency` (String) The currency code used for the Balance amount. For example: USD, GBP or EUR.
 - `end_date` (String) The date *(in ISO 8601 format)* after which the Balance will no longer be active for the Account.
 
 **Note:** You can use the `rolloverEndDate` request parameter to define an extended grace period for continued draw-down against the Balance if any amount remains when the specified `endDate` is reached.
+- `name` (String) The official name for the Balance.
 - `start_date` (String) The date *(in ISO 8601 format)* when the Balance becomes active.
 
 ### Optional
 
 - `balance_draw_down_description` (String) A description for the bill line items for draw-down charges against the Balance. *(Optional).*
-- `code` (String) Unique short code for the Balance.
-- `consumptions_accounting_product_id` (String) Optional Product ID this Balance Consumptions should be attributed to for accounting purposes
-- `contract_id` (String)
+- `consumptions_accounting_product_id` (String) Product ID that any Balance Consumed line items will be attributed to for accounting purposes.(*Optional*)
+- `contract_id` (String) The unique identifier (UUID) of a Contract on the Account that the Balance will be added to.
 - `custom_fields` (Dynamic) User defined fields enabling you to attach custom data. The value for a custom field can be either a string or a number.
 
 If `customFields` can also be defined for this entity at the Organizational level, `customField` values defined at individual level override values of `customFields` with the same name defined at Organization level.
 
 See [Working with Custom Fields](https://www.m3ter.com/docs/guides/creating-and-managing-products/working-with-custom-fields) in the m3ter documentation for more information.
 - `description` (String) A description of the Balance.
-- `fees_accounting_product_id` (String) Optional Product ID this Balance Fees should be attributed to for accounting purposes
+- `fees_accounting_product_id` (String) Product ID that any Balance Fees line items will be attributed to for accounting purposes.(*Optional*)
 - `line_item_types` (List of String) Specify the line item charge types that can draw-down at billing against the  Balance amount. Options are:
 - `"MINIMUM_SPEND"`
 - `"STANDING_CHARGE"`
 - `"USAGE"`
 - `"COUNTER_RUNNING_TOTAL_CHARGE"`
 - `"COUNTER_ADJUSTMENT_DEBIT"`
+- `AD_HOC`
 
 **NOTE:** If no charge types are specified, by default *all types* can draw-down against the Balance amount at billing.
-- `name` (String) The official name for the Balance.
 - `org_id` (String, Deprecated)
 - `overage_description` (String) A description for Bill line items overage charges.
 - `overage_surcharge_percent` (Number) Define a surcharge level, as a percentage of regular usage rating, applied to overages *(usage charges that exceed the Balance amount)*. For example, if the regular usage rate is $10 per unit of usage consumed and `overageSurchargePercent` is set at 10%, then any usage charged above the original Balance amount is charged at $11 per unit of usage.

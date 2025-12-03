@@ -67,6 +67,7 @@ resource "m3ter_integration_configuration" "example_integration_configuration" {
 - `error` (String) Describes any errors encountered during the integration run.
 - `external_id` (String) The external ID in the destination system if available.
 - `id` (String) The UUID of the entity.
+- `parent_integration_run_id` (String) ID of the parent integration run, or null if this is a parent integration run
 - `status` (String) Available values: "WAITING", "STARTED", "COMPLETE", "ERROR", "AWAITING_RETRY", "AUTH_FAILED", "ACCOUNTING_PERIOD_CLOSED", "INVOICE_ALREADY_PAID", "DISABLED", "TIMEOUT_LIMIT_EXCEEDED", "RATE_LIMIT_RETRY".
 - `trigger_type` (String, Deprecated) Specifies the type of trigger for the integration.
 Available values: "EVENT", "SCHEDULE".
@@ -81,7 +82,7 @@ Available values: "EVENT", "SCHEDULE".
 Required:
 
 - `type` (String) Specifies the type of authorization required for the integration.
-Available values: "HTTP_BASIC", "OAUTH_CLIENT_CREDENTIALS", "M3TER_SIGNED_REQUEST", "AWS_INTEGRATION", "PADDLE_AUTH", "NETSUITE_AUTH", "CHARGEBEE_AUTH", "M3TER_SERVICE_USER", "STRIPE_SIGNED_REQUEST", "HUBSPOT_ACCESS_TOKEN", "HUBSPOT_CLIENT_SECRET", "OPSGENIE_KEY", "SAP_BYD".
+Available values: "HTTP_BASIC", "OAUTH_CLIENT_CREDENTIALS", "M3TER_SIGNED_REQUEST", "AWS_INTEGRATION", "PADDLE_AUTH", "NETSUITE_AUTH", "CHARGEBEE_AUTH", "M3TER_APP_SIGNATURE", "M3TER_SERVICE_USER", "STRIPE_SIGNED_REQUEST", "HUBSPOT_ACCESS_TOKEN", "HUBSPOT_CLIENT_SECRET", "OPSGENIE_KEY", "SAP_BYD", "SLACK_WEBHOOK", "SAGE_INTACCT_CLIENT_CREDENTIALS".
 
 Optional:
 

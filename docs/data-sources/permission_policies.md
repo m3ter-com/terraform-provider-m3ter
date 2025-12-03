@@ -35,11 +35,13 @@ data "m3ter_permission_policies" "example_permission_policies" {
 
 Read-Only:
 
-- `id` (String) The unique identifier (UUID) for this Permission Policy.
+- `id` (String) The UUID of the entity.
 - `managed_policy` (Boolean) Indicates whether this is a system generated Managed Permission Policy.
 - `name` (String) The name of the Permission Policy.
 - `permission_policy` (Attributes List) Array containing the Permission Policies information. (see [below for nested schema](#nestedatt--items--permission_policy))
-- `version` (Number) The version number. Default value when newly created is one.
+- `version` (Number) The version number:
+- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.
+- **Update:** On successful Update, the version is incremented by 1 in the response.
 
 <a id="nestedatt--items--permission_policy"></a>
 ### Nested Schema for `items.permission_policy`

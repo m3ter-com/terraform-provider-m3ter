@@ -40,6 +40,8 @@ data "m3ter_resource_groups" "example_resource_groups" {
 
 Read-Only:
 
-- `id` (String) The unique identifier (UUID) of the Resource Group.
+- `id` (String) The UUID of the entity.
 - `name` (String) The name of the Resource Group.
-- `version` (Number) The version number. Default value when newly created is one.
+- `version` (Number) The version number:
+- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.
+- **Update:** On successful Update, the version is incremented by 1 in the response.
