@@ -32,7 +32,9 @@ data "m3ter_permission_policy" "example_permission_policy" {
 - `managed_policy` (Boolean) Indicates whether this is a system generated Managed Permission Policy.
 - `name` (String) The name of the Permission Policy.
 - `permission_policy` (Attributes List) Array containing the Permission Policies information. (see [below for nested schema](#nestedatt--permission_policy))
-- `version` (Number) The version number. Default value when newly created is one.
+- `version` (Number) The version number:
+- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.
+- **Update:** On successful Update, the version is incremented by 1 in the response.
 
 <a id="nestedatt--permission_policy"></a>
 ### Nested Schema for `permission_policy`

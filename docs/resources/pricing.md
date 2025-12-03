@@ -87,7 +87,12 @@ resource "m3ter_pricing" "example_pricing" {
 *(Optional)*. Overrides the setting at Organization level for minimum spend billing in arrears/in advance.
 - `minimum_spend_description` (String) Minimum spend description *(displayed on the bill line item)*.
 - `org_id` (String, Deprecated)
-- `overage_pricing_bands` (Attributes List) Specify Prepayment/Balance overage pricing in pricing bands for the case of a **Tiered** pricing structure. (see [below for nested schema](#nestedatt--overage_pricing_bands))
+- `overage_pricing_bands` (Attributes List) Specify Prepayment/Balance overage pricing in pricing bands for the case of a **Tiered** pricing structure. The overage pricing rates will be used to charge for usage if the Account has a Commitment/Prepayment or Balance applied to it and the entire Commitment/Prepayment or Balance amount has been consumed.
+
+**Constraints:**
+* Can only be used for a **Tiered** pricing structure. If cumulative is **FALSE** and you defined `overagePricingBands`, then you'll receive an error.
+* If `tiersSpanPlan` is set to **TRUE** for usage accumulates over entire contract period, then cannot be used.
+* If the Commitment/Prepayement or Balance has an `overageSurchargePercent` defined, then  this will override any `overagePricingBands` you've defined for the pricing. (see [below for nested schema](#nestedatt--overage_pricing_bands))
 - `plan_id` (String) UUID of the Plan the Pricing is created for.
 - `plan_template_id` (String) UUID of the Plan Template the Pricing is created for.
 - `segment` (Map of String) Specifies the segment value which you are defining a Pricing for using this call:

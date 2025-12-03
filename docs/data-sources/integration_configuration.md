@@ -30,6 +30,7 @@ data "m3ter_integration_configuration" "example_integration_configuration" {
 ### Read-Only
 
 - `destination` (String) The destination system for the integration run.
+- `destination_id` (String) Identifier of the destination
 - `dt_completed` (String) The date and time the integration was completed. *(in ISO-8601 format)*.
 - `dt_started` (String) The date and time the integration run was started *(in ISO-8601 format)*.
 - `entity_id` (String) The unique identifier (UUID) of the entity the integration run is for.
@@ -39,6 +40,7 @@ data "m3ter_integration_configuration" "example_integration_configuration" {
 - `error` (String) Describes any errors encountered during the integration run.
 - `external_id` (String) The external ID in the destination system if available.
 - `id` (String) The ID of this resource.
+- `parent_integration_run_id` (String) ID of the parent integration run, or null if this is a parent integration run
 - `status` (String) Available values: "WAITING", "STARTED", "COMPLETE", "ERROR", "AWAITING_RETRY", "AUTH_FAILED", "ACCOUNTING_PERIOD_CLOSED", "INVOICE_ALREADY_PAID", "DISABLED", "TIMEOUT_LIMIT_EXCEEDED", "RATE_LIMIT_RETRY".
 - `url` (String) The URL of the entity in the destination system if available.
 - `version` (Number) The version number:

@@ -33,8 +33,8 @@ data "m3ter_balance" "example_balance" {
 - `amount` (Number) The financial value that the Balance holds.
 - `balance_draw_down_description` (String) A description for the bill line items for charges drawn-down against the Balance.
 - `code` (String) A unique short code assigned to the Balance.
-- `consumptions_accounting_product_id` (String)
-- `contract_id` (String)
+- `consumptions_accounting_product_id` (String) Product ID that any Balance Consumed line items will be attributed to for accounting purposes.(*Optional*)
+- `contract_id` (String) The unique identifier (UUID) for a Contract on the Account the Balance has been added to.
 - `currency` (String) The currency code used for the Balance amount. For example: USD, GBP or EUR.
 - `custom_fields` (Dynamic) User defined fields enabling you to attach custom data. The value for a custom field can be either a string or a number.
 
@@ -43,7 +43,7 @@ If `customFields` can also be defined for this entity at the Organizational leve
 See [Working with Custom Fields](https://www.m3ter.com/docs/guides/creating-and-managing-products/working-with-custom-fields) in the m3ter documentation for more information.
 - `description` (String) A description of the Balance.
 - `end_date` (String) The date *(in ISO 8601 format)* after which the Balance will no longer be active.
-- `fees_accounting_product_id` (String)
+- `fees_accounting_product_id` (String) Product ID that any Balance Fees line items will be attributed to for accounting purposes.(*Optional*)
 - `id` (String) The ID of this resource.
 - `line_item_types` (List of String) A list of line item charge types that can draw-down against the Balance amount at billing.
 - `name` (String) The official name of the Balance.
@@ -64,5 +64,7 @@ Optional:
 
 - `account_id` (String) The unique identifier (UUID) for the end customer's account.
 - `contract` (String)
+- `contract_id` (String) Filter Balances by contract id. Use '' with accountId to fetch unlinked balances.
 - `end_date_end` (String) Only include Balances with end dates earlier than this date. If a Balance has a rollover amount configured, then the `rolloverEndDate` will be used as the end date.
 - `end_date_start` (String) Only include Balances with end dates equal to or later than this date. If a Balance has a rollover amount configured, then the `rolloverEndDate` will be used as the end date.
+- `ids` (List of String) A list of unique identifiers (UUIDs) for specific Balances to retrieve.

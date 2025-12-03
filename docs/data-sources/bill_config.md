@@ -32,5 +32,5 @@ data "m3ter_bill_config" "example_bill_config" {
 For example: `"2024-03-01"`.
 - `id` (String, Deprecated) The ID of this resource.
 - `version` (Number) The version number:
-* Default value when newly created is one.
-* Incremented by 1 each time it is updated.
+- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.
+- **Update:** On successful Update, the version is incremented by 1 in the response.
