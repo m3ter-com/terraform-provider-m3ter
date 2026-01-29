@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.8.0 (2026-01-29)
+
+Full Changelog: [v0.7.0...v0.8.0](https://github.com/m3ter-com/terraform-provider-m3ter/compare/v0.7.0...v0.8.0)
+
+### Features
+
+* **api:** updating api spec + fixes ([f111743](https://github.com/m3ter-com/terraform-provider-m3ter/commit/f11174369fa310e7fde89576d391e51089e1f33f))
+
+
+### Chores
+
+* bump dependency version ([d0c5dfd](https://github.com/m3ter-com/terraform-provider-m3ter/commit/d0c5dfd0a3e114a117d98decf70ff3e7b7a2ae32))
+* **internal:** codegen related update ([c386327](https://github.com/m3ter-com/terraform-provider-m3ter/commit/c386327bc7f768a0f6afea010258beebe3a5edae))
+* **internal:** codegen related update ([2c702e8](https://github.com/m3ter-com/terraform-provider-m3ter/commit/2c702e8c2f97fa3c7e266963a48474a2752d659a))
+* **internal:** codegen related update ([5bdb5fd](https://github.com/m3ter-com/terraform-provider-m3ter/commit/5bdb5fdb923996e9a86ebece5e8efe4e9bc6b335))
+* **internal:** update `actions/checkout` version ([9698735](https://github.com/m3ter-com/terraform-provider-m3ter/commit/9698735be1c5808d233a75330664c7ebfe112ed4))
+* update Go SDK version ([f6d8d10](https://github.com/m3ter-com/terraform-provider-m3ter/commit/f6d8d10afb2cdc013691ac1660b947b515c156b4))
+
 ## 0.7.0 (2025-12-03)
 
 Full Changelog: [v0.6.1...v0.7.0](https://github.com/m3ter-com/terraform-provider-m3ter/compare/v0.6.1...v0.7.0)
