@@ -41,7 +41,6 @@ Available values: "NONE", "JSON", "JSON_AND_CSV".
 Optional attribute - if not defined, then first bill date is determined by the Epoch settings at Organizational level.
 - `code` (String) Code of the Account.
 This is a unique short code used for the Account.
-- `config_data` (Map of String) Configuration data for the Account
 - `credit_application_order` (List of String) The order in which any Prepayment or Balance amounts on the Account are to be drawn-down against for billing. Four options:
 - `"PREPAYMENT","BALANCE"`. Draw-down against Prepayment credit before Balance credit.
 - `"BALANCE","PREPAYMENT"`. Draw-down against Balance credit before Prepayment credit.

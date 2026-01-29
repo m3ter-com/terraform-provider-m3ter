@@ -48,6 +48,7 @@ data "m3ter_balances" "example_balances" {
 Read-Only:
 
 - `account_id` (String) The unique identifier (UUID) for the end customer Account the Balance belongs to.
+- `allow_overdraft` (Boolean) Allow balance amounts to fall below zero. This feature is enabled on request. Please get in touch with m3ter Support or your m3ter contact if you would like it enabling for your organization(s).
 - `amount` (Number) The financial value that the Balance holds.
 - `balance_draw_down_description` (String) A description for the bill line items for charges drawn-down against the Balance.
 - `code` (String) A unique short code assigned to the Balance.

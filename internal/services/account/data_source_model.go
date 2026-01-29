@@ -5,7 +5,6 @@ package account
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -27,7 +26,6 @@ type AccountDataSourceModel struct {
 	PurchaseOrderNumber       types.String                                            `tfsdk:"purchase_order_number" json:"purchaseOrderNumber,computed"`
 	StatementDefinitionID     types.String                                            `tfsdk:"statement_definition_id" json:"statementDefinitionId,computed"`
 	Version                   types.Int64                                             `tfsdk:"version" json:"version,computed,force_encode,encode_state_for_unknown"`
-	ConfigData                customfield.Map[jsontypes.Normalized]                   `tfsdk:"config_data" json:"configData,computed"`
 	CreditApplicationOrder    customfield.List[types.String]                          `tfsdk:"credit_application_order" json:"creditApplicationOrder,computed"`
 	Address                   customfield.NestedObject[AccountAddressDataSourceModel] `tfsdk:"address" json:"address,computed"`
 	CustomFields              customfield.NormalizedDynamicValue                      `tfsdk:"custom_fields" json:"customFields,computed"`

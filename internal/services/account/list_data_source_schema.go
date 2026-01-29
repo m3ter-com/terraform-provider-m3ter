@@ -5,7 +5,6 @@ package account
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
@@ -103,12 +102,6 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 						"code": schema.StringAttribute{
 							Description: "Code of the Account.\nThis is a unique short code used for the Account.",
 							Computed:    true,
-						},
-						"config_data": schema.MapAttribute{
-							Description: "Configuration data for the Account",
-							Computed:    true,
-							CustomType:  customfield.NewMapType[jsontypes.Normalized](ctx),
-							ElementType: jsontypes.NormalizedType{},
 						},
 						"credit_application_order": schema.ListAttribute{
 							Description: "The order in which any Prepayment or Balance amounts on the Account are to be drawn-down against for billing. Four options:\n- `\"PREPAYMENT\",\"BALANCE\"`. Draw-down against Prepayment credit before Balance credit.\n- `\"BALANCE\",\"PREPAYMENT\"`. Draw-down against Balance credit before Prepayment credit.\n- `\"PREPAYMENT\"`. Only draw-down against Prepayment credit.\n- `\"BALANCE\"`. Only draw-down against Balance credit.",

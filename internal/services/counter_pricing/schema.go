@@ -98,19 +98,19 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				Optional:    true,
 			},
 			"pro_rate_adjustment_credit": schema.BoolAttribute{
-				Description: "The default value is **TRUE**.\n\n* When TRUE, counter adjustment credits are prorated and are billed according to the number of days in billing period.\n\n* When FALSE, counter adjustment credits are not prorated and are billed for the entire billing period.\n\n*(Optional)*.",
+				Description: "The default value is **TRUE**.\n\n* When **TRUE**, counter adjustment credits are prorated and are billed according to the number of days in billing period.\n\n* When **FALSE**, counter adjustment credits are not prorated and are billed for the entire billing period.\n\n*(Optional)*.",
 				Optional:    true,
 			},
 			"pro_rate_adjustment_debit": schema.BoolAttribute{
-				Description: "The default value is **TRUE**.\n\n* When TRUE, counter adjustment debits are prorated and are billed according to the number of days in billing period.\n\n* When FALSE, counter adjustment debits are not prorated and are billed for the entire billing period.\n\n*(Optional)*.",
+				Description: "The default value is **TRUE**.\n\n* When **TRUE**, counter adjustment debits are prorated and are billed according to the number of days in billing period.\n\n* When **FALSE**, counter adjustment debits are not prorated and are billed for the entire billing period.\n\n*(Optional)*.",
 				Optional:    true,
 			},
 			"pro_rate_running_total": schema.BoolAttribute{
-				Description: "The default value is **TRUE**.\n\n* When TRUE, counter running total charges are prorated and are billed according to the number of days in billing period.\n\n* When FALSE, counter running total charges are not prorated and are billed for the entire billing period.\n\n*(Optional)*.",
+				Description: "The default value is **TRUE**.\n\n* When **TRUE**, counter running total charges are prorated and are billed according to the number of days in billing period.\n\n* When **FALSE**, counter running total charges are not prorated and are billed for the entire billing period.\n\n*(Optional)*.",
 				Optional:    true,
 			},
 			"running_total_bill_in_advance": schema.BoolAttribute{
-				Description: "The default value is **TRUE**.\n\n* When TRUE, running totals are billed at the start of each billing period.\n\n* When FALSE, running totals are billed at the end of each billing period.\n\n*(Optional)*.",
+				Description: "The default value is **TRUE**.\n\n* When **TRUE**, running totals are billed at the start of each billing period.\n\n* When **FALSE**, running totals are billed at the end of each billing period.\n\n*(Optional)*.",
 				Optional:    true,
 			},
 			"version": schema.Int64Attribute{

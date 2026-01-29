@@ -29,7 +29,7 @@ data "m3ter_compound_aggregation" "example_compound_aggregation" {
 
 ### Read-Only
 
-- `accounting_product_id` (String)
+- `accounting_product_id` (String) Optional Product ID this Aggregation should be attributed to for accounting purposes.
 - `calculation` (String) This field is a string that represents the formula for the calculation. This formula determines how the CompoundAggregation is calculated from the underlying usage data.
 - `code` (String) Code of the Aggregation. A unique short code to identify the Aggregation.
 - `custom_fields` (Dynamic)

@@ -3,7 +3,6 @@
 package account
 
 import (
-	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/m3ter-com/terraform-provider-m3ter/internal/apijson"
@@ -23,7 +22,6 @@ type AccountModel struct {
 	ParentAccountID           types.String                       `tfsdk:"parent_account_id" json:"parentAccountId,optional"`
 	PurchaseOrderNumber       types.String                       `tfsdk:"purchase_order_number" json:"purchaseOrderNumber,optional"`
 	StatementDefinitionID     types.String                       `tfsdk:"statement_definition_id" json:"statementDefinitionId,optional"`
-	ConfigData                *map[string]jsontypes.Normalized   `tfsdk:"config_data" json:"configData,optional"`
 	CreditApplicationOrder    *[]types.String                    `tfsdk:"credit_application_order" json:"creditApplicationOrder,optional"`
 	Address                   *AccountAddressModel               `tfsdk:"address" json:"address,optional"`
 	CustomFields              customfield.NormalizedDynamicValue `tfsdk:"custom_fields" json:"customFields,optional"`

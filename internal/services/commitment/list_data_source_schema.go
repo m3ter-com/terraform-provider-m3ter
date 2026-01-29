@@ -144,7 +144,8 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Computed:    true,
 						},
 						"drawdowns_accounting_product_id": schema.StringAttribute{
-							Computed: true,
+							Description: "Optional Product ID this Commitment's consumptions should be attributed to for accounting purposes.",
+							Computed:    true,
 						},
 						"end_date": schema.StringAttribute{
 							Description: "The end date of the Commitment period in ISO-8601 format.",
@@ -179,7 +180,8 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							},
 						},
 						"fees_accounting_product_id": schema.StringAttribute{
-							Computed: true,
+							Description: "Optional Product ID this Commitment's fees should be attributed to for accounting purposes.",
+							Computed:    true,
 						},
 						"line_item_types": schema.ListAttribute{
 							Description: "Specifies the line item charge types that can draw-down at billing against the Commitment amount. Options are:\n- `MINIMUM_SPEND`\n- `STANDING_CHARGE`\n- `USAGE`\n- `\"COUNTER_RUNNING_TOTAL_CHARGE\"`\n- `\"COUNTER_ADJUSTMENT_DEBIT\"`",

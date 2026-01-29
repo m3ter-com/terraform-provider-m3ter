@@ -91,7 +91,7 @@ If no value is supplied, then the Organization Configuration value is used.
 - `contract_id` (String) The unique identifier (UUID) for a Contract you've created for the Account - used to add the Commitment to this Contract.
 
 **Note:** If you associate the Commitment with a Contract you must ensure the Account Plan attached to the Account has the same Contract associated with it. If the Account Plan Contract and Commitment Contract do not match, then at billing the Commitment amount will not be drawn-down against.
-- `drawdowns_accounting_product_id` (String) Optional Product ID this Commitment consumptions should be attributed to for accounting purposes
+- `drawdowns_accounting_product_id` (String) Optional Product ID this Commitment's consumptions should be attributed to for accounting purposes.
 - `fee_dates` (Attributes List) Used for billing any outstanding Commitment fees *on a schedule*.
 
 Create an array to define a series of bill dates and amounts covering specified service periods:
@@ -102,7 +102,7 @@ Create an array to define a series of bill dates and amounts covering specified 
 **Notes:**
 * If you try to set `servicePeriodStartDate` *after* `servicePeriodEndDate`, you'll receive an error.
 * You can set `servicePeriodStartDate` and `servicePeriodEndDate` to the *same date* without receiving an error, but *please be sure* your Commitment billing use case requires this. (see [below for nested schema](#nestedatt--fee_dates))
-- `fees_accounting_product_id` (String) Optional Product ID this Commitment fees should be attributed to for accounting purposes
+- `fees_accounting_product_id` (String) Optional Product ID this Commitment's fees should be attributed to for accounting purposes.
 - `line_item_types` (List of String) Specify the line item charge types that can draw-down at billing against the Commitment amount. Options are:
 - `MINIMUM_SPEND`
 - `STANDING_CHARGE`

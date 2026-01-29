@@ -5,7 +5,6 @@ package account
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -57,7 +56,6 @@ type AccountsItemsDataSourceModel struct {
 	AutoGenerateStatementMode types.String                                             `tfsdk:"auto_generate_statement_mode" json:"autoGenerateStatementMode,computed"`
 	BillEpoch                 timetypes.RFC3339                                        `tfsdk:"bill_epoch" json:"billEpoch,computed" format:"date"`
 	Code                      types.String                                             `tfsdk:"code" json:"code,computed"`
-	ConfigData                customfield.Map[jsontypes.Normalized]                    `tfsdk:"config_data" json:"configData,computed"`
 	CreditApplicationOrder    customfield.List[types.String]                           `tfsdk:"credit_application_order" json:"creditApplicationOrder,computed"`
 	Currency                  types.String                                             `tfsdk:"currency" json:"currency,computed"`
 	CustomFields              customfield.NormalizedDynamicValue                       `tfsdk:"custom_fields" json:"customFields,computed"`
