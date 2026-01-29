@@ -15,9 +15,6 @@ resource "m3ter_account" "example_account" {
   }
   auto_generate_statement_mode = "NONE"
   bill_epoch = "2019-12-27"
-  config_data = {
-    foo = "bar"
-  }
   credit_application_order = ["PREPAYMENT"]
   currency = "USD"
   custom_fields = {

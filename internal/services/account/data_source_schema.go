@@ -5,7 +5,6 @@ package account
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/datasourcevalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
@@ -82,12 +81,6 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 			"version": schema.Int64Attribute{
 				Description: "The version number:\n- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.\n- **Update:** On successful Update, the version is incremented by 1 in the response.",
 				Computed:    true,
-			},
-			"config_data": schema.MapAttribute{
-				Description: "Configuration data for the Account",
-				Computed:    true,
-				CustomType:  customfield.NewMapType[jsontypes.Normalized](ctx),
-				ElementType: jsontypes.NormalizedType{},
 			},
 			"credit_application_order": schema.ListAttribute{
 				Description: "The order in which any Prepayment or Balance amounts on the Account are to be drawn-down against for billing. Four options:\n- `\"PREPAYMENT\",\"BALANCE\"`. Draw-down against Prepayment credit before Balance credit.\n- `\"BALANCE\",\"PREPAYMENT\"`. Draw-down against Balance credit before Prepayment credit.\n- `\"PREPAYMENT\"`. Only draw-down against Prepayment credit.\n- `\"BALANCE\"`. Only draw-down against Balance credit.",

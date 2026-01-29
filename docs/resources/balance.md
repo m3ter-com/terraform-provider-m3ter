@@ -21,6 +21,7 @@ resource "m3ter_balance" "example_balance" {
   end_date = "2019-12-27T18:11:19.117Z"
   name = "x"
   start_date = "2019-12-27T18:11:19.117Z"
+  allow_overdraft = false
   balance_draw_down_description = "balanceDrawDownDescription"
   consumptions_accounting_product_id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
   contract_id = "contractId"
@@ -54,6 +55,7 @@ resource "m3ter_balance" "example_balance" {
 
 ### Optional
 
+- `allow_overdraft` (Boolean) Allow balance amounts to fall below zero. This feature is enabled on request. Please get in touch with m3ter Support or your m3ter contact if you would like it enabling for your organization(s).
 - `balance_draw_down_description` (String) A description for the bill line items for draw-down charges against the Balance. *(Optional).*
 - `consumptions_accounting_product_id` (String) Product ID that any Balance Consumed line items will be attributed to for accounting purposes.(*Optional*)
 - `contract_id` (String) The unique identifier (UUID) of a Contract on the Account that the Balance will be added to.

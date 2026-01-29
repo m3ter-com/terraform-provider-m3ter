@@ -18,6 +18,7 @@ type BalanceModel struct {
 	EndDate                         timetypes.RFC3339                  `tfsdk:"end_date" json:"endDate,required" format:"date-time"`
 	Name                            types.String                       `tfsdk:"name" json:"name,required"`
 	StartDate                       timetypes.RFC3339                  `tfsdk:"start_date" json:"startDate,required" format:"date-time"`
+	AllowOverdraft                  types.Bool                         `tfsdk:"allow_overdraft" json:"allowOverdraft,optional"`
 	BalanceDrawDownDescription      types.String                       `tfsdk:"balance_draw_down_description" json:"balanceDrawDownDescription,optional"`
 	ConsumptionsAccountingProductID types.String                       `tfsdk:"consumptions_accounting_product_id" json:"consumptionsAccountingProductId,optional"`
 	ContractID                      types.String                       `tfsdk:"contract_id" json:"contractId,optional"`

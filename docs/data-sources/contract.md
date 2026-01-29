@@ -30,8 +30,10 @@ data "m3ter_contract" "example_contract" {
 ### Read-Only
 
 - `account_id` (String) The unique identifier (UUID) of the Account associated with this Contract.
-- `apply_contract_period_limits` (Boolean)
-- `bill_grouping_key_id` (String)
+- `apply_contract_period_limits` (Boolean) For Contract billing, a boolean setting for restricting the charges billed to the period defined for the Contract:
+* **TRUE** - Contract billing for the Account will be restricted to charge amounts that fall within the defined Contract period.
+* **FALSE** - The period for amounts billed under the Contract will be determined by the Account Plan attached to the Account and linked to the Contract.(*Default*)
+- `bill_grouping_key_id` (String) The ID of the Bill Grouping Key assigned to the Contract.
 - `code` (String) The short code of the Contract.
 - `custom_fields` (Dynamic) User defined fields enabling you to attach custom data. The value for a custom field can be either a string or a number.
 
@@ -44,7 +46,9 @@ See [Working with Custom Fields](https://www.m3ter.com/docs/guides/creating-and-
 - `name` (String) The name of the Contract.
 - `purchase_order_number` (String) The Purchase Order Number associated with the Contract.
 - `start_date` (String) The start date for the Contract *(in ISO-8601 format)*. This date is inclusive, meaning the Contract is active from this date onward.
-- `usage_filters` (Attributes List) (see [below for nested schema](#nestedatt--usage_filters))
+- `usage_filters` (Attributes List) Used to control Contract billing and charge at billing only for usage where Product Meter dimensions equal specific defined values:
+* Usage filters are defined to either *include* or *exclude* charges for usage associated with specific Meter dimensions.
+* The Meter dimensions must be present in the data field schema of the Meter used to submit usage data measurements. (see [below for nested schema](#nestedatt--usage_filters))
 - `version` (Number) The version number:
 - **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.
 - **Update:** On successful Update, the version is incremented by 1 in the response.

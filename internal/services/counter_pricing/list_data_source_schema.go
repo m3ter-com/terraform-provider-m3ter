@@ -59,7 +59,8 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Computed:    true,
 						},
 						"accounting_product_id": schema.StringAttribute{
-							Computed: true,
+							Description: "Optional Product ID this Pricing should be attributed to for accounting purposes.",
+							Computed:    true,
 						},
 						"code": schema.StringAttribute{
 							Description: "Unique short code for the Pricing.",

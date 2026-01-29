@@ -41,7 +41,7 @@ data "m3ter_aggregations" "example_aggregations" {
 
 Read-Only:
 
-- `accounting_product_id` (String)
+- `accounting_product_id` (String) Optional Product ID this Aggregation should be attributed to for accounting purposes.
 - `aggregation` (String) Specifies the computation method applied to usage data collected in `targetField`. Aggregation unit value depends on the **Category** configured for the selected targetField.
 
 Enum: 
@@ -59,10 +59,12 @@ Enum:
 * **MEAN**. Uses the arithmetic mean of the values. Can be applied to a **Measure**, **Income**, or **Cost** `targetField`.
 
 * **UNIQUE**. Uses unique values and returns a count of the number of unique values. Can be applied to a **Metadata** `targetField`.
+
+* **CUSTOM_SQL**. Uses an SQL query expression. The `customSQL` parameter is used for the SQL query.
 Available values: "SUM", "MIN", "MAX", "COUNT", "LATEST", "MEAN", "UNIQUE", "CUSTOM_SQL".
 - `code` (String) Code of the Aggregation. A unique short code to identify the Aggregation.
 - `custom_fields` (Dynamic)
-- `custom_sql` (String)
+- `custom_sql` (String) The SQL query expression to be used for a Custom SQL Aggregation.
 - `default_value` (Number) Aggregation value used when no usage data is available to be aggregated. *(Optional)*.
 
 **Note:** Set to 0, if you expect to reference the Aggregation in a Compound Aggregation. This ensures that any null values are passed in correctly to the Compound Aggregation calculation with a value = 0.

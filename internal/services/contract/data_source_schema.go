@@ -34,10 +34,12 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Computed:    true,
 			},
 			"apply_contract_period_limits": schema.BoolAttribute{
-				Computed: true,
+				Description: "For Contract billing, a boolean setting for restricting the charges billed to the period defined for the Contract:\n* **TRUE** - Contract billing for the Account will be restricted to charge amounts that fall within the defined Contract period.\n* **FALSE** - The period for amounts billed under the Contract will be determined by the Account Plan attached to the Account and linked to the Contract.(*Default*)",
+				Computed:    true,
 			},
 			"bill_grouping_key_id": schema.StringAttribute{
-				Computed: true,
+				Description: "The ID of the Bill Grouping Key assigned to the Contract.",
+				Computed:    true,
 			},
 			"code": schema.StringAttribute{
 				Description: "The short code of the Contract.",
@@ -70,8 +72,9 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Computed:    true,
 			},
 			"usage_filters": schema.ListNestedAttribute{
-				Computed:   true,
-				CustomType: customfield.NewNestedObjectListType[ContractUsageFiltersDataSourceModel](ctx),
+				Description: "Used to control Contract billing and charge at billing only for usage where Product Meter dimensions equal specific defined values:\n* Usage filters are defined to either *include* or *exclude* charges for usage associated with specific Meter dimensions.\n* The Meter dimensions must be present in the data field schema of the Meter used to submit usage data measurements.",
+				Computed:    true,
+				CustomType:  customfield.NewNestedObjectListType[ContractUsageFiltersDataSourceModel](ctx),
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
 						"dimension_code": schema.StringAttribute{

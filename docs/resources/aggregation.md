@@ -41,7 +41,7 @@ resource "m3ter_aggregation" "example_aggregation" {
 
 ### Required
 
-- `aggregation` (String) Specifies the computation method applied to usage data collected in `targetField`. Aggregation unit value depends on the **Category** configured for the selected targetField.
+- `aggregation` (String) Specifies the computation method applied to usage data collected in `targetField`. Aggregation unit value depends on the **Category** configured for the selected `targetField`.
 
 Enum: 
 
@@ -58,6 +58,8 @@ Enum:
 * **MEAN**. Uses the arithmetic mean of the values. Can be applied to a **Measure**, **Income**, or **Cost** `targetField`.
 
 * **UNIQUE**. Uses unique values and returns a count of the number of unique values. Can be applied to a **Metadata** `targetField`.
+
+* **CUSTOM_SQL**. Uses an SQL query expression. If you select this Aggregation type, use the `customSQL` request parameter to enter an SQL query.
 Available values: "SUM", "MIN", "MAX", "COUNT", "LATEST", "MEAN", "UNIQUE", "CUSTOM_SQL".
 - `meter_id` (String) The UUID of the Meter used as the source of usage data for the Aggregation.
 
@@ -79,10 +81,12 @@ Available values: "UP", "DOWN", "NEAREST", "NONE".
 
 ### Optional
 
-- `accounting_product_id` (String) Optional Product ID this Aggregation should be attributed to for accounting purposes
+- `accounting_product_id` (String) Optional Product ID this Aggregation should be attributed to for accounting purposes.
 - `code` (String) Code of the new Aggregation. A unique short code to identify the Aggregation.
 - `custom_fields` (Dynamic)
-- `custom_sql` (String) **NOTE:** The `customSql` Aggregation type is currently only available in Beta release and on request. If you are interested in using this feature, please get in touch with m3ter Support or your m3ter contact.
+- `custom_sql` (String) Enter the SQL query expression to be used for a Custom SQL Aggregation. Custom SQL queries should be run against the Measurements table - for more details see [Custom SQL Aggregations](https://www.m3ter.com/docs/guides/usage-data-aggregations/custom-sql-aggregations) in your main User documentation.
+
+**NOTE:** The `customSql` Aggregation type is currently available in Preview release. If you are interested in using this feature, please get in touch with m3ter Support or your m3ter contact.
 - `default_value` (Number) Aggregation value used when no usage data is available to be aggregated. *(Optional)*.
 
 **Note:** Set to 0, if you expect to reference the Aggregation in a Compound Aggregation. This ensures that any null values are passed in correctly to the Compound Aggregation calculation with a value = 0.

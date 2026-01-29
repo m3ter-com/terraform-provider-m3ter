@@ -59,6 +59,10 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				Required:    true,
 				CustomType:  timetypes.RFC3339Type{},
 			},
+			"allow_overdraft": schema.BoolAttribute{
+				Description: "Allow balance amounts to fall below zero. This feature is enabled on request. Please get in touch with m3ter Support or your m3ter contact if you would like it enabling for your organization(s).",
+				Optional:    true,
+			},
 			"balance_draw_down_description": schema.StringAttribute{
 				Description: "A description for the bill line items for draw-down charges against the Balance. *(Optional).*",
 				Optional:    true,

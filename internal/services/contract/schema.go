@@ -49,10 +49,12 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				CustomType:  timetypes.RFC3339Type{},
 			},
 			"apply_contract_period_limits": schema.BoolAttribute{
-				Optional: true,
+				Description: "For Contract billing, a boolean setting for restricting the charges billed to the period defined for the Contract:\n* **TRUE** - Contract billing for the Account will be restricted to charge amounts that fall within the defined Contract period.\n* **FALSE** - The period for amounts billed under the Contract will be determined by the Account Plan attached to the Account and linked to the Contract.(*Default*)",
+				Optional:    true,
 			},
 			"bill_grouping_key_id": schema.StringAttribute{
-				Optional: true,
+				Description: "The ID of the Bill Grouping Key assigned to the Contract.\n\nIf you are implementing Contract Billing for an Account, use `billGroupingKey` to control how charges linked to Contracts on the Account will be billed:\n* **Independent Contract billing**. Assign an *exclusive* Bill Grouping Key to the Contract - only charges due against the Account and linked to the single Contract will appear on a separate Bill.\n* **Collective Contract billing**. Assign the same *non-exclusive* Bill Grouping Key to multiple Contracts - all charges due against the Account and linked to the multiple Contracts will appear together on a single Bill.",
+				Optional:    true,
 			},
 			"code": schema.StringAttribute{
 				Description: "The short code of the Contract.",
@@ -67,7 +69,8 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				Optional:    true,
 			},
 			"usage_filters": schema.ListNestedAttribute{
-				Optional: true,
+				Description: "Use `usageFilters` to control Contract billing and charge at billing only for usage where Product Meter dimensions equal specific defined values:\n* Define Usage filters to either *include* or *exclude* charges for usage associated with specific Meter dimensions.\n* The Meter dimensions must be present in the data field schema of the Meter used to submit usage data measurements.",
+				Optional:    true,
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
 						"dimension_code": schema.StringAttribute{
