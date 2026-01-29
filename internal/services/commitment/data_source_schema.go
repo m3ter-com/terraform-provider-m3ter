@@ -104,7 +104,8 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Computed:    true,
 			},
 			"drawdowns_accounting_product_id": schema.StringAttribute{
-				Computed: true,
+				Description: "Optional Product ID this Commitment's consumptions should be attributed to for accounting purposes.",
+				Computed:    true,
 			},
 			"end_date": schema.StringAttribute{
 				Description: "The end date of the Commitment period in ISO-8601 format.",
@@ -112,7 +113,8 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				CustomType:  timetypes.RFC3339Type{},
 			},
 			"fees_accounting_product_id": schema.StringAttribute{
-				Computed: true,
+				Description: "Optional Product ID this Commitment's fees should be attributed to for accounting purposes.",
+				Computed:    true,
 			},
 			"overage_description": schema.StringAttribute{
 				Description: "A textual description of the overage charges.",

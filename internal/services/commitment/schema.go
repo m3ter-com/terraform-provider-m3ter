@@ -127,11 +127,11 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				Optional:    true,
 			},
 			"drawdowns_accounting_product_id": schema.StringAttribute{
-				Description: "Optional Product ID this Commitment consumptions should be attributed to for accounting purposes",
+				Description: "Optional Product ID this Commitment's consumptions should be attributed to for accounting purposes.",
 				Optional:    true,
 			},
 			"fees_accounting_product_id": schema.StringAttribute{
-				Description: "Optional Product ID this Commitment fees should be attributed to for accounting purposes",
+				Description: "Optional Product ID this Commitment's fees should be attributed to for accounting purposes.",
 				Optional:    true,
 			},
 			"overage_description": schema.StringAttribute{

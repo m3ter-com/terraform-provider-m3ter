@@ -70,6 +70,10 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Description: "The unique identifier (UUID) for the end customer Account the Balance belongs to.",
 							Computed:    true,
 						},
+						"allow_overdraft": schema.BoolAttribute{
+							Description: "Allow balance amounts to fall below zero. This feature is enabled on request. Please get in touch with m3ter Support or your m3ter contact if you would like it enabling for your organization(s).",
+							Computed:    true,
+						},
 						"amount": schema.Float64Attribute{
 							Description: "The financial value that the Balance holds.",
 							Computed:    true,

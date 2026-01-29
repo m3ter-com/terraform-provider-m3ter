@@ -43,7 +43,7 @@ data "m3ter_counter_pricings" "example_counter_pricings" {
 
 Read-Only:
 
-- `accounting_product_id` (String)
+- `accounting_product_id` (String) Optional Product ID this Pricing should be attributed to for accounting purposes.
 - `code` (String) Unique short code for the Pricing.
 - `counter_id` (String) UUID of the Counter used to create the pricing.
 - `cumulative` (Boolean) Controls whether or not charge rates under a set of pricing bands configured for a Pricing are applied according to each separate band or at the highest band reached.

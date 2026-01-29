@@ -6,6 +6,7 @@ resource "m3ter_balance" "example_balance" {
   end_date = "2019-12-27T18:11:19.117Z"
   name = "x"
   start_date = "2019-12-27T18:11:19.117Z"
+  allow_overdraft = false
   balance_draw_down_description = "balanceDrawDownDescription"
   consumptions_accounting_product_id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
   contract_id = "contractId"

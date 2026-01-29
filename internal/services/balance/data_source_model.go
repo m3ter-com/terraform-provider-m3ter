@@ -16,6 +16,7 @@ type BalanceDataSourceModel struct {
 	ID                              types.String                       `tfsdk:"id" path:"id,computed_optional"`
 	OrgID                           types.String                       `tfsdk:"org_id" path:"orgId,optional"`
 	AccountID                       types.String                       `tfsdk:"account_id" json:"accountId,computed"`
+	AllowOverdraft                  types.Bool                         `tfsdk:"allow_overdraft" json:"allowOverdraft,computed"`
 	Amount                          types.Float64                      `tfsdk:"amount" json:"amount,computed"`
 	BalanceDrawDownDescription      types.String                       `tfsdk:"balance_draw_down_description" json:"balanceDrawDownDescription,computed"`
 	Code                            types.String                       `tfsdk:"code" json:"code,computed"`

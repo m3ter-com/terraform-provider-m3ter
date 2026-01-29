@@ -80,9 +80,9 @@ resource "m3ter_pricing" "example_pricing" {
 - `minimum_spend` (Number) The minimum spend amount per billing cycle for end customer Accounts on a Plan to which the Pricing is applied.
 - `minimum_spend_bill_in_advance` (Boolean) The default value is **FALSE**.
 
-* When TRUE, minimum spend is billed at the start of each billing period.
+* When **TRUE**, minimum spend is billed at the start of each billing period.
 
-* When FALSE, minimum spend is billed at the end of each billing period.
+* When **FALSE**, minimum spend is billed at the end of each billing period.
 
 *(Optional)*. Overrides the setting at Organization level for minimum spend billing in arrears/in advance.
 - `minimum_spend_description` (String) Minimum spend description *(displayed on the bill line item)*.
@@ -103,9 +103,9 @@ resource "m3ter_pricing" "example_pricing" {
 For more details on creating Pricings for segment values on a Segmented Aggregation using this call, together with some examples, see the [Using API Call to Create Segmented Pricings](https://www.m3ter.com/docs/guides/plans-and-pricing/pricing-plans/pricing-plans-using-segmented-aggregations#using-api-call-to-create-a-segmented-pricing) in our User Documentation.
 - `tiers_span_plan` (Boolean) The default value is **FALSE**.
 
-* If TRUE, usage accumulates over the entire period the priced Plan is active for the account, and is not reset for pricing band rates at the start of each billing period.
+* If **TRUE**, usage accumulates over the entire period the priced Plan is active for the account, and is not reset for pricing band rates at the start of each billing period.
 
-* If FALSE, usage does not accumulate, and is reset for pricing bands at the start of each billing period.
+* If **FALSE**, usage does not accumulate, and is reset for pricing bands at the start of each billing period.
 - `type` (String) * **DEBIT**. Default setting. The amount calculated using the Pricing is added to the bill as a debit.
 
 * **PRODUCT_CREDIT**. The amount calculated using the Pricing is added to the bill as a credit *(negative amount)*. To prevent negative billing, the bill will be capped at the total of other line items for the same Product.

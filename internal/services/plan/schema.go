@@ -58,11 +58,11 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				},
 			},
 			"minimum_spend_accounting_product_id": schema.StringAttribute{
-				Description: "Optional Product ID this plan's minimum spend should be attributed to for accounting purposes",
+				Description: "Optional Product ID this Plan's minimum spend should be attributed to for accounting purposes.",
 				Optional:    true,
 			},
 			"minimum_spend_bill_in_advance": schema.BoolAttribute{
-				Description: "When TRUE, minimum spend is billed at the start of each billing period.\n\nWhen FALSE, minimum spend is billed at the end of each billing period.\n\n*(Optional)*. Overrides the setting at PlanTemplate level for minimum spend billing in arrears/in advance.",
+				Description: "When **TRUE**, minimum spend is billed at the start of each billing period.\n\nWhen **FALSE**, minimum spend is billed at the end of each billing period.\n\n*(Optional)*. Overrides the setting at PlanTemplate level for minimum spend billing in arrears/in advance.",
 				Optional:    true,
 			},
 			"minimum_spend_description": schema.StringAttribute{
@@ -84,11 +84,11 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				},
 			},
 			"standing_charge_accounting_product_id": schema.StringAttribute{
-				Description: "Optional Product ID this plan's standing charge should be attributed to for accounting purposes",
+				Description: "Optional Product ID this Plan's standing charge should be attributed to for accounting purposes.",
 				Optional:    true,
 			},
 			"standing_charge_bill_in_advance": schema.BoolAttribute{
-				Description: "When TRUE, standing charge is billed at the start of each billing period.\n\nWhen FALSE, standing charge is billed at the end of each billing period.\n\n*(Optional)*. Overrides the setting at PlanTemplate level for standing charge billing in arrears/in advance.",
+				Description: "When **TRUE**, standing charge is billed at the start of each billing period.\n\nWhen **FALSE**, standing charge is billed at the end of each billing period.\n\n*(Optional)*. Overrides the setting at PlanTemplate level for standing charge billing in arrears/in advance.",
 				Optional:    true,
 			},
 			"standing_charge_description": schema.StringAttribute{

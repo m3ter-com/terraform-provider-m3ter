@@ -103,7 +103,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				},
 			},
 			"minimum_spend_bill_in_advance": schema.BoolAttribute{
-				Description: "The default value is **FALSE**.\n\n* When TRUE, minimum spend is billed at the start of each billing period.\n\n* When FALSE, minimum spend is billed at the end of each billing period.\n\n*(Optional)*. Overrides the setting at Organization level for minimum spend billing in arrears/in advance.",
+				Description: "The default value is **FALSE**.\n\n* When **TRUE**, minimum spend is billed at the start of each billing period.\n\n* When **FALSE**, minimum spend is billed at the end of each billing period.\n\n*(Optional)*. Overrides the setting at Organization level for minimum spend billing in arrears/in advance.",
 				Optional:    true,
 			},
 			"minimum_spend_description": schema.StringAttribute{
@@ -119,7 +119,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				Optional:    true,
 			},
 			"tiers_span_plan": schema.BoolAttribute{
-				Description: "The default value is **FALSE**.\n\n* If TRUE, usage accumulates over the entire period the priced Plan is active for the account, and is not reset for pricing band rates at the start of each billing period.\n\n* If FALSE, usage does not accumulate, and is reset for pricing bands at the start of each billing period.",
+				Description: "The default value is **FALSE**.\n\n* If **TRUE**, usage accumulates over the entire period the priced Plan is active for the account, and is not reset for pricing band rates at the start of each billing period.\n\n* If **FALSE**, usage does not accumulate, and is reset for pricing bands at the start of each billing period.",
 				Optional:    true,
 			},
 			"type": schema.StringAttribute{

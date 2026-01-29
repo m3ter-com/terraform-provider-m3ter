@@ -65,6 +65,7 @@ func (m *BalancesDataSourceModel) toListParams(_ context.Context) (params m3ter.
 type BalancesItemsDataSourceModel struct {
 	ID                              types.String                       `tfsdk:"id" json:"id,computed"`
 	AccountID                       types.String                       `tfsdk:"account_id" json:"accountId,computed"`
+	AllowOverdraft                  types.Bool                         `tfsdk:"allow_overdraft" json:"allowOverdraft,computed"`
 	Amount                          types.Float64                      `tfsdk:"amount" json:"amount,computed"`
 	BalanceDrawDownDescription      types.String                       `tfsdk:"balance_draw_down_description" json:"balanceDrawDownDescription,computed"`
 	Code                            types.String                       `tfsdk:"code" json:"code,computed"`

@@ -56,7 +56,8 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 							Computed:    true,
 						},
 						"accounting_product_id": schema.StringAttribute{
-							Computed: true,
+							Description: "Optional Product ID this Aggregation should be attributed to for accounting purposes.",
+							Computed:    true,
 						},
 						"calculation": schema.StringAttribute{
 							Description: "This field is a string that represents the formula for the calculation. This formula determines how the CompoundAggregation is calculated from the underlying usage data.",

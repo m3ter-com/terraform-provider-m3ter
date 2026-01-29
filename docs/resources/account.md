@@ -30,9 +30,6 @@ resource "m3ter_account" "example_account" {
   }
   auto_generate_statement_mode = "NONE"
   bill_epoch = "2019-12-27"
-  config_data = {
-    foo = "bar"
-  }
   credit_application_order = ["PREPAYMENT"]
   currency = "USD"
   custom_fields = {
@@ -68,9 +65,6 @@ Available values: "NONE", "JSON", "JSON_AND_CSV".
 * For example, if you attach a Plan to an Account where the Plan is configured for monthly billing frequency and you've defined the period the Plan will apply to the Account to be from January 1st, 2022 until January 1st, 2023. You then set a `billEpoch` date of February 15th, 2022. The first Bill will be created for the Account on February 15th, and subsequent Bills created on the 15th of the months following for the remainder of the billing period - March 15th, April 15th, and so on.
 * If not defined, then the relevant Epoch date set for the billing frequency period at Organization level will be used instead.
 * The date is in ISO-8601 format.
-- `config_data` (Map of String) Configuration data for the Account
-Supported settings:
- * SendBillsToThirdParties ("true"/"false")
 - `credit_application_order` (List of String) Define the order in which any Prepayment or Balance amounts on the Account are to be drawn-down against for billing. Four options:
 - `"PREPAYMENT","BALANCE"`. Draw-down against Prepayment credit before Balance credit.
 - `"BALANCE","PREPAYMENT"`. Draw-down against Balance credit before Prepayment credit.

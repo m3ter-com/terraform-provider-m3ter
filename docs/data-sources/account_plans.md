@@ -43,7 +43,9 @@ data "m3ter_account_plans" "example_account_plans" {
 - `includeall` (Boolean) A Boolean flag that specifies whether to include both active and inactive AccountPlans and AccountPlanGroups in the list.
 
 * **TRUE** - both active and inactive AccountPlans and AccountPlanGroups are included in the list.
-* **FALSE** - only active AccountPlans and AccountPlanGroups are retrieved in the list.
+* **FALSE** - only active AccountPlans and AccountPlanGroups are retrieved in the list.*(Default)*
+
+**NOTE:** Only operative if you also have one of `account`, `plan` or `contract` as a query parameter.
 - `max_items` (Number) Max items to fetch, default: 1000
 - `org_id` (String, Deprecated)
 - `plan` (String) The unique identifier (UUID) for the Plan whose associated AccountPlans you want to retrieve.

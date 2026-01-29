@@ -76,7 +76,9 @@ Optional:
 - `includeall` (Boolean) A Boolean flag that specifies whether to include both active and inactive AccountPlans and AccountPlanGroups in the list.
 
 * **TRUE** - both active and inactive AccountPlans and AccountPlanGroups are included in the list.
-* **FALSE** - only active AccountPlans and AccountPlanGroups are retrieved in the list.
+* **FALSE** - only active AccountPlans and AccountPlanGroups are retrieved in the list.*(Default)*
+
+**NOTE:** Only operative if you also have one of `account`, `plan` or `contract` as a query parameter.
 - `plan` (String) The unique identifier (UUID) for the Plan whose associated AccountPlans you want to retrieve.
 
 **NOTE:** Does not return AccountPlanGroups if you use a `planGroupId`.

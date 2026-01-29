@@ -47,8 +47,14 @@ resource "m3ter_contract" "example_contract" {
 
 ### Optional
 
-- `apply_contract_period_limits` (Boolean)
-- `bill_grouping_key_id` (String)
+- `apply_contract_period_limits` (Boolean) For Contract billing, a boolean setting for restricting the charges billed to the period defined for the Contract:
+* **TRUE** - Contract billing for the Account will be restricted to charge amounts that fall within the defined Contract period.
+* **FALSE** - The period for amounts billed under the Contract will be determined by the Account Plan attached to the Account and linked to the Contract.(*Default*)
+- `bill_grouping_key_id` (String) The ID of the Bill Grouping Key assigned to the Contract.
+
+If you are implementing Contract Billing for an Account, use `billGroupingKey` to control how charges linked to Contracts on the Account will be billed:
+* **Independent Contract billing**. Assign an *exclusive* Bill Grouping Key to the Contract - only charges due against the Account and linked to the single Contract will appear on a separate Bill.
+* **Collective Contract billing**. Assign the same *non-exclusive* Bill Grouping Key to multiple Contracts - all charges due against the Account and linked to the multiple Contracts will appear together on a single Bill.
 - `code` (String) The short code of the Contract.
 - `custom_fields` (Dynamic) User defined fields enabling you to attach custom data. The value for a custom field can be either a string or a number.
 
@@ -58,7 +64,9 @@ See [Working with Custom Fields](https://www.m3ter.com/docs/guides/creating-and-
 - `description` (String) The description of the Contract, which provides context and information.
 - `org_id` (String, Deprecated)
 - `purchase_order_number` (String) The Purchase Order Number associated with the Contract.
-- `usage_filters` (Attributes List) (see [below for nested schema](#nestedatt--usage_filters))
+- `usage_filters` (Attributes List) Use `usageFilters` to control Contract billing and charge at billing only for usage where Product Meter dimensions equal specific defined values:
+* Define Usage filters to either *include* or *exclude* charges for usage associated with specific Meter dimensions.
+* The Meter dimensions must be present in the data field schema of the Meter used to submit usage data measurements. (see [below for nested schema](#nestedatt--usage_filters))
 
 ### Read-Only
 

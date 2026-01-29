@@ -30,7 +30,8 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				DeprecationMessage: "the org id should be set at the client level instead",
 			},
 			"accounting_product_id": schema.StringAttribute{
-				Computed: true,
+				Description: "Optional Product ID this Pricing should be attributed to for accounting purposes.",
+				Computed:    true,
 			},
 			"code": schema.StringAttribute{
 				Description: "Unique short code for the Pricing.",
