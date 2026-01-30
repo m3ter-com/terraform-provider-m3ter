@@ -116,7 +116,7 @@ func (r *BillConfigResource) Update(ctx context.Context, req resource.UpdateRequ
 	params := m3ter.BillConfigUpdateParams{}
 
 	if !data.ID.IsNull() {
-		params.OrgID = m3ter.F(data.ID.ValueString())
+		params.OrgID = m3ter.F(data.OrgID.ValueString())
 	}
 
 	dataBytes, err := data.MarshalJSONForUpdate(*state)
@@ -158,7 +158,7 @@ func (r *BillConfigResource) Read(ctx context.Context, req resource.ReadRequest,
 	params := m3ter.BillConfigGetParams{}
 
 	if !data.ID.IsNull() {
-		params.OrgID = m3ter.F(data.ID.ValueString())
+		params.OrgID = m3ter.F(data.OrgID.ValueString())
 	}
 
 	res := new(http.Response)
