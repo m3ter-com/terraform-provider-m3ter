@@ -2,8 +2,6 @@ module github.com/m3ter-com/terraform-provider-m3ter
 
 go 1.24.0
 
-toolchain go1.24.12
-
 require (
 	github.com/davecgh/go-spew v1.1.1
 	github.com/hashicorp/terraform-plugin-docs v0.16.0
@@ -13,7 +11,7 @@ require (
 	github.com/hashicorp/terraform-plugin-framework-validators v0.17.0
 	github.com/hashicorp/terraform-plugin-go v0.28.0
 	github.com/hashicorp/terraform-plugin-log v0.9.0
-	github.com/m3ter-com/m3ter-sdk-go v0.11.0
+	github.com/m3ter-com/m3ter-sdk-go v0.12.0
 	github.com/tidwall/gjson v1.18.0
 	github.com/tidwall/sjson v1.2.5
 )
