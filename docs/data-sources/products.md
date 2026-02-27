@@ -3,12 +3,15 @@
 page_title: "m3ter_products Data Source - m3ter"
 subcategory: ""
 description: |-
-  
+  Endpoints for listing, creating, updating, retrieving, or deleting Products.
+  A Product represents the products and services you offer to your end customers. Products act as a container for the Meters, Aggregations, Pricing, and Plans required to implement usage-based and other pricing models for your Organization.
 ---
 
 # m3ter_products (Data Source)
 
+Endpoints for listing, creating, updating, retrieving, or deleting Products.
 
+A Product represents the products and services you offer to your end customers. Products act as a container for the Meters, Aggregations, Pricing, and Plans required to implement usage-based and other pricing models for your Organization.
 
 ## Example Usage
 

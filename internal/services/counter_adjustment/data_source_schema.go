@@ -16,6 +16,7 @@ var _ datasource.DataSourceWithConfigValidators = (*CounterAdjustmentDataSource)
 
 func DataSourceSchema(ctx context.Context) schema.Schema {
 	return schema.Schema{
+		Description: "Endpoints for listing, creating, updating, retrieving, or deleting CounterAdjustments.\n\nIf you attach a Plan to an Account which is priced using a Counter to apply unit-based pricing, you can then create CounterAdjustments for the Account using that Counter to ensure the Account is billed according to the number of Counter units the Account subscribes to in a given billing period.\n\nSee [Understanding and Creating Counter Adjustments for Accounts](https://www.m3ter.com/docs/guides/recurring-charges-counters/creating-counter-adjustments-for-accounts) for more information.",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				Computed: true,

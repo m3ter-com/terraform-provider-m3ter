@@ -3,12 +3,15 @@
 page_title: "m3ter_credit_reasons Data Source - m3ter"
 subcategory: ""
 description: |-
-  
+  Endpoints for CreditReason operations such as creation, update, list, and delete.
+  You can create CreditReasons for your Organization, and then use them when creating a credit line item on a bill, or applying a product credit to a bill. CreditReasons provide contextual information as to why a credit was applied.
 ---
 
 # m3ter_credit_reasons (Data Source)
 
+Endpoints for CreditReason operations such as creation, update, list, and delete. 
 
+You can create CreditReasons for your Organization, and then use them when creating a credit line item on a bill, or applying a product credit to a bill. CreditReasons provide contextual information as to why a credit was applied.
 
 ## Example Usage
 

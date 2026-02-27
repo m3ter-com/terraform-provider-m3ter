@@ -3,12 +3,32 @@
 page_title: "m3ter_webhooks Data Source - m3ter"
 subcategory: ""
 description: |-
-  
+  A suite of endpoints for configuring and managing third party integrations within the m3ter platform. The integration endpoints in this section facilitate various operations such as creating, updating, listing, and deletion of integrations.
+  m3ter integrations enable seamless data synchronization and mapping with external systems required in core business processes. These processes often include sales, pricing, billing and invoicing, and general finance.
+  With m3ter integrations, you can establish robust connections with popular business platforms, enhancing your operational capabilities. For example:
+  * Chargebee
+  * Salesforce
+  * Stripe
+  * Netsuite
+  * Paddle
+  * Xero
+  * QuickBooks
 ---
 
 # m3ter_webhooks (Data Source)
 
+A suite of endpoints for configuring and managing third party integrations within the m3ter platform. The integration endpoints in this section facilitate various operations such as creating, updating, listing, and deletion of integrations.
 
+m3ter integrations enable seamless data synchronization and mapping with external systems required in core business processes. These processes often include sales, pricing, billing and invoicing, and general finance. 
+
+With m3ter integrations, you can establish robust connections with popular business platforms, enhancing your operational capabilities. For example:
+* Chargebee
+* Salesforce
+* Stripe
+* Netsuite
+* Paddle
+* Xero
+* QuickBooks
 
 ## Example Usage
 

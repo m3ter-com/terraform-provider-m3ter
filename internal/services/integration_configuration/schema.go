@@ -20,6 +20,7 @@ var _ resource.ResourceWithConfigValidators = (*IntegrationConfigurationResource
 
 func ResourceSchema(ctx context.Context) schema.Schema {
 	return schema.Schema{
+		Description: "A suite of endpoints for configuring and managing third party integrations within the m3ter platform. The integration endpoints in this section facilitate various operations such as creating, updating, listing, and deletion of integrations.\n\nm3ter integrations enable seamless data synchronization and mapping with external systems required in core business processes. These processes often include sales, pricing, billing and invoicing, and general finance. \n\nWith m3ter integrations, you can establish robust connections with popular business platforms, enhancing your operational capabilities. For example:\n* Chargebee\n* Salesforce\n* Stripe\n* Netsuite\n* Paddle\n* Xero\n* QuickBooks\n",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				Description:   "The UUID of the entity.",

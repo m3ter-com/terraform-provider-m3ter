@@ -3,12 +3,18 @@
 page_title: "m3ter_counter_pricing Resource - m3ter"
 subcategory: ""
 description: |-
-  
+  Endpoints for listing, creating, updating, retrieving, or deleting CounterPricing.
+  Create the CounterPricing for a Plan/PlanTemplate using a Counter, and define a unit-based pricing structure for charging end customer Accounts put on the Plan.
+  See Creating Counters and Pricing Plans https://www.m3ter.com/docs/guides/recurring-charges-counters/creating-counters for more information.
 ---
 
 # m3ter_counter_pricing (Resource)
 
+Endpoints for listing, creating, updating, retrieving, or deleting CounterPricing.
 
+Create the CounterPricing for a Plan/PlanTemplate using a Counter, and define a unit-based pricing structure for charging end customer Accounts put on the Plan.
+
+See [Creating Counters and Pricing Plans](https://www.m3ter.com/docs/guides/recurring-charges-counters/creating-counters) for more information.
 
 ## Example Usage
 

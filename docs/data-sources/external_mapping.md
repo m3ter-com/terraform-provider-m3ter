@@ -3,12 +3,18 @@
 page_title: "m3ter_external_mapping Data Source - m3ter"
 subcategory: ""
 description: |-
-  
+  Endpoints for managing External Mapping related operations such as creation, update, list and delete.
+  When you integrate your 3rd-party systems with the m3ter platform, a mapping between entities in the local system (m3ter) and external systems is constructed. This External Mapping is crucial in scenarios where data from external systems is consumed or where data from the local system is to be synchronized with external systems.
+  When you are working to set up your Integrations and want to test or troubleshoot your implementation before going live, you might need to create External Mappings manually and, at a later date, edit or delete them.
 ---
 
 # m3ter_external_mapping (Data Source)
 
+Endpoints for managing External Mapping related operations such as creation, update, list and delete.
 
+When you integrate your 3rd-party systems with the m3ter platform, a mapping between entities in the local system *(m3ter)* and external systems is constructed. This *External Mapping* is crucial in scenarios where data from external systems is consumed or where data from the local system is to be synchronized with external systems. 
+
+When you are working to set up your Integrations and want to test or troubleshoot your implementation before going live, you might need to create External Mappings manually and, at a later date, edit or delete them.
 
 ## Example Usage
 

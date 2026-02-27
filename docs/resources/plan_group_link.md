@@ -3,12 +3,15 @@
 page_title: "m3ter_plan_group_link Resource - m3ter"
 subcategory: ""
 description: |-
-  
+  Endpoints for PlanGroupLink related operations such as creation, update, list and delete.
+  PlanGroupLinks are the intersection table between a PlanGroup and its associated Plans. A PlanGroupLink is only created when at least 1 Plan is linked to a PlanGroup.
 ---
 
 # m3ter_plan_group_link (Resource)
 
+Endpoints for PlanGroupLink related operations such as creation, update, list and delete.
 
+PlanGroupLinks are the intersection table between a PlanGroup and its associated Plans. A PlanGroupLink is only created when at least 1 Plan is linked to a PlanGroup.
 
 ## Example Usage
 
