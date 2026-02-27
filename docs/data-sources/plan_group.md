@@ -3,12 +3,15 @@
 page_title: "m3ter_plan_group Data Source - m3ter"
 subcategory: ""
 description: |-
-  
+  Endpoints for PlanGroup related operations such as creation, update, retrieve, list and delete.
+  PlanGroups are constructs that group multiple plans together. This enables a unified approach to efficiently handle various uses cases across different plans. For example applying a minimum spend amount at billing, across several of your products or features that are each priced separately.
 ---
 
 # m3ter_plan_group (Data Source)
 
+Endpoints for PlanGroup related operations such as creation, update, retrieve, list and delete.
 
+PlanGroups are constructs that group multiple plans together. This enables a unified approach to efficiently handle various uses cases across different plans. For example applying a minimum spend amount at billing, across several of your products or features that are each priced separately.
 
 ## Example Usage
 

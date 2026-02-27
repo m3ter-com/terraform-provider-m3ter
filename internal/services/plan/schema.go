@@ -19,6 +19,7 @@ var _ resource.ResourceWithConfigValidators = (*PlanResource)(nil)
 
 func ResourceSchema(ctx context.Context) schema.Schema {
 	return schema.Schema{
+		Description: "Endpoints for listing, creating, updating, retrieving, or deleting Plans.\n\nA Plan is based on a PlanTemplate and represents a specific pricing plan for one of your products or services. Each Plan inherits general billing attributes or pricing structure from its parent Plan Template. Some attributes can be overriden for the specific Plan.\n\nWhen you've created the Plan Templates and Plans you need for your Products, you can configure the exact pricing structures for Plans to charge customers that consume one or more of your Products.\n\nYou can then attach the appropriately priced Plans to customer Accounts to create [Account Plans](https://www.m3ter.com/docs/api#tag/AccountPlan) and enable charges to be calculated correctly for billing against those Accounts.\n\nSee also:\n- [Reviewing Options for Plans and Plan Templates](https://www.m3ter.com/docs/guides/working-with-plan-templates-and-plans/reviewing-configuration-options-for-plans-and-plan-templates).",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				Description:   "The UUID of the entity.",

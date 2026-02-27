@@ -3,12 +3,18 @@
 page_title: "m3ter_scheduled_event_configurations Data Source - m3ter"
 subcategory: ""
 description: |-
-  
+  Endpoints for retrieving and managing scheduled Events' configurations.
+  Scheduled Event Configurations define custom Event types that reference Date/Time fields belonging to configuration and billing entities. They therefore provide you with an extra degree of flexibility over and above system-generated Events for setting up Notifications based on Events.
+  For more details, see the Working with Scheduled Events https://www.m3ter.com/docs/guides/alerts-events-and-notifications/utilizing-events-and-notifications/working-with-scheduled-events in our Documenation.
 ---
 
 # m3ter_scheduled_event_configurations (Data Source)
 
+Endpoints for retrieving and managing scheduled Events' configurations.
 
+Scheduled Event Configurations define custom Event types that reference Date/Time fields belonging to configuration and billing entities. They therefore provide you with an extra degree of flexibility over and above system-generated Events for setting up Notifications based on Events.
+
+For more details, see the [Working with Scheduled Events](https://www.m3ter.com/docs/guides/alerts-events-and-notifications/utilizing-events-and-notifications/working-with-scheduled-events) in our Documenation.
 
 ## Example Usage
 

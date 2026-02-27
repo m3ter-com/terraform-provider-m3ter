@@ -15,6 +15,7 @@ var _ resource.ResourceWithConfigValidators = (*ScheduledEventConfigurationResou
 
 func ResourceSchema(ctx context.Context) schema.Schema {
 	return schema.Schema{
+		Description: "Endpoints for retrieving and managing scheduled Events' configurations.\n\nScheduled Event Configurations define custom Event types that reference Date/Time fields belonging to configuration and billing entities. They therefore provide you with an extra degree of flexibility over and above system-generated Events for setting up Notifications based on Events.\n\nFor more details, see the [Working with Scheduled Events](https://www.m3ter.com/docs/guides/alerts-events-and-notifications/utilizing-events-and-notifications/working-with-scheduled-events) in our Documenation.",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				Description:   "The UUID of the entity.",

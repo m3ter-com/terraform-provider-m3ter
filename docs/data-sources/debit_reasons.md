@@ -3,12 +3,15 @@
 page_title: "m3ter_debit_reasons Data Source - m3ter"
 subcategory: ""
 description: |-
-  
+  Endpoints for DebitReason operations such as creation, update, list, and delete.
+  You can create DebitReasons for your Organization, and then use them when creating a debit line item on a bill, or applying a product debit to a bill. DebitReasons provide contextual information as to why a debit was applied.
 ---
 
 # m3ter_debit_reasons (Data Source)
 
+Endpoints for DebitReason operations such as creation, update, list, and delete. 
 
+You can create DebitReasons for your Organization, and then use them when creating a debit line item on a bill, or applying a product debit to a bill. DebitReasons provide contextual information as to why a debit was applied.
 
 ## Example Usage
 

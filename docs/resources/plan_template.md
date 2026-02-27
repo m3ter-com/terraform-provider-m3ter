@@ -3,12 +3,18 @@
 page_title: "m3ter_plan_template Resource - m3ter"
 subcategory: ""
 description: |-
-  
+  Endpoints for listing, creating, updating, retrieving, or deleting PlanTemplates.
+  Use PlanTemplates to define default values for Plans. These default values control the billing operations you want applied to your products. PlanTemplates avoid repetition in configuration work - many Plans will share settings for billing operations and differ only in the details of their pricing structures.
+  A PlanTemplate is linked to a Product, and each Plan is a child of a PlanTemplate.
 ---
 
 # m3ter_plan_template (Resource)
 
+Endpoints for listing, creating, updating, retrieving, or deleting PlanTemplates.
 
+Use PlanTemplates to define default values for Plans. These default values control the billing operations you want applied to your products. PlanTemplates avoid repetition in configuration work - many Plans will share settings for billing operations and differ only in the details of their pricing structures.
+
+A PlanTemplate is linked to a Product, and each Plan is a child of a PlanTemplate.
 
 ## Example Usage
 

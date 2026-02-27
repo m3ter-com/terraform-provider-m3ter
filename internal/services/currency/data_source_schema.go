@@ -18,6 +18,7 @@ var _ datasource.DataSourceWithConfigValidators = (*CurrencyDataSource)(nil)
 
 func DataSourceSchema(ctx context.Context) schema.Schema {
 	return schema.Schema{
+		Description: "Endpoints for Currency operations such as creation, update, list, and delete. Currencies are stored for your Organization, and can then be used to specify currencies on various entities such as plan groups and plan templates.\n\n**IMPORTANT!** \nThe Currencies you want to use in your Organization must be created first.\n\nThe currency you select for your Organization determines the billing currency and overrides any currency settings in your pricing Plans. \nFor example, if the Organization currency is set to USD and a pricing Plan used for an Account is set to GBP, the bill for an Account using that Plan is calculated in GBP, and then each bill line item converted to USD amounts.\n\nCurrency conversion rates are setup in the *OrganizationConfig*. For more details, see [Creating and Managing Currencies](https://www.m3ter.com/docs/guides/organization-and-access-management/viewing-and-editing-organization#creating-and-managing-currencies) in the m3ter Documentation.\n",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				Computed: true,

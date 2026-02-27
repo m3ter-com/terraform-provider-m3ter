@@ -3,12 +3,18 @@
 page_title: "m3ter_transaction_type Resource - m3ter"
 subcategory: ""
 description: |-
-  
+  Endpoints for TransactionType operations such as creation, update, list, retrieve, and delete.
+  You can create TransactionTypes for your Organization, which can then be used when creating and updating Balances. Example TransactionTypes: "Balance Amount" or "Add Funds".
+  For details on creating a Transaction amount for a Balance using a TransactionType you've created for your Organization, see the Create Balance Transaction https://www.m3ter.com/docs/api#tag/Balances/operation/PostBalanceTransaction call in the Balances https://www.m3ter.com/docs/api#tag/Balances section of this API Reference.
 ---
 
 # m3ter_transaction_type (Resource)
 
+Endpoints for TransactionType operations such as creation, update, list, retrieve, and delete. 
 
+You can create TransactionTypes for your Organization, which can then be used when creating and updating Balances. Example TransactionTypes: "Balance Amount" or "Add Funds".
+
+For details on creating a Transaction amount for a Balance using a TransactionType you've created for your Organization, see the [Create Balance Transaction](https://www.m3ter.com/docs/api#tag/Balances/operation/PostBalanceTransaction) call in the [Balances](https://www.m3ter.com/docs/api#tag/Balances) section of this API Reference.
 
 ## Example Usage
 

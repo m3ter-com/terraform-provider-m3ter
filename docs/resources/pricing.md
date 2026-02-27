@@ -3,12 +3,18 @@
 page_title: "m3ter_pricing Resource - m3ter"
 subcategory: ""
 description: |-
-  
+  Endpoints for listing, creating, updating, retrieving, or deleting Pricing.
+  Create the Pricing for a Plan/PlanTemplate with usage data Aggregations, and define a usage-based pricing structure for charging end customer Accounts put on the Plan.
+  See Reviewing Pricing Options for Plans and Plan Templates https://www.m3ter.com/docs/guides/pricing-plans/reviewing-pricing-options-and-pricing-plans for more information.
 ---
 
 # m3ter_pricing (Resource)
 
+Endpoints for listing, creating, updating, retrieving, or deleting Pricing.
 
+Create the Pricing for a Plan/PlanTemplate with usage data Aggregations, and define a usage-based pricing structure for charging end customer Accounts put on the Plan.
+
+See [Reviewing Pricing Options for Plans and Plan Templates](https://www.m3ter.com/docs/guides/pricing-plans/reviewing-pricing-options-and-pricing-plans) for more information.
 
 ## Example Usage
 
