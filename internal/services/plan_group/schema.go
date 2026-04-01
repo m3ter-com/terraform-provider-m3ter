@@ -18,6 +18,7 @@ var _ resource.ResourceWithConfigValidators = (*PlanGroupResource)(nil)
 
 func ResourceSchema(ctx context.Context) schema.Schema {
 	return schema.Schema{
+		Description: "Endpoints for PlanGroup related operations such as creation, update, retrieve, list and delete.\n\nPlanGroups are constructs that group multiple plans together. This enables a unified approach to efficiently handle various uses cases across different plans. For example applying a minimum spend amount at billing, across several of your products or features that are each priced separately. ",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				Description:   "The UUID of the entity.",

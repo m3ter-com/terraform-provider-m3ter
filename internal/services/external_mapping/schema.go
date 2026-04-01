@@ -15,6 +15,7 @@ var _ resource.ResourceWithConfigValidators = (*ExternalMappingResource)(nil)
 
 func ResourceSchema(ctx context.Context) schema.Schema {
 	return schema.Schema{
+		Description: "Endpoints for managing External Mapping related operations such as creation, update, list and delete.\n\nWhen you integrate your 3rd-party systems with the m3ter platform, a mapping between entities in the local system *(m3ter)* and external systems is constructed. This *External Mapping* is crucial in scenarios where data from external systems is consumed or where data from the local system is to be synchronized with external systems. \n\nWhen you are working to set up your Integrations and want to test or troubleshoot your implementation before going live, you might need to create External Mappings manually and, at a later date, edit or delete them.\n",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				Description:   "The UUID of the entity.",

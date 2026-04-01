@@ -20,6 +20,7 @@ var _ resource.ResourceWithConfigValidators = (*IntegrationConfigurationResource
 
 func ResourceSchema(ctx context.Context) schema.Schema {
 	return schema.Schema{
+		Description: "A suite of endpoints for configuring and managing third party integrations within the m3ter platform. The integration endpoints in this section facilitate various operations such as creating, updating, listing, and deletion of integrations.\n\nm3ter integrations enable seamless data synchronization and mapping with external systems required in core business processes. These processes often include sales, pricing, billing and invoicing, and general finance. \n\nWith m3ter integrations, you can establish robust connections with popular business platforms, enhancing your operational capabilities. For example:\n* Chargebee\n* Salesforce\n* Stripe\n* Netsuite\n* Paddle\n* Xero\n* QuickBooks\n",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				Description:   "The UUID of the entity.",
@@ -67,7 +68,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 				CustomType:  customfield.NewNestedObjectType[IntegrationConfigurationCredentialsModel](ctx),
 				Attributes: map[string]schema.Attribute{
 					"type": schema.StringAttribute{
-						Description: "Specifies the type of authorization required for the integration.\nAvailable values: \"HTTP_BASIC\", \"OAUTH_CLIENT_CREDENTIALS\", \"M3TER_SIGNED_REQUEST\", \"AWS_INTEGRATION\", \"PADDLE_AUTH\", \"NETSUITE_AUTH\", \"CHARGEBEE_AUTH\", \"M3TER_APP_SIGNATURE\", \"M3TER_SERVICE_USER\", \"STRIPE_SIGNED_REQUEST\", \"HUBSPOT_ACCESS_TOKEN\", \"HUBSPOT_CLIENT_SECRET\", \"OPSGENIE_KEY\", \"SAP_BYD\", \"SLACK_WEBHOOK\", \"SAGE_INTACCT_CLIENT_CREDENTIALS\", \"SAGE_INTACCT_CLIENT_SECRET\".",
+						Description: "Specifies the type of authorization required for the integration.\nAvailable values: \"HTTP_BASIC\", \"OAUTH_CLIENT_CREDENTIALS\", \"M3TER_SIGNED_REQUEST\", \"AWS_INTEGRATION\", \"PADDLE_AUTH\", \"NETSUITE_AUTH\", \"CHARGEBEE_AUTH\", \"M3TER_APP_SIGNATURE\", \"M3TER_SERVICE_USER\", \"STRIPE_SIGNED_REQUEST\", \"HUBSPOT_ACCESS_TOKEN\", \"HUBSPOT_CLIENT_SECRET\", \"OPSGENIE_KEY\", \"SAP_BYD\", \"SLACK_WEBHOOK\", \"SAGE_INTACCT_CLIENT_CREDENTIALS\", \"SAGE_INTACCT_CLIENT_SECRET\", \"STATIC_API_KEY\".",
 						Required:    true,
 						Validators: []validator.String{
 							stringvalidator.OneOfCaseInsensitive(
@@ -88,6 +89,7 @@ func ResourceSchema(ctx context.Context) schema.Schema {
 								"SLACK_WEBHOOK",
 								"SAGE_INTACCT_CLIENT_CREDENTIALS",
 								"SAGE_INTACCT_CLIENT_SECRET",
+								"STATIC_API_KEY",
 							),
 						},
 					},

@@ -1,5 +1,48 @@
 # Changelog
 
+## 0.9.0 (2026-03-31)
+
+Full Changelog: [v0.8.0...v0.9.0](https://github.com/m3ter-com/terraform-provider-m3ter/compare/v0.8.0...v0.9.0)
+
+### Features
+
+* **api:** Updating OpenAPI Spec ([196fa85](https://github.com/m3ter-com/terraform-provider-m3ter/commit/196fa85cc8343af9bced43206e2feb31888dcf43))
+
+
+### Bug Fixes
+
+* improve linking behavior when developing on a branch not in the Go SDK ([091197e](https://github.com/m3ter-com/terraform-provider-m3ter/commit/091197e119016d4d0ba1a727e1383e8b8e708d86))
+* improved workflow for developing on branches ([3d3bae6](https://github.com/m3ter-com/terraform-provider-m3ter/commit/3d3bae6c71b8773862825580b3c0e915dfabd4ae))
+* no longer require an API key when building on production repos ([45f6bf6](https://github.com/m3ter-com/terraform-provider-m3ter/commit/45f6bf62b3fbdbd2c9db7bf795620e2655f2a0c1))
+* patch style requests should never send empty json body for objects ([c070291](https://github.com/m3ter-com/terraform-provider-m3ter/commit/c070291fe0305442cc20d148d4d6fbd3546a0419))
+* prefer named identifier field over id alias, missing ImportStates in certain resources ([8800b97](https://github.com/m3ter-com/terraform-provider-m3ter/commit/8800b9701ebc2c9aba8e79043b105344894ddcd1))
+* spurious update plans for float attributes after import ([ef3024c](https://github.com/m3ter-com/terraform-provider-m3ter/commit/ef3024c37c9f93d2bc7a28b4981b988cf4d4a463))
+
+
+### Chores
+
+* **api:** minor updates ([c9f039c](https://github.com/m3ter-com/terraform-provider-m3ter/commit/c9f039c5af82f5be796d641017a7c4358f9e92ca))
+* **docs:** add missing descriptions ([48b1dd4](https://github.com/m3ter-com/terraform-provider-m3ter/commit/48b1dd41dab557bb1023bcfd8427f0fd4b1673b0))
+* **docs:** update terraform-plugin-docs to v0.24.0 ([530c3ef](https://github.com/m3ter-com/terraform-provider-m3ter/commit/530c3ef837e0c9bcd9d056406799c4300b3317b0))
+* **internal:** codegen related update ([bdf9265](https://github.com/m3ter-com/terraform-provider-m3ter/commit/bdf926569fd0490520093854a1f69f12898fc3da))
+* **internal:** codegen related update ([447b89e](https://github.com/m3ter-com/terraform-provider-m3ter/commit/447b89e57c7a862ec16df88ed84864cfcb4f73fd))
+* **internal:** codegen related update ([976582b](https://github.com/m3ter-com/terraform-provider-m3ter/commit/976582baea9f2a44885b031f95fb4a73d6ab4ff1))
+* **internal:** tweak CI branches ([d8b1441](https://github.com/m3ter-com/terraform-provider-m3ter/commit/d8b14413939d7db237c600a6167892e3e4e6a41c))
+* **internal:** update gitignore ([4fea96f](https://github.com/m3ter-com/terraform-provider-m3ter/commit/4fea96f695e83aa7eb8a873e363788c4c2b9d422))
+* **internal:** update multipart form array serialization ([32aa461](https://github.com/m3ter-com/terraform-provider-m3ter/commit/32aa4613d195e115d241eb8c236c88484106d08a))
+* **test:** do not count install time for mock server timeout ([e5d0ee5](https://github.com/m3ter-com/terraform-provider-m3ter/commit/e5d0ee53a2c420271e91424bd83f1cb5f9af950b))
+* **tests:** bump steady to v0.19.4 ([c686bc9](https://github.com/m3ter-com/terraform-provider-m3ter/commit/c686bc99b788edad08693939c0a069f5a0355534))
+* **tests:** bump steady to v0.19.5 ([dc0be1c](https://github.com/m3ter-com/terraform-provider-m3ter/commit/dc0be1ce0ab4a26f73dcbcf92c56c4b75947a216))
+* **tests:** bump steady to v0.19.6 ([30e0cf8](https://github.com/m3ter-com/terraform-provider-m3ter/commit/30e0cf80be038569d9ce08c09d2f222be2558a32))
+* **tests:** bump steady to v0.19.7 ([0f258c4](https://github.com/m3ter-com/terraform-provider-m3ter/commit/0f258c440df83f2e02413b9309adf5ca11c854fc))
+* **tests:** bump steady to v0.20.1 ([cd6fd1a](https://github.com/m3ter-com/terraform-provider-m3ter/commit/cd6fd1a10db45c47ece654638b54a7055ec1409e))
+* **tests:** bump steady to v0.20.2 ([c0933ee](https://github.com/m3ter-com/terraform-provider-m3ter/commit/c0933eeee0b0470b6fba09c9bd5d38719f11a80c))
+
+
+### Refactors
+
+* **tests:** switch from prism to steady ([0c7c77a](https://github.com/m3ter-com/terraform-provider-m3ter/commit/0c7c77aa4745db36fcdaffad7c3cb1dff8581289))
+
 ## 0.8.0 (2026-01-29)
 
 Full Changelog: [v0.7.0...v0.8.0](https://github.com/m3ter-com/terraform-provider-m3ter/compare/v0.7.0...v0.8.0)
