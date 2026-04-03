@@ -19,7 +19,7 @@ var _ datasource.DataSourceWithConfigValidators = (*CounterPricingsDataSource)(n
 
 func ListDataSourceSchema(ctx context.Context) schema.Schema {
 	return schema.Schema{
-		Description: "Endpoints for listing, creating, updating, retrieving, or deleting CounterPricing.\n\nCreate the CounterPricing for a Plan/PlanTemplate using a Counter, and define a unit-based pricing structure for charging end customer Accounts put on the Plan.\n\nSee [Creating Counters and Pricing Plans](https://www.m3ter.com/docs/guides/recurring-charges-counters/creating-counters) for more information.",
+		MarkdownDescription: "Endpoints for listing, creating, updating, retrieving, or deleting CounterPricing.\n\nCreate the CounterPricing for a Plan/PlanTemplate using a Counter, and define a unit-based pricing structure for charging end customer Accounts put on the Plan.\n\nSee [Creating Counters and Pricing Plans](https://www.m3ter.com/docs/guides/recurring-charges-counters/creating-counters) for more information.",
 		Attributes: map[string]schema.Attribute{
 			"org_id": schema.StringAttribute{
 				Optional:           true,

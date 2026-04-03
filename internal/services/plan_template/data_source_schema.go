@@ -19,7 +19,7 @@ var _ datasource.DataSourceWithConfigValidators = (*PlanTemplateDataSource)(nil)
 
 func DataSourceSchema(ctx context.Context) schema.Schema {
 	return schema.Schema{
-		Description: "Endpoints for listing, creating, updating, retrieving, or deleting PlanTemplates.\n\nUse PlanTemplates to define default values for Plans. These default values control the billing operations you want applied to your products. PlanTemplates avoid repetition in configuration work - many Plans will share settings for billing operations and differ only in the details of their pricing structures.\n\nA PlanTemplate is linked to a Product, and each Plan is a child of a PlanTemplate. ",
+		MarkdownDescription: "Endpoints for listing, creating, updating, retrieving, or deleting PlanTemplates.\n\nUse PlanTemplates to define default values for Plans. These default values control the billing operations you want applied to your products. PlanTemplates avoid repetition in configuration work - many Plans will share settings for billing operations and differ only in the details of their pricing structures.\n\nA PlanTemplate is linked to a Product, and each Plan is a child of a PlanTemplate. ",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				Computed: true,

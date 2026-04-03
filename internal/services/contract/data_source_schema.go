@@ -20,7 +20,7 @@ var _ datasource.DataSourceWithConfigValidators = (*ContractDataSource)(nil)
 
 func DataSourceSchema(ctx context.Context) schema.Schema {
 	return schema.Schema{
-		Description: "Endpoints for Contract related operations such as creation, update, list and delete.\n\nContracts are created for Accounts, which are your end-user customers. Contracts can be used for:\n* **Accounts Reporting**. To serve your general accounting operations and processes, you can report on total Contract values for an Account.\n* **Contract Billing**. Various billing entities associated with an Account can  be linked to Contracts on the Account to meet your specific Contract billing use cases. ",
+		MarkdownDescription: "Endpoints for Contract related operations such as creation, update, list and delete.\n\nContracts are created for Accounts, which are your end-user customers. Contracts can be used for:\n* **Accounts Reporting**. To serve your general accounting operations and processes, you can report on total Contract values for an Account.\n* **Contract Billing**. Various billing entities associated with an Account can  be linked to Contracts on the Account to meet your specific Contract billing use cases. ",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				Computed: true,

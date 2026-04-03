@@ -15,7 +15,7 @@ var _ resource.ResourceWithConfigValidators = (*CreditReasonResource)(nil)
 
 func ResourceSchema(ctx context.Context) schema.Schema {
 	return schema.Schema{
-		Description: "Endpoints for CreditReason operations such as creation, update, list, and delete. \n\nYou can create CreditReasons for your Organization, and then use them when creating a credit line item on a bill, or applying a product credit to a bill. CreditReasons provide contextual information as to why a credit was applied. ",
+		MarkdownDescription: "Endpoints for CreditReason operations such as creation, update, list, and delete. \n\nYou can create CreditReasons for your Organization, and then use them when creating a credit line item on a bill, or applying a product credit to a bill. CreditReasons provide contextual information as to why a credit was applied. ",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				Description:   "The UUID of the entity.",

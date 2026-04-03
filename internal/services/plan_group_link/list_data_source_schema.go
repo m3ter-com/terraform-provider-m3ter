@@ -17,7 +17,7 @@ var _ datasource.DataSourceWithConfigValidators = (*PlanGroupLinksDataSource)(ni
 
 func ListDataSourceSchema(ctx context.Context) schema.Schema {
 	return schema.Schema{
-		Description: "Endpoints for PlanGroupLink related operations such as creation, update, list and delete.\n\nPlanGroupLinks are the intersection table between a PlanGroup and its associated Plans. A PlanGroupLink is only created when at least 1 Plan is linked to a PlanGroup. ",
+		MarkdownDescription: "Endpoints for PlanGroupLink related operations such as creation, update, list and delete.\n\nPlanGroupLinks are the intersection table between a PlanGroup and its associated Plans. A PlanGroupLink is only created when at least 1 Plan is linked to a PlanGroup. ",
 		Attributes: map[string]schema.Attribute{
 			"org_id": schema.StringAttribute{
 				Optional:           true,
