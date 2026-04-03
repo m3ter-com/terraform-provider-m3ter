@@ -19,7 +19,7 @@ var _ resource.ResourceWithConfigValidators = (*PermissionPolicyResource)(nil)
 
 func ResourceSchema(ctx context.Context) schema.Schema {
 	return schema.Schema{
-		Description: "Endpoints for Permission Policy related operations such as creation, update, add and retrieve.\n\nPermission Policies can restrict or grant access to specific resources for both Users *(people)* and Service Users *(automated processes with direct API access)*. This enables you to control precisely what a User can do in your m3ter Organization.\n\nFor more details, see [Understanding, Creating, and Managing Permission Policies](https://www.m3ter.com/docs/guides/organization-and-access-management/creating-and-managing-permissions#permission-policy-statements---available-actions-and-resources) in our main Documentation.",
+		MarkdownDescription: "Endpoints for Permission Policy related operations such as creation, update, add and retrieve.\n\nPermission Policies can restrict or grant access to specific resources for both Users *(people)* and Service Users *(automated processes with direct API access)*. This enables you to control precisely what a User can do in your m3ter Organization.\n\nFor more details, see [Understanding, Creating, and Managing Permission Policies](https://www.m3ter.com/docs/guides/organization-and-access-management/creating-and-managing-permissions#permission-policy-statements---available-actions-and-resources) in our main Documentation.",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				Description:   "The UUID of the entity.",

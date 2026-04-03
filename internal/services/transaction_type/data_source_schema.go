@@ -16,7 +16,7 @@ var _ datasource.DataSourceWithConfigValidators = (*TransactionTypeDataSource)(n
 
 func DataSourceSchema(ctx context.Context) schema.Schema {
 	return schema.Schema{
-		Description: "Endpoints for TransactionType operations such as creation, update, list, retrieve, and delete. \n\nYou can create TransactionTypes for your Organization, which can then be used when creating and updating Balances. Example TransactionTypes: \"Balance Amount\" or \"Add Funds\".\n\nFor details on creating a Transaction amount for a Balance using a TransactionType you've created for your Organization, see the [Create Balance Transaction](https://www.m3ter.com/docs/api#tag/Balances/operation/PostBalanceTransaction) call in the [Balances](https://www.m3ter.com/docs/api#tag/Balances) section of this API Reference.",
+		MarkdownDescription: "Endpoints for TransactionType operations such as creation, update, list, retrieve, and delete. \n\nYou can create TransactionTypes for your Organization, which can then be used when creating and updating Balances. Example TransactionTypes: \"Balance Amount\" or \"Add Funds\".\n\nFor details on creating a Transaction amount for a Balance using a TransactionType you've created for your Organization, see the [Create Balance Transaction](https://www.m3ter.com/docs/api#tag/Balances/operation/PostBalanceTransaction) call in the [Balances](https://www.m3ter.com/docs/api#tag/Balances) section of this API Reference.",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				Computed: true,
