@@ -1,5 +1,30 @@
 # Changelog
 
+## 0.10.0 (2026-04-22)
+
+Full Changelog: [v0.9.0...v0.10.0](https://github.com/m3ter-com/terraform-provider-m3ter/compare/v0.9.0...v0.10.0)
+
+### Features
+
+* add per-resource api permissions to schema description ([5cbb13e](https://github.com/m3ter-com/terraform-provider-m3ter/commit/5cbb13e0ef30767920a5063c54b042df244d2fee))
+
+
+### Bug Fixes
+
+* **ci:** in custom setup-go, pass through go-version and cache-dependency-path ([09aeb02](https://github.com/m3ter-com/terraform-provider-m3ter/commit/09aeb020e541c1ef3f86c4bfd1220fb4a716fa46))
+* fall back to main branch if linking fails in CI ([d59623c](https://github.com/m3ter-com/terraform-provider-m3ter/commit/d59623cc95d03c86d6d2f12b21a4da5860c430a7))
+* fix for failing to drop invalid module replace in link script ([1e99ca9](https://github.com/m3ter-com/terraform-provider-m3ter/commit/1e99ca9c1a8c075da033e0a215c15417642fde52))
+* fix quoting typo ([ad24dff](https://github.com/m3ter-com/terraform-provider-m3ter/commit/ad24dff50c48eeee5550141784f680e3d41a2489))
+* **tests:** update hc-install to fix PGP key mismatch ([40d1c9b](https://github.com/m3ter-com/terraform-provider-m3ter/commit/40d1c9b64c5456ea8f08edfbbc3c6650ddcc0c7c))
+
+
+### Chores
+
+* add local tmpfile directory ([219ecf0](https://github.com/m3ter-com/terraform-provider-m3ter/commit/219ecf0c9d833cb885d44cbff1fd26728090b1ff))
+* **internal:** more robust bootstrap script ([6f23d72](https://github.com/m3ter-com/terraform-provider-m3ter/commit/6f23d724549b74a3fe851534c9158820275c3d2f))
+* pin go releaser version ([5fbe44e](https://github.com/m3ter-com/terraform-provider-m3ter/commit/5fbe44e4f74c1c0b41cac7e9f3fc9b62a42733bd))
+* **tests:** bump steady to v0.22.1 ([c8fedb2](https://github.com/m3ter-com/terraform-provider-m3ter/commit/c8fedb2ff35cfcade634b0e871c35198b12afcda))
+
 ## 0.9.0 (2026-03-31)
 
 Full Changelog: [v0.8.0...v0.9.0](https://github.com/m3ter-com/terraform-provider-m3ter/compare/v0.8.0...v0.9.0)
