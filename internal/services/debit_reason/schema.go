@@ -15,7 +15,7 @@ var _ resource.ResourceWithConfigValidators = (*DebitReasonResource)(nil)
 
 func ResourceSchema(ctx context.Context) schema.Schema {
 	return schema.Schema{
-		Description: "Endpoints for DebitReason operations such as creation, update, list, and delete. \n\nYou can create DebitReasons for your Organization, and then use them when creating a debit line item on a bill, or applying a product debit to a bill. DebitReasons provide contextual information as to why a debit was applied. ",
+		MarkdownDescription: "Endpoints for DebitReason operations such as creation, update, list, and delete. \n\nYou can create DebitReasons for your Organization, and then use them when creating a debit line item on a bill, or applying a product debit to a bill. DebitReasons provide contextual information as to why a debit was applied. ",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				Description:   "The UUID of the entity.",

@@ -17,7 +17,7 @@ var _ datasource.DataSourceWithConfigValidators = (*ProductDataSource)(nil)
 
 func DataSourceSchema(ctx context.Context) schema.Schema {
 	return schema.Schema{
-		Description: "Endpoints for listing, creating, updating, retrieving, or deleting Products.\n\nA Product represents the products and services you offer to your end customers. Products act as a container for the Meters, Aggregations, Pricing, and Plans required to implement usage-based and other pricing models for your Organization.  ",
+		MarkdownDescription: "Endpoints for listing, creating, updating, retrieving, or deleting Products.\n\nA Product represents the products and services you offer to your end customers. Products act as a container for the Meters, Aggregations, Pricing, and Plans required to implement usage-based and other pricing models for your Organization.  ",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				Computed: true,

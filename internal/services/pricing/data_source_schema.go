@@ -21,7 +21,7 @@ var _ datasource.DataSourceWithConfigValidators = (*PricingDataSource)(nil)
 
 func DataSourceSchema(ctx context.Context) schema.Schema {
 	return schema.Schema{
-		Description: "Endpoints for listing, creating, updating, retrieving, or deleting Pricing.\n\nCreate the Pricing for a Plan/PlanTemplate with usage data Aggregations, and define a usage-based pricing structure for charging end customer Accounts put on the Plan.\n\nSee [Reviewing Pricing Options for Plans and Plan Templates](https://www.m3ter.com/docs/guides/pricing-plans/reviewing-pricing-options-and-pricing-plans) for more information. ",
+		MarkdownDescription: "Endpoints for listing, creating, updating, retrieving, or deleting Pricing.\n\nCreate the Pricing for a Plan/PlanTemplate with usage data Aggregations, and define a usage-based pricing structure for charging end customer Accounts put on the Plan.\n\nSee [Reviewing Pricing Options for Plans and Plan Templates](https://www.m3ter.com/docs/guides/pricing-plans/reviewing-pricing-options-and-pricing-plans) for more information. ",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				Computed: true,

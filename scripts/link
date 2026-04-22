@@ -9,5 +9,9 @@ export GOPRIVATE="${GOPRIVATE:+$GOPRIVATE,}github.com/m3ter-com/m3ter-sdk-go,git
 
 REPLACEMENT="${1:-"../m3ter-go"}"
 echo "==> Replacing Go SDK with $REPLACEMENT"
-go mod edit -replace github.com/m3ter-com/m3ter-sdk-go="$REPLACEMENT"
-go mod tidy -e
+if [[ -d "$REPLACEMENT" ]] || go list -m "$REPLACEMENT" >/dev/null; then
+    go mod edit -replace github.com/m3ter-com/m3ter-sdk-go="$REPLACEMENT"
+    go mod tidy -e
+else
+    echo "Skipping Go SDK replacement (branch may not exist on Go SDK)"
+fi
