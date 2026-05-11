@@ -12,16 +12,16 @@ import (
 )
 
 type MetersDataListDataSourceEnvelope struct {
-	Data customfield.NestedObjectList[MetersItemsDataSourceModel] `json:"data,computed"`
+	Data customfield.NormalizedDynamicValue `json:"data,computed"`
 }
 
 type MetersDataSourceModel struct {
-	OrgID     types.String                                             `tfsdk:"org_id" path:"orgId,optional"`
-	Codes     *[]types.String                                          `tfsdk:"codes" query:"codes,optional"`
-	IDs       *[]types.String                                          `tfsdk:"ids" query:"ids,optional"`
-	ProductID *[]types.String                                          `tfsdk:"product_id" query:"productId,optional"`
-	MaxItems  types.Int64                                              `tfsdk:"max_items"`
-	Items     customfield.NestedObjectList[MetersItemsDataSourceModel] `tfsdk:"items"`
+	OrgID     types.String                       `tfsdk:"org_id" path:"orgId,optional"`
+	Codes     *[]types.String                    `tfsdk:"codes" query:"codes,optional"`
+	IDs       *[]types.String                    `tfsdk:"ids" query:"ids,optional"`
+	ProductID *[]types.String                    `tfsdk:"product_id" query:"productId,optional"`
+	MaxItems  types.Int64                        `tfsdk:"max_items"`
+	Items     customfield.NormalizedDynamicValue `tfsdk:"items"`
 }
 
 func (m *MetersDataSourceModel) toListParams(_ context.Context) (params m3ter.MeterListParams, diags diag.Diagnostics) {
@@ -55,31 +55,4 @@ func (m *MetersDataSourceModel) toListParams(_ context.Context) (params m3ter.Me
 	}
 
 	return
-}
-
-type MetersItemsDataSourceModel struct {
-	ID            types.String                                                     `tfsdk:"id" json:"id,computed"`
-	Code          types.String                                                     `tfsdk:"code" json:"code,computed"`
-	CustomFields  customfield.NormalizedDynamicValue                               `tfsdk:"custom_fields" json:"customFields,computed"`
-	DataFields    customfield.NestedObjectList[MetersDataFieldsDataSourceModel]    `tfsdk:"data_fields" json:"dataFields,computed"`
-	DerivedFields customfield.NestedObjectList[MetersDerivedFieldsDataSourceModel] `tfsdk:"derived_fields" json:"derivedFields,computed"`
-	GroupID       types.String                                                     `tfsdk:"group_id" json:"groupId,computed"`
-	Name          types.String                                                     `tfsdk:"name" json:"name,computed"`
-	ProductID     types.String                                                     `tfsdk:"product_id" json:"productId,computed"`
-	Version       types.Int64                                                      `tfsdk:"version" json:"version,computed,force_encode,encode_state_for_unknown"`
-}
-
-type MetersDataFieldsDataSourceModel struct {
-	Category types.String `tfsdk:"category" json:"category,computed"`
-	Code     types.String `tfsdk:"code" json:"code,computed"`
-	Name     types.String `tfsdk:"name" json:"name,computed"`
-	Unit     types.String `tfsdk:"unit" json:"unit,computed"`
-}
-
-type MetersDerivedFieldsDataSourceModel struct {
-	Category    types.String `tfsdk:"category" json:"category,computed"`
-	Code        types.String `tfsdk:"code" json:"code,computed"`
-	Name        types.String `tfsdk:"name" json:"name,computed"`
-	Unit        types.String `tfsdk:"unit" json:"unit,computed"`
-	Calculation types.String `tfsdk:"calculation" json:"calculation,computed"`
 }
