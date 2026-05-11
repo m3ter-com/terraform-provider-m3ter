@@ -12,15 +12,15 @@ import (
 )
 
 type PlanTemplatesDataListDataSourceEnvelope struct {
-	Data customfield.NestedObjectList[PlanTemplatesItemsDataSourceModel] `json:"data,computed"`
+	Data customfield.NormalizedDynamicValue `json:"data,computed"`
 }
 
 type PlanTemplatesDataSourceModel struct {
-	OrgID     types.String                                                    `tfsdk:"org_id" path:"orgId,optional"`
-	ProductID types.String                                                    `tfsdk:"product_id" query:"productId,optional"`
-	IDs       *[]types.String                                                 `tfsdk:"ids" query:"ids,optional"`
-	MaxItems  types.Int64                                                     `tfsdk:"max_items"`
-	Items     customfield.NestedObjectList[PlanTemplatesItemsDataSourceModel] `tfsdk:"items"`
+	OrgID     types.String                       `tfsdk:"org_id" path:"orgId,optional"`
+	ProductID types.String                       `tfsdk:"product_id" query:"productId,optional"`
+	IDs       *[]types.String                    `tfsdk:"ids" query:"ids,optional"`
+	MaxItems  types.Int64                        `tfsdk:"max_items"`
+	Items     customfield.NormalizedDynamicValue `tfsdk:"items"`
 }
 
 func (m *PlanTemplatesDataSourceModel) toListParams(_ context.Context) (params m3ter.PlanTemplateListParams, diags diag.Diagnostics) {
@@ -43,25 +43,4 @@ func (m *PlanTemplatesDataSourceModel) toListParams(_ context.Context) (params m
 	}
 
 	return
-}
-
-type PlanTemplatesItemsDataSourceModel struct {
-	ID                          types.String                       `tfsdk:"id" json:"id,computed"`
-	BillFrequency               types.String                       `tfsdk:"bill_frequency" json:"billFrequency,computed"`
-	BillFrequencyInterval       types.Int64                        `tfsdk:"bill_frequency_interval" json:"billFrequencyInterval,computed"`
-	Code                        types.String                       `tfsdk:"code" json:"code,computed"`
-	Currency                    types.String                       `tfsdk:"currency" json:"currency,computed"`
-	CustomFields                customfield.NormalizedDynamicValue `tfsdk:"custom_fields" json:"customFields,computed"`
-	MinimumSpend                types.Float64                      `tfsdk:"minimum_spend" json:"minimumSpend,computed"`
-	MinimumSpendBillInAdvance   types.Bool                         `tfsdk:"minimum_spend_bill_in_advance" json:"minimumSpendBillInAdvance,computed"`
-	MinimumSpendDescription     types.String                       `tfsdk:"minimum_spend_description" json:"minimumSpendDescription,computed"`
-	Name                        types.String                       `tfsdk:"name" json:"name,computed"`
-	Ordinal                     types.Int64                        `tfsdk:"ordinal" json:"ordinal,computed"`
-	ProductID                   types.String                       `tfsdk:"product_id" json:"productId,computed"`
-	StandingCharge              types.Float64                      `tfsdk:"standing_charge" json:"standingCharge,computed"`
-	StandingChargeBillInAdvance types.Bool                         `tfsdk:"standing_charge_bill_in_advance" json:"standingChargeBillInAdvance,computed"`
-	StandingChargeDescription   types.String                       `tfsdk:"standing_charge_description" json:"standingChargeDescription,computed"`
-	StandingChargeInterval      types.Int64                        `tfsdk:"standing_charge_interval" json:"standingChargeInterval,computed"`
-	StandingChargeOffset        types.Int64                        `tfsdk:"standing_charge_offset" json:"standingChargeOffset,computed"`
-	Version                     types.Int64                        `tfsdk:"version" json:"version,computed,force_encode,encode_state_for_unknown"`
 }

@@ -12,16 +12,16 @@ import (
 )
 
 type AggregationsDataListDataSourceEnvelope struct {
-	Data customfield.NestedObjectList[AggregationsItemsDataSourceModel] `json:"data,computed"`
+	Data customfield.NormalizedDynamicValue `json:"data,computed"`
 }
 
 type AggregationsDataSourceModel struct {
-	OrgID     types.String                                                   `tfsdk:"org_id" path:"orgId,optional"`
-	Codes     *[]types.String                                                `tfsdk:"codes" query:"codes,optional"`
-	IDs       *[]types.String                                                `tfsdk:"ids" query:"ids,optional"`
-	ProductID *[]types.String                                                `tfsdk:"product_id" query:"productId,optional"`
-	MaxItems  types.Int64                                                    `tfsdk:"max_items"`
-	Items     customfield.NestedObjectList[AggregationsItemsDataSourceModel] `tfsdk:"items"`
+	OrgID     types.String                       `tfsdk:"org_id" path:"orgId,optional"`
+	Codes     *[]types.String                    `tfsdk:"codes" query:"codes,optional"`
+	IDs       *[]types.String                    `tfsdk:"ids" query:"ids,optional"`
+	ProductID *[]types.String                    `tfsdk:"product_id" query:"productId,optional"`
+	MaxItems  types.Int64                        `tfsdk:"max_items"`
+	Items     customfield.NormalizedDynamicValue `tfsdk:"items"`
 }
 
 func (m *AggregationsDataSourceModel) toListParams(_ context.Context) (params m3ter.AggregationListParams, diags diag.Diagnostics) {
@@ -55,23 +55,4 @@ func (m *AggregationsDataSourceModel) toListParams(_ context.Context) (params m3
 	}
 
 	return
-}
-
-type AggregationsItemsDataSourceModel struct {
-	ID                  types.String                                    `tfsdk:"id" json:"id,computed"`
-	AccountingProductID types.String                                    `tfsdk:"accounting_product_id" json:"accountingProductId,computed"`
-	Aggregation         types.String                                    `tfsdk:"aggregation" json:"aggregation,computed"`
-	Code                types.String                                    `tfsdk:"code" json:"code,computed"`
-	CustomFields        customfield.NormalizedDynamicValue              `tfsdk:"custom_fields" json:"customFields,computed"`
-	CustomSql           types.String                                    `tfsdk:"custom_sql" json:"customSql,computed"`
-	DefaultValue        types.Float64                                   `tfsdk:"default_value" json:"defaultValue,computed"`
-	MeterID             types.String                                    `tfsdk:"meter_id" json:"meterId,computed"`
-	Name                types.String                                    `tfsdk:"name" json:"name,computed"`
-	QuantityPerUnit     types.Float64                                   `tfsdk:"quantity_per_unit" json:"quantityPerUnit,computed"`
-	Rounding            types.String                                    `tfsdk:"rounding" json:"rounding,computed"`
-	SegmentedFields     customfield.List[types.String]                  `tfsdk:"segmented_fields" json:"segmentedFields,computed"`
-	Segments            customfield.List[customfield.Map[types.String]] `tfsdk:"segments" json:"segments,computed"`
-	TargetField         types.String                                    `tfsdk:"target_field" json:"targetField,computed"`
-	Unit                types.String                                    `tfsdk:"unit" json:"unit,computed"`
-	Version             types.Int64                                     `tfsdk:"version" json:"version,computed,force_encode,encode_state_for_unknown"`
 }

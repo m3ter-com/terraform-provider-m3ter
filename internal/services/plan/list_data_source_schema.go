@@ -44,87 +44,10 @@ func ListDataSourceSchema(ctx context.Context) schema.Schema {
 					int64validator.AtLeast(0),
 				},
 			},
-			"items": schema.ListNestedAttribute{
+			"items": schema.DynamicAttribute{
 				Description: "The items returned by the data source",
 				Computed:    true,
-				CustomType:  customfield.NewNestedObjectListType[PlansItemsDataSourceModel](ctx),
-				NestedObject: schema.NestedAttributeObject{
-					Attributes: map[string]schema.Attribute{
-						"id": schema.StringAttribute{
-							Description: "The UUID of the entity.",
-							Computed:    true,
-						},
-						"account_id": schema.StringAttribute{
-							Description: "*(Optional)*. The Account ID for which this Plan was created as custom/bespoke. A custom/bespoke Plan can only be attached to the specified Account.",
-							Computed:    true,
-						},
-						"bespoke": schema.BoolAttribute{
-							Description: "TRUE/FALSE flag indicating whether the Plan is custom/bespoke for a particular Account.",
-							Computed:    true,
-						},
-						"code": schema.StringAttribute{
-							Description: "Unique short code reference for the Plan.",
-							Computed:    true,
-						},
-						"custom_fields": schema.DynamicAttribute{
-							Description: "User defined fields enabling you to attach custom data. The value for a custom field can be either a string or a number.\n\nIf `customFields` can also be defined for this entity at the Organizational level,`customField` values defined at individual level override values of `customFields` with the same name defined at Organization level.\n\nSee [Working with Custom Fields](https://www.m3ter.com/docs/guides/creating-and-managing-products/working-with-custom-fields) in the m3ter documentation for more information.",
-							Computed:    true,
-							CustomType:  customfield.NormalizedDynamicType{},
-						},
-						"minimum_spend": schema.Float64Attribute{
-							Description: "The product minimum spend amount per billing cycle for end customer Accounts on a priced Plan.\n\n*(Optional)*. Overrides PlanTemplate value.",
-							Computed:    true,
-						},
-						"minimum_spend_accounting_product_id": schema.StringAttribute{
-							Description: "Optional Product ID this Plan's minimum spend should be attributed to for accounting purposes.",
-							Computed:    true,
-						},
-						"minimum_spend_bill_in_advance": schema.BoolAttribute{
-							Description: "When **TRUE**, minimum spend is billed at the start of each billing period.\n\nWhen **FALSE**, minimum spend is billed at the end of each billing period.\n\n*(Optional)*. Overrides the setting at PlanTemplate level for minimum spend billing in arrears/in advance.",
-							Computed:    true,
-						},
-						"minimum_spend_description": schema.StringAttribute{
-							Description: "Minimum spend description *(displayed on the bill line item)*.",
-							Computed:    true,
-						},
-						"name": schema.StringAttribute{
-							Description: "Descriptive name for the Plan.",
-							Computed:    true,
-						},
-						"ordinal": schema.Int64Attribute{
-							Description: "Assigns a rank or position to the Plan in your order of pricing plans - lower numbers represent more basic pricing plans; higher numbers represent more premium pricing plans.\n\n*(Optional)*. Overrides PlanTemplate value.\n\n**NOTE:** **DEPRECATED** - no longer used.",
-							Computed:    true,
-						},
-						"plan_template_id": schema.StringAttribute{
-							Description: "UUID of the PlanTemplate the Plan belongs to.",
-							Computed:    true,
-						},
-						"product_id": schema.StringAttribute{
-							Description: "UUID of the Product the Plan belongs to.",
-							Computed:    true,
-						},
-						"standing_charge": schema.Float64Attribute{
-							Description: "The standing charge applied to bills for end customers. This is prorated.\n\n*(Optional)*. Overrides PlanTemplate value.",
-							Computed:    true,
-						},
-						"standing_charge_accounting_product_id": schema.StringAttribute{
-							Description: "Optional Product ID this Plan's standing charge should be attributed to for accounting purposes.",
-							Computed:    true,
-						},
-						"standing_charge_bill_in_advance": schema.BoolAttribute{
-							Description: "When **TRUE**, standing charge is billed at the start of each billing period.\n\nWhen **FALSE**, standing charge is billed at the end of each billing period.\n\n*(Optional)*. Overrides the setting at PlanTemplate level for standing charge billing in arrears/in advance.",
-							Computed:    true,
-						},
-						"standing_charge_description": schema.StringAttribute{
-							Description: "Standing charge description *(displayed on the bill line item)*.",
-							Computed:    true,
-						},
-						"version": schema.Int64Attribute{
-							Description: "The version number:\n- **Create:** On initial Create to insert a new entity, the version is set at 1 in the response.\n- **Update:** On successful Update, the version is incremented by 1 in the response.",
-							Computed:    true,
-						},
-					},
-				},
+				CustomType:  customfield.NormalizedDynamicType{},
 			},
 		},
 	}
