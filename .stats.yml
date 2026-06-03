@@ -1,4 +1,4 @@
 configured_endpoints: 286
-openapi_spec_url: https://storage.googleapis.com/stainless-sdk-openapi-specs/rg/m3ter-sdk-b6704740a735035c0d02d5c52df2385c508c85cdb649a250c4515265c22dff5a.yml
+openapi_spec_url: https://storage.googleapis.com/stainless-sdk-openapi-specs/rg/m3ter-sdk-8ed00aff39e19053e35301d739d96ff2bafb352273d647c86073ca879a1dad3f.yml
 openapi_spec_hash: 3e75a21276e7cd06944188f512a7a4e3
-config_hash: 49362aa74a21515a3e36e3743fdf1e55
+config_hash: 5de7039a6202fb360a3970934cffb50e
